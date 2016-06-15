@@ -1,0 +1,197 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+   
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="http://cdn.shopify.com/s/files/1/1062/1162/t/3/assets/slideshow_1.jpg?3164089094361797524" alt="Chania">
+     <div class="carousel-caption">
+        <h1>My Event</h1>
+        <h3>Find the best event from our site.</h3>
+      </div>
+    </div>
+
+    <div class="item">
+     <img src="http://3.bp.blogspot.com/-Um3RiwS-kjQ/VRyraiPvQ_I/AAAAAAAAASk/UA-A1ZrUzFM/s1600/Recipe%2BFridays.jpg" alt="Chania">
+     <div class="carousel-caption">
+        <h1>My Event</h1>
+        <h3>Find the best event from our site.</h3>
+      </div>
+    </div>
+     <div class="item">
+     <img src="http://www.cooksmarts.com/wp-content/uploads/2013/01/2013.01.23-Tips-for-Dinner-Blog-Banner.jpg" alt="Chania">
+     <div class="carousel-caption">
+        <h1>My Event</h1>
+        <h3>Find the best event from our site.</h3>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+
+
+
+<div class="center jumbotron">
+      <div class="container">
+           
+            <h3>View our Latest Event </h3>
+            <hr/>
+            </br>
+    </div>
+
+        <!--Display Recipes-->
+<div class="container">
+ 
+ <% @events.each do |x| %>
+        <div class="col-md-4 m-b-lg">
+          <div class="panel panel-default panel-profile m-b-0">
+            <!--<div class="panel-heading" style="background-image: url(https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=9bd244971b9cb52a8418cf2f66fce464);"></div>-->
+            <!--<div class="panel-heading"></div>-->
+                <%= image_tag(x.picture.url, class: "panel-recipe") if x.picture? %>
+                
+            <div class="panel-body text-center">
+                <section class="panel-profile-recipe-img">
+              <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              
+              </section>
+              
+              <h4><%= link_to x.name, event_path(x) %></h4>
+              <h2 class="quiet"><%= x.summary.split[0..4].join(" ") %></h2>
+              
+                  <div class>
+                        <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
+                    </div> 
+                    
+                <div class="thumbs">
+                    <%= link_to like_event_path(x, like: true), method: :post do %>
+                    <i class="white glyphicon glyphicon-thumbs-up">&nbsp<%= x.thumbs_up_total %></i>
+                    <% end %> &nbsp&nbsp&nbsp&nbsp
+                    <%= link_to like_event_path(x, like: false), method: :post do %>
+                    <i class="white glyphicon glyphicon-thumbs-down">&nbsp<%= x.thumbs_down_total %></i>
+                    <% end %>
+                    
+                </div> 
+                </br>
+               
+                <div class="ingredient pull-left">
+                <span style="color: #777">Categories: <%= render x.categories %></span>
+                </div>
+                    
+              
+              
+            </div>
+          </div>
+        </div>
+                    
+                 
+            
+     <% end %>
+     
+     <!--pagination on bttom -->
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 center">
+        
+        </div>
+      </div>
+    
+    	    
+            
+</div>
+
+
+<!--Recipes ends-->
+
+</div>
+
+
+
+
+
+
+
+<!--Display Chefs-->
+ <div class="container center">
+           
+            <h3>View our Latest Organizers </h3>
+            <hr/>
+            </br>
+    </div>
+
+        <!--Display Chefs-->
+<div class="container">
+    
+    
+<% @users.each_slice(3) do |works| %>
+<div class="container">
+<div class="row">
+    <% @users.each do |x| %>
+        <div class="col-md-4 m-b-lg">
+          <div class="panel panel-default panel-profile m-b-0">
+            <!--<div class="panel-heading" style="background-image: url(http://greatist.com/sites/default/files/styles/big_share/public/Tag_HealthyRecipes.png?itok=tKgJ8R2O);"></div>-->
+            <div class="panel-heading"></div>
+
+            <div class="panel-body text-center">
+                <section class="panel-profile-img">
+              <%= link_to gravatar_for(x, size: 100), user_path(x) %> 
+              </section>
+              <h2><%= x.username %></h2>
+                <span class="icon icon-add-user"></span> <%= link_to 'View Organizer', user_path(x), class: "btn btn-success btn-small" %>
+              </a>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        
+      </div>
+      <% end %>
+      </div>
+
+</div>
+
+
+
+
+
+
+
+<div class="center jumbotron">
+<div class="container">
+<div class="row">
+    <div class="col-lg-4">
+        <h3 class="midrow"> View Events as Guest User</h3>
+        <h2 class="midrow">Browse and view Event as a guest and Sign up later</h2>
+        <p><%= link_to 'Browse Events Listing', events_path, class: "btn btn-warning btn-small" %></p>
+    </div>
+    <div class="col-lg-4">
+        <h3 class="midrow"> View Events as Guest User</h3>
+        <h2 class="midrow">Browse and view event as a guest and Sign up later</h2>
+        <p><%= link_to 'Browse Events Listing', "", class: "btn btn-warning btn-small" %></p>
+    </div>
+    <div class="col-lg-4">
+        <h3 class="midrow"> View Events as Guest User</h3>
+        <h2 class="midrow">Browse and view events as a guest and Sign up later</h2>
+        <p><%= link_to 'Browse Event Listing', "", class: "btn btn-warning btn-small" %></p>
+    </div>
+</div>
+</div>
+</div>
+
+

@@ -1,0 +1,99 @@
+<!--display title from partials page-->
+
+<%= image_tag(@event.picture.url, class: "img-responsive", style: "width: 100%;") if @event.picture? %>
+<div class="container">
+    <div class="show-page-text">
+    <h1><%= @event.name %></h1>
+    </div>
+    <div class="show-page-text2">
+    <h3 class="center"><%= @event.summary %></h3>
+    </div>
+</div>
+
+<!--Recipe content -->
+<div class="container show-page-detail-text">
+    
+
+    <div class="row ">
+        <div class="col-md-4 user-avatar">
+                <section class="chef_info center">
+                    <%= link_to gravatar_for(@event.user, size: 200), user_path(@event.user) %>
+                
+                    <h5>Organizer Name: <%= @event.user.username %></h5>
+                    <!--<hr>-->
+                </section>
+                <% if logged_in? && (@event.user == current_user || current_user.admin?) %>
+                     <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-success btn-xs"  %>
+                     <%= link_to 'Delete Event', event_path(@event), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "are you sure you want to delte this event" } %>
+                 <% end %>
+                 <hr>
+                 </div>
+                 
+                 
+                
+                     
+                 
+                         <div class="col-md-6 center">
+                                <span style="color: #777"> Category: <%= render @event.categories %></span>
+                                    <hr>
+                            </div>
+                            
+                            <div class="col-md-2 center">
+                                <%= link_to like_event_path(@event, like: true), method: :post do %>
+                                <i class="glyphicon glyphicon-thumbs-up">&nbsp<%= @event.thumbs_up_total %></i>
+                                <% end %> &nbsp&nbsp&nbsp&nbsp
+                                <%= link_to like_event_path(@event, like: false), method: :post do %>
+                                <i class="glyphicon glyphicon-thumbs-down">&nbsp<%= @event.thumbs_down_total %></i>
+                                <% end %>
+                                <hr>
+                            </div>
+                
+                
+        <div class="row">
+            <div class="col-md-12 col-md-10-offset">
+                <div class="well">
+                    
+                    <div class="col-md-4 pull-right">
+                            <span class="quiet"><small>Created: <%= time_ago_in_words(@event.created_at) %> ago</small></span> - 
+                          <span class="quiet"><small>Updated: <%= time_ago_in_words(@event.updated_at) %> ago</small></span>
+                            <hr>
+                       </div>
+                       
+                      <p>
+                    <strong>Steps:</strong>
+                    </p>
+                    <%= simple_format(@event.description) %>
+                    
+                </div>
+                
+                
+               
+                
+                
+                
+                
+                <!--Review form-->
+                
+               
+                
+                
+               
+                
+                
+                
+                
+                <!--Return to listing page-->
+                <div class="container">
+                 <h5><%= link_to 'Return to listing', events_path, class: "btn btn-warning btn-small" %></h5>
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+ </div>
+</div> 
+
+
+

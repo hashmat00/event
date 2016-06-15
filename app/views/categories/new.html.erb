@@ -1,0 +1,22 @@
+<!--display title from partials page-->
+<%= render 'shared/page_title', title: "Create new Category" %>
+
+<!--<hr/>-->
+
+<%= render 'shared/errors', obj: @category %>
+
+
+
+<div class="row">
+    <div class="well col-md-8 col-md-offset-2">
+        <%= form_for @category  do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        
+       
+        </span>
+        
+        <%= f.submit class: "btn btn-success" %>
+        <% end %>
+    </div>
+</div>
