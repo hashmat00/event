@@ -3,12 +3,13 @@ class EventsController < ApplicationController
     before_action :require_user, except: [:show, :index]
     before_action :require_same_user, only: [:edit, :destory, :update]
     
-    
+    before_action :authenticate_user!, only: [:edit, :update, :destroy]
     
     
     def index
         # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
-        @events = Event.paginate(page: params[:page], per_page: 6)
+        @events = Event.all
+        # paginate(page: params[:page], per_page: 6)
     end
     
     

@@ -6,8 +6,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'will_paginate', '3.1.0'
-gem 'bootstrap-will_paginate', '0.0.10'
+# gem 'will_paginate', '3.1.0'
+# gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt', '3.1.11'
 gem 'fog'
 
@@ -24,7 +24,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails','>= 1.0.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -37,6 +37,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+
+# gem devise for user Authentication
+gem 'devise',      '> 4.1.0'
+#gem active_admin for handle the backend of application
+gem 'activeadmin', github: 'activeadmin'
+#gem geocoder for location
+gem 'geocoder'
+#gem omniauth-facebook for facebook Authentication
+ gem 'omniauth-facebook'
+ gem 'omniauth-facebook'
+ gem 'omniauth-twitter'
+ gem 'omniauth-github'
+ gem 'omniauth-fitbit-oauth2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

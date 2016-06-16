@@ -22,7 +22,7 @@
                     <h5>Organizer Name: <%= @event.user.username %></h5>
                     <!--<hr>-->
                 </section>
-                <% if logged_in? && (@event.user == current_user || current_user.admin?) %>
+                <% if user_signed_in?  && (@event.user == current_user || current_user.admin?) %>
                      <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-success btn-xs"  %>
                      <%= link_to 'Delete Event', event_path(@event), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "are you sure you want to delte this event" } %>
                  <% end %>
