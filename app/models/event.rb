@@ -1,5 +1,14 @@
 class Event < ActiveRecord::Base
+   
     belongs_to :user
+    geocoded_by :full_address
+    geocoded_by :address
+    after_validation :geocode, :if => :address_changed?
+
+
+
+
+
 
     has_many :like, dependent: :destroy
     has_many :event_categories, dependent: :destroy
@@ -20,6 +29,9 @@ class Event < ActiveRecord::Base
    validate :picture_size
    default_scope -> { order(created_at: :desc) }
    
+  def full_address
+    "#{address}, #{city}, #{state}, #{country}"
+  end
    
   def thumbs_up_total
       self.like.where(like: true).size

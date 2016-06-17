@@ -31,22 +31,21 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'formtastic', git: 'git@github.com:justinfrench/formtastic.git', :branch => 'master'
 # gem devise for user Authentication
 gem 'devise',      '> 4.1.0'
 #gem active_admin for handle the backend of application
 gem 'activeadmin', github: 'activeadmin'
+
 #gem geocoder for location
 gem 'geocoder'
 #gem omniauth-facebook for facebook Authentication
  gem 'omniauth-facebook'
- gem 'omniauth-fitbit-oauth2'
+ gem  'omniauth'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

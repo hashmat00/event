@@ -1,17 +1,30 @@
 class EventsController < ApplicationController
+
     before_action :set_event, only: [:edit, :update, :show, :like, :destroy]
     before_action :require_same_user, only: [:edit, :destory, :update]    
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
     
-    def index
+  def index
+
         # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
-        @events = Event.all
+
+    if params[:category].present?  
+         @categories = Category.find(params[:category])
+         @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
+        elsif params[:search]
+         @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
+        elsif params[:distance]
+         city =  Rails.env == 'development' ? 'Delhi' : request.location.city
+         @events = Event.near(city, params[:distance], :order => :address)  
+        else
+         @events = Event.all
         # paginate(page: params[:page], per_page: 6)
     end
-    
-    
-    
+
+
+  end
+     
     
     def new
         @event = Event.new
@@ -26,10 +39,11 @@ class EventsController < ApplicationController
         else
             render 'new'
         end
-      end
+    end
     
     
     def show
+     
        #used set_event on bottom and top
        #@review = Review.where(event_id: @event).order("created_At DESC")
     end
@@ -77,22 +91,13 @@ class EventsController < ApplicationController
     
     
     
+
     private
     
-        def event_params
-        params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :start_time, :end_time, category_ids: [])
-    end
-    
-    
-    def set_event
-        @event = Event.find(params[:id])
-    end
-    
-    
-    def require_same_user
-        if current_user != @event.user && !current_user.admin?
-        	flash[:danger] = "You can only edit/delete your own event"
-    		redirect_to root_path
-    	end
-    end
+      def set_event
+          @event = Event.find(params[:id])
+      end      
+      def event_params
+          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, category_ids: [])
+      end
 end

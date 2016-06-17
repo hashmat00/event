@@ -1,8 +1,23 @@
 <!--display title from partials page-->
 
+
+
+
+
+
+
+
+
 <%= image_tag(@event.picture.url, class: "img-responsive", style: "width: 100%;") if @event.picture? %>
 <div class="container">
+
+<ul>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+
+  <li><%= link_to @event.address %> </li>
+</ul>
     <div class="show-page-text">
+
     <h1><%= @event.name %></h1>
     </div>
     <div class="show-page-text2">
@@ -10,11 +25,15 @@
     </div>
 </div>
 
+
+
+
+
 <!--Recipe content -->
 <div class="container show-page-detail-text">
     
-
     <div class="row ">
+
         <div class="col-md-4 user-avatar">
                 <section class="chef_info center">
                     <%= link_to gravatar_for(@event.user, size: 200), user_path(@event.user) %>

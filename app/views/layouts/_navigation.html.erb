@@ -1,4 +1,3 @@
- 
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,6 +14,7 @@
       <ul class="nav navbar-nav">
         
         <li><%= link_to 'Browse', events_path %></li>
+
         <li><%= link_to 'Organizers', users_path %></li>         
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
@@ -28,7 +28,30 @@
            <% end %>
           </ul>
         </li>
-      </ul>
+        <li>
+      
+       <%= form_tag  events_path, :method => :get do %>
+    
+     <div class="form-inline" >
+      <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"form-control  li-text " %>
+        
+          <%= text_field_tag :distance, params[:distance], :class=>"form-control  li-text", 
+         :placeholder=>"Enter Addreess for find event" %>
+
+         <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
+         :placeholder=>"Enter Addreess for find event" %>
+              
+          <%= submit_tag "Search Near", :name => nil, :class=>"form-control li-button btn btn-success" %>
+          
+        </div>
+      <% end %>
+        </li>
+        
+        
+        </ul>
+        
+  
+
       
       <ul class="nav navbar-nav navbar-right">
        <% if user_signed_in?  %> 
