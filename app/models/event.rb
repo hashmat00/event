@@ -1,5 +1,8 @@
 class Event < ActiveRecord::Base
+   
     belongs_to :user
+    geocoded_by :address
+    after_validation :geocode, :if => :address_changed?
 
     has_many :like, dependent: :destroy
     has_many :event_categories, dependent: :destroy

@@ -1,19 +1,21 @@
 class EventsController < ApplicationController
-    before_action :set_event, only: [:edit, :update, :show, :like, :destroy]
+    before_action :set_event, only: [:edit, :update, :show, :new, :create, :like, :destroy]
     before_action :require_user, except: [:show, :index]
     before_action :require_same_user, only: [:edit, :destory, :update]
     
-    before_action :authenticate_user!, only: [:edit, :update, :destroy]
+   
     
     
-    def index
+  def index
         # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+       if params[:search].present?
+        @events = Event.near(params[:search], 50)
+        else
         @events = Event.all
         # paginate(page: params[:page], per_page: 6)
-    end
-    
-    
-    
+       end
+  end
+     
     
     def new
         @event = Event.new
@@ -21,17 +23,18 @@ class EventsController < ApplicationController
     
     def create
        @event = Event.new(event_params)
-       @event.user = current_user
+       @event.user = current_user.id
        if @event.save
         flash[:success] = "You have successfully created the Event"
         redirect_to events_path
         else
             render 'new'
         end
-      end
+    end
     
     
     def show
+     
        #used set_event on bottom and top
        #@review = Review.where(event_id: @event).order("created_At DESC")
     end
@@ -79,11 +82,12 @@ class EventsController < ApplicationController
     
     
     
-    private
-    
-        def event_params
-        params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, category_ids: [])
-    end
+    # def require_same_user
+    #     if current_user != @event.user && !current_user.admin?
+    #       flash[:danger] = "You can only edit/delete your own event"
+    #     redirect_to root_path
+    #   end
+    # end
     
     
     def set_event
@@ -91,10 +95,10 @@ class EventsController < ApplicationController
     end
     
     
-    def require_same_user
-        if current_user != @event.user && !current_user.admin?
-        	flash[:danger] = "You can only edit/delete your own event"
-    		redirect_to root_path
-    	end
+    
+
+    private
+      def event_params
+        params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, category_ids: [])
     end
 end
