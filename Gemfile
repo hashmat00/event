@@ -6,8 +6,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 gem 'carrierwave'
 gem 'mini_magick'
-# gem 'will_paginate', '3.1.0'
-# gem 'bootstrap-will_paginate', '0.0.10'
+gem 'will_paginate', '3.1.0'
+gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt', '3.1.11'
 gem 'fog'
 
@@ -46,9 +46,6 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'geocoder'
 #gem omniauth-facebook for facebook Authentication
  gem 'omniauth-facebook'
- gem 'omniauth-facebook'
- gem 'omniauth-twitter'
- gem 'omniauth-github'
  gem 'omniauth-fitbit-oauth2'
 
 # Use Capistrano for deployment
@@ -71,11 +68,11 @@ group :development do
 end
 
 group :production do
-  
 
   gem 'pg'
   
   gem 'rails_12factor'
   
 end
+gem 'figaro'
 

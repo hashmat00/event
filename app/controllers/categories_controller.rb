@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-    before_action :require_user, except: [:show]
+    before_action :authenticate_user!, except: [:show]
     
     
    def show
