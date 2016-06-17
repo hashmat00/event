@@ -4,7 +4,25 @@
 <!--<hr/>-->
 
 <div class="container">
- 
+ <div id="fb-root"></div>
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<%= ENV["FACEBOOK_APP_ID"] %>',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
  <% @events.each do |x| %>
         <div class="col-md-4 m-b-lg">
           <div class="panel panel-default panel-profile m-b-0">
@@ -40,13 +58,26 @@
                 <p style="color: #777">Category: <%= render x.categories %></p>
                 </div>
                     
-              
-              
+              <a href = '#-' id="facebook-share_<%= x.id %>"><img src="/assets/fb.png"></a>
+              <a href="https://twitter.com/share?text=Event: <%= x.name %>.&url=<%= event_path(x) %>" target="_blank" ><img src="/assets/tweet.png"></a>
+
             </div>
           </div>
         </div>
                     
-                 
+           <script type="text/javascript">
+            $(document).on('click','#facebook-share_<%=x.id %>',function(e){
+              e.preventDefault();
+              FB.ui(
+              {
+                  method: 'feed',
+                  link: '<%= event_path(x) %>',
+                  name: '<%= x.name %>',
+                  picture: '<%= x.picture.url %>',
+                  description: '<%= x.summary %>'
+              }, function(response){});
+            });
+          </script>      
             
      <% end %>
      

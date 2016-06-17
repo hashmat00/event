@@ -41,7 +41,7 @@ class EventsController < ApplicationController
     
     
     
-    def update
+    def update      
     if @event.update(event_params)
       flash[:success] = "Your Event was updated succesfully!"
       redirect_to event_path(@event)
@@ -80,7 +80,7 @@ class EventsController < ApplicationController
     private
     
         def event_params
-        params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, category_ids: [])
+        params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :start_time, :end_time, category_ids: [])
     end
     
     
