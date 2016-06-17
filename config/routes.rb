@@ -3,47 +3,20 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  
+  devise_for :users  
   root 'welcome#home'
   #get 'about', to: 'welcome#about'
-  
   
   resources :events do
     member do
       post 'like'
-    end
-    
-    #resources :reviews, except: [:index, :show]
-    
+    end   
+    #resources :reviews, except: [:index, :show]   
   end
-  
-  
- 
-  
-  
-  
   resources :users, except: [:new]
-  get 'register', to: 'users#new'
-  
-  
-  
-  get 'login', to: 'login#new'
-  post 'login', to: 'login#create'
-  get 'logout', to: 'login#destroy'
-  
-  
-
   resources :categories, only: [:new, :create, :show]
-  
-  
+  resources :relationships, :only => [:create]
+  post 'unfollow' => 'relationships#unfollow', as: :unfollow
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
