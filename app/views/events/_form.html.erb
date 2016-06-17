@@ -18,7 +18,8 @@
 
 <div class="row">
     <div class="well col-md-8 col-md-offset-2">
-        <%= form_for (@event, html: { multipart: true }) do |f| %>
+      
+       <%= form_for @event do |f| %>
         <%= f.label :name %>
         <%= f.text_field :name %>
         
@@ -43,20 +44,17 @@
          <%= f.label :country %>
         <%= f.text_field :country %>
         
-        
-        
-      
       
         <strong>Categoreis: </strong>
         <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |v| %>
         <%= v.label(class: "checkbox-inline input_checkbox") {v.check_box(class: "checkbox") + v.text } %>
         <% end %>
+       
         <hr/>
-        <span class="picture">
-          <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
-        </span>
-        
-        <%= f.submit class: "btn btn-success" %>
+          <span class="picture">
+            <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
+          </span>
+          <%= f.submit class: "btn btn-success" %>
         <% end %>
     </div>
 </div>

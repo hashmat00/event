@@ -11,23 +11,22 @@
 <%= image_tag(@event.picture.url, class: "img-responsive", style: "width: 100%;") if @event.picture? %>
 <div class="container">
 
-
+<ul>
 <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
 
-<h3>Nearby locations</h3>
-<ul>
-<% for @event in @event.nearbys(10) %>
-  <li><%= link_to event.try(:address), event %> </li>
-<% end %>
+  <li><%= link_to @event.address %> </li>
 </ul>
-
     <div class="show-page-text">
+
     <h1><%= @event.name %></h1>
     </div>
     <div class="show-page-text2">
     <h3 class="center"><%= @event.summary %></h3>
     </div>
 </div>
+
+
+
 
 
 <!--Recipe content -->

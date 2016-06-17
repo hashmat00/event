@@ -1,19 +1,28 @@
 class EventsController < ApplicationController
-    before_action :set_event, only: [:edit, :update, :show, :new, :create, :like, :destroy]
-    before_action :require_user, except: [:show, :index]
-    before_action :require_same_user, only: [:edit, :destory, :update]
-    
-   
+
+    before_action :set_event, only: [:edit, :update, :show, :like, :destroy]
+    before_action :require_same_user, only: [:edit, :destory, :update]    
+    before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
     
   def index
+
         # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
-       if params[:search].present?
-        @events = Event.near(params[:search], 50)
+
+    if params[:category].present?  
+         @categories = Category.find(params[:category])
+         @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
+        elsif params[:search]
+         @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
+        elsif params[:distance]
+         city =  Rails.env == 'development' ? 'Delhi' : request.location.city
+         @events = Event.near(city, params[:distance], :order => :address)  
         else
-        @events = Event.all
+         @events = Event.all
         # paginate(page: params[:page], per_page: 6)
-       end
+    end
+
+
   end
      
     
@@ -23,7 +32,7 @@ class EventsController < ApplicationController
     
     def create
        @event = Event.new(event_params)
-       @event.user = current_user.id
+       @event.user = current_user
        if @event.save
         flash[:success] = "You have successfully created the Event"
         redirect_to events_path
