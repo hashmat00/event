@@ -1,0 +1,31 @@
+SECRET_KEY_BASE: f4082baf04b77ffe4dcd4dcc52b90910deae22ab97f8e7051d2e3b9a5be0181985015ea03179d19270d8a96bf331e7d7c70662e5a6a658918ed23445e9980$
+
+default:
+  # Database
+  DATABASE_ADAPTER: postgresql
+  DATABASE_USER: root
+  DATABASE_PASSWORD: root
+  DATABASE_NAME: event_development
+  DATABASE_HOST: localhost
+  DOMAIN: jannahevent.herokuapp.com
+
+development:
+  # Database
+  DATABASE_ADAPTER: postgresql
+  DATABASE_USER: root
+  DATABASE_PASSWORD: root
+  DATABASE_NAME: event_development
+  DATABASE_HOST: localhost
+  DOMAIN: localhost
+
+production:
+  # Database
+  DATABASE_ADAPTER: postgresql
+  DATABASE_USER: root
+  DATABASE_PASSWORD: root
+  DATABASE_NAME: event_production
+  DATABASE_HOST: localhost
+  DOMAIN: localhost
+
+
+# Staging

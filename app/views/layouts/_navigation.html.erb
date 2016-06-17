@@ -1,27 +1,4 @@
- <!--<header class="navbar navbar-fixed-top navbar-default">-->
- <!--   <div class="container">-->
- <!--     <%= link_to 'Jannah Events', root_path, class: "btn btn-lg btn-success", id: "logo" %>-->
- <!--     <div class="nav_item">-->
- <!--       <%= link_to 'Register', register_path, class: "btn btn-default btn-warning" %>-->
- <!--     </div>-->
- <!--     <div class="nav_item">-->
- <!--       <%= link_to 'Browse', events_path, class: "btn btn-default btn-warning" %>-->
- <!--     </div>-->
- <!--     <div class="nav_item">-->
- <!--       <%= link_to 'Organizers', users_path, class: "btn btn-default btn-warning" %>-->
- <!--     </div>-->
- <!--     <div class="nav_item">-->
- <!--       <%= link_to 'Create Events', new_event_path, class: "btn btn-default btn-warning" %>-->
- <!--     </div>-->
-   
-           
-          
- <!--   </div>-->
- <!-- </header>-->
-  
-  
-  
-  
+ 
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,80 +9,54 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" <%= link_to 'Jannah Event', root_path %></a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         
         <li><%= link_to 'Browse', events_path %></li>
-        <li><%= link_to 'Organizers', users_path %></li>
-        
-               
-          
-        
-        
-        
+        <li><%= link_to 'Organizers', users_path %></li>         
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
           <ul class="dropdown-menu">
                <% Category.all.each do |x| %> 
             <li><%= link_to x.name, category_url(x) %></li>
            <% end %>
-           <% if logged_in? && current_user.admin? %>
+           <% if !user_signed_in? %>
            <li role="separator" class="divider"></li>
            <li><%= link_to 'New Category', new_category_path %></li>
            <% end %>
           </ul>
         </li>
-        
-        
-        
-        
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
-        
-     
-        
-        <li><%= link_to 'Create Event', new_event_path %></li>
-        
-        
-         <li class="navitem">
-         <li class="dropdown">
-           <%= link_to '#',  class: "dropdown-toggle", "data-toggle" =>"dropdown" do %>
-           <%= current_user.username %> <span class="caret"></span></a>
-           <% end %>
-         
+       <% if user_signed_in?  %> 
+          <li><%= link_to 'Create Event', new_event_path %></li>
+          <li class="navitem">
+           <li class="dropdown">
+             <%= link_to '#',  class: "dropdown-toggle", "data-toggle" =>"dropdown" do %>
+              <%= current_user.usersname %><span class="caret"></span></a>
+        <% end %>
+           
           <ul class="dropdown-menu">
             
             <li><%= link_to 'Profile', user_path(current_user) %></li>
-            <li><%= link_to 'Edit Profile', edit_user_path(current_user) %></li>
+            <li><%= link_to 'Edit Profile', '/users/edit' %></li>
             <li><%= link_to 'Create Event', new_event_path %></li>
            
            
             <li role="separator" class="divider"></li>
-           <li> <%= link_to 'Logout', logout_path %></li>
+           <li> <%= link_to 'Logout', destroy_user_session_path, :method => :delete  %></li>
           </ul>
         </li>
        
-        
-        <% else %>
-        
-        
-       
-        
-        
-        <li> <%= link_to 'Login', login_path %></li>
-        <li> <%= link_to 'Signup', register_path%></li>
-        
+        <% else %>        
+        <li><%= link_to "Login", new_user_session_path %></li>
+        <li><%= link_to "Sign up", new_user_registration_path %> </li>
         
         <% end %>
-        
-        
-        
+       
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
