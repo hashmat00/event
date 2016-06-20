@@ -1,39 +1,78 @@
 <!--display title from partials page-->
 
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script>
+  $(function() {
+    $( "#start_date" ).datepicker({
+        dateFormat: 'dd-mm-yy'
+     });
+    $( "#end_date" ).datepicker({
+        dateFormat: 'dd-mm-yy'
+     });
 
+  });
+  </script>
+
+
+<div class="row">
+<div class="col-md-1">
+
+</div>
+<div class="col-md-10">
+ <%= form_tag  events_path, :method => :get do %>
+     <div class="form-inline" >
+      <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"form-control  li-text " %>
+        
+          <%= text_field_tag :distance, params[:distance], :class=>"form-control  li-text", 
+         :placeholder=>"Enter Addreess for find event" %>
+
+         <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
+         :placeholder=>"Enter Addreess for find event" %>
+            
+        <%= text_field_tag :start_date, params[:start_date],:id=>"start_date", :class=>"form-control  li-text", 
+         :placeholder=>"Start date" %>
+      
+        <%= text_field_tag :end_date, params[:end_date],  :id=>"end_date", :class=>"form-control  li-text", 
+         :placeholder=>"End Date" %>
+
+          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button btn btn-success" %>
+          
+        </div>
+      <% end %>
+      </div>
+      <div class="col-md-1">
+</div>
+</div>
+
+
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/half-slider.css" rel="stylesheet">
+    <link href="assets/half-slider.css" rel="stylesheet">
       <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
 
  <header id="myCarousel" class="carousel slide">
         <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+      
 
         <!-- Wrapper for Slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <!-- Set the first background image using inline CSS below. -->
-                <% @events.each do |event|%>
+                <% @events.limit(1).each do |event|%>
                        <%= image_tag event.picture, :class =>"fill" %>
                 
                 <% end %>
             </div>
+             <% @events.each_with_index do |event, index|%>
             <div class="item">
                 <!-- Set the first background image using inline CSS below. -->
-                <% @events.each do |event|%>
+               
                        <%= image_tag event.picture, :class =>"fill" %>
                 
-                <% end %>
+                
             </div>
+            <% end %>
         </div>
 
         <!-- Controls -->
@@ -52,6 +91,24 @@
 <!--<hr/>-->
 
 <div class="container">
+ <div id="fb-root"></div>
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<%= ENV["FACEBOOK_APP_ID"] %>',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
  <% @events.each do |x| %>
         <div class="col-md-4 m-b-lg">
@@ -67,6 +124,7 @@
               </section>
               
               <h4><%= link_to x.name, event_path(x) %></h4>
+              <h6><%=  x.city %>, <%=  x.state %></h6>,
               <h2 class="quiet"><%#= x.summary.split[0..4].join(" ") %></h2>
               
                   <div class>
@@ -88,13 +146,26 @@
                 <p style="color: #777">Category: <%= render x.categories %></p>
                 </div>
                     
-              
-              
+              <a href = '#-' id="facebook-share_<%= x.id %>"><img src="/assets/fb.png"></a>
+              <a href="https://twitter.com/share?text=Event: <%= x.name %>.&url=<%= event_path(x) %>" target="_blank" ><img src="/assets/tweet.png"></a>
+
             </div>
           </div>
         </div>
                     
-                 
+           <script type="text/javascript">
+            $(document).on('click','#facebook-share_<%=x.id %>',function(e){
+              e.preventDefault();
+              FB.ui(
+              {
+                  method: 'feed',
+                  link: '<%= event_path(x) %>',
+                  name: '<%= x.name %>',
+                  picture: '<%= x.picture.url %>',
+                  description: '<%= x.summary %>'
+              }, function(response){});
+            });
+          </script>      
             
      <% end %>
      
@@ -109,7 +180,8 @@
             
 </div>
         
-   
+  
+
 
 
 

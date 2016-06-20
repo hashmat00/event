@@ -11,7 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bcrypt', '3.1.11'
 gem 'fog'
 
-
+gem "jquery-rails",'>= 1.0.0'
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -36,6 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 # gem 'will_paginate', ">3.0.pre2"
+
 # gem 'formtastic', git: 'git@github.com:justinfrench/formtastic.git', :branch => 'master'
 # gem devise for user Authentication
 gem 'devise',      '> 4.1.0'

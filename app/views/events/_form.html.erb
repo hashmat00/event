@@ -11,11 +11,7 @@
     </div>
   </div>
 <% end %>
-
-
-
-
-
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <div class="row">
     <div class="well col-md-8 col-md-offset-2">
       
@@ -44,7 +40,13 @@
          <%= f.label :country %>
         <%= f.text_field :country %>
         
-      
+        <%= f.label :start_time %>
+        <%= f.text_field :start_time, :id=>"start_date" %>
+        
+
+        <%= f.label :end_time %>
+        <%= f.text_field :end_time, :id=>"end_date" %>    
+
         <strong>Categoreis: </strong>
         <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |v| %>
         <%= v.label(class: "checkbox-inline input_checkbox") {v.check_box(class: "checkbox") + v.text } %>
@@ -73,3 +75,14 @@
     }
   });
 </script>
+  <script>
+  $(function() {
+    $( "#start_date" ).datepicker({
+        dateFormat: 'dd-mm-yy'
+     });
+    $( "#end_date" ).datepicker({
+        dateFormat: 'dd-mm-yy'
+     });
+
+  });
+  </script>

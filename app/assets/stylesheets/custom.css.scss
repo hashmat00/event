@@ -232,8 +232,14 @@ color: white;
 
 }
 
+/*======================homepage slideshow===========================*/
 
+@media only screen and (max-width: 500px) {
 
+    .carousel-inner > .item > img {
+    height: 250px;
+    }
+}
 
 
 
@@ -501,5 +507,4 @@ background: rgba(51, 51, 51, 0.26) url("../img/categories/img_category_socail-aw
     background-size: cover;
 margin-bottom: 5px;
 }
-
-
+.nav > li > a{padding: 10px 13px;}

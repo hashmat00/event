@@ -55,7 +55,7 @@ class EventsController < ApplicationController
     
     
     
-    def update
+    def update      
     if @event.update(event_params)
       flash[:success] = "Your Event was updated succesfully!"
       redirect_to event_path(@event)
@@ -91,23 +91,14 @@ class EventsController < ApplicationController
     
     
     
-    # def require_same_user
-    #     if current_user != @event.user && !current_user.admin?
-    #       flash[:danger] = "You can only edit/delete your own event"
-    #     redirect_to root_path
-    #   end
-    # end
-    
-    
-    def set_event
-        @event = Event.find(params[:id])
-    end
-    
-    
-    
 
     private
+    
+      def set_event
+          @event = Event.find(params[:id])
+      end      
       def event_params
-        params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :video, :latitude, :longitude,:user_id, category_ids: [])
-    end
+          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, category_ids: [])
+      end
+
 end

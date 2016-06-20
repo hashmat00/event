@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'order_items/create'
+
+  get 'order_items/update'
+
+  get 'order_items/destroy'
+
+  get 'carts/show'
+
+  get 'tickets/index'
+
   get 'auth/:provider/callback', to: "users#omniauth" 
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -10,13 +20,16 @@ Rails.application.routes.draw do
   resources :events do
     member do
       post 'like'
-    end   
+    end
+    resources :tickets, only: [:index]
     #resources :reviews, except: [:index, :show]   
   end
   resources :users, except: [:new]
   resources :categories, only: [:new, :create, :show]
   resources :relationships, :only => [:create]
   post 'unfollow' => 'relationships#unfollow', as: :unfollow
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

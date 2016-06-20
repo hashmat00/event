@@ -18,6 +18,9 @@ development:
   DATABASE_HOST: localhost
   DOMAIN: localhost
 
+  FACEBOOK_APP_ID: 1010053535725175
+  FACEBOOK_APP_SECRET: 1010053535725175
+
 production:
   # Database
   DATABASE_ADAPTER: postgresql
@@ -27,5 +30,7 @@ production:
   DATABASE_HOST: localhost
   DOMAIN: localhost
 
+  FACEBOOK_APP_ID: 1037096729731636
+  FACEBOOK_APP_SECRET: 6703b75235b704e789aa9fbb6490badd
 
 # Staging

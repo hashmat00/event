@@ -33,20 +33,19 @@
        <%= form_tag  events_path, :method => :get do %>
     
      <div class="form-inline" >
-      <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"form-control  li-text " %>
-        
-          <%= text_field_tag :distance, params[:distance], :class=>"form-control  li-text", 
-         :placeholder=>"Enter Addreess for find event" %>
-
          <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
          :placeholder=>"Enter Addreess for find event" %>
               
-          <%= submit_tag "Search Near", :name => nil, :class=>"form-control li-button btn btn-success" %>
+          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button btn btn-success" %>
           
         </div>
       <% end %>
         </li>
-        
+        <% if user_signed_in? %>
+          <li>              
+           <div class="cart-text"><%= render 'layouts/cart_text' %></div>
+          </li>
+        <% end %>
         
         </ul>
         
@@ -59,7 +58,7 @@
           <li class="navitem">
            <li class="dropdown">
              <%= link_to '#',  class: "dropdown-toggle", "data-toggle" =>"dropdown" do %>
-              <%= current_user.usersname %><span class="caret"></span></a>
+              <%= current_user.username %><span class="caret"></span></a>
         <% end %>
            
           <ul class="dropdown-menu">
