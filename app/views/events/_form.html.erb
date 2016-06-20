@@ -52,8 +52,13 @@
        
         <hr/>
           <span class="picture">
+          <%= f.label :picture %>
             <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
           </span>
+         
+            <%= f.label :video %>
+            <%= f.file_field :video %>
+          
           <%= f.submit class: "btn btn-success" %>
         <% end %>
     </div>

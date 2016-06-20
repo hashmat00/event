@@ -35,7 +35,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 # Use Unicorn as the app server
 # gem 'unicorn'
-gem 'formtastic', git: 'git@github.com:justinfrench/formtastic.git', :branch => 'master'
+# gem 'will_paginate', ">3.0.pre2"
+# gem 'formtastic', git: 'git@github.com:justinfrench/formtastic.git', :branch => 'master'
 # gem devise for user Authentication
 gem 'devise',      '> 4.1.0'
 #gem active_admin for handle the backend of application
@@ -46,6 +47,8 @@ gem 'geocoder'
 #gem omniauth-facebook for facebook Authentication
  gem 'omniauth-facebook'
  gem  'omniauth'
+ # for Video Thumnail
+ gem 'carrierwave-video-thumbnailer' 
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
