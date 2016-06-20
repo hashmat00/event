@@ -41,12 +41,16 @@
          <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
          :placeholder=>"Enter Addreess for find event" %>
               
-          <%= submit_tag "Search Near", :name => nil, :class=>"form-control li-button btn btn-success" %>
+          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button btn btn-success" %>
           
         </div>
       <% end %>
         </li>
-        
+        <% if user_signed_in? %>
+          <li>              
+           <div class="cart-text"><%= render 'layouts/cart_text' %></div>
+          </li>
+        <% end %>
         
         </ul>
         
