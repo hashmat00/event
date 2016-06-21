@@ -34,6 +34,9 @@ class EventsController < ApplicationController
        @event = Event.new(event_params)
        @event.user = current_user
        if @event.save
+        User.all.each do |user|
+          Notification.create(recipient: user , user: current_user, body: "#{current_user.name } has created event #{@event.name} ", notificable: @event)
+        end
         flash[:success] = "You have successfully created the Event"
         redirect_to events_path
         else
