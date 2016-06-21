@@ -30,6 +30,17 @@ Rails.application.routes.draw do
   post 'unfollow' => 'relationships#unfollow', as: :unfollow
   resource :cart, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
+  resources :notifications do
+    collection do
+      post :mark_as_read  
+    end
+  end
+
+  # Accept and Regect path
+  post 'accept/:id', to: 'notifications#accept', as: :notification_accept
+  post 'reject/:id', to: 'notifications#reject', as: :notification_reject
+  post '/update_notification', to: 'notifications#update_notification', as: :update_notification
+  post '/update_message_notification', to: 'notifications#update_message_notification', as: :update_message_notification
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
