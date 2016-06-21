@@ -1,19 +1,39 @@
-
-
 <!--display title from partials page-->
-<%= image_tag(@event.picture.url, class: "img-responsive", style: "width: 100%;") if @event.picture? %>
+
+
+<style type="text/css">
+  .show-page-text{color: #000;margin-top: 200px;}
+  .show-page-text2 {color: #000;margin-top:0px;;}
+</style>
+
+
+
+<div class="col-md-12" > 
+<div class="col-md-6">
+
+<%= image_tag(@event.picture.url, class: "img-responsive ", style: "width:600px;height:384px;margin:10px") if @event.picture? %>
+</div>
+<div class="col-md-6">
+<%= video_tag @event.try(:video), :style=>"width:600px;height:384px;margin:10px 2px;frameborder:0px;", :controls => true,:autobuffer => true %>
+</div>
+</div>
+
+
 <div class="container">
-  <ul>
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
-    <li><%= link_to @event.address %> </li>
-  </ul>
+  <div class="row">
+  <div class="col-md-6">
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=550x400&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+</div>
+<div class="col-md-1"></div>
+<div class="col-md-5">
   <div class="show-page-text">
     <h1><%= @event.name %></h1>
   </div>
   <div class="show-page-text2">
     <h3 class="center"><%= @event.summary %></h3>
   </div>
-
+  </div>
+</div>
 </div>
 <!--Recipe content -->
 <div class="container show-page-detail-text">

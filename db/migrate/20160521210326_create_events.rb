@@ -9,7 +9,6 @@ class CreateEvents < ActiveRecord::Migration
       t.string :zipcode
       t.string :state
       t.string :country
-      
       t.timestamps
     end
   end

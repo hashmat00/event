@@ -26,6 +26,7 @@ class Event < ActiveRecord::Base
    
    
    mount_uploader :picture, PictureUploader
+   mount_uploader :video, AvatarUploader
    validate :picture_size
    default_scope -> { order(created_at: :desc) }
    
