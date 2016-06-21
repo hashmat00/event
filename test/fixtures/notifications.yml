@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  recipient_id: 1
+  notificable_id: 1
+  notificable_type: MyString
+  readt_at: 
+  body: MyText
+  accept: false
+
+two:
+  user_id: 1
+  recipient_id: 1
+  notificable_id: 1
+  notificable_type: MyString
+  readt_at: 
+  body: MyText
+  accept: false
