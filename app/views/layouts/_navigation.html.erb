@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -36,7 +36,7 @@
          <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
          :placeholder=>"Enter Addreess for find event" %>
               
-          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button btn btn-success" %>
+          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button1 btn btn-success" %>
           
         </div>
       <% end %>
@@ -73,7 +73,13 @@
           </ul>
         </li>
        
-        <% else %>        
+        <% else %>
+             <li>
+       <button class="btn btn-default btn-lg btn-link">
+          <span class="glyphicon glyphicon-bell"></span>
+        </button>
+           <span class="badge badge-notify">3</span>
+         </li>
         <li><%= link_to "Login", new_user_session_path %></li>
         <li><%= link_to "Sign up", new_user_registration_path %> </li>
         

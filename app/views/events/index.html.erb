@@ -15,33 +15,39 @@
 
 
 <div class="row">
-<div class="col-md-1">
+<div class="form-inline" >
+<div class="col-md-6 div-search-left">
 
-</div>
-<div class="col-md-10">
  <%= form_tag  events_path, :method => :get do %>
-     <div class="form-inline" >
-      <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"form-control  li-text " %>
+
+      <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"col-md-3 form-control  li-text " %>
         
-          <%= text_field_tag :distance, params[:distance], :class=>"form-control  li-text", 
-         :placeholder=>"Enter Addreess for find event" %>
+          <%= text_field_tag :distance, params[:distance], :class=>"col-md-3 form-control  li-text", 
+         :placeholder=>"Enter Miles " %>
 
-         <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
+         <%= text_field_tag :search, params[:search], :class=>" col-md-3 form-control  li-text", 
          :placeholder=>"Enter Addreess for find event" %>
-            
-        <%= text_field_tag :start_date, params[:start_date],:id=>"start_date", :class=>"form-control  li-text", 
-         :placeholder=>"Start date" %>
-      
-        <%= text_field_tag :end_date, params[:end_date],  :id=>"end_date", :class=>"form-control  li-text", 
-         :placeholder=>"End Date" %>
-
-          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button btn btn-success" %>
+     
+         <%= submit_tag "Search", :name => nil, :class=>"col-md-3 form-control li-button btn btn-success" %>
           
-        </div>
       <% end %>
       </div>
-      <div class="col-md-1">
+
+      <div class="col-md-6 div-search-right">
+     <span id="span1">Search by date:</span>
+      <%= form_tag  events_path, :method => :get do %>
+
+     <%= text_field_tag :start_date, params[:start_date],:id=>"start_date", :class=>" col-md-3 form-control  li-text", 
+         :placeholder=>"Start date" %>
+      
+        <%= text_field_tag :end_date, params[:end_date],  :id=>"end_date", :class=>" col-md-3 form-control  li-text", 
+         :placeholder=>"End Date" %>
+
+          <%= submit_tag "Search", :name => nil, :class=>"col-md-3 form-control li-button btn btn-success" %>
+         
+               <% end %>
 </div>
+ </div>
 </div>
 
 
