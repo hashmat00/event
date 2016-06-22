@@ -1,0 +1,25 @@
+<% messages = Message.incoming_messages(user)%>
+
+<a href="#" data-toggle="dropdown" class="read-messages"><img src="/assets/images/email.png" alt="">
+  <%if messages.count > 0 %>
+    <span><%= messages.count%></span>
+  <% end %>
+</a>
+<ul class="clearfix dropdown-menu">
+  <div class="topGrayRow"> <span class="blackColor font14 bold">Message (<%= messages.count%>)</span>
+    <%= link_to "Mark As Read ", mark_as_read_notifications_path, :method => "post" ,:class =>"blackColor font13 bold fr" if messages.count > 0 %> </div>
+
+  <div class="notiScroll scrollbars">
+    <% messages.try(:reverse).each do |notification|%>
+      <li>
+        <div class="clearfix commentSec cmntRow">
+          <div class="clearfix userInfo posRel"> <a href="<%= conversation_message_path(notification.user, current_user) rescue nil%>" class="userImg"><img src="<%= notification.user.try(:img) %>" alt=""></a> <a href="<%= conversation_message_path(notification.user, current_user) rescue nil%>" class="userNAme font14"><%= notification.user.try(:screen_name) %></a> <br>
+            <div class="fr grayColor tar"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
+            <div class="font13"><%=notification.try(:body)%></div>
+            <!-- <div class="blackColor font12 bold"> is now a connection</div> -->
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </div>
+</ul>

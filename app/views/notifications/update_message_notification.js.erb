@@ -1,0 +1,7 @@
+setTimeout(function(){
+  $(".container.popupmsg").hide();
+}, 50000);
+$(function () {
+  $('.message_notifications').html('<%= j (render "notifications/message_notifications")%>')
+});
+$(".scrollbars, .searchDropDown").niceScroll({cursorborder:"0", cursorwidth :"6px", cursorminheight:"50", horizrailenabled:false, cursorcolor:"#999",boxzoom:false});

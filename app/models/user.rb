@@ -14,6 +14,14 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  ##Notifications
+  has_many :sent_notifications,
+   :class_name => 'Notification',
+   :foreign_key => 'user_id'
+
+  has_many :notifications,
+   :class_name => 'Notification',
+   :foreign_key => 'recipient_id'
 
   def self.sign_in_from_omniauth(auth)
         user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
@@ -22,6 +30,10 @@ class User < ActiveRecord::Base
         user.password = Devise.friendly_token[0,20]
         user.save
         user
+  end
+
+  def admin?
+    self.is_admin
   end
 
   # Follows a user.
