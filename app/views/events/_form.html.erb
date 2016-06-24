@@ -36,8 +36,13 @@
         
         <%= f.label :state %>
         <%= f.text_field :state %>
-        
-         <%= f.label :country %>
+     
+        <%= f.label :is_paid, "Paid", :value => "Paid"  %>
+        <%= f.radio_button :is_paid, true, :checked => true %>
+        <%= f.label :is_paid, "Free", :value => "Free" %>
+        <%= f.radio_button :is_paid, false%>
+              <br>
+        <%= f.label :country %>
         <%= f.text_field :country %>
         
         <%= f.label :start_time %>

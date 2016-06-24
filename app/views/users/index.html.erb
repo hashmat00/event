@@ -3,20 +3,28 @@
 
 
 <!--<div class="container">-->
-<!--   <% @users.each_slice(3) do |works| %>-->
+<!--   <#% @users.each_slice(3) do |works| %>-->
 <!--   <div class="row"">-->
-<!--    <% @users.each do |x| %>-->
+<!--    <#% @users.each do |x| %>-->
     
 <!--        <div class="col-md-4 m-b-lg">-->
 
-<!--          <%= link_to gravatar_for(x, size: 200), user_path(x) %>-->
+<!--          <%#= link_to gravatar_for(x, size: 200), user_path(x) %>-->
 <!--           <h5>User name:   </h5>-->
         
 <!--        </div>-->
-<!--        <% end %>-->
+<!--        <%# end %>-->
 <!--    </div>-->
-<!--    <% end %>-->
+<!--    <%# end %>-->
 <!--</div>-->
+
+ 
+
+<p>
+  Download:
+  <%= link_to "CSV", users_path(format: "csv") %> |
+  <%= link_to "Excel", users_path(format: "xls") %>
+</p>
 
 
 <% @users.each_slice(6) do |works| %>
@@ -31,7 +39,8 @@
                 <section class="panel-profile-img">
               <%= link_to gravatar_for(x, size: 100), user_path(x) %> 
               </section>
-              <h2><%= x.username %></h2>              
+              <h2><%= x.username %></h2> 
+              <h2><%= x.email %></h2>            
                 <span class="icon icon-add-user"></span> <%= link_to 'View User', user_path(x), class: "btn btn-success btn-small" %>
               </a>
             </div>

@@ -13,10 +13,10 @@
   });
   </script>
 
-
+<div class="container">
 <div class="row">
 <div class="form-inline" >
-<div class="col-md-6 div-search-left">
+<div class="col-md-7 div-search-left">
 
  <%= form_tag  events_path, :method => :get do %>
 
@@ -27,13 +27,13 @@
 
          <%= text_field_tag :search, params[:search], :class=>" col-md-3 form-control  li-text", 
          :placeholder=>"Enter Addreess for find event" %>
-     
+    
          <%= submit_tag "Search", :name => nil, :class=>"col-md-3 form-control li-button btn btn-success" %>
           
       <% end %>
       </div>
 
-      <div class="col-md-6 div-search-right">
+      <div class="col-md-5 div-search-right">
      <span id="span1">Search by date:</span>
       <%= form_tag  events_path, :method => :get do %>
 
@@ -48,7 +48,7 @@
                <% end %>
 </div>
  </div>
-</div>
+</div></div>
 
 
   <link href="assets/bootstrap.min.css" rel="stylesheet">
@@ -130,9 +130,17 @@
               </section>
               
               <h4><%= link_to x.name, event_path(x) %></h4>
-              <h6><%=  x.city %>, <%=  x.state %></h6>,
+              <h6><%=  x.address %>,<%=  x.city %>, <%=  x.state %></h6>
               <h2 class="quiet"><%#= x.summary.split[0..4].join(" ") %></h2>
+              <% if x.is_paid == true %>
               
+              <%= label_tag :Paid %>
+              <%else %>
+                <%= label_tag :Free %>
+                <% end %> 
+
+                   
+
                   <div class>
                         <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
                     </div> 
@@ -147,7 +155,13 @@
                     
                 </div> 
                 </br>
-               
+                <p><%=label_tag :Start_Date %>
+              
+                <%= x.start_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %>
+        
+
+                <%= label_tag :End_Date %>
+                <%= x.end_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %> </p>
                 <div class="ingredient pull-left">
                 <p style="color: #777">Category: <%= render x.categories %></p>
                 </div>

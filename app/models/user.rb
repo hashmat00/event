@@ -51,6 +51,19 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
+
+
+
+  def self.to_csv(options = {})
+  CSV.generate(options) do |csv|
+    csv << column_names
+    all.each do |user|
+      csv << user.attributes.values_at(*column_names)
+    end
+  end
+end
+
+
       
     #    before_save { self.email = email.downcase }
     #    validates :username, presence: true, length: {minimum: 3, maximum: 40}

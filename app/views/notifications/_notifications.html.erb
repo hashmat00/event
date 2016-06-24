@@ -1,22 +1,159 @@
-<% notifications = current_user.notifications.unread %>
+<style>
+.topGrayRow {
+    background-color: #d8d6d6;
+    padding: 15px;
+  margin-top:-5px;}
+
+.blackColor{float:right !important;}
+.bold{font-family: bold;}
+/*#all-notifications{background-color:red;color:white;width:10px;height:10px;box-shadow: 1px 1px 2px 2px #fff;}*/
+#all-notifications {
+    margin-top: 14px;
+    background-color: #ed1c24;
+    border-radius: 3px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 10px;
+    height: 16px;
+    position: absolute;
+    right: 3px;
+    text-align: center;
+    top: -7px;
+    width: 16px;
+    z-index: 9;
+}
+
+   .dropdown-menu1{
+    max-height: 410px !important;
+    overflow: visible;
+    opacity: 1;
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+    display: none;
+    margin-right: -132px !important;
+    font-size: 14px;
+    list-style: outside none none;
+    min-width: 340px !important;
+    padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.7s ease 0s;
+  }
+  .push-notification{background:white;}
+  .dropdown:hover{background:white;}
+
+  .notification .commentSec {
+    box-sizing: border-box;
+    margin: 0 !important;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    transition: all 300ms ease-in-out 0s;
+}
+.cmntRow {
+    margin: 0 0px !important;
+}
+.cmntRow {
+    background-color: #f7f7f7;
+}
+.commentSec {
+    border-top: 1px solid #d8d8d8;
+    margin:0px;
+}
+ .userImg .img {
+    height: 42px !important ;
+    width: 42px !important;
+     vertical-align: middle;
+     border: medium none;
+    max-width: 100%;
+    margin-top:10px;
+    margin-left:5px
+    outline: medium none;
+    margin-left: 5px;
+  }
+a, input[type="submit"] {
+    color: #333333;
+}
+.userInfo {
+    line-height: 17px;
+}
+.userInfo .grayColor {
+    font-size: 13px;
+    margin-top: -10px;
+    margin-top: -25px;
+    color: #909090;
+    float: right;
+    text-align: right;
+}
+.font13 {
+    font-size: 13px;
+    color: #909090;
+    float: left;
+    text-align: left;
+    margin-left: 52px;
+    margin-top: -20px;
+    width:180px;
+    margin-right:-10px
+}
+.acceptRej {
+    background-color: #efefef;
+    bottom: 0;
+    position: absolute;
+    right: -70px;
+    top: 0;
+    transition: all 300ms ease-in-out 0s;
+    width: 70px;
+}
+.userNAme {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: :-10px;
+
+}
+a, input[type="submit"] {
+    color: #333333;
+    outline: medium none;
+    text-decoration: none;
+    transition: all 300ms ease-in-out 0s;
+}
+a {
+    background-color: transparent;
+}
+</style>
+<% notifications = current_user.notifications %>
  <a href="#" data-toggle="dropdown" class="push-notification"><img src="/assets/noti.png" alt="">
   <%if notifications.count > 0 %>
    <span id ="all-notifications"><%= notifications.count %></span>
    <% end %>
  </a>
-   <ul class="clearfix dropdown-menu dropdown-menuNoti">
-   <div class="topGrayRow"> <span class="blackColor font14 bold">Notification</span> 
-   <%= link_to "Mark As Read ", mark_as_read_notifications_path, :method => "post" ,:class =>"blackColor font13 bold fr" if notifications.count > 0  %>
-  </div>      
+   <ul class="clearfix dropdown-menu1 dropdown-menu dropdown-menuNoti">
+
+
+   <div class="topGrayRow"> <span class="bold">Notification</span> 
+
+   <%= link_to "Mark As Read ", mark_as_read_notifications_path, :method => "post" ,:class =>"blackColor bold" if notifications.count > 0  %>
+  </div>     
+
+
 <div class="notiScroll scrollbars notifications"> 
   <% notifications.try(:reverse).each do |notification|%>
     <li class="notification-<%= notification.id %>">
+    
       <div class="clearfix commentSec cmntRow">
-        <div class="clearfix userInfo posRel"> <a href="<%= profile_path(notification.user) rescue nil%>" class="userImg"><img src="<%= notification.try(:user).try(:img) %>" alt=""></a> <a href="<%= profile_path(notification.user) rescue nil %>" class="userNAme font14"><%=notification.user.try(:screen_name )%></a> <br>
-          <div class="fr grayColor tar"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
+
+        <div class="clearfix userInfo posRel"> <a href="<%= profile_path(notification.user) rescue nil%>" class="userImg">
+        
+        <img src="assets/profile.png" class="img img-circle"></a> 
+        <a href="<%= profile_path(notification.user) rescue nil %>" class="userNAme font14"><%=notification.user.username %></a> <br>
+          <div class="grayColor"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
           <div class="font13"><%= notification.body.truncate(50) %></div>
           <!-- <div class="blackColor font12 bold"> is now a connection</div> -->
-          <% if (notification.notificable.class.name != "Post") &&  (notification.is_acceptable) %>
+          <% if true %>
            <div class="acceptRej">
             <%= link_to "", notification_accept_path(notification), :method => :post , :class=>"accept ", :remote=>true %>
                <%= link_to "", notification_reject_path(notification), :method => :post , :class=>"reject ", :remote=>true %>
@@ -24,6 +161,8 @@
               <% end %>
         </div>              
       </li>
-      <% end %>       
+      <% end %>     
     </div>
   </ul>
+  
+

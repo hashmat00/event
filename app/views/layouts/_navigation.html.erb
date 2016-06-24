@@ -1,3 +1,4 @@
+  <br><br>
   <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,31 +30,39 @@
           </ul>
         </li>
         <li>
-      
-       <%= form_tag  events_path, :method => :get do %>
+        
+        <%= form_tag  events_path, :method => :get do %>
     
-     <div class="form-inline" >
+        <div class="form-inline" >
          <%= text_field_tag :search, params[:search], :class=>"form-control  li-text", 
          :placeholder=>"Enter Addreess for find event" %>
               
-          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button1 btn btn-success" %>
-          
+  <% if user_signed_in? %>
+
+          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button2 btn btn-success" %>
+
+              <% else %>
+               <%= submit_tag "Search", :name => nil, :class=>"form-control li-button1 btn btn-success" %>
+                <% end %>
         </div>
-      <% end %>
-        </li>
-        <% if user_signed_in? %>
-          <li>              
-           <div class="cart-text"><%= render 'layouts/cart_text' %></div>
-          </li>
-          <li><%= render 'notifications/notifications' %></li>
         <% end %>
-        
+      
+        </li>
+      
         </ul>
         
   
 
       
       <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li>              
+           <div class="cart-text"><%= render 'layouts/cart_text' %></div>
+          </li>
+          <li></li>
+          <li><%= render 'notifications/notifications' %></li>
+        <% end %>
+        
        <% if user_signed_in?  %> 
           <li><%= link_to 'Create Event', new_event_path %></li>
           <li class="navitem">
@@ -75,12 +84,7 @@
         </li>
        
         <% else %>
-             <li>
-       <button class="btn btn-default btn-lg btn-link">
-          <span class="glyphicon glyphicon-bell"></span>
-        </button>
-           <span class="badge badge-notify">3</span>
-         </li>
+             
         <li><%= link_to "Login", new_user_session_path %></li>
         <li><%= link_to "Sign up", new_user_registration_path %> </li>
         
