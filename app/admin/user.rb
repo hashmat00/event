@@ -8,8 +8,8 @@ permit_params :usersname, :email, :password, :password_confirmation
 # or
 #
   form do |f|
-    f.inputs "Admin Details" do
-      f.input :usersname
+    f.inputs "User Details" do
+      f.input :username
       f.input :email
       f.input :password
       f.input :password_confirmation

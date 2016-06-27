@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   post 'reject/:id', to: 'notifications#reject', as: :notification_reject
   post '/update_notification', to: 'notifications#update_notification', as: :update_notification
   post '/update_message_notification', to: 'notifications#update_message_notification', as: :update_message_notification
+  post '/events/:id/contact_email', to: 'events#contact_email', as: 'event_contact_email'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

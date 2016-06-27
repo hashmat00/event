@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-    before_action :set_event, only: [:edit, :update, :show, :like, :destroy]
+    before_action :set_event, only: [:edit, :update, :show, :like, :destroy, :contact_email]
     before_action :require_same_user, only: [:edit, :destory, :update]    
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
@@ -17,7 +17,6 @@ class EventsController < ApplicationController
         elsif params[:distance]
          city =  Rails.env == 'development' ? 'Delhi' : request.location.city
          @events = Event.near(city, params[:distance], :order => :address) 
-          byebug
         elsif params[:start_date] && params[:start_date]
            @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time})
          else
@@ -94,7 +93,11 @@ class EventsController < ApplicationController
     end
     
     
-    
+    def contact_email
+      EventMailer.contact_email(@event,params[:event]).deliver_now
+      flash[:success] = "Your Email has been successfully sent"
+      redirect_to action: :index
+    end
     
     
     

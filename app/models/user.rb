@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
    :class_name => 'Notification',
    :foreign_key => 'recipient_id'
 
+  mount_uploader :image, PictureUploader 
   def self.sign_in_from_omniauth(auth)
         user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
         user.email =  auth['info']['email']

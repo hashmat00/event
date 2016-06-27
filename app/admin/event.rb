@@ -3,7 +3,7 @@ ActiveAdmin.register Event do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
- permit_params :list, :of, :attributes, :on, :model
+ permit_params :name, :summary, :description, :address, :city, :zipcode, :state, :country, :created_at, :updated_at, :user_id, :picture, :latitude, :longitude, :start_time, :end_time, :video
 #
 # or
 #
