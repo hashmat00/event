@@ -21,6 +21,26 @@ development:
   FACEBOOK_APP_ID: 1010053535725175
   FACEBOOK_APP_SECRET: 1010053535725175
 
+  # Paypal credentials for the platform owner.
+  paypal_username: arvindtransactions_api1.paypal.com
+  paypal_password: 4ZMDKRW8FAVHRCQ6
+  paypal_signature: AFcWxV21C7fd0v3bYYYRCpSSRl31Av2-PyzC3LbChH42-IseqVZZoP-G
+  paypal_partner_id: xxxxxxxxxxxxx # payerID for paypal platform owner account
+  paypal_app_id: Acr9vp3uNJCFV667nwo6LxrnJRsZ2MBCy-tXpt9LtyD57FYWiI8s9mwDZ75sWPbCRNkNZTkM4HjCZNnq # Global test id
+  paypal_button_source: EHpLO186wJ1bIOCtV6a0MpemIpebJSSEjxzkb6ll7oApuVF2fNt1EvUmfsV8xKdCXD_aziLADuYkIeOk # Unique value given to you by your PayPal contact
+  #Paypal environment to use. Either :sandbox or :live
+  paypal_endpoint: live
+  # after authorization there is 3 day period before expiration
+  paypal_expiration_period: 3
+  # The domain that we want Paypal to send IPN notifications to
+  # Note! You must also add the hook url for your production deployment
+  # manually to your production paypal account profile.
+  paypal_ipn_domain:
+  paypal_ipn_protocol: https
+  paypal_host: https://www.sandbox.paypal.com
+  app_host: http://localhost:3000
+
+
 production:
   # Database
   DATABASE_ADAPTER: postgresql
@@ -32,5 +52,6 @@ production:
 
   FACEBOOK_APP_ID: 1037096729731636
   FACEBOOK_APP_SECRET: 6703b75235b704e789aa9fbb6490badd
-
+  paypal_host: https://www.paypal.com
+  app_host: http://event.com
 # Staging

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :tickets, only: [:index]
     #resources :reviews, except: [:index, :show]   
   end
+  resources :checkouts, only: [:create]
   resources :users, except: [:new]
   resources :categories, only: [:new, :create, :show]
   resources :relationships, :only => [:create]
