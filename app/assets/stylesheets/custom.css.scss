@@ -13,13 +13,13 @@
    left: -35px;
 }
 
-input,select{border-radius:0px !important;margin-left:-2px !important}
+.input,select{border-radius:0px !important;margin-left:-2px !important;height:40px !important;}
 .div-search-left {margin-left:5px;margin-top:10px;padding-bottom:5px;}
 .div-search-right {margin-right:-5px;margin-top:-10px;}
 .li-text{margin-top:10px;}
 .li-button{margin-top:10px;}
 .li-button1{margin-top:-5px; }
-.li-button2{margin-top:10px;}
+.li-button2{margin-top:-6px;border-radius:0px;height:40px !important;}
 #span1{margin-top:5px;}
 // #logo {
 //     margin-top: 10px;
