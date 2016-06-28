@@ -21,6 +21,29 @@ class OrderItem < ActiveRecord::Base
     unit_price * quantity
   end
 
+  def self.paypal_url(return_url)
+    values = {
+      :business => 'rorfuture-facilitator@gmail.com',
+      :cmd => '_cart',
+      :upload => 1,
+      :return => return_url,
+      :invoice => 12121,
+      "amount_1" => 10,
+        "item_name_1" => "item.product.name",
+        "item_number_1" => 23,
+        "quantity_1" => 1
+    }
+    # line_items.each_with_index do |item, index|
+    #   values.merge!({
+    #     "amount_#{index+1}" => item.unit_price,
+    #     "item_name_#{index+1}" => item.product.name,
+    #     "item_number_#{index+1}" => item.id,
+    #     "quantity_#{index+1}" => item.quantity
+    #   })
+    # end
+  "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
 private
   def ticket_present
     if ticket.nil?
