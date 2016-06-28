@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'interests/index'
+
   get 'order_items/create'
 
   get 'order_items/update'
@@ -21,9 +23,13 @@ Rails.application.routes.draw do
     member do
       post 'like'
     end
+    resources :interests, :only => [:index, :create]    
     resources :tickets, only: [:index]
+
     #resources :reviews, except: [:index, :show]   
   end
+  post '/not_interested/:event_id', to: "interests#not_interested" , as: :not_interested_path
+
   resources :checkouts, only: [:create]
   resources :users, except: [:new]
   resources :categories, only: [:new, :create, :show]

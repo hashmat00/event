@@ -53,5 +53,5 @@ production:
   FACEBOOK_APP_ID: 1037096729731636
   FACEBOOK_APP_SECRET: 6703b75235b704e789aa9fbb6490badd
   paypal_host: https://www.paypal.com
-  app_host: http://event.com
+  app_host: http­:­/­/­e­v­e­n­t­d­e­v­.­h­e­r­o­k­u­a­p­p­.­com
 # Staging

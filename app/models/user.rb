@@ -23,6 +23,9 @@ class User < ActiveRecord::Base
    :class_name => 'Notification',
    :foreign_key => 'recipient_id'
 
+  has_many :interests, :dependent => :destroy
+  has_many :user_interests, :through => :interests, :source => :event
+
   mount_uploader :image, PictureUploader 
   def self.sign_in_from_omniauth(auth)
         user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
@@ -52,17 +55,19 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
-
+  def is_interested?(event)
+    self.interests.where(:id => event.id).first.present?
+  end
 
 
   def self.to_csv(options = {})
   CSV.generate(options) do |csv|
-    csv << column_names
-    all.each do |user|
-      csv << user.attributes.values_at(*column_names)
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
     end
   end
-end
 
 
       
