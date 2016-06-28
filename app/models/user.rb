@@ -55,17 +55,19 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
-
+  def is_interested?(event)
+    self.interests.where(:id => event.id).first.present?
+  end
 
 
   def self.to_csv(options = {})
   CSV.generate(options) do |csv|
-    csv << column_names
-    all.each do |user|
-      csv << user.attributes.values_at(*column_names)
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
     end
   end
-end
 
 
       

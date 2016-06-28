@@ -18,16 +18,18 @@ Rails.application.routes.draw do
   devise_for :users  
   root 'welcome#home'
   #get 'about', to: 'welcome#about'
-  resources :users do
-    resources :favourites, :only => [:index, :create, :destroy]
-  end
+  
   resources :events do
     member do
       post 'like'
     end
+    resources :interests, :only => [:index, :create]    
     resources :tickets, only: [:index]
+
     #resources :reviews, except: [:index, :show]   
   end
+  post '/not_interested/:event_id', to: "interests#not_interested" , as: :not_interested_path
+
   resources :checkouts, only: [:create]
   resources :users, except: [:new]
   resources :categories, only: [:new, :create, :show]
