@@ -15,9 +15,13 @@
  *= require_self
  */
 
+  
   .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
       width: 100%;height: 400px !important;
       margin: auto;
   }
-  
+  nav{ height: 60px !important;background-color: white !important; }
+  .container-fluid{margin-top:10px !important;font-weight: 10px;}
+  .div-search{margin-left: 125px;}
+  .tag{font-size:10px;color: gray; }

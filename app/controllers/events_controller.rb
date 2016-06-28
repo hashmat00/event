@@ -11,18 +11,17 @@ class EventsController < ApplicationController
  
     if params[:category].present?  
          @categories = Category.find(params[:category])
-         @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
+         @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address').paginate(page: params[:page], per_page: 6)
         elsif params[:search]
-         @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
+         @events = Event.where("address LIKE? ", "%#{params[:search]}%" ).paginate(page: params[:page], per_page: 6)
         elsif params[:distance]
          city =  Rails.env == 'development' ? 'Delhi' : request.location.city
-         @events = Event.near(city, params[:distance], :order => :address) 
-          byebug
+         @events = Event.near(city, params[:distance], :order => :address).paginate(page: params[:page], per_page: 6) 
         elsif params[:start_date] && params[:start_date]
-           @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time})
+           @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time}).paginate(page: params[:page], per_page: 6)
          else
        
-         @events = Event.all
+         @events = Event.all.paginate(page: params[:page], per_page: 6)
         # paginate(page: params[:page], per_page: 6)
     end
 

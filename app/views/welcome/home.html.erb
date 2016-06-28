@@ -49,6 +49,50 @@
 
 
 
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script>
+  $(function() {
+    $( "#start_date" ).datepicker({
+        dateFormat: 'dd-mm-yy'
+     });
+    $( "#end_date" ).datepicker({
+        dateFormat: 'dd-mm-yy'
+     });
+
+  });
+  </script>
+  <div class="form-inline div-search" >
+      
+        <%= form_tag  events_path, :method => :get do %>
+    <div class="form-group">
+        <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"col-md-3 form-control li-text input " %>
+        </div>
+        <div class="form-group">
+          <%= text_field_tag :distance, params[:distance], :class=>"col-md-3 form-control  li-text input", :placeholder=>"Enter Miles " %>
+</div>
+<div class="form-group">
+         <%= text_field_tag :search, params[:search], :class=>" col-md-3 form-control  li-text input",  :placeholder=>"Enter Addreess for find event" %>
+    
+</div>
+<div class="form-group">
+
+     <%= text_field_tag :start_date, params[:start_date],:id=>"start_date", :class=>" col-md-3 form-control  li-text input", :placeholder=>"Start date" %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag :end_date, params[:end_date],  :id=>"end_date", :class=>" col-md-3 form-control  li-text input", :placeholder=>"End Date" %>
+</div>
+        
+       <div class="form-group">
+          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button2 btn btn-success" %>
+</div>
+    
+              
+        </div>
+        <% end %>
+      
+       
+      
+        </div>
 
 <div class="center jumbotron">
       <div class="container">
