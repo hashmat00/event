@@ -2,7 +2,7 @@
 </br>
 <div class="row">
     <div class="col-md-4 col-md-offset-4 center">
-        <%= gravatar_for @user, size: 200 %>
+        <%= image_tag (@user.image), class: "gravatar", width: "100", height: "100" %>
         
     </div>
 </div>
@@ -26,7 +26,7 @@
                 
             <div class="panel-body text-center">
                 <section class="panel-profile-recipe-img">
-              <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
               
               </section>
               

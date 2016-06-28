@@ -37,7 +37,8 @@
             <div class="panel-heading"></div>
             <div class="panel-body text-center">
                 <section class="panel-profile-img">
-              <%= link_to gravatar_for(x, size: 100), user_path(x) %> 
+              <%= link_to (image_tag (x.image), class: "gravatar", width: "100", height: "100"), user_path(x) %>
+
               </section>
               <h2><%= x.username %></h2> 
               <h2><%= x.email %></h2>            
