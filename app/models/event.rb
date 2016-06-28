@@ -1,14 +1,9 @@
 class Event < ActiveRecord::Base
-   
+    attr_accessor :email, :message, :event_id
     belongs_to :user
     geocoded_by :full_address
     geocoded_by :address
     after_validation :geocode, :if => :address_changed?
-
-
-
-
-
 
     has_many :like, dependent: :destroy
     has_many :event_categories, dependent: :destroy
@@ -22,8 +17,7 @@ class Event < ActiveRecord::Base
     validates :city, presence: true, length: {minimum: 3, maximum: 25}
     validates :zipcode, presence: true, length: {minimum: 1, maximum: 20}
     validates :state, presence: true, length: {minimum: 2, maximum: 20}
-    validates :country, presence: true, length: {minimum: 3, maximum: 55}
-   
+    # validates :country, presence: true, length: {minimum: 3, maximum: 55}   
    
    mount_uploader :picture, PictureUploader
    mount_uploader :video, AvatarUploader

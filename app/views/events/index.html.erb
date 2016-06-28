@@ -147,10 +147,7 @@
 
 
                     <%= form_for Event.new, url: "/events/#{x.id}/contact_email", method: "post" do |f| %>
-                      <%#= f.hidden_field :event_id, :value => x.id %>
-                      <%#= f.text_field :email, required: true %>
-                      <%#= f.text_area :message, required: true %>
-                      <%#= f.submit %>
+
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -162,12 +159,10 @@
                             <form>
                               <div class="form-group">
                                 <label for="recipient-name" class="control-label">Recipient:</label>
-                                <!-- <input type="text" class="form-control" id="recipient-name"> -->
                                 <%= f.text_field :email, required: true, class:"form-control", id: "recipient-name" %>
                               </div>
                               <div class="form-group">
                                 <label for="message-text" class="control-label">Message:</label>
-                                <!-- <textarea class="form-control" id="message-text"></textarea> -->
                                 <%= f.text_area :message, required: true, class:"form-control", id: "message-text" %>
                               </div>
                             </form>
