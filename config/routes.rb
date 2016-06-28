@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'interests/index'
+
   get 'order_items/create'
 
   get 'order_items/update'
@@ -16,7 +18,9 @@ Rails.application.routes.draw do
   devise_for :users  
   root 'welcome#home'
   #get 'about', to: 'welcome#about'
-  
+  resources :users do
+    resources :favourites, :only => [:index, :create, :destroy]
+  end
   resources :events do
     member do
       post 'like'

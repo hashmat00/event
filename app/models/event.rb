@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
    mount_uploader :video, AvatarUploader
    validate :picture_size
    default_scope -> { order(created_at: :desc) }
+   has_many :interests, as: :interestable
    
   def full_address
     "#{address}, #{city}, #{state}, #{country}"
