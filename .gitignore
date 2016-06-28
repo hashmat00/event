@@ -17,6 +17,5 @@
 /tmp
 .byebug_history
 /public/uploads
-/public/assets
 /config/database.yml
 Gemfile.lock
