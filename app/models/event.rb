@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
     has_many :like, dependent: :destroy
     has_many :event_categories, dependent: :destroy
     has_many :categories, through: :event_categories
+    has_many :schedules, dependent: :destroy
     
     validates :user_id, presence: true
     validates :name, presence: true, length: { minimum: 3, maximum: 50}
