@@ -15,9 +15,8 @@ class InterestsController < ApplicationController
 	end
 
 	def not_interested
-		@event = current_user.interests.find_by_event_id(params[:event_id])
+		@event = current_user.interests.where(interestable: params[:event_id]).first
 		@event.destroy unless @event.blank?
-		render 'destroy'
 	end
 
 end
