@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
     has_many :event_categories, dependent: :destroy
     has_many :categories, through: :event_categories
     has_many :schedules, dependent: :destroy
-    
+    accepts_nested_attributes_for :schedules, :allow_destroy => true
     validates :user_id, presence: true
     validates :name, presence: true, length: { minimum: 3, maximum: 50}
     validates :summary, presence: true, length: {minimum: 10, maximum: 250}

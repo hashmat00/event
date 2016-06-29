@@ -15,7 +15,7 @@
 <div class="row">
     <div class="well col-md-8 col-md-offset-2">
       
-       <%= form_for @event do |f| %>
+       <%= nested_form_for @event do |f| %>
         <%= f.label :name %>
         <%= f.text_field :name %>
         
@@ -66,11 +66,26 @@
             <%= f.label :video %>
             <%= f.file_field :video %>
 
-            <%= f.label :youtube_video %>
-            <%= f.text_field :youtube_video %>
+            <%#= f.label :youtube_video %>
+            <%#= f.text_field :youtube_video %>
           
-            <%= f.label :vimeo_video %>
-            <%= f.text_field :vime_video %>
+            <%#= f.label :vimeo_video %>
+            <%# = f.text_field :vime_video %>
+
+            <%= f.fields_for :schedules do |schedule_form| %>
+              <%= schedule_form.label :title %>
+              <%= schedule_form.text_field :title %>
+              <%= schedule_form.label :image %>
+              <%= schedule_form.file_field :image %>
+              <%= schedule_form.label :description %>
+              <%= schedule_form.text_field :description %>
+              <%= schedule_form.label :start_time %>
+              <%= schedule_form.text_field :start_time %>
+              <%= schedule_form.label :end_time %>
+              <%= schedule_form.text_field :end_time %>
+              <%= schedule_form.link_to_remove "Remove this Schedules" %>
+            <% end %>
+            <p><%= f.link_to_add "Add a Schedules", :schedules %></p>
 
           <%= f.submit class: "btn btn-success" %>
         <% end %>
