@@ -17,5 +17,4 @@
 //= require_tree .
 
 //= require jquery_nested_form
-alert("success");
 var j$ = jQuery.noConflict();
