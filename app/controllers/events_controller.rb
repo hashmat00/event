@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
 
     before_action :set_event, only: [:edit, :update, :show, :like, :destroy, :contact_email]
-    before_action :require_same_user, only: [:edit, :destory, :update]    
+    # before_action :require_same_user, only: [:edit, :destory, :update]    
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
     
