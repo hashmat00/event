@@ -49,7 +49,7 @@ class EventsController < ApplicationController
     
     
     def show
-     
+     @events=Event.all
        #used set_event on bottom and top
        #@review = Review.where(event_id: @event).order("created_At DESC")
     end
