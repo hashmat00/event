@@ -51,7 +51,7 @@
       <% if user_signed_in? %> 
       <a href="<%= event_tickets_path(@event)%>" class="btn btn-primary">Get Tickets</a>
       <div class="interested_<%= @event.id %>">
-        <%if current_user.is_interested?(@event) %>
+        <%if !current_user.is_interested?(@event) %>
           <a href="<%= event_interests_path(@event)%>" data-remote= 'true' data-method='post' class="btn btn-primary">Interested</a>
         <%else %>
           <a href="/not_interested/<%= @event.id %>" data-remote= 'true' data-method='post' class="btn btn-primary">Not Interested</a>
