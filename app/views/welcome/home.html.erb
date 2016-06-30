@@ -65,7 +65,7 @@
       
         <%= form_tag  events_path, :method => :get do %>
     <div class="form-group">
-        <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"col-md-3 form-control li-text input " %>
+        <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: "Select Category", :class=>"col-md-3 form-control li-text input " %>
         </div>
         <div class="form-group">
           <%= text_field_tag :distance, params[:distance], :class=>"col-md-3 form-control  li-text input", :placeholder=>"Enter Miles " %>
@@ -114,7 +114,8 @@
                 
             <div class="panel-body text-center">
                 <section class="panel-profile-recipe-img">
-              <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              <%#= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
               
               </section>
               
@@ -189,7 +190,8 @@
 
             <div class="panel-body text-center">
                 <section class="panel-profile-img">
-              <%= link_to gravatar_for(x, size: 100), user_path(x) %> 
+              <%#= link_to gravatar_for(x, size: 100), user_path(x) %> 
+              <%= link_to (image_tag (x.image), class: "gravatar", width: "100", height: "100"), user_path(x) %>
               </section>
               <h2><%= x.username %></h2>
                 <span class="icon icon-add-user"></span> <%= link_to 'View Organizer', user_path(x), class: "btn btn-success btn-small" %>
