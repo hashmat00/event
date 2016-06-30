@@ -6,9 +6,7 @@ class EventsController < ApplicationController
     
     
   def index
-
-        # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
- 
+      
     if params[:category].present?  
          @categories = Category.find(params[:category])
          @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address').paginate(page: params[:page], per_page: 6)
@@ -50,6 +48,17 @@ class EventsController < ApplicationController
     
     
     def show
+        # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+    if params[:response]
+      order_item = OrderItem.where(id: params[:order_item_id].to_i).first
+      if order_item
+        user = User.where(id: params[:user_id].to_i).first
+        order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id))
+        EventMailer.payment_success(user, order_item, order_item.try(:order)).deliver_now
+        # order_item.destroy
+        flash[:success] = "Your Payment has been done successfully"
+      end  
+    end
      @events=Event.all
        #used set_event on bottom and top
        #@review = Review.where(event_id: @event).order("created_At DESC")

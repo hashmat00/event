@@ -8,6 +8,7 @@ class OrderItem < ActiveRecord::Base
   validate :order_present
 
   before_save :finalize
+  serialize :notification_params, Hash
 
   def unit_price
     if persisted?
@@ -21,17 +22,20 @@ class OrderItem < ActiveRecord::Base
     unit_price * quantity
   end
 
-  def self.paypal_url(return_url)
+  def self.paypal_url(return_url, subtotal, event_id, ticket_id, size)
+    event = Event.where(id: event_id).first
+    ticket = Ticket.where(id: ticket_id).first
     values = {
-      :business => 'rorfuture-facilitator@gmail.com',
+      :business =>  'rorfuture-facilitator@gmail.com',
       :cmd => '_cart',
       :upload => 1,
       :return => return_url,
-      :invoice => 12121,
-      "amount_1" => 10,
-        "item_name_1" => "item.product.name",
-        "item_number_1" => 23,
-        "quantity_1" => 1
+      :invoice => rand.to_s[2..7].to_i,
+      notify_url: "#{Rails.application.secrets.app_host}/hook",
+      "amount_1" => subtotal,
+        "item_name_1" => ticket.try(:name) + " ticket for " + event.try(:name),
+        "item_number_1" => rand.to_s[2..9].to_i,
+        "quantity_1" => size
     }
     # line_items.each_with_index do |item, index|
     #   values.merge!({
