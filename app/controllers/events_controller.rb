@@ -54,8 +54,12 @@ class EventsController < ApplicationController
       if order_item
         user = User.where(id: params[:user_id].to_i).first
         order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id))
-        EventMailer.payment_success(user, order_item, order_item.try(:order)).deliver_now
-        # order_item.destroy
+        EventMailer.payment_success(user, order_item, order_item.try(:order)).deliver_now rescue "OPPS Mail can not send"
+
+        @order = current_order
+        @order_item = @order.order_items.where(id: order_item.try(:id)).first
+        @order_item.destroy
+        @order_items = @order.order_items
         flash[:success] = "Your Payment has been done successfully"
       end  
     end
