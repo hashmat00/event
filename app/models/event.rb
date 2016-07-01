@@ -38,6 +38,9 @@ class Event < ActiveRecord::Base
       self.like.where(like: false).size
   end
   
+  def picture_url
+    self.picture.present? ? self.picture : "event_default.jpg"
+  end
   
    
    private

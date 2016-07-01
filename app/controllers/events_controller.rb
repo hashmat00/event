@@ -5,27 +5,22 @@ class EventsController < ApplicationController
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
     
-  def index
-      
+  def index  
     if params[:category].present?  
-         @categories = Category.find(params[:category])
-         @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address').paginate(page: params[:page], per_page: 6)
-        elsif params[:search]
-         @events = Event.where("address LIKE? ", "%#{params[:search]}%" ).paginate(page: params[:page], per_page: 6)
-        elsif params[:distance]
-         city =  Rails.env == 'development' ? 'Delhi' : request.location.city
-
-         @events = Event.near(city, params[:distance], :order => :address).paginate(page: params[:page], per_page: 6) 
-        elsif params[:start_date] && params[:start_date]
-           @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time}).paginate(page: params[:page], per_page: 6)
-         else
-       
-         @events = Event.all.paginate(page: params[:page], per_page: 6)
-        # paginate(page: params[:page], per_page: 6)
+      @categories = Category.find(params[:category])
+      @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
+      elsif params[:search]
+        @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
+      elsif params[:distance]
+        city =  Rails.env == 'development' ? 'Delhi' : request.location.city
+        @events = Event.near(city, params[:distance], :order => :address) 
+      elsif params[:start_date] && params[:start_date]
+        @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time})
+      else 
+        @events = Event.all
+      end
+        @events = @events.paginate(page: params[:page], per_page: 3)
     end
-
-
-  end
      
     
     def new

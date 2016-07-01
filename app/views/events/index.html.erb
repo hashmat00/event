@@ -1,37 +1,30 @@
-
 <header id="myCarousel" class="carousel slide">
-        
-         <div class="carousel-inner">
-            <div class="item active">
-                <% @events.limit(1).each do |event|%>
-                       <%= image_tag event.picture, :class =>"fill" %>
-                
-                <% end %>
-            </div>
-              <% @events.each_with_index do |event, index|%>
-            <div class="item">
-                       <%= image_tag event.picture, :class =>"fill" %>
-                    
-         </div>
-            <% end %>
-        </div> 
+  <div class="carousel-inner">
+    <div class="item active">
+      <% @events.limit(1).each do |event|%>
+        <%= image_tag event.picture, :class =>"fill" %>
+      <% end %>
+    </div>
+    <% @events.each_with_index do |event, index|%>
+      <div class="item">
+        <%= image_tag event.picture, :class =>"fill" %>              
+      </div>
+    <% end %>
+  </div> 
+  <!-- Controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="icon-next"></span>
+  </a>
+</header>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
 
-    </header>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
- 
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
-  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
-
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
 <body class="page-search" id="page-top">
   <!-- Preloader -->
@@ -69,64 +62,73 @@
                 <div class="content col-sm-8 col-xs-12">
                   <div class="wide-2">
                     <div class="col-xs-12">
-                      <div class="row">
+                      <div class="row event-container">
                       <% @events.each do |x| %>
                         <div class="col-md-4 col-sm-6 col-xs-6 prop">
                           <div class="wht-cont">
                             <div class="exp-img-2">
-                            <%= image_tag(x.picture.url, class: "panel-recipe ") if x.picture? %>
-                              <div class="overlay">
+                              <%= image_tag(x.picture_url, class: "panel-recipe #{x.picture.blank? ? 'panel-border' : ''}", height: "195") %>
+                              <!-- <div class="overlay">
                                 <div class="img-counter">
-                                <%= link_to 'Event Details', event_path(x)  %>
+                                <%#= link_to 'Event Details', event_path(x)  %>
                                 </div>
-                              </div>
+                              </div> -->
                             </div>
                             <div class="item-title">
-                              <h4><a href="property_page.html"><%= link_to x.name, event_path(x) %></a></h4>
+                              <h4><a href="property_page.html"><%= link_to x.name.try(:titleize), event_path(x) %></a></h4>
                               <p class="team-color"><%=  x.address %>,<%=  x.city %>, <%=  x.state %></p>
                               <div class="col-md-7 col-sm-7 col-xs-7">
                                 <span class="tag" style="display: inline-block;">Category :<%= render x.categories %></span>
                               </div>
                               <div class="col-md-5 col-sm-5 col-xs-5">
-                            
+                                <div data-compare-state="empty" style="text-align: center;">
+                                  <%= link_to like_event_path(x, like: true), method: :post do %>
+                                    <i class="glyphicon glyphicon-thumbs-up" style="display: inline-block;"><%= x.thumbs_up_total %></i>
+                                  <% end %> 
+                                  <%= link_to like_event_path(x, like: false), method: :post do %>
+                                    <i class="glyphicon glyphicon-thumbs-down" style="display: inline-block;"><%= x.thumbs_down_total %></i>
+                                  <% end %>
+                                </div>
                               </div>
                               <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
                               <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
                             </div>
                             <hr>
-                            
-
                             <div class="item-title btm-part">
                               <div class="row">
                                 <div class="col-md-8 col-sm-8 col-xs-8">
-                                  <p>$5,000,000</p>
-                                  <p class="team-color">
-                                  <% if x.is_paid == true %>
-              
-                                <%= label_tag :Paid %>
-                                <%else %>
-                                  <%= label_tag :Free %>
-                                  <% end %> </p>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                               <div data-compare-state="empty">
-                                <%= link_to like_event_path(x, like: true), method: :post do %>
-                                <i class="glyphicon glyphicon-thumbs-up">&nbsp<%= x.thumbs_up_total %></i>
-                                <% end %> &nbsp&nbsp&nbsp&nbsp
-                                <%= link_to like_event_path(x, like: false), method: :post do %>
-                                <i class="glyphicon glyphicon-thumbs-down">&nbsp<%= x.thumbs_down_total %></i>
-                                <% end %>
-                                 </div> 
-                                  <div data-compare-state="empty">
-                                    <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+                                  <!-- <p>$ <%#= x.price %></p> -->
+                                  <div class="item-label">
+                                    <p class="team-color">
+                                      <% if x.is_paid == true %>
+                                        <%#= label_tag :Paid %>Paid
+                                      <%else %>
+                                        <%#= label_tag :Free %>Free
+                                      <% end %> 
+                                    </p>
+                                    <p>
+                                      Created By:
+                                    </p>
                                   </div>
-                             
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 favorite"> 
+                                  <div data-compare-state="empty" style="text-align: center">
+                                    <div>
+                                      <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
+                                    </div>
+                                    <div>
+                                      <%= x.user.name %>
+                                    </div>
+                                  </div>
+                                    
                                 </div><hr>
-                                <span class="tag" style="display: inline-block;">Start Date
-              
-                <%= x.start_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %> | 
-                End Date
-                <%= x.end_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %></span>
+                                <div class="tag" style="display: inline-block; text-align: center;">
+                                  <b>
+                                    Start Date
+                                    <%= x.start_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %> | End Date
+                                    <%= x.end_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %>
+                                  </b>
+                                </div>      
                     <br>
                      <script>
   window.fbAsyncInit = function() {
@@ -145,9 +147,11 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-
+                <div style="text-align: center;">      
                   <a href = '#-' id="facebook-share_<%= x.id %>"><img src="/assets/fb.png"></a>
-              <a href="https://twitter.com/share?text=Event: <%= x.name %>.&url=<%= event_path(x) %>" target="_blank" ><img src="/assets/tweet.png"></a>
+                  <a href="https://twitter.com/share?text=Event: <%= x.name %>.&url=<%= event_path(x) %>" target="_blank" ><img src="/assets/tweet.png"></a>
+                  <%= image_tag ('email.png'), onclick: "$('#contactbtn1').click();" %>
+                </div>
 
            <script type="text/javascript">
             $(document).on('click','#facebook-share_<%=x.id %>',function(e){
@@ -161,8 +165,8 @@
                   description: '<%= x.summary %>'
               }, function(response){});
             });
-          </script>  
-                              <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Contact</button>
+          </script>           
+                              <button style="display: none" type="button" id="contactbtn1" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Contact</button>
                               <%= form_for Event.new, url: "/events/#{x.id}/contact_email", method: "post" do |f| %>
                                 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                   <div class="modal-dialog" role="document">
@@ -201,12 +205,12 @@
                        
                       </div><!-- end row -->
                     </div><!-- end container -->
-                    <div class="col-xs-12 content_2 top-indent">
-                      <nav class="site-navigation paging-navigation navbar">
+                    <div class="col-xs-12 content_2 top-indent" style="text-align: center">
+                      <!-- <nav class="site-navigation paging-navigation navbar"> -->
                         <ul class="pagination pagination-lg">
-                          <li><%= will_paginate %></li>
+                          <li><%= will_paginate @events %></li>
                         </ul>
-                      </nav>
+                      <!-- </nav> -->
                     </div>
                   </div>  <!-- end wide-2 -->
                 </div>  <!-- content -->
@@ -361,7 +365,7 @@
                     <nav class="site-navigation paging-navigation navbar">
                      
                       <ul class="pagination pagination-lg">
-                     <li><%= will_paginate %></li>
+                     <li><%= will_paginate @events %></li>
                       </ul>
                     </nav>
                   </div>
@@ -523,7 +527,7 @@
                   <div class="col-md-10 col-md-offset-1 col-xs-12">
                     <nav class="site-navigation paging-navigation navbar">
                       <ul class="pagination pagination-lg">
-                           <li><%= will_paginate %></li>
+                           <li><%= will_paginate @events %></li>
                         </ul>
                     </nav>
                   </div>
@@ -702,5 +706,29 @@
 }
 #page-content-search .container .wide_container_2 .form-control {
     border: solid black 1px;
+}
+.panel-border
+{
+  border: 1px solid gray;
+}
+img.panel-recipe
+{
+  height: 165px !important;
+}
+.event-container
+{
+margin-top: 15px;
+}
+.tag
+{
+  width: 100%;
+}
+.item-label
+{
+  margin-top:15px;
+}
+
+#page-content-search .container .wide_container_2 .wht-cont {
+    min-height: 450px;
 }
 </style>
