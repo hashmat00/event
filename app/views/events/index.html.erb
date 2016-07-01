@@ -57,7 +57,8 @@
             <div class="tab-content">
               <div id="tab1" class="tab" style="display: block;">
                 <div class="sidebar col-sm-4 col-xs-12">
-                  <div id="map"></div>
+                  <!-- <div id="map"></div> -->
+                    <div id="googleMap" style="width:100%"></div>
                 </div>
                 <div class="content col-sm-8 col-xs-12">
                   <div class="wide-2">
@@ -565,11 +566,11 @@
 
   <!-- End Modal login, register, custom gallery -->
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
   
 
   <script type="text/javascript" src="assets/js/custom-map.js"></script>
-  <script type="text/javascript" src="assets/js/custom.js"></script>
+  <script type="text/javascript" src="assets/js/custom.js"></script> -->
 
   
 
@@ -731,4 +732,32 @@ margin-top: 15px;
 #page-content-search .container .wide_container_2 .wht-cont {
     min-height: 450px;
 }
+
 </style>
+
+<script type="text/javascript">
+
+function initialize()
+{
+  var mapProp = {
+    center: new google.maps.LatLng(<%= request.location.latitude!=0 ? request.location.latitude : 28.631418 %>,<%= request.location.longitude!=0 ? request.location.longitude : 77.280159 %>),
+    zoom:7,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+
+function loadScript()
+{
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "http://maps.googleapis.com/maps/api/js?key=&sensor=false&callback=initialize";
+  document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+</script>
+<script type="text/javascript">
+  var eventconHeight =  $('.event-container').height();
+  $('#googleMap').css('height',eventconHeight);
+</script>

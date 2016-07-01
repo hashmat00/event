@@ -19,7 +19,7 @@ class EventsController < ApplicationController
       else 
         @events = Event.all
       end
-        @events = @events.paginate(page: params[:page], per_page: 3)
+        @events = @events.paginate(page: params[:page], per_page: 6)
     end
      
     
