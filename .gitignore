@@ -19,3 +19,6 @@
 /public/uploads
 /config/database.yml
 Gemfile.lock
+/public/*
+/config/secrets.yml
+/config/application.yml

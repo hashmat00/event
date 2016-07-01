@@ -4,10 +4,8 @@
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-   
+    <li data-target="#myCarousel" data-slide-to="2"></li>  
   </ol>
-
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
@@ -17,7 +15,6 @@
         <h3>Find the best event from our site.</h3>
       </div>
     </div>
-
     <div class="item">
      <img src="http://coralspringsresort.com/wp-content/uploads/2015/12/Biking.jpg" alt="Chania">
      <div class="carousel-caption">
@@ -31,11 +28,8 @@
         <h1>My Event</h1>
         <h3>Find the best event from our site.</h3>
       </div>
-    </div>
-
-    
+    </div>  
   </div>
-
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -47,52 +41,40 @@
   </a>
 </div>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script>
+$(function() {
+  $( "#start_date" ).datepicker({
+      dateFormat: 'dd-mm-yy'
+   });
+  $( "#end_date" ).datepicker({
+      dateFormat: 'dd-mm-yy'
+   });
 
-
- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script>
-  $(function() {
-    $( "#start_date" ).datepicker({
-        dateFormat: 'dd-mm-yy'
-     });
-    $( "#end_date" ).datepicker({
-        dateFormat: 'dd-mm-yy'
-     });
-
-  });
-  </script>
-  <div class="form-inline div-search" >
-      
-        <%= form_tag  events_path, :method => :get do %>
+});
+</script>
+<div class="form-inline div-search" >      
+  <%= form_tag  events_path, :method => :get do %>
     <div class="form-group">
-        <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: true, :class=>"col-md-3 form-control li-text input " %>
-        </div>
-        <div class="form-group">
-          <%= text_field_tag :distance, params[:distance], :class=>"col-md-3 form-control  li-text input", :placeholder=>"Enter Miles " %>
+    <%= select_tag 'category', options_for_select(Category.all.map{|el| [el.name, el.id]}), include_blank: "Select Category", :class=>"col-md-3 form-control li-text input " %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :distance, params[:distance], :class=>"col-md-3 form-control  li-text input", :placeholder=>"Enter Miles " %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], :class=>" col-md-3 form-control  li-text input",  :placeholder=>"Enter Addreess for find event" %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :start_date, params[:start_date],:id=>"start_date", :class=>" col-md-3 form-control  li-text input", :placeholder=>"Start date" %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :end_date, params[:end_date],  :id=>"end_date", :class=>" col-md-3 form-control  li-text input", :placeholder=>"End Date" %>
+    </div>  
+    <div class="form-group">
+      <%= submit_tag "Search", :name => nil, :class=>"form-control li-button2 btn btn-success" %>
+    </div>
+  <% end %>  
 </div>
-<div class="form-group">
-         <%= text_field_tag :search, params[:search], :class=>" col-md-3 form-control  li-text input",  :placeholder=>"Enter Addreess for find event" %>
-    
-</div>
-<div class="form-group">
-
-     <%= text_field_tag :start_date, params[:start_date],:id=>"start_date", :class=>" col-md-3 form-control  li-text input", :placeholder=>"Start date" %>
-      </div>
-      <div class="form-group">
-        <%= text_field_tag :end_date, params[:end_date],  :id=>"end_date", :class=>" col-md-3 form-control  li-text input", :placeholder=>"End Date" %>
-</div>
-        
-       <div class="form-group">
-          <%= submit_tag "Search", :name => nil, :class=>"form-control li-button2 btn btn-success" %>
-</div>
-    
-              
-        </div>
-        <% end %>
-      
-       
-      
-        </div>
 
 <div class="center jumbotron">
       <div class="container">
@@ -114,7 +96,8 @@
                 
             <div class="panel-body text-center">
                 <section class="panel-profile-recipe-img">
-              <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              <%#= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
               
               </section>
               
@@ -178,7 +161,7 @@
 <div class="container">
     
     
-<% @users.each_slice(3) do |works| %>
+<%# @users.each_slice(3) do |works| %>
 <div class="container">
 <div class="row">
     <% @users.each do |x| %>
@@ -189,7 +172,8 @@
 
             <div class="panel-body text-center">
                 <section class="panel-profile-img">
-              <%= link_to gravatar_for(x, size: 100), user_path(x) %> 
+              <%#= link_to gravatar_for(x, size: 100), user_path(x) %> 
+              <%= link_to (image_tag (x.image), class: "gravatar", width: "100", height: "100"), user_path(x) %>
               </section>
               <h2><%= x.username %></h2>
                 <span class="icon icon-add-user"></span> <%= link_to 'View Organizer', user_path(x), class: "btn btn-success btn-small" %>
@@ -200,7 +184,7 @@
         <% end %>
         
       </div>
-      <% end %>
+      <%# end %>
       </div>
 
 </div>

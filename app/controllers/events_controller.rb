@@ -1,33 +1,26 @@
 class EventsController < ApplicationController
 
     before_action :set_event, only: [:edit, :update, :show, :like, :destroy, :contact_email]
-    before_action :require_same_user, only: [:edit, :destory, :update]    
+    # before_action :require_same_user, only: [:edit, :destory, :update]    
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
     
-  def index
-
-        # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
- 
+  def index  
     if params[:category].present?  
-         @categories = Category.find(params[:category])
-         @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address').paginate(page: params[:page], per_page: 6)
-        elsif params[:search]
-         @events = Event.where("address LIKE? ", "%#{params[:search]}%" ).paginate(page: params[:page], per_page: 6)
-        elsif params[:distance]
-         city =  Rails.env == 'development' ? 'Delhi' : request.location.city
-
-         @events = Event.near(city, params[:distance], :order => :address).paginate(page: params[:page], per_page: 6) 
-        elsif params[:start_date] && params[:start_date]
-           @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time}).paginate(page: params[:page], per_page: 6)
-         else
-       
-         @events = Event.all.paginate(page: params[:page], per_page: 6)
-        # paginate(page: params[:page], per_page: 6)
+      @categories = Category.find(params[:category])
+      @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
+      elsif params[:search]
+        @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
+      elsif params[:distance]
+        city =  Rails.env == 'development' ? 'Delhi' : request.location.city
+        @events = Event.near(city, params[:distance], :order => :address) 
+      elsif params[:start_date] && params[:start_date]
+        @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time})
+      else 
+        @events = Event.all
+      end
+        @events = @events.paginate(page: params[:page], per_page: 6)
     end
-
-
-  end
      
     
     def new
@@ -50,7 +43,22 @@ class EventsController < ApplicationController
     
     
     def show
-     
+        # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+    if params[:response]
+      order_item = OrderItem.where(id: params[:order_item_id].to_i).first
+      if order_item
+        user = User.where(id: params[:user_id].to_i).first
+        order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id))
+        EventMailer.payment_success(user, order_item, order_item.try(:order)).deliver_now rescue "OPPS Mail can not send"
+
+        @order = current_order
+        @order_item = @order.order_items.where(id: order_item.try(:id)).first
+        @order_item.destroy
+        @order_items = @order.order_items
+        flash[:success] = "Your Payment has been done successfully"
+      end  
+    end
+     @events=Event.all
        #used set_event on bottom and top
        #@review = Review.where(event_id: @event).order("created_At DESC")
     end
