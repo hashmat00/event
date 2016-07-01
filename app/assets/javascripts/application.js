@@ -18,4 +18,3 @@
 
 //= require jquery_nested_form
 
-var j$ = jQuery.noConflict();

@@ -25,3 +25,7 @@
   .container-fluid{margin-top:10px !important;font-weight: 10px;}
   .div-search{margin-left: 125px;}
   .tag{font-size:10px;color: gray; }
+
+  .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    z-index: 9999 !important;
+}

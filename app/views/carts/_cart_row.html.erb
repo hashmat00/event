@@ -19,7 +19,8 @@
             </div>
           </div>
           <div class="col-xs-3">
-              <%= link_to "Checkout", @order_items.paypal_url(events_url), class: "btn btn-primary" %>
+            <% url = "http://" + (request.subdomain.present? ? (request.subdomain+".") : "") + request.domain + ((request.port.present? && Rails.env.development?) ? (":#{request.port}") : "")+"/events/#{order_item.try(:event).try(:id)}"+"?response=true&order_item_id=#{order_item.id}&user_id=#{current_user.try(:id)}" %>
+              <%= link_to "Checkout", @order_items.paypal_url(url, (number_to_currency order_item.total_price), (order_item.try(:event).try(:id)), (order_item.try(:ticket).try(:id)), order_item.quantity.to_i), class: "btn btn-primary" %>
 
           </div>
         </div>

@@ -10,4 +10,11 @@ class EventMailer < ApplicationMailer
     @event = event
     mail to: event.try(:user).try(:email), subject: "contact_email"
   end
+
+  def payment_success(user, order_item, order)
+    @user = user
+    @order_item = order_item
+    @order = order
+    mail to: user.try(:email), subject: "payment_success" 
+  end
 end

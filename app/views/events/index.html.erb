@@ -1,3 +1,4 @@
+
 <header id="myCarousel" class="carousel slide">
         
          <div class="carousel-inner">
@@ -92,6 +93,8 @@
                               <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
                             </div>
                             <hr>
+                            
+
                             <div class="item-title btm-part">
                               <div class="row">
                                 <div class="col-md-8 col-sm-8 col-xs-8">
@@ -158,6 +161,37 @@
               }, function(response){});
             });
           </script>  
+                              <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Contact</button>
+                              <%= form_for Event.new, url: "/events/#{x.id}/contact_email", method: "post" do |f| %>
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">New message to <%= x.try(:user).try(:name) %></h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form>
+                                          <!-- <div class="form-group"> -->
+                                            <!-- <label for="recipient-name" class="control-label">Recipient:</label> -->
+                                            <%#= f.text_field :email, required: true, class:"form-control", id: "recipient-name" %>
+                                          <!-- </div> -->
+                                          <div class="form-group">
+                                            <label for="message-text" class="control-label">Message:</label>
+                                            <%= f.text_area :message, required: true, class:"form-control", id: "message-text" %>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-small" data-dismiss="modal">Close</button>
+                                        <%= f.submit "Send Email", class:"btn btn-primary btn-small", id: "send_message", style: "display:none" %>
+                                        <button type="button" class="btn btn-primary" onclick="$('#send_message').click();" >Send message</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% end %>
+
                               </div>
                             </div>
                           </div>
@@ -279,6 +313,38 @@
               }, function(response){});
             });
           </script>  
+                                  
+                              <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Contact</button>
+                              <%= form_for Event.new, url: "/events/#{x.id}/contact_email", method: "post" do |f| %>
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">New message to <%= x.try(:user).try(:name) %></h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form>
+                                          <!-- <div class="form-group"> -->
+                                            <!-- <label for="recipient-name" class="control-label">Recipient:</label> -->
+                                            <%#= f.text_field :email, required: true, class:"form-control", id: "recipient-name" %>
+                                          <!-- </div> -->
+                                          <div class="form-group">
+                                            <label for="message-text" class="control-label">Message:</label>
+                                            <%= f.text_area :message, required: true, class:"form-control", id: "message-text" %>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-small" data-dismiss="modal">Close</button>
+                                        <%= f.submit "Send Email", class:"btn btn-primary btn-small", id: "send_message", style: "display:none" %>
+                                        <button type="button" class="btn btn-primary" onclick="$('#send_message').click();" >Send message</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% end %>
+
                                   </div>
                                 </div>
                               </div>
@@ -412,7 +478,38 @@
                   description: '<%= x.summary %>'
               }, function(response){});
             });
-          </script>  
+          </script> 
+                            <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal3" data-whatever="@mdo">Contact</button>
+                              <%= form_for Event.new, url: "/events/#{x.id}/contact_email", method: "post" do |f| %>
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">New message to <%= x.try(:user).try(:name) %></h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form>
+                                          <!-- <div class="form-group"> -->
+                                            <!-- <label for="recipient-name" class="control-label">Recipient:</label> -->
+                                            <%#= f.text_field :email, required: true, class:"form-control", id: "recipient-name" %>
+                                          <!-- </div> -->
+                                          <div class="form-group">
+                                            <label for="message-text" class="control-label">Message:</label>
+                                            <%= f.text_area :message, required: true, class:"form-control", id: "message-text" %>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-small" data-dismiss="modal">Close</button>
+                                        <%= f.submit "Send Email", class:"btn btn-primary btn-small", id: "send_message", style: "display:none" %>
+                                        <button type="button" class="btn btn-primary" onclick="$('#send_message').click();" >Send message</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% end %>
+
                           </div>
                           
                     </div>
@@ -536,16 +633,36 @@
         <!-- </div>
       </div>
     
-    	    
+          
             
 </div> --> 
         
  
 
-<!-- 
+
 <script type="text/javascript">
   
-  $('#exampleModal').on('show.bs.modal', function (event) {
+  $('#exampleModal1').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  // modal.find('.modal-title').text('New message to ' + recipient)
+  // modal.find('.modal-body input').val(recipient)
+})
+
+ $('#exampleModal2').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var recipient = button.data('whatever') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  // modal.find('.modal-title').text('New message to ' + recipient)
+  // modal.find('.modal-body input').val(recipient)
+})
+
+ $('#exampleModal3').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('whatever') // Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -556,7 +673,6 @@
 })
 
 </script>        
- -->
 
 
 
@@ -564,6 +680,26 @@
 
 
 
+<style>
+  .btn-sm, .btn-small {
+    padding: 9px 10px;
+    width: auto; 
+    height: 40px;
+}
 
+.wide-2 .btn-small {
+     padding: 10px 10px; 
+     width: auto; 
+    height: 40px;
+}
+.wide-2 .btn {
+     margin: 0; 
+}
 
-
+.wide-2 .wht-cont p, .wide-2 .wht-cont li {
+    word-wrap: break-word;
+}
+#page-content-search .container .wide_container_2 .form-control {
+    border: solid black 1px;
+}
+</style>
