@@ -565,7 +565,7 @@
   </div>
 
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDk_1trU7te1evmY8eqaWAtBdkvJ1Sxtxc"></script>
-  <script type="text/javascript" src="assets/js/custom.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/custom.js"></script> -->
   
   <!-- End Modal login, register, custom gallery -->
 
@@ -743,7 +743,7 @@ margin-top: 15px;
 function initialize()
 {
   var mapProp = {
-    center: new google.maps.LatLng(<%= request.location.latitude!=0 ? request.location.latitude : 28.631418 %>,<%= request.location.longitude!=0 ? request.location.longitude : 77.280159 %>),
+    center: new google.maps.LatLng(<%= request.location.latitude!=0 ? 28.631418 : 28.631418 %>,<%= request.location.longitude!=0 ? 77.280159 : 77.280159 %>),
     zoom:7,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
