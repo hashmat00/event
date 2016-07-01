@@ -14,7 +14,8 @@
 <%= image_tag(@event.picture.url, class: "img-responsive ", style: "width:600px;height:384px;margin:10px") if @event.picture? %>
 </div>
 <div class="col-md-6">
-<%= video_tag @event.try(:video), :style=>"width:600px;height:384px;margin:10px 2px;frameborder:0px;", :controls => true,:autobuffer => true %>
+<%= video_tag @event.try(
+:video), :style=>"width:600px;height:384px;margin:10px 2px;frameborder:0px;", :controls => true,:autobuffer => true %>
 </div>
 </div>
 
@@ -40,7 +41,8 @@
   <div class="row ">
     <div class="col-md-4 user-avatar">
       <section class="chef_info center">
-        <%= link_to gravatar_for(@event.user, size: 200), user_path(@event.user) %>
+        <%#= link_to gravatar_for(@event.user, size: 200), user_path(@event.user) %>
+        <%= link_to (image_tag (@event.user.image), class: "gravatar", width: "100", height: "100"), user_path(@event.user) %>
         <h5>Organizer Name: <%= @event.user.username %></h5>
         <!--<hr>-->
       </section>
