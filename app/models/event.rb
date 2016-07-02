@@ -25,6 +25,7 @@ class Event < ActiveRecord::Base
    validate :picture_size
    default_scope -> { order(created_at: :desc) }
    has_many :interests, as: :interestable
+   has_many :pictures, as: :picturable
    
   def full_address
     "#{address}, #{city}, #{state}, #{country}"
