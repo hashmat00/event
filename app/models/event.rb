@@ -8,16 +8,21 @@ class Event < ActiveRecord::Base
     has_many :like, dependent: :destroy
     has_many :event_categories, dependent: :destroy
     has_many :categories, through: :event_categories
+
     has_many :schedules, dependent: :destroy
     accepts_nested_attributes_for :schedules, :allow_destroy => true
-    validates :user_id, presence: true
-    validates :name, presence: true, length: { minimum: 3, maximum: 50}
-    validates :summary, presence: true, length: {minimum: 10, maximum: 250}
-    validates :description, presence: true, length: {minimum: 20, maximum: 1000}
-    validates :address, presence: true, length: {minimum: 5, maximum: 55}
-    validates :city, presence: true, length: {minimum: 3, maximum: 25}
-    validates :zipcode, presence: true, length: {minimum: 1, maximum: 20}
-    validates :state, presence: true, length: {minimum: 2, maximum: 20}
+
+    has_many :tickets, dependent: :destroy
+    accepts_nested_attributes_for :tickets, :allow_destroy => true
+
+    # validates :user_id, presence: true
+    # validates :name, presence: true, length: { minimum: 3, maximum: 50}
+    # validates :summary, presence: true, length: {minimum: 10, maximum: 250}
+    # validates :description, presence: true, length: {minimum: 20, maximum: 1000}
+    # validates :address, presence: true, length: {minimum: 5, maximum: 55}
+    # validates :city, presence: true, length: {minimum: 3, maximum: 25}
+    # validates :zipcode, presence: true, length: {minimum: 1, maximum: 20}
+    # validates :state, presence: true, length: {minimum: 2, maximum: 20}
     # validates :country, presence: true, length: {minimum: 3, maximum: 55}   
    
    mount_uploader :picture, PictureUploader
@@ -25,6 +30,7 @@ class Event < ActiveRecord::Base
    validate :picture_size
    default_scope -> { order(created_at: :desc) }
    has_many :interests, as: :interestable
+   has_many :pictures, as: :picturable
    
   def full_address
     "#{address}, #{city}, #{state}, #{country}"
@@ -38,6 +44,9 @@ class Event < ActiveRecord::Base
       self.like.where(like: false).size
   end
   
+  def picture_url
+    self.picture.present? ? self.picture : "event_default.jpg"
+  end
   
    
    private

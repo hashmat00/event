@@ -16,80 +16,218 @@
     <div class="well col-md-8 col-md-offset-2">
       
        <%= nested_form_for @event do |f| %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+
+   <div class="form-group col-md-6">
+    <label for="name">Name</label>
+    <%= f.text_field :name, :class=>"form-control" %>
+   </div>
         
-        <%= f.label :summary %>
-        <%= f.text_field :summary %>
+   <div class="form-group col-md-6">
+    <label for="name">Summary</label>
+    <%= f.text_field :summary, :class=>"form-control" %>
+   </div>
+
+    <div class="form-group col-md-12">
+    <label for="name">Description</label>
+    <%= f.text_area :description, :class=>"form-control",rows:5 %>
+   </div>
+
+    <div class="form-group col-md-12">
+    <label for="name">Address</label>
+    <%= f.text_field :address, :class=>"form-control" %>
+   </div>
         
-        <%= f.label :description %>
-        <%= f.text_area :description, rows: 10%>
+   <div class="form-group col-md-4">
+    <label for="name">City</label>
+    <%= f.text_field :city, :class=>"form-control" %>
+   </div>
+   <div class="form-group col-md-4">
+    <label for="name">State</label>
+    <%= f.text_field :state, :class=>"form-control" %>
+   </div>
         
-        <%= f.label :address %>
-        <%= f.text_field :address %>
+    <div class="form-group col-md-4">
+    <label for="name">Zip Code</label>
+    <%= f.text_field :zipcode, :class=>"form-control" %>
+   </div>
         
-        <%= f.label :city %>
-        <%= f.text_field :city %>
-        
-        <%= f.label :zipcode %>
-        <%= f.text_field :zipcode %>
-        
-        <%= f.label :state %>
-        <%= f.text_field :state %>
      
-        <%= f.label :is_paid, "Paid", :value => "Paid"  %>
-        <%= f.radio_button :is_paid, true, :checked => true %>
-        <%= f.label :is_paid, "Free", :value => "Free" %>
-        <%= f.radio_button :is_paid, false%>
-              <br>
-        <%= f.label :country %>
-        <%= f.text_field :country %>
+        <%#= f.label :is_paid, "Paid", :value => "Paid"  %>
+        <%#= f.radio_button :is_paid, true, :checked => true %>
+        <%#= f.label :is_paid, "Free", :value => "Free" %>
+        <%#= f.radio_button :is_paid, false%>
+           
+    <div class="form-group col-md-4">
+    <label for="name">Country</label>
+    <%= f.text_field :country, :class=>"form-control" %>
+    </div>    
         
-        <%= f.label :start_time %>
-        <%= f.text_field :start_time, :id=>"start_date" %>
+    <div class="form-group col-md-4">
+    <label for="name">Event Start Date </label>
+    <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control" %>
+    </div>
         
-
-        <%= f.label :end_time %>
-        <%= f.text_field :end_time, :id=>"end_date" %>    
-
-        <strong>Categoreis: </strong>
+  <div class="form-group col-md-4">
+    <label for="name">Event End Date </label>
+    <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control" %>
+    </div>
+    <div class="form-group col-md-12">
+         <label for="name">Categories List :-</label></div>
         <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |v| %>
-        <%= v.label(class: "checkbox-inline input_checkbox") {v.check_box(class: "checkbox") + v.text } %>
+        <div class="form-group col-md-3">
+         <%= v.label(class: "checkbox-inline input_checkbox") {v.check_box(class: "checkbox") + v.text }%>
+       </div>
+        
         <% end %>
        
         <hr/>
-          <span class="picture">
-          <%= f.label :picture %>
-            <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
-          </span>
-         
-            <%= f.label :video %>
-            <%= f.file_field :video %>
 
-            <%= f.label :youtube_video %>
-            <%= f.text_field :youtube_video %>
-          
-            <%= f.label :vimeo_video %>
-            <%= f.text_field :vimeo_video %>
-            <div class="nested_form jumbotron">
+    <div class="form-group col-md-6">
+    <label for="name">Picture</label>
+    <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
+    </div>
+    <div class="form-group col-md-6">
+    <label for="name">Video</label>
+     <%= f.file_field :video %>
+    </div>
+
+    <div class="form-group col-md-12">
+    <label for="name">Video</label>
+       <%= f.text_field :youtube_video, :class=>"form-control" %>
+    </div>
+         
+    <div class="form-group col-md-12">
+    <label for="name">Video</label>
+       <%= f.text_field :vimeo_video, :class=>"form-control" %>
+    </div>
+    <br>
+            <h3>Step-2 | Add Schedules</h3>
+            
+            <div class="nested_form jumbotron col-md-12">
               <%= f.fields_for :schedules do |schedule_form| %>
-                <%= schedule_form.label :title %>
-                <%= schedule_form.text_field :title %>
-                <%= schedule_form.label :image %>
-                <%= schedule_form.file_field :image %>
-                <%= schedule_form.label :description %>
-                <%= schedule_form.text_field :description %>
-                <%= schedule_form.label :start_time %>
-                <%= schedule_form.text_field :start_time %>
-                <%= schedule_form.label :end_time %>
-                <%= schedule_form.text_field :end_time %>
-                <%= schedule_form.link_to_remove "Remove this Schedules" %>
+
+           <div class="form-group col-md-12">
+           <label for="name">Title</label>
+           <%= schedule_form.text_field :title, :class=>"form-control" %>
+           </div>
+
+            <div class="form-group col-md-12">
+           <label for="name">Upload Image</label>
+           <%=  schedule_form.file_field :image, :class=>"form-control" %>
+           </div>
+
+            <div class="form-group col-md-12">
+           <label for="name">Description</label>
+           <%=  schedule_form.text_area :description, :class=>"form-control",row:5 %>
+           </div>
+
+             <div class="form-group col-md-6">
+           <label for="name">Start Time</label>
+           <%=  schedule_form.text_field :start_time,:id=>"start_time",:class=>"form-control"   %>
+           </div>
+
+             <div class="form-group col-md-6">
+           <label for="name">End Time</label>
+           <%=  schedule_form.text_field :end_time,:id=>"end_time",:class=>"form-control" %>
+           </div>
+              
+            <div class="form-group col-md-12">
+          <%= schedule_form.link_to_remove "Remove this Schedules" %>
+           </div> 
+             
               <% end %>
-            <p><%= f.link_to_add "Add a Schedules", :schedules %></p>
+            <div class="form-group col-md-12">
+           <%= f.link_to_add "Add a Schedules", :schedules %>
+           </div> 
+            </div>
+      <br>
+               <h3> Step-3 | Add Ticket </h3>
+
+
+
+             <div class="nested_form jumbotron">
+
+<!-- Centered Pills -->
+
+<br>
+
+        <%= f.fields_for :tickets do |ticket_form| %>
+           
+           <div class="form-group col-md-6">
+           <label for="name">Ticket Name</label>
+           <%= ticket_form.text_field :name, :class=>"form-control" %>
+           </div>
+           <div class="form-group col-md-6">
+           <label for="quantity">Quantity available*</label>
+            <%= ticket_form.text_field :quantity, :class=>"form-control" %>
+           </div>
+           <div class="form-group col-md-12">
+           <label for="price">Price</label>
+            <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control" %>
+           </div>
+               
+          <div class="form-group col-md-12">
+           <label for="ticket_description">Ticket Description</label>
+            <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5%>
+           </div>
+                
+             <div class="form-group col-md-6">
+           <label for="show_ticket_description">Show Ticket Description</label>
+            <%= ticket_form.check_box :show_ticket_description, :class=>"form-control" %>
+           </div>
+      
+
+       
+            <div class="form-group col-md-6">
+            <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
+            <%= ticket_form.select :sale_channel, [['Every where', 'Everywhere'], ['Online only', 'Onlineonly'], ['At the door only', 'dooronly']] %>
+          </div> 
+          <div class="form-group col-md-6">
+           <label for="tickets_start_date">Ticket Sales Start</label>
+            <%= ticket_form.text_field :tickets_start_date, :class=>"form-control" %>
+           </div>
+            <div class="form-group col-md-6">
+           <label for="ticket_end_date">Ticket Sales End</label>
+            <%= ticket_form.text_field :ticket_end_date, :class=>"form-control" %>
+           </div>
+     
+         <div class="form-group col-md-6">
+            <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
+            <%= ticket_form.select :country, [['United States', 'US'], ['Argentina', 'AR'], ['Australia', 'Au']] %>
+          </div>           
+
+          <div class="form-group col-md-6">
+            <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
+            <%= ticket_form.select :currency, [['U.S. Dollars $', 'Dollars'], ['Canadian Dollars C$', 'C$'], ['Mexican Peso Mex$', 'MXN']] %>
+          </div> 
+
+
+                <%= ticket_form.link_to_remove "Remove this Ticket" %>
+              <% end %>
+            <p><%= f.link_to_add "Add a Ticket", :tickets %></p>
             </div>
 
+    <h3>Additional Settings</h3>
+      <div class="form-group inline-form col-md-12 ">
+        <%= f.label :event_privacy, "Public :-list this event on Eventbrite and search engines", :value => "Public"  %>
+        <%= f.radio_button :event_privacy, true, :checked => true %> 
+        <%= f.label :event_privacy, "Private :-do not list this event publicly", :value => "Private" %>
+        <%= f.radio_button :event_privacy, false %><label for="sel1"></label>
+        </div>
+        
+
+          <div class="form-group col-md-12">
+            <label for="sel1">Event Type</label>
+            <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']] %>
+          </div>
+          <div class="form-group col-md-12">
+            <label for="sel1">Event Topic</label>
+            <%=f.select :event_topic, [['Auto, Boat & Air', 'AutoAir'], ['Business & Professional', 'BusinessProfessional'], ['Charity & Causes', 'CharityCauses']] %>
+          </div>
           <%= f.submit class: "btn btn-success" %>
         <% end %>
+
+
     </div>
 </div>
 
@@ -111,16 +249,19 @@
         dateFormat: 'dd-mm-yy'
      });
 
+    $("#paid").click(function(){
+        $("price").show();
+    });
+    $("#free").click(function(){
+        $("price").hide();
+    });
+
   });
+ 
   </script>
 
 <style type="text/css">
-  .nested_form
-  {
-    margin: 10px 40px;
-    padding: 25px;
   
-  }
 
  .nested_form label
  {
@@ -128,3 +269,6 @@
  }
 
 </style>
+
+
+

@@ -1,5 +1,6 @@
 
 <header id="myCarousel" class="carousel slide">
+
         
          <div class="carousel-inner">
             <div class="item active">
@@ -52,8 +53,62 @@
         <div class="wide_container_2">
           <div class="tabs">
             <header class="col-md-8 col-xs-12 no-pad">
-             <!-- options-overlay -->
-            </header><!-- end header -->
+                <div class="location-map col-sm-4 col-xs-4">
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="address-map" name="address" placeholder="Manhattan, New York" autocomplete="off">
+                    <i class="fa fa-search"></i>
+                  </div>
+                </div>
+                <div class="select-block col-sm-2 col-xs-2">
+                  <select class="selection selectized" tabindex="-1" style="display: none;"><option value="Beds" selected="selected"></option></select><div class="selectize-control selection single"><div class="selectize-input items full has-options has-items"><div data-value="Beds" class="item">Beds</div><input type="text" autocomplete="off" tabindex="" readonly="readonly" style="width: 4px; opacity: 0; position: absolute; left: -10000px;"></div><div class="selectize-dropdown selection single" style="display: none; visibility: visible; width: 142px; top: 48px; left: 0px;"><div class="selectize-dropdown-content"><div data-value="1" data-selectable="" class="option">1</div><div data-value="2" data-selectable="" class="option">2</div><div data-value="3" data-selectable="" class="option">3</div><div data-value="Beds" data-selectable="" class="option selected">Beds</div></div></div></div>
+                </div>
+                <div class="select-block col-sm-2 col-xs-2 ">
+                  <select class="selection selectized" tabindex="-1" style="display: none;"><option value="For Rent" selected="selected"></option></select><div class="selectize-control selection single"><div class="selectize-input items full has-options has-items"><div data-value="For Rent" class="item">For Rent</div><input type="text" autocomplete="off" tabindex="" readonly="readonly" style="width: 4px; opacity: 0; position: absolute; left: -10000px;"></div><div class="selectize-dropdown selection single" style="display: none; visibility: visible; width: 142px; top: 48px; left: 0px;"><div class="selectize-dropdown-content"><div data-value="For Rent" data-selectable="" class="option selected">For Rent</div><div data-value="For Sale" data-selectable="" class="option">For Sale</div><div data-value="Type" data-selectable="" class="option">Type</div></div></div></div>
+                </div>
+                <div class="select-block col-md-3 col-xs-4 last">
+                  <a class="options-button" id="toggle-link">More Filters</a>
+                </div>
+                <div class="options-overlay col-md-offset-4 col-sm-offset-5 col-sm-7" id="hidden_content" style="display: none;">
+                  <div class="row">
+                    <div class="col-xs-6 top-mrg">
+                      <div class="internal-container features">
+                        <div class="form-group">
+                          <label>Minimum Square Footage:</label>
+                          <input type="text" class="form-control" placeholder="Enter an Amount">
+                        </div>
+                        <label>Building Features:</label>
+                        <section class="block">
+                          <section>
+                            <ul class="submit-features">
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Elevator</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Gym</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Pool</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Lorem Ipsum</label></div></li>
+                            </ul>
+                          </section>
+                        </section>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 top-mrg">
+                      <div class="internal-container features">
+                        <label>Property Features:</label>
+                        <section class="block">
+                          <section>
+                            <ul class="submit-features">
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Air conditioning</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Balcony</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Garage Internet</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Dishwasher</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Washer Mashine</label></div></li>
+                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>Some Lorem Ipsum</label></div></li>
+                            </ul>
+                          </section>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                  </div><!-- options-overlay -->
+              </header>
             <ul class="tab-links col-md-4 col-xs-12">
               <li class="col-lg-3 col-lg-offset-2 col-md-4 col-xs-4 no-pad active"><a href="#tab1" class="map2"><img src="assets/img/map.png" alt=""/>Map</a></li>
               <li class="col-lg-3 col-md-4 col-xs-4 no-pad"><a href="#tab2"><img src="assets/img/grid.png" alt=""/>Grig</a></li>
@@ -63,69 +118,80 @@
             <div class="tab-content">
               <div id="tab1" class="tab" style="display: block;">
                 <div class="sidebar col-sm-4 col-xs-12">
-                  <div id="map"></div>
+                  <!-- <div id="map"></div> -->
+                    <div id="googleMap" style="width:100%"></div>
                 </div>
                 <div class="content col-sm-8 col-xs-12">
                   <div class="wide-2">
                     <div class="col-xs-12">
-                      <div class="row">
+                      <div class="row event-container">
                       <% @events.each do |x| %>
                         <div class="col-md-4 col-sm-6 col-xs-6 prop">
                           <div class="wht-cont">
                             <div class="exp-img-2">
-                            <%= image_tag(x.picture.url, class: "panel-recipe ") if x.picture? %>
-                              <div class="overlay">
+                              <%= image_tag(x.picture_url, class: "panel-recipe #{x.picture.blank? ? 'panel-border' : ''}", height: "195") %>
+                              <!-- <div class="overlay">
                                 <div class="img-counter">
-                                <%= link_to 'Event Details', event_path(x)  %>
+                                <%#= link_to 'Event Details', event_path(x)  %>
                                 </div>
-                              </div>
+                              </div> -->
                             </div>
                             <div class="item-title">
-                              <h4><a href="property_page.html"><%= link_to x.name, event_path(x) %></a></h4>
+                              <h4><a href="property_page.html"><%= link_to x.name.try(:titleize), event_path(x) %></a></h4>
                               <p class="team-color"><%=  x.address %>,<%=  x.city %>, <%=  x.state %></p>
                               <div class="col-md-7 col-sm-7 col-xs-7">
                                 <span class="tag" style="display: inline-block;">Category :<%= render x.categories %></span>
                               </div>
                               <div class="col-md-5 col-sm-5 col-xs-5">
-                            
+                                <div data-compare-state="empty" style="text-align: center;">
+                                  <%= link_to like_event_path(x, like: true), method: :post do %>
+                                    <i class="glyphicon glyphicon-thumbs-up" style="display: inline-block;"><%= x.thumbs_up_total %></i>
+                                  <% end %> 
+                                  <%= link_to like_event_path(x, like: false), method: :post do %>
+                                    <i class="glyphicon glyphicon-thumbs-down" style="display: inline-block;"><%= x.thumbs_down_total %></i>
+                                  <% end %>
+                                </div>
                               </div>
                               <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
                               <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
                             </div>
                             <hr>
-                            
-
                             <div class="item-title btm-part">
                               <div class="row">
                                 <div class="col-md-8 col-sm-8 col-xs-8">
-                                  <p>$5,000,000</p>
-                                  <p class="team-color">
-                                  <% if x.is_paid == true %>
+                                  <!-- <p>$ <%#= x.price %></p> -->
+                                  <div class="item-label">
+                                    <p class="team-color">
+                                     <% if x.is_paid == true %>
               
-                                <%= label_tag :Paid %>
-                                <%else %>
-                                  <%= label_tag :Free %>
-                                  <% end %> </p>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                               <div data-compare-state="empty">
-                                <%= link_to like_event_path(x, like: true), method: :post do %>
-                                <i class="glyphicon glyphicon-thumbs-up">&nbsp<%= x.thumbs_up_total %></i>
-                                <% end %> &nbsp&nbsp&nbsp&nbsp
-                                <%= link_to like_event_path(x, like: false), method: :post do %>
-                                <i class="glyphicon glyphicon-thumbs-down">&nbsp<%= x.thumbs_down_total %></i>
-                                <% end %>
-                                 </div> 
-                                  <div data-compare-state="empty">
-                                    <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+                                        <%= label_tag :Paid %>
+                                      <%else %>
+                                        <%= label_tag :Free %>
+                                      <% end %> 
+                                    </p>
+                                    <p>
+                                      Created By:
+                                    </p>
                                   </div>
-                             
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-4 favorite"> 
+                                  <div data-compare-state="empty" style="text-align: center">
+                                    <div>
+                                      <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
+                                    </div>
+                                    <div>
+                                      <%= x.user.name %>
+                                    </div>
+                                  </div>
+                                    
                                 </div><hr>
-                                <span class="tag" style="display: inline-block;">Start Date
-              
-                <%= x.start_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %> | 
-                End Date
-                <%= x.end_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %></span>
+                                <div class="tag" style="display: inline-block; text-align: center;">
+                                  <b>
+                                    Start Date
+                                    <%= x.start_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %> | End Date
+                                    <%= x.end_time.to_datetime.strftime("%d-%m-%y") rescue "Not Available" %>
+                                  </b>
+                                </div>      
                     <br>
                      <script>
   window.fbAsyncInit = function() {
@@ -144,9 +210,11 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-
+                <div style="text-align: center;">      
                   <a href = '#-' id="facebook-share_<%= x.id %>"><img src="/assets/fb.png"></a>
-              <a href="https://twitter.com/share?text=Event: <%= x.name %>.&url=<%= event_path(x) %>" target="_blank" ><img src="/assets/tweet.png"></a>
+                  <a href="https://twitter.com/share?text=Event: <%= x.name %>.&url=<%= event_path(x) %>" target="_blank" ><img src="/assets/tweet.png"></a>
+                  <%= image_tag ('email.png'), onclick: "$('#contactbtn1').click();" %>
+                </div>
 
            <script type="text/javascript">
             $(document).on('click','#facebook-share_<%=x.id %>',function(e){
@@ -160,8 +228,8 @@
                   description: '<%= x.summary %>'
               }, function(response){});
             });
-          </script>  
-                              <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Contact</button>
+          </script>           
+                              <button style="display: none" type="button" id="contactbtn1" class="btn btn-info btn-small" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Contact</button>
                               <%= form_for Event.new, url: "/events/#{x.id}/contact_email", method: "post" do |f| %>
                                 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                   <div class="modal-dialog" role="document">
@@ -200,12 +268,12 @@
                        
                       </div><!-- end row -->
                     </div><!-- end container -->
-                    <div class="col-xs-12 content_2 top-indent">
-                      <nav class="site-navigation paging-navigation navbar">
+                    <div class="col-xs-12 content_2 top-indent" style="text-align: center">
+                      <!-- <nav class="site-navigation paging-navigation navbar"> -->
                         <ul class="pagination pagination-lg">
-                          <li><%= will_paginate %></li>
+                          <li><%= will_paginate @events %></li>
                         </ul>
-                      </nav>
+                      <!-- </nav> -->
                     </div>
                   </div>  <!-- end wide-2 -->
                 </div>  <!-- content -->
@@ -360,7 +428,7 @@
                     <nav class="site-navigation paging-navigation navbar">
                      
                       <ul class="pagination pagination-lg">
-                     <li><%= will_paginate %></li>
+                     <li><%= will_paginate @events %></li>
                       </ul>
                     </nav>
                   </div>
@@ -522,7 +590,7 @@
                   <div class="col-md-10 col-md-offset-1 col-xs-12">
                     <nav class="site-navigation paging-navigation navbar">
                       <ul class="pagination pagination-lg">
-                           <li><%= will_paginate %></li>
+                           <li><%= will_paginate @events %></li>
                         </ul>
                     </nav>
                   </div>
@@ -558,6 +626,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- End Modal login, register, custom gallery -->
 
   <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
@@ -637,8 +706,6 @@
             
 </div> --> 
         
- 
-
 
 <script type="text/javascript">
   
@@ -678,7 +745,21 @@
 
 
 
+<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('googleMap'), {
+          center: {lat: <%= request.location.latitude!=0 ? request.location.latitude : 28.631418 %>, lng: <%= request.location.longitude!=0 ? request.location.longitude : 77.280159 %>},
+          zoom: 8
+        });
+      }
+    </script>
+  <script type="text/javascript">
+  var eventconHeight =  $('.event-container').height();
+  $('#googleMap').css('height',eventconHeight);
+</script>
 
+<<<<<<< HEAD
 
 <style>
   .btn-sm, .btn-small {
@@ -703,3 +784,7 @@
     border: solid black 1px;
 }
 </style>
+=======
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap"
+    async defer></script>
+>>>>>>> 0836bae1e27628dc43ac2d2bdb5c0a62154e5432
