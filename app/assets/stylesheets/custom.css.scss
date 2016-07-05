@@ -629,3 +629,52 @@ background: rgba(51, 51, 51, 0.26) url("../img/categories/img_category_socail-aw
 margin-bottom: 5px;
 }
 .nav > li > a{padding: 10px 13px;}
+
+
+.panel-border
+{
+  border: 1px solid gray;
+}
+img.panel-recipe
+{
+  height: 165px !important;
+}
+
+  .btn-sm, .btn-small {
+    padding: 9px 10px;
+    width: auto; 
+    height: 40px;
+}
+
+.wide-2 .btn-small {
+     padding: 10px 10px; 
+     width: auto; 
+    height: 40px;
+}
+.wide-2 .btn {
+     margin: 0; 
+}
+
+.wide-2 .wht-cont p, .wide-2 .wht-cont li {
+    word-wrap: break-word;
+}
+#page-content-search .container .wide_container_2 .form-control {
+    border: solid black 1px;
+}
+
+.event-container
+{
+margin-top: 15px;
+}
+.tag
+{
+  width: 100%;
+}
+.item-label
+{
+  margin-top:15px;
+}
+
+#page-content-search .container .wide_container_2 .wht-cont {
+    min-height: 450px;
+}

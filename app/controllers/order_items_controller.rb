@@ -2,8 +2,24 @@ class OrderItemsController < ApplicationController
    protect_from_forgery except: [:hook]
   def create
     @order = current_order
-    @order_item = @order.order_items.new(order_item_params)
+      @order_item= current_order.order_items.where(ticket_id:  params[:order_item][:ticket_id].to_i, order_id: current_order.try(:id), event_id: params[:order_item][:event_id].to_i).first
+    if @order_item
+      @order_item.quantity = @order_item.quantity.to_i + params[:order_item][:quantity].to_i
+      already_cart = true
+    else
+      @order_item = @order.order_items.new(order_item_params)
+    end  
+    @order_item.user_id = current_user.id
+    @order.user_id = current_user.id
     @order.save
+    @order_item.update(total_price: (@order_item.quantity * @order_item.unit_price)) if already_cart
+    unless @order_item.event.is_paid? 
+      @order_item.update(total_price: 0, unit_price: 0)
+    end  
+    @order.quantity = @order_item.quantity
+    @order.order_type = @order_item.event.is_paid? ? "paid" : "free"
+    @order.save
+
     session[:order_id] = @order.id
   end
 

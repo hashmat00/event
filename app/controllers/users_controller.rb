@@ -21,6 +21,9 @@ class UsersController < ApplicationController
       end
     end
 
+    def tickets_history
+    	@tickets_histories = current_user.ticket_histories
+    end
 	# def new
 	# 	@user = User.new
 	# end

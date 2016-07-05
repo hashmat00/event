@@ -1,0 +1,33 @@
+<% if @tickets_histories.present? %>
+  <h3>List of tickets_histories</h3>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Event</th>
+        <th>Event Type</th>
+        <th>Ticket Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Purchased At</th>
+        <th>id</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets_histories.each_with_index do |t, index| %>
+        <tr>
+          <th scope="row"><%= index+1 %></th>
+          <td><%= t.event.name %></td>
+          <td><%= t.event.is_paid? ? "Paid" : "Free" %></td>
+          <td><%= t.ticket.name %></td>
+          <td><%= number_to_currency t.order.subtotal %></td>
+          <td><%= t.order.quantity %></td>
+          <td><%= t.order.purchased_at %></td>
+          <td><%= t.order.id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>You have not purchased any ticket yet</h3>
+<% end %>

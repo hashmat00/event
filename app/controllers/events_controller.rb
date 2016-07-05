@@ -20,6 +20,7 @@ class EventsController < ApplicationController
         @events = Event.all
       end
         @events = @events.paginate(page: params[:page], per_page: 6)
+        
     end
      
     
@@ -44,18 +45,25 @@ class EventsController < ApplicationController
     
     def show
         # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+    @tickets = Ticket.all
+    @order_item = current_order.order_items.new
     if params[:response]
       order_item = OrderItem.where(id: params[:order_item_id].to_i).first
       if order_item
         user = User.where(id: params[:user_id].to_i).first
-        order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id))
+        order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id), subtotal: order_item.event.is_paid? ? order_item.total_price : 0)
         EventMailer.payment_success(user, order_item, order_item.try(:order)).deliver_now rescue "OPPS Mail can not send"
-
+        TicketHistory.new(:user_id => current_user.id, :ticket_id => order_item.ticket.id, :order_id => order_item.order.id, :event_id => order_item.event.id, :quantity => order_item.quantity).save
         @order = current_order
         @order_item = @order.order_items.where(id: order_item.try(:id)).first
         @order_item.destroy
         @order_items = @order.order_items
-        flash[:success] = "Your Payment has been done successfully"
+        if @event.is_paid
+          flash[:success] = "Your Payment has been done successfully and is Available Your Ticket is Available you can check in Ticket History"
+        else
+          flash[:success] = "Your Free Ticket is Available you can check in Ticket History"
+        end  
+        session[:order_id] = nil
       end  
     end
      @events=Event.all
@@ -117,7 +125,7 @@ class EventsController < ApplicationController
           @event = Event.find(params[:id])
       end      
       def event_params
-          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video, category_ids: [], schedules_attributes: [:id, :event_id, :image, :title, :description, :start_time, :end_time])
+          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy,  category_ids: [], schedules_attributes: [:event_id, :image, :title, :description, :start_time, :end_time,:_destroy],tickets_attributes: [:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country,:_destroy])
       end
 
 end

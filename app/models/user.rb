@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   has_many :interests, :dependent => :destroy
   has_many :user_interests, :through => :interests, :source => :event
+  has_many :ticket_histories, dependent: :destroy
 
   mount_uploader :image, PictureUploader 
   def self.sign_in_from_omniauth(auth)

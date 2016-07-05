@@ -1,31 +1,37 @@
 
 <header id="myCarousel" class="carousel slide">
-  <div class="carousel-inner">
-    <div class="item active">
-      <% @events.limit(1).each do |event|%>
-        <%= image_tag event.picture, :class =>"fill" %>
-      <% end %>
-    </div>
-    <% @events.each_with_index do |event, index|%>
-      <div class="item">
-        <%= image_tag event.picture, :class =>"fill" %>              
-      </div>
-    <% end %>
-  </div> 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="icon-prev"></span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="icon-next"></span>
-  </a>
-</header>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+        
+         <div class="carousel-inner">
+            <div class="item active">
+                <% @events.limit(1).each do |event|%>
+                       <%= image_tag event.picture, :class =>"fill" %>
+                
+                <% end %>
+            </div>
+              <% @events.each_with_index do |event, index|%>
+            <div class="item">
+                       <%= image_tag event.picture, :class =>"fill" %>
+                    
+         </div>
+            <% end %>
+        </div> 
 
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
-<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+
+    </header>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+ 
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
 
 <body class="page-search" id="page-top">
   <!-- Preloader -->
@@ -156,10 +162,11 @@
                                   <!-- <p>$ <%#= x.price %></p> -->
                                   <div class="item-label">
                                     <p class="team-color">
-                                      <% if x.is_paid == true %>
-                                        <%#= label_tag :Paid %>Paid
+                                     <% if x.is_paid == true %>
+              
+                                        <%= label_tag :Paid %>
                                       <%else %>
-                                        <%#= label_tag :Free %>Free
+                                        <%= label_tag :Free %>
                                       <% end %> 
                                     </p>
                                     <p>
@@ -618,19 +625,15 @@
       </nav>
     </div>
   </div>
-<!--   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk_1trU7te1evmY8eqaWAtBdkvJ1Sxtxc"
-  type="text/javascript"></script> -->
-  <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDk_1trU7te1evmY8eqaWAtBdkvJ1Sxtxc"></script> -->
-  
-  <!-- <script type="text/javascript" src="assets/js/custom.js"></script> -->
-  
+
+
   <!-- End Modal login, register, custom gallery -->
 
-
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places"></script>
   
 
   <script type="text/javascript" src="assets/js/custom-map.js"></script>
+  <script type="text/javascript" src="assets/js/custom.js"></script>
 
   
 
@@ -654,7 +657,7 @@
    <!--  <script src="assets/bootstrap.min.js"></script> -->
 
  <!-- <header id="myCarousel" class="carousel slide">
-        <!-- Indicators --> 
+         Indicators --> 
       
 
         <!-- Wrapper for Slides -->
@@ -667,7 +670,7 @@
             </div> -->
            <!--   <%# @events.each_with_index do |event, index|%>
             <div class="item">
-                <!-- Set the first background image using inline CSS below. -->
+                Set the first background image using inline CSS below. -->
                
                        <%#= image_tag event.picture, :class =>"fill" %>
                 
@@ -703,8 +706,6 @@
             
 </div> --> 
         
- 
-
 
 <script type="text/javascript">
   
@@ -744,6 +745,19 @@
 
 
 
+<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('googleMap'), {
+          center: {lat: <%= request.location.latitude!=0 ? request.location.latitude : 28.631418 %>, lng: <%= request.location.longitude!=0 ? request.location.longitude : 77.280159 %>},
+          zoom: 8
+        });
+      }
+    </script>
+  <script type="text/javascript">
+  var eventconHeight =  $('.event-container').height();
+  $('#googleMap').css('height',eventconHeight);
+</script>
 
 
 <style>
@@ -768,46 +782,7 @@
 #page-content-search .container .wide_container_2 .form-control {
     border: solid black 1px;
 }
-.panel-border
-{
-  border: 1px solid gray;
-}
-img.panel-recipe
-{
-  height: 165px !important;
-}
-.event-container
-{
-margin-top: 15px;
-}
-.tag
-{
-  width: 100%;
-}
-.item-label
-{
-  margin-top:15px;
-}
-
-#page-content-search .container .wide_container_2 .wht-cont {
-    min-height: 450px;
-}
-
-</style>
-
-<script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('googleMap'), {
-          center: {lat: <%= request.location.latitude!=0 ? request.location.latitude : 28.631418 %>, lng: <%= request.location.longitude!=0 ? request.location.longitude : 77.280159 %>},
-          zoom: 8
-        });
-      }
-    </script>
-<script type="text/javascript">
-  var eventconHeight =  $('.event-container').height();
-  $('#googleMap').css('height',eventconHeight);
-</script>
+</style> 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap"
     async defer></script>
