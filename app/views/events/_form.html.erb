@@ -160,21 +160,25 @@
             <%= ticket_form.text_field :quantity, :class=>"form-control" %>
            </div>
 
-            
-
-  <input onclick="document.getElementById('price').disabled = false; document.getElementById('charstype').disabled = true;" type="radio" name="type">wanna price url?
-  <!-- <input type="text" name="price" id="price" placeholder="should be 5 charecters at least" >
-  <br> --><br>
-  <input onclick="document.getElementById('price').disabled = true; document.getElementById('charstype').disabled = false;" type="radio" name="type" value="customurl">random?
-  <select name="charstype" id="charstype" disabled="disabled">
-                <option>Letters</option>
-                <option>Number</option>
-  </select>
-<br>
+            <label for="price">Ticket Type</label>
+             <div class="form-group col-md-12">
+              
+               <div class="form-group col-md-2"> <label >Paid Ticket</label></div>
+               <div class="form-group col-md-1"> 
+              <input onclick="document.getElementById('price').disabled = false; document.getElementById('charstype').disabled = true;" type="radio" name="type">
+              </div>
+               <div class="form-group col-md-2">
+               <label name="charstype" id="charstype" disabled="disabled">Fee Ticket</label>
+               </div>
+               <div class="form-group col-md-1">
+              <input onclick="document.getElementById('price').disabled = true; document.getElementById('charstype').disabled = false;" type="radio" name="type" value="customurl">
+              
+              </div></div>
+            <br>
            <div class="form-group col-md-12">
            <label for="price">Price</label>
             <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control" %>
-            
+
            </div>
                
           <div class="form-group col-md-12">
