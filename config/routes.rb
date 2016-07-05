@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'carts/show'
 
   get 'tickets/index'
+  get '/users/tickets_history', to: "users#tickets_history", as: :tickets_history
 
   get 'auth/:provider/callback', to: "users#omniauth" 
 

@@ -51,14 +51,19 @@ class EventsController < ApplicationController
       order_item = OrderItem.where(id: params[:order_item_id].to_i).first
       if order_item
         user = User.where(id: params[:user_id].to_i).first
-        order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id))
+        order_item.order.update(order_status_id: 2, status: true, purchased_at: Time.now, user_id: user.try(:id), subtotal: order_item.event.is_paid? ? order_item.total_price : 0)
         EventMailer.payment_success(user, order_item, order_item.try(:order)).deliver_now rescue "OPPS Mail can not send"
-
+        TicketHistory.new(:user_id => current_user.id, :ticket_id => order_item.ticket.id, :order_id => order_item.order.id, :event_id => order_item.event.id, :quantity => order_item.quantity).save
         @order = current_order
         @order_item = @order.order_items.where(id: order_item.try(:id)).first
         @order_item.destroy
         @order_items = @order.order_items
-        flash[:success] = "Your Payment has been done successfully"
+        if @event.is_paid
+          flash[:success] = "Your Payment has been done successfully and is Available Your Ticket is Available you can check in Ticket History"
+        else
+          flash[:success] = "Your Free Ticket is Available you can check in Ticket History"
+        end  
+        session[:order_id] = nil
       end  
     end
      @events=Event.all

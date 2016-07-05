@@ -51,7 +51,7 @@
       <%= link_to 'Delete Event', event_path(@event), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "are you sure you want to delte this event" } %>
       <% end %>
       <% if user_signed_in? %> 
-      <a href="<%= event_tickets_path(@event)%>" class="btn btn-primary">Get Tickets</a>
+      <!-- <a href="<%= event_tickets_path(@event)%>" class="btn btn-primary">Get Tickets</a> -->
 
       <div class="interested_<%= @event.id %>">
         <%if !current_user.is_interested?(@event) %>

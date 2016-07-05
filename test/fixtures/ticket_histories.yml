@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  ticket_id: 1
+  order_id: 1
+  event_id: MyString
+  integer: MyString
+
+two:
+  user_id: 1
+  ticket_id: 1
+  order_id: 1
+  event_id: MyString
+  integer: MyString

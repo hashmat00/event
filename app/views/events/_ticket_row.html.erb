@@ -8,7 +8,7 @@
       
       <%= form_for order_item, remote: true do |f| %>
       <h4 class="text-right">Unit Price: <span style="color: green">
-        <%= number_to_currency ticket.price %></span></h4>
+        <%= number_to_currency event.is_paid? ? ticket.price : 0 %></span></h4>
         <div class="input-group">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
             <%= f.hidden_field :ticket_id, value: ticket.id %>

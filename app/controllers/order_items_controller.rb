@@ -10,8 +10,16 @@ class OrderItemsController < ApplicationController
       @order_item = @order.order_items.new(order_item_params)
     end  
     @order_item.user_id = current_user.id
+    @order.user_id = current_user.id
     @order.save
     @order_item.update(total_price: (@order_item.quantity * @order_item.unit_price)) if already_cart
+    unless @order_item.event.is_paid? 
+      @order_item.update(total_price: 0, unit_price: 0)
+    end  
+    @order.quantity = @order_item.quantity
+    @order.order_type = @order_item.event.is_paid? ? "paid" : "free"
+    @order.save
+
     session[:order_id] = @order.id
   end
 
