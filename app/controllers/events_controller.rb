@@ -120,7 +120,7 @@ class EventsController < ApplicationController
           @event = Event.find(params[:id])
       end      
       def event_params
-          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy,  category_ids: [], schedules_attributes: [:id, :event_id, :image, :title, :description, :start_time, :end_time,:_destroy],tickets_attributes: [:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country,:_destroy])
+          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy,  category_ids: [], schedules_attributes: [:event_id, :image, :title, :description, :start_time, :end_time,:_destroy],tickets_attributes: [:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country,:_destroy])
       end
 
 end
