@@ -141,14 +141,17 @@
            </div> 
             </div>
       <br>
+
+
                <h3> Step-3 | Add Ticket </h3>
-
-
 
              <div class="nested_form jumbotron">
 
 <!-- Centered Pills -->
-
+            <%= f.label :is_paid, "Paid", :value => "Paid"  %>
+            <%= f.radio_button :is_paid, true, :checked => true, :id=>"paid"  %>
+            <%= f.label :is_paid, "Free", :value => "Free" %>
+            <%= f.radio_button :is_paid, :id=>"free", :checked => false %>
 <br>
 
         <%= f.fields_for :tickets do |ticket_form| %>
@@ -161,6 +164,9 @@
            <label for="quantity">Quantity available*</label>
             <%= ticket_form.text_field :quantity, :class=>"form-control" %>
            </div>
+
+            
+
            <div class="form-group col-md-12">
            <label for="price">Price</label>
             <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control" %>
@@ -249,13 +255,7 @@
         dateFormat: 'dd-mm-yy'
      });
 
-    $("#paid").click(function(){
-        $("price").show();
-    });
-    $("#free").click(function(){
-        $("price").hide();
-    });
-
+  
   });
  
   </script>
