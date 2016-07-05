@@ -92,12 +92,12 @@
     </div>
 
     <div class="form-group col-md-12">
-    <label for="name">Video</label>
+    <label for="name">Youtube Video</label>
        <%= f.text_field :youtube_video, :class=>"form-control" %>
     </div>
          
     <div class="form-group col-md-12">
-    <label for="name">Video</label>
+    <label for="name">Vimeo Video</label>
        <%= f.text_field :vimeo_video, :class=>"form-control" %>
     </div>
     <br>
@@ -147,12 +147,7 @@
 
              <div class="nested_form jumbotron">
 
-<!-- Centered Pills -->
-            <%= f.label :is_paid, "Paid", :value => "Paid"  %>
-            <%= f.radio_button :is_paid, true, :checked => true, :id=>"paid"  %>
-            <%= f.label :is_paid, "Free", :value => "Free" %>
-            <%= f.radio_button :is_paid, :id=>"free", :checked => false %>
-<br>
+
 
         <%= f.fields_for :tickets do |ticket_form| %>
            
@@ -167,6 +162,15 @@
 
             
 
+  <input onclick="document.getElementById('custom').disabled = false; document.getElementById('charstype').disabled = true;" type="radio" name="type">wanna custom url?
+  <input type="text" name="custom" id="custom" placeholder="should be 5 charecters at least" >
+  <br><br>
+  <input onclick="document.getElementById('custom').disabled = true; document.getElementById('charstype').disabled = false;" type="radio" name="type" value="customurl">random?
+  <select name="charstype" id="charstype" disabled="disabled">
+                <option>Letters</option>
+                <option>Number</option>
+  </select>
+<br>
            <div class="form-group col-md-12">
            <label for="price">Price</label>
             <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control" %>
@@ -254,8 +258,6 @@
     $( "#end_date" ).datepicker({
         dateFormat: 'dd-mm-yy'
      });
-
-  
   });
  
   </script>

@@ -14,12 +14,12 @@ class OrderItem < ActiveRecord::Base
     if persisted?
       self[:unit_price]
     else
-      ticket.price
+      self.ticket.try(:price)
     end
   end
 
   def total_price
-    unit_price * quantity
+    unit_price * quantity if unit_price.present?
   end
 
   def self.paypal_url(return_url, subtotal, event_id, ticket_id, size)

@@ -45,6 +45,8 @@ class EventsController < ApplicationController
     
     def show
         # @events = Event.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+    @tickets = Ticket.all
+    @order_item = current_order.order_items.new
     if params[:response]
       order_item = OrderItem.where(id: params[:order_item_id].to_i).first
       if order_item
