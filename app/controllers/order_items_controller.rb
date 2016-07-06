@@ -13,7 +13,7 @@ class OrderItemsController < ApplicationController
     @order.user_id = current_user.id
     @order.save
     @order_item.update(total_price: (@order_item.quantity * @order_item.unit_price)) if already_cart
-    unless @order_item.event.is_paid? 
+    unless @order_item.event.is_paid
       @order_item.update(total_price: 0, unit_price: 0)
     end  
     @order.quantity = @order_item.quantity

@@ -18,7 +18,7 @@
         <tr>
           <th scope="row"><%= index+1 %></th>
           <td><%= t.event.name %></td>
-          <td><%= t.event.is_paid? ? "Paid" : "Free" %></td>
+          <td><%= t.event.is_paid ? "Paid" : "Free" %></td>
           <td><%= t.ticket.name %></td>
           <td><%= number_to_currency t.order.subtotal %></td>
           <td><%= t.order.quantity %></td>
