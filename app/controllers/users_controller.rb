@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show]
+    before_action :authenticate_user!, only: [:tickets_history]
+
 	# before_action :require_user, only: [:edit, :update] 
 	# before_action :require_same_user, only: [:edit, :update]
 	
@@ -21,8 +23,24 @@ class UsersController < ApplicationController
       end
     end
 
+    def ticket_show
+    	@ticket = current_user.ticket_histories.where(id: params[:id]).first
+    end
+
     def tickets_history
-    	@tickets_histories = current_user.ticket_histories
+    	@tickets = current_user.ticket_histories.eager_load(:event, :ticket, :order).references(:event, :ticket, :order)	
+    	@all_tickets_count = current_user.ticket_histories.eager_load(:event, :ticket, :order).references(:event, :ticket, :order).try(:count)
+    	@upcomming_tickets_count = @tickets.where('events.start_time > ?', Time.now).try(:count)
+    	@saved_tickets_count = @tickets.select{|s| current_user.wish_lists_events.map{|m| m == s.event} }.try(:count)
+    	@past_tickets_count = @tickets.where('events.end_time < ?', Time.now).try(:count)
+    	case params[:tab]
+    	when 'all' then @tickets = @tickets
+    	when 'upcomming' then @tickets = @tickets.where('events.start_time > ?', Time.now)
+    	when 'saved' then @tickets = @tickets.select{|s| current_user.wish_lists_events.map{|m| m == s.event} }
+    	when 'past' then @tickets = @tickets.where('events.end_time < ?', Time.now)
+    	else
+    		@tickets = @tickets	
+    	end
     end
 	# def new
 	# 	@user = User.new

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'tickets/index'
   get '/users/tickets_history', to: "users#tickets_history", as: :tickets_history
-
+  get '/users/ticket_show', to: "users#ticket_show", as: :ticket_show  
   get 'auth/:provider/callback', to: "users#omniauth" 
 
   devise_for :admin_users, ActiveAdmin::Devise.config

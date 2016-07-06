@@ -1,0 +1,35 @@
+<article class="g-cell g-cell-12-12 g-cell-lg-8-12 g-offset-lg-2-12 js-current-orders-container is-active tab-content l-pad-bot-5 l-sm-pad-bot-3" id="orders">
+  <% if tickets.present? %>
+    <% tickets.each_with_index do |t, i| %>
+      <div class="js-xd-content tabs-content g-grid">       
+        <div data-automation="order-card" class="js-order-card  l-mar-top-2 g-group">
+          <a data-automation="manage-order" class="list-card" href="/users/ticket_show?id=<%= t.id %>">
+            <div class="list-card__header">
+              <div class="list-card__image">
+              <%= image_tag(t.event.picture_url, class: "panel-recipe #{t.event.picture.blank? ? 'panel-border' : ''}") %>
+              </div>
+              <span class="show-small list-card__label"><%= t.ticket.pay_type %></span>
+            </div>
+            <div class="list-card__body">
+              <time class="list-card__date"><%= t.event.start_time.to_formatted_s(:long) %></time>
+              <h3 data-automation="view-order" class="list-card__title">
+                  <%= t.event.name %>
+              </h3>
+              <p class="hide-small l-mar-top-2 text-body-small text-body--faint" data-automation="order-payment-status-text"><%= t.ticket.pay_type %> order #<%= t.order.try(:order_uid) %> of <%= t.quantity %> Tickets on <%= t.order.purchased_at.to_formatted_s(:long) %></p>
+              <p class="show-small l-mar-top-2 text-body-small text-body--faint">Order #<%= t.order.try(:order_uid) %></p>    
+            </div>
+          </a>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <article class=" tab-content g-group" id="saved">
+      <div class="l-align-center">
+        <div class="g-cell g-cell-1-1 g-cell-lg-4-12 l-mar-vert-6">
+          <img width="200" alt="No saved events" data-d-retina-src="https://cdn.evbstatic.com/s3-build/perm_001/bd3414/django/images/pages/saved_events/no_events_2x.png" src="https://cdn.evbstatic.com/s3-build/perm_001/4e34f5/django/images/pages/saved_events/no_events.png" class="g-img l-mar-top-6 js-d-retina" dorsal-guid="fa6d1126-78a1-77eb-2667-5a35b7958a2f" data-xd-wired="retina">
+          <p class="l-mar-top-2 l-mar-bot-6 text-body--faint">There are No tickets for <%= params[:tab] ? params[:tab].capitalize : "All" %> Events and those will show up here so you can easily view them here later.</p>
+        </div>
+      </div>
+    </article>  
+  <% end %>
+</article>

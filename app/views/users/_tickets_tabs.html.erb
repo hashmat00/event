@@ -1,0 +1,65 @@
+<div class="js-xd-header tabs-header tabs-header__grid tabs-header__grid-3 user-profile__header">
+  <div class="g-grid">
+    <ul class="tabs-header-list">
+      <li class="<% if params[:tab]=="all" || params[:tab].blank? %>is-active<% end %>" id="ticket_btn_article1">
+        <a class="js-load-past-orders" href="javascript:void(0)">
+          <em><%= all_tickets_count %></em>
+          <div class="hide-small">All Events</div>
+        </a>
+      </li>
+      <li class="<% if params[:tab]=="upcomming" %>is-active<% end %>" id="ticket_btn_article2">
+        <a href="javascript:void(0)">
+          <em><%= upcomming_tickets_count %></em>
+          <div class="hide-small">Upcoming Events</div>
+        </a>
+      </li>
+      <li class="<% if params[:tab]=="saved" %>is-active<% end %>" id="ticket_btn_article3">
+        <a href="javascript:void(0)">
+          <em><%= saved_tickets_count %></em>
+          <div class="hide-small">Saved Events</div>
+        </a>
+      </li>
+      <li class="<% if params[:tab]=="past" %>is-active<% end %>" id="ticket_btn_article4">
+        <a class="js-load-past-orders" href="javascript:void(0)">
+          <em><%= past_tickets_count %></em>
+          <div class="hide-small">Past Events</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#ticket_btn_article1').on('click', function(){
+    $.ajax({
+      type:'GET',
+      url: '/users/tickets_history',
+      dataType: 'script',
+      data: $.param({ tab: 'all'})
+    });
+  });
+  $('#ticket_btn_article2').on('click', function(){
+    $.ajax({
+      type:'GET',
+      url: '/users/tickets_history',
+      dataType: 'script',
+      data: $.param({ tab: 'upcomming'})
+    });
+  });
+  $('#ticket_btn_article3').on('click', function(){
+    $.ajax({
+      type:'GET',
+      url: '/users/tickets_history',
+      dataType: 'script',
+      data: $.param({ tab: 'saved'})
+    });
+  });
+  $('#ticket_btn_article4').on('click', function(){
+    $.ajax({
+      type:'GET',
+      url: '/users/tickets_history',
+      dataType: 'script',
+      data: $.param({ tab: 'past'})
+    });
+  });
+</script>

@@ -80,3 +80,4 @@ end
 gem 'figaro'
 gem 'country_select'
 gem "nested_form"
+gem "bullet", :group => "development"
