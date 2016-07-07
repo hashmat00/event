@@ -36,17 +36,19 @@ class UsersController < ApplicationController
     	@tickets = current_user.ticket_histories.eager_load(:event, :ticket, :order).references(:event, :ticket, :order)	
     	@all_tickets_count = @tickets.try(:active).try(:count)
     	@upcomming_tickets_count = @tickets.where('events.start_time > ?', Time.now).try(:active).try(:count)
-    	@saved_tickets_count = @tickets.select{|s| current_user.wish_lists_events.map{|m| m == s.event} }.try(:count)
+    	@saved_tickets_count = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }.try(:count)
     	@past_tickets_count = @tickets.where('events.end_time < ?', Time.now).try(:active).try(:count)
+    	@inactive_tickets_count = @tickets.try(:inactive).try(:count)
     	case params[:tab]
     	when 'all' then @tickets = @tickets
     	when 'upcomming' then @tickets = @tickets.where('events.start_time > ?', Time.now)
-    	when 'saved' then @tickets = @tickets.select{|s| current_user.wish_lists_events.map{|m| m == s.event} }
+    	when 'saved' then @tickets = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }
     	when 'past' then @tickets = @tickets.where('events.end_time < ?', Time.now)
+    	when 'inactive' then @tickets = @tickets.try(:inactive)	
     	else
     		@tickets = @tickets	
     	end
-    		@tickets = @tickets.active
+    		@tickets = @tickets.active unless (params[:tab] == 'inactive' || params[:tab] == 'saved')
     end
 	# def new
 	# 	@user = User.new

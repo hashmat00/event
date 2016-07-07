@@ -33,3 +33,12 @@
     </article>  
   <% end %>
 </article>
+
+<style>
+  <% if params[:tab] == "inactive"%>
+    .list-card
+    {
+      background: grey !important;
+    }
+  <% end %>
+</style>

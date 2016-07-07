@@ -25,6 +25,12 @@
           <div class="hide-small">Past Events</div>
         </a>
       </li>
+      <li class="<% if params[:tab]=="inactive" %>is-active<% end %>" id="ticket_btn_article5">
+        <a class="js-load-past-orders" href="javascript:void(0)">
+          <em><%= inactive_tickets_count %></em>
+          <div class="hide-small">Cancel Tickets</div>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
@@ -60,6 +66,14 @@
       url: '/users/tickets_history',
       dataType: 'script',
       data: $.param({ tab: 'past'})
+    });
+  });
+  $('#ticket_btn_article5').on('click', function(){
+    $.ajax({
+      type:'GET',
+      url: '/users/tickets_history',
+      dataType: 'script',
+      data: $.param({ tab: 'inactive'})
     });
   });
 </script>
