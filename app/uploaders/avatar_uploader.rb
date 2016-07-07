@@ -21,12 +21,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
     %Q{#{version_name}_#{for_file.chomp(File.extname(for_file))}.png}
   end
 
-    if Rails.env.production?
-   storage :fog
-    else  
-    storage :file
-    end 
-     #storage :file
+   #  if Rails.env.production?
+   # storage :fog
+   #  else  
+   #  storage :file
+   #  end 
+   #   #storage :file
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
