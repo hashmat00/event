@@ -1,0 +1,17 @@
+<div class="text-con">
+  <div class="text-block">
+    <p>Contact Information</p>
+  </div>
+  <div class="text-block">
+    <p>First Name *</p>
+    <p><%= ticket.order.try(:first_name).try(:titleize) %></p>
+  </div>              
+  <div class="text-block">
+    <p>Last Name *</p>
+    <p><%= ticket.order.try(:last_name).try(:titleize) %></p>
+  </div>
+  <div class="text-block">
+    <p>Email *</p>
+    <p><%= ticket.order.try(:email) %></p>
+  </div>
+</div>

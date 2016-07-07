@@ -7,12 +7,22 @@
   <%= csrf_meta_tags %>
   <meta name="google-site-verification" content="b6KspSExufhe85f_1xbprHpeaZwSBXNvsUcfjRmWXIw" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if (params[:controller] == "users" && (params[:action]=="tickets_history")) %>
   <link rel="stylesheet" type="text/css" href="https://cdn.evbstatic.com/s3-build/16702-rc2016-07-04_12.04-f38382e/django/css/production/base_styles.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.evbstatic.com/s3-build/16702-rc2016-07-04_12.04-f38382e/django/css/src/smacss/non_modular/global_header.css" />
 	<link rel="stylesheet" type="text/css" href="https://cdn.evbstatic.com/s3-build/16702-rc2016-07-04_12.04-f38382e/django/css/production/responsive_mytickets.css" />
 	<link rel="stylesheet" type="text/css" href="https://cdn.evbstatic.com/s3-build/16702-rc2016-07-04_12.04-f38382e/django/css/src/smacss/non_modular/user_profile.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.evbstatic.com/s3-build/16702-rc2016-07-04_12.04-f38382e/django/css/src/smacss/non_modular/mytickets_responsive.css" />
+  <% end %>
+  <script src="//cdn.jsdelivr.net/alertifyjs/1.7.1/alertify.min.js"></script>
 
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.7.1/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.7.1/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.7.1/css/themes/semantic.min.css"/>
+	<!-- Bootstrap theme -->
   
 
 </head>

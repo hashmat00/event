@@ -1,0 +1,33 @@
+
+<%= form_for ticket.order, url: orders_path, method: :put, html: {id: "order_form"}, remote: true do |f| %>
+<div class="text-con">
+  <div class="text-block">
+    <p>Edit Contact Information</p>
+  </div>
+  <%= f.hidden_field :id, value: ticket.order.id %>
+  <%= f.hidden_field :ticket_history_id, value: ticket.id %>
+  <div class="text-block">
+    <p>First Name *</p>
+    <p><%= f.text_field :first_name, required: true %></p>
+  </div>              
+  <div class="text-block">
+    <p>Last Name *</p>
+    <p><%= f.text_field :last_name, required: true %></p>
+  </div>
+  <div class="text-block">
+    <p>Email *</p>
+    <p><%= f.email_field :email, required: true %></p>
+  </div>
+  <div class="cancel-btn inline-block">
+  <button type="button" class="btn btn-danger btn-lg" onclick="$('#ticket_user_form').hide();$('#ticket_user_details').show();">
+    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+  </button>
+  </div>
+  <div class="update-btn inline-block">
+    <button type="button" class="btn btn-success btn-lg" onclick="$('#order_form').submit();">
+      <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Update
+    </button>
+  </div>
+</div>
+
+<% end %>

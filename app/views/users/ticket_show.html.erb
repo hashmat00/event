@@ -1,312 +1,73 @@
-<div class="clrfix" id="content">
-  <div class="g-grid">
-    <div class="g-group">
-      <nav class="g-cell g-cell-12-12 l-mar-top-3">
-        <div class="text-body-medium">
-          <a href="/users/tickets_history" class="back_nav">
-            <i class="ico-omnes-arrow-left"></i> Back to Current Orders
-          </a>
-        </div>
-      </nav>
-      <header class="g-cell g-cell-12-12 l-mar-top-3">
-        <h2 class="text-heading-primary">
-          Order for 
-          <a target="_blank" href="">
-            <%= @ticket.event.try(:name).try(:titleize) %>
-          </a>
-        </h2>
-      </header>
-      <section class="g-cell g-cell-12-12 l-mar-top-1">
-        <div class="text-body-large text-body--understated">
-          <p><%= @ticket.ticket.pay_type %> order #<%= @ticket.order.try(:order_uid) %> on <%= @ticket.order.purchased_at.strftime('%b  %d, %y') %></p>
-          <p><%= @ticket.event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') %>  &ndash;<br> <%= @ticket.event.end_time.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') %></p>
-          <p><%= @ticket.event.try(:city).try(:titleize) %></p>
-        </div>
-      </section>
-    </div>
+<div class="row">
+  <div class="col-md-1">
   </div>
-
-<div class="g-grid">
-    <div class="g-group">
-      <div class="g-vertical-group g-cell-12-12 g-cell-md-6-12 g-cell-lg-3-12">
-        <nav class="g-cell g-cell-3-3 l-mar-top-3">
-          <a data-automation="print-tickets" class="btn btn--block" href="/print-ticket?oid=531308007&amp;sig=AHTu1yZgx7VEUMgYYKkare06GVN6fxb6Ww" name="531308007" id="print_tickets">
-              <span>
-                  Print Tickets
-              </span>
-          </a>
-          <a data-automation="print-tickets" class="btn btn--block" href="/print-ticket?oid=531308007&amp;sig=AHTu1yZgx7VEUMgYYKkare06GVN6fxb6Ww" name="531308007" id="print_tickets">
-              <span>Cancel Order</span>
-          </a>
-          <a data-automation="print-tickets" class="btn btn--block" href="/print-ticket?oid=531308007&amp;sig=AHTu1yZgx7VEUMgYYKkare06GVN6fxb6Ww" name="531308007" id="print_tickets">
-            <span>Contact the Organizer</span>
-          </a>
-        </nav>
-      </div>
-      <div class="g-vertical-group g-cell-12-12 g-cell-lg-9-12">
-            <div class="g-group l-gutter-right-1">
-                            
-    <div data-automation="attendee-container" class="attendee_edit_section myorder-container l-mar-top-3" data-attendee_id="669524471" data-order_id="531308007">
-        <div class="js-my-order-loader g-cell g-cell-9-9 l-align-center l-mar-top-4 hide_me">
-            <img src="https://cdn.evbstatic.com/s3-build/16702-rc2016-07-04_12.04-f38382e/django/images/icons/loading_16px.gif" alt="loading..." class="loading_16px hide_me">
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="heading">
+          <h1>Order for 
+            <a target="_blank" href="/events/<%= @ticket.event.try(:id) %>">
+              <%= @ticket.event.try(:name).try(:titleize) %>
+            </a>
+          </h1>
         </div>
-        <div class="g-cell g-cell-9-9 g-cell-md-5-9 g-cell-lg-6-9 l-pad-hor-3 l-sm-pad-hor-2 l-pad-vert-3">
-            <h3 class="text-heading-secondary">
-                (10x)
+        <div class="col-md-12">
+          <div class="col-md-4"><p><%= @ticket.ticket.pay_type %> order #<%= @ticket.order.try(:order_uid) %> on <%= @ticket.order.purchased_at.strftime('%b  %d, %y') %></p>
+            <p><%= @ticket.event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') %>  &ndash;<br> <%= @ticket.event.end_time.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') %></p>
+            <p><%= @ticket.event.try(:city).try(:titleize) %></p></div>
+          <div class="col-md-8"></div>
+        </div>
+        <div class="col-md-3 left-con" >
+          <a href="javascript:void(0)" class="btn btn-primary btn-lg ticket_action">Print Tickets</a>
+          <a href="javascript:void(0)" class="btn btn-danger btn-lg ticket_action" onclick="cancel_ticket();">Cancel Order</a>
+          <a href="javascript:void(0)" class="btn btn-info btn-lg ticket_action">Contact The <br> Organizer</a>
+        </div>
+        <div class="col-md-9 ticket-con">
+          <div class="row heading-block">
+            <div class="col-md-10">
+              <h3 class="text-heading-secondary">
                 <%= @ticket.event.try(:name).try(:titleize) %>
-            </h3>
+              </h3>
+            </div>
+            <div class="col-md-2 edit-btn">
+              <button type="button" class="btn btn-info btn-lg" onclick="$('#ticket_user_form').show();$('#ticket_user_details').hide();">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+              </button>
+            </div>
+          </div>
+          <div id="ticket_user_details">
+            <%= render partial: "ticket_user_details", locals: {ticket: @ticket} %>        
+          </div>
+          <div id="ticket_user_form"  style="display: none;">
+            <%= render partial: "ticket_user_form", locals: {ticket: @ticket} %>        
+          </div>
         </div>
-        <div class="myorder-actions g-cell g-cell-9-9 g-cell-md-4-9 g-cell-lg-3-9 l-pad-hor-3 l-sm-pad-hor-2 l-pad-vert-3 l-align-right l-sm-align-center">
-            <span class="text-body-large text-body--significant">
-                <a class="js-my-order-edit hide_me" href="javascript:void(0);">
-                    <i class="ico-write"></i>
-                    Edit
-                </a>
-
-            </span>
-        </div>
-        <section class="l-section l-pad-bot-3">
-            <div class="g-cell">
-                <div class="attendee_edit_container">
-
-
-
-<style type="text/css">
-    .error {
-        color: red;
-    }
-</style>
-
-
-<form action="https://www.eventbrite.com/updateattendeeinformationajax" class="responsive-form" method="POST"><div style="display:none"><input type="hidden" value="29881779f8194b81942827f4a1e4cef6" name="csrfmiddlewaretoken"></div>
-    <div class="notincluded g-cell g-cell-9-9 l-mar-top-2">
-        <a class="update_button btn" href="#">Save</a>
-        <a class="cancel_button btn btn--secondary" href="#">Cancel</a>
+      </div>
+    </div>  
+    <div class="col-md-12">
+      <a href="/users/tickets_history" class="back_nav">
+        <i class="ico-omnes-arrow-left"></i> 
+        Back to Current Orders
+      </a>
     </div>
-    <input type="hidden" value="531308007" name="oid">
-    <input type="hidden" value="669524471" name="aid">
-    <input type="hidden" value="1" name="submitted">
-
-
-    <div class="l-mar-top-3 g-group">
-        
-<div class="g-cell g-cell-9-9">
-    <span class="text-body-large text-body--significant">Contact Information</span>
-</div>
-
-        
-<label class="text-body--understated l-mar-top-2 g-cell g-cell-9-9 " for="first_name">First Name <span class="error">*</span></label>
-
-        <div class="g-cell g-cell-9-9 g-cell-md-1-2">
-            
-<input type="text" id="first_name" class="required" value="test3" name="first_name">
-
-        <span class="text-body--faint hide_me" id="value_first_name">test3</span></div>
-
-        
-<label class="text-body--understated l-mar-top-2 g-cell g-cell-9-9 " for="last_name">Last Name <span class="error">*</span></label>
-
-        <div class="g-cell g-cell-9-9 g-cell-md-1-2">
-            
-<input type="text" id="last_name" class="required" value="last3" name="last_name">
-
-        <span class="text-body--faint hide_me" id="value_last_name">last3</span></div>
-
-
-
-<label class="text-body--understated l-mar-top-2 g-cell g-cell-9-9 " for="email_address">Email <span class="error">*</span></label>
-
-<div class="g-cell g-cell-9-9 g-cell-md-1-2">
-    <input type="text" id="email_address" onchange="if(document.attendeeForm &amp;&amp; document.attendeeForm.ec){document.attendeeForm.ec.checked = true;}" class="required" value="test3@yopmail.com" name="email_address">
-<span class="text-body--faint hide_me" id="value_email_address">test3@yopmail.com</span></div>
-
-<div class="l-mar-top-2 g-cell g-cell-9-9 notincluded">
-    <input type="checkbox" id="ec" value="1" name="ec">
-    <label for="ec">Send confirmation email to new attendee</label>
-</div>
-
-
-
-
-    </div>
-
-
-
-
-
-
-
-
-<div class="notincluded g-cell g-cell-9-9 l-mar-top-2 l-pad-bot-2">
-    <a class="update_button btn" href="#">Save</a>
-    <a class="cancel_button btn btn--secondary" href="#">Cancel</a>
-</div>
-</form>
-
-<script id="conditional_logic" type="text">
-[
-]
-</script>
-
-
-
-
-</div>
-            </div>
-        </section>
-    </div>
-
-            </div>
-        </div><!-- vertical -->
-    </div><!-- g-group -->
-    <div class="g-group">
-        <nav class="g-cell g-cell-12-12 l-mar-top-3 l-pad-bot-3">
-            <div class="text-body-medium">
-                <a href="/users/tickets_history" class="back_nav">
-                    <i class="ico-omnes-arrow-left"></i> Back to Current Orders
-                </a>
-            </div>
-        </nav>
-    </div>
-</div>
-
-<div class="g-cell g-cell--no-gutters g-cell-12-12 g-cell-lg-8-12 l-align-left mfp-hide" id="lightbox_contact">
-
-    <div class="g-grid">
-
-        <section class="g-group l-mar-top-2">
-            <div class="g-cell g-cell-12-12">
-                <div class="text-heading-primary" id="lightbox_contact_heading">Contact Host</div>
-                <hr class="l-mar-top-2">
-            </div>
-        </section>
-
-        <section class="g-group is-hidden" id="lightbox_contact_confirmation" style="display: none;">
-            <div class="g-cell g-cell-12-12">
-                <div data-automation="organizer-form-success-confirmation" class="notification notification--success l-mar-top-2">
-                    Your message has been sent!
-                </div>
-            </div>
-        </section>
-
-        <section class="g-group" id="lightbox_contact_main_form">
-
-            <div class="g-cell g-cell-12-12">
-                <span class="responsive-form__field-error" id="error_messages"></span>
-            </div>
-
-            <form class="responsive-form" name="contactForm" method="post" action="" id="form_contact_organizer"><div style="display:none"><input type="hidden" value="29881779f8194b81942827f4a1e4cef6" name="csrfmiddlewaretoken"></div>
-                <input type="hidden" value="1" name="contact_organizer_submit" id="form_contact_organizer_hidden">
-
-                <div class="g-cell g-cell-12-12">
-                    <label class="label-primary" for="contact_name">
-                        Your Name
-                    </label>
-                </div>
-
-                <div class="g-cell g-cell-12-12 g-cell-lg-12-12">
-                    <input type="text" value="" name="from_name" id="contact_name">
-                </div>
-
-                <div class="g-cell g-cell-12-12 l-mar-top-2">
-                    <label class="label-primary" for="contact_email">
-                        Email Address
-                    </label>
-                </div>
-
-                <div class="g-cell g-cell-12-12 g-cell-lg-12-12">
-                    <input type="text" value="" name="from_email" id="contact_email">
-                </div>
-
-                <div class="g-cell g-cell-12-12 l-mar-top-2">
-                    <label class="label-primary" for="contact_message">
-                        Message
-                    </label>
-                </div>
-
-                <div class="g-cell g-cell-12-12 g-cell-lg-12-12">
-                    <textarea rows="7" name="message" id="contact_message"></textarea>
-                </div>
-
-                <div class="is-hidden l-mar-top-2" id="container_captcha_privacy">
-
-                    <div class="g-cell g-cell-12-12">
-                        <span class="label-primary">
-                            Enter the code as shown below:
-                        </span>
-                    </div>
-                    <div class="g-cell g-cell-12-12">
-                        <div id="recaptcha_area" class=" recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio"><div id="recaptcha_area"><table class="recaptchatable recaptcha_theme_clean" id="recaptcha_table"> <tbody><tr height="73"> <td width="302" class="recaptcha_image_cell"><center><div id="recaptcha_image" style="width: 300px; height: 57px;"><img width="300" height="57" src="https://www.google.com/recaptcha/api/image?c=03AHJ_VutLr9QC2K78380Zzc5Z8v7tqV_nRsQmVQ4r7VhHtkUrvh9IdJJpdJxioyAOgbr2mdNKlHXgLRVNN6jZOBJWan-vb_thFefsKaYd83kQbrPZNdDpbv6QaQOEMhfkelPbxD0N4FkOOWqFmug1PFZGz5gRqIRpmwWf6tFUwRTgmVzvDj2vtRYicU2aLdfmTDxA2StliDLFLs2lty8ptsqy9Kc9aHwI01fP6LIbrivR4_s2LRnDOYgokn01lSDr9lOVrhb-hGFhHxvEslvCD9fpCZnunGguDA" style="display:block;"></div></center></td> <td style="padding: 10px 7px 7px 7px;"> <a id="recaptcha_reload_btn" href="javascript:Recaptcha.reload ();" title="Get a new challenge"><img width="25" height="18" alt="Get a new challenge" id="recaptcha_reload" src="https://www.google.com/recaptcha/api/img/clean/refresh.png"></a> <a class="recaptcha_only_if_image" id="recaptcha_switch_audio_btn" href="javascript:Recaptcha.switch_type('audio');" title="Get an audio challenge"><img width="25" height="15" alt="Get an audio challenge" id="recaptcha_switch_audio" src="https://www.google.com/recaptcha/api/img/clean/audio.png"></a><a class="recaptcha_only_if_audio" id="recaptcha_switch_img_btn" href="javascript:Recaptcha.switch_type('image');" title="Get a visual challenge"><img width="25" height="15" alt="Get a visual challenge" id="recaptcha_switch_img" src="https://www.google.com/recaptcha/api/img/clean/text.png"></a> <a id="recaptcha_whatsthis_btn" href="http://www.google.com/recaptcha/help?c=03AHJ_VutLr9QC2K78380Zzc5Z8v7tqV_nRsQmVQ4r7VhHtkUrvh9IdJJpdJxioyAOgbr2mdNKlHXgLRVNN6jZOBJWan-vb_thFefsKaYd83kQbrPZNdDpbv6QaQOEMhfkelPbxD0N4FkOOWqFmug1PFZGz5gRqIRpmwWf6tFUwRTgmVzvDj2vtRYicU2aLdfmTDxA2StliDLFLs2lty8ptsqy9Kc9aHwI01fP6LIbrivR4_s2LRnDOYgokn01lSDr9lOVrhb-hGFhHxvEslvCD9fpCZnunGguDA" target="_blank" title="Help"><img width="25" height="16" id="recaptcha_whatsthis" src="https://www.google.com/recaptcha/api/img/clean/help.png" alt="Help"></a> </td> <td style="padding: 18px 7px 18px 7px;"> <img width="71" height="36" alt="" id="recaptcha_logo" src="https://www.google.com/recaptcha/api/img/clean/logo.png"> </td> </tr> <tr> <td style="padding-left: 7px;"> <div style="padding-top: 2px; padding-bottom: 7px;" class="recaptcha_input_area"> <span id="recaptcha_challenge_field_holder" style="display: none;"><input type="hidden" value="" id="recaptcha_challenge_field" name="recaptcha_challenge_field"></span><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" style="width: 302px;" autocomplete="off"> </div> </td> <td></td> <td style="padding: 4px 7px 12px 7px;"> <img width="71" height="17" id="recaptcha_tagline" src="https://www.google.com/recaptcha/api/img/clean/tagline.png"> </td> </tr> </tbody></table> </div></div>
-                    </div>
-                </div>
-
-                <div class="g-cell g-cell-12-12">
-                    <div id="contact_disclaimer">Your message will only be seen by the event organizer.</div>
-                </div>
-
-            </form>
-        </section>
-
-        <section class="g-group l-pad-vert-2" id="lightbox_contact_buttons_row">
-            <div class="g-cell g-cell-12-12">
-                <a href="javascript:void(0);" class="unsent_mode btn" id="lightbox_contact_send_button">
-                    <span id="lightbox_contact_send_message">
-                        Send message
-                    </span>
-                    <span class="is-hidden" id="lightbox_contact_please_wait">
-                        Please wait...
-                    </span>
-                </a>
-                <a href="javascript:void(0);" class="eb_close_button btn btn--secondary" id="lightbox_contact_cancel_button">
-                    Cancel
-                </a>
-            </div>
-        </section>
-
-        <section class="g-group l-pad-vert-2 is-hidden" id="lightbox_contact_close_row" style="display: none;">
-            <div class="g-cell g-cell-12-12">
-                <a data-automation="contact_close_button" href="javascript:void(0);" class="eb_close_button btn btn--secondary" id="lightbox_contact_close_button">
-                    Close
-                </a>
-            </div>
-        </section>
-    </div>
-
-</div>
-
-
-<div class="g-cell g-cell--no-gutters g-cell-12-12 g-cell-md-8-12 mfp-hide" id="lightbox_cancel_order">
-  <div class="modal__heading">
-      <h1 class="text-heading-primary">Cancel Free Order</h1>
+  </div>  
+  <div class="col-md-1">
   </div>
-    <div class="modal__body l-align-center">
-        <p>
-           Are you sure you want to cancel this order?
-        </p>
-        <div class="btn-group btn-group--responsive l-mar-top-2">
-            <a data-mfp-src="#lightbox_cancel_order_confirmation" class="btn js-d-modal" href="https://www.eventbrite.com/users/tickets_historycancel/531308007/" id="cancel_order_confirm" dorsal-guid="c04323c6-3571-e8ef-2946-6b5d2d75edc5" data-xd-wired="modal">
-                Yes, cancel this order
-            </a>
-            <button class="btn btn--secondary js-xd-modal-close" id="cancel_order_cancel">
-                No, nevermind
-            </button>
-        </div>
-    </div>
 </div>
 
-<div class="g-cell g-cell--no-gutters g-cell-12-12 g-cell-md-8-12 mfp-hide" id="lightbox_cancel_order_confirmation">
-    <div class="modal__body l-align-center">
-      <p>
-         Your order has been canceled.
-      </p>
-        <div class="btn-group btn-group--responsive l-mar-top-2">
-            <a href="/users/tickets_history" class="btn btn--secondary js-xd-modal-close">
-                Back to Current Orders
-            </a>
-        </div>
-    </div>
-</div>
-
-<div id="fb-root"></div>
-
-    </div>
+<script type="text/javascript">
+  function cancel_ticket()
+  {
+    alertify.confirm( 'Are you sure you want to cancel this order? ', function (e) {
+               
+        if (e) {
+          window.location.href = '/users/tickets_history?id=<%= @ticket.id %>';
+        } else {
+          
+        }
+    }); 
+    $('.ajs-header').html("Cancel Free Order");
+    // $('.ajs-button .ajs-ok').html("Yes, cancel this order");  
+    // $('.ajs-button .ajs-cancel').html("No, nevermind");
+  }
+</script>
