@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     end
 
     def ticket_download
-    		@ticket = TicketHistory.where(id: 6).first
+    		@ticket = TicketHistory.where(id: params[:ticket_id]).first
     		
     		@random_codes = []
 				@ticket.quantity.times do |i|
