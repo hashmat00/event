@@ -1,6 +1,4 @@
-<p id="pdf_link">
-  <%= link_to "Download (PDF)", ticket_download_path(:format => "pdf", ticket_id: @ticket.id) %>
-</p>
+
 <div class="row ticket-show-con">
   <div class="col-md-1">
   </div>
@@ -21,7 +19,11 @@
           <div class="col-md-8"></div>
         </div>
         <div class="col-md-3 left-con" >
-          <a href="javascript:void(0)" <% unless @ticket.is_active %> disabled <% end %> class="btn btn-primary btn-lg ticket_action" <% if @ticket.is_active %> onclick="alert('ello');" <% end %>>Print Tickets</a>
+          <% if @ticket.is_active %>
+            <%= link_to "Print Tickets", ticket_download_path(:format => "pdf", ticket_id: @ticket.id), id: "ptint_pdf", class:"btn btn-primary btn-lg ticket_action" %>
+          <% else %>
+            <%= link_to "Print Tickets", "javascript:void(0)", id: "ptint_pdf", class:"btn btn-primary btn-lg ticket_action" %>
+          <% end %>
           <a href="javascript:void(0)" <% unless @ticket.is_active %> disabled <% end %> class="btn btn-danger btn-lg ticket_action" <% if @ticket.is_active %> onclick="cancel_ticket();" <% end %> >Cancel Order</a>
           <a href="javascript:void(0)" class="btn btn-info btn-lg ticket_action" data-toggle="modal" data-target="#myModal">Contact The <br> Organizer</a>
         </div>
@@ -73,5 +75,11 @@
     $('.ajs-header').html("Cancel Free Order");
     // $('.ajs-button .ajs-ok').html("Yes, cancel this order");  
     // $('.ajs-button .ajs-cancel').html("No, nevermind");
+  }
+
+  function print_pdf()
+  {
+    $("#ptint_pdf").click();
+    alert("hello");
   }
 </script>

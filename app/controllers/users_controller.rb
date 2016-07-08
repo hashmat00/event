@@ -53,11 +53,23 @@ class UsersController < ApplicationController
 
     def ticket_download
     		@ticket = TicketHistory.where(id: 6).first
-    		@random_code = rand.to_s[2..18].to_i
-    		@qr = []
+    		
+    		@random_codes = []
 				@ticket.quantity.times do |i|
-				   qrcode = RQRCode::QRCode.new("#{@random_code}", :size => 2, :level => :m, :mode => :number )
-				   @qr << qrcode
+				  @random_code = rand.to_s[2..18].to_i
+				  qrcode = RQRCode::QRCode.new("#{@random_code}")
+				  png = qrcode.as_png(
+          resize_gte_to: false,
+          resize_exactly_to: false,
+          fill: 'white',
+          color: 'black',
+          size: 120,
+          border_modules: 1,
+          module_px_size: 1,	
+          file:  Rails.root.join('public','qrcode',"qrcode_#{@random_code}.png")
+          )
+					# IO.write("/tmp/github-qrcode.png", png.to_s)
+				  @random_codes << @random_code
 				end
     		 html = render_to_string(:action => 'ticket_download', :layout => false)
 			   pdf = PDFKit.new(html)
