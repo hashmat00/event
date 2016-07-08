@@ -59,9 +59,9 @@ class UsersController < ApplicationController
 				   qrcode = RQRCode::QRCode.new("#{@random_code}", :size => 2, :level => :m, :mode => :number )
 				   @qr << qrcode
 				end
-    		#  html = render_to_string(:action => 'ticket_download', :layout => false)
-			   # pdf = PDFKit.new(html)
-			   # send_data(pdf.to_pdf)
+    		 html = render_to_string(:action => 'ticket_download', :layout => false)
+			   pdf = PDFKit.new(html)
+			   send_data(pdf.to_pdf)
   	end
 
 	# def new
