@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Contact Host</h4>
+        </div>
+        <div class="modal-body">
+
+          <%= form_for Event.new, url: "/events/#{ticket.try(:event).try(:id)}/contact_email", method: "post", html: {id: "contact_form"} do |f| %>
+          <div class="text-con">
+            <%#= f.hidden_field :id, value: ticket.order.id %>
+            <%#= f.hidden_field :ticket_history_id, value: ticket.id %>
+            
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="email">Name *</label>
+              <div class="col-sm-10">
+                <%= f.text_field :name, required: true, class: "form-control", placeholder: "Enter Name" %>
+                <!-- <input type="email" class="form-control" id="email" placeholder=""> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Email *</label>
+              <div class="col-sm-10">          
+                <%= f.email_field :email, required: true, class: "form-control", placeholder: "Enter Email" %>
+                <!-- <input type="password" class="form-control" id="pwd" placeholder="Enter password"> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Phone No *</label>
+              <div class="col-sm-10">          
+                <%= f.text_field :phone, required: true, class: "form-control", placeholder: "Enter Phone No" %>
+                <!-- <input type="password" class="form-control" id="pwd" placeholder="Enter password"> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="pwd">Message *</label>
+              <div class="col-sm-10">          
+                <%= f.text_area :body, style:"min-height:150px;", required: true, class: "form-control", placeholder: "Enter Message" %>
+                <!-- <input type="password" class="form-control" id="pwd" placeholder="Enter password"> -->
+              </div>
+            </div>
+            <p>Your message will only be seen by the event organizer.</p>
+            <div class="update-btn inline-block">
+              <button type="button" class="btn btn-success btn-lg" onclick="$('#contact_form').submit();">
+                <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Send
+              </button>
+            </div>
+            <div class="cancel-btn inline-block">
+            <button type="button" class="btn btn-danger btn-lg" class="btn btn-default" data-dismiss="modal">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+            </button>
+            </div>
+          </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+    $('#contact_form')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                email: {
+                    validators: {
+                        emailAddress: {
+                            message: 'The value is not a valid email address'
+                        },
+                        regexp: {
+                            regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                            message: 'The value is not a valid email address'
+                        }
+                    }
+                }
+            }
+        })
+        .on('err.validator.fv', function(e, data) {
+            // data.bv        --> The FormValidation.Base instance
+            // data.field     --> The field name
+            // data.element   --> The field element
+            // data.validator --> The current validator name
+
+            if (data.field === 'email') {
+                // The email field is not valid
+                data.element
+                    .data('fv.messages')
+                    // Hide all the messages
+                    .find('.help-block[data-fv-for="' + data.field + '"]').hide()
+                    // Show only message associated with current validator
+                    .filter('[data-fv-validator="' + data.validator + '"]').show();
+            }
+        });
+});
+</script>

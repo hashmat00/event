@@ -81,5 +81,6 @@ gem 'figaro'
 gem 'country_select'
 gem "nested_form"
 gem "bullet", :group => "development"
-# gem "pdfkit"
-# gem "wkhtmltopdf-binary"
+gem "pdfkit"
+gem "wkhtmltopdf-binary"
+gem 'rqrcode'

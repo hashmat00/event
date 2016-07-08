@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   post '/update_message_notification', to: 'notifications#update_message_notification', as: :update_message_notification
   post '/events/:id/contact_email', to: 'events#contact_email', as: 'event_contact_email'
   post "/hook" => "order_items#hook"
+  get "/ticket_download", to: "users#ticket_download", as: :ticket_download
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

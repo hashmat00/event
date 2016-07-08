@@ -22,10 +22,19 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.7.1/css/themes/default.min.css"/>
 	<!-- Semantic UI theme -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.7.1/css/themes/semantic.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.1/css/formValidation.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.1/js/formValidation.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.1/js/framework/bootstrap.min.js"></script> 
 	<!-- Bootstrap theme -->
   
 
 </head>
+<div class="ajax-loading">
+  <span>
+    <p id="please_wait"><strong>Please wait..</strong></p>
+    <p><i class="glyphicon glyphicon-refresh gly-spin" aria-hidden="true">       </i></p>
+  </span>
+</div>
 <body>  
 <%= render 'layouts/navigation' %>
 <br>

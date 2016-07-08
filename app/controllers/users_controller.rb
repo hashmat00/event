@@ -50,6 +50,20 @@ class UsersController < ApplicationController
     	end
     		@tickets = @tickets.active unless (params[:tab] == 'inactive' || params[:tab] == 'saved')
     end
+
+    def ticket_download
+    		@ticket = TicketHistory.where(id: 6).first
+    		@random_code = rand.to_s[2..18].to_i
+    		@qr = []
+				@ticket.quantity.times do |i|
+				   qrcode = RQRCode::QRCode.new("#{@random_code}", :size => 2, :level => :m, :mode => :number )
+				   @qr << qrcode
+				end
+    		#  html = render_to_string(:action => 'ticket_download', :layout => false)
+			   # pdf = PDFKit.new(html)
+			   # send_data(pdf.to_pdf)
+  	end
+
 	# def new
 	# 	@user = User.new
 	# end

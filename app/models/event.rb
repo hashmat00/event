@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-    attr_accessor :email, :message, :event_id
+    attr_accessor :email, :body, :name, :phone, :message
     belongs_to :user
     geocoded_by :full_address
     geocoded_by :address

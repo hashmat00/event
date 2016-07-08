@@ -709,7 +709,8 @@ html, body, .container {
 .heading-block
 {
   padding: 10px 20px;
-  border-bottom: 3px solid black;
+  margin: 0px -10px;
+  border-bottom: 1px solid #d2d6df;
 }
 .edit-btn
 {
@@ -731,5 +732,90 @@ html, body, .container {
 }
 .left-con
 {
-  margin: 35px 0px !important;
+  margin: 0px 0px !important;
+}
+
+div.ajax-loading{
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  display: none;
+  background: black;
+  z-index: 2000;
+  text-align: center;
+  color: #ffffff;
+}
+div.ajax-loading span{
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  margin-left: -15px;
+}
+div.ajax-loading span p{
+  padding-top: 0px;
+  padding-right: 0px;
+  font-size: 30px;
+}
+div.ajax-loading span p i{
+  color: #09c1c1;
+  font-size: 30px;
+}
+.gly-spin {
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+.ticket-show-con 
+{
+  background: #f8f8fa none repeat scroll 0 0 !important;
+}
+
+.heading h1
+{
+  font-weight: bold;
+  padding: 10px 25px;
+  text-align: left;
+}
+
+#contact_form input, textarea
+{
+  width:102%!important;
 }

@@ -17,3 +17,12 @@
 
 //= require jquery_nested_form
 
+
+    $(document).ajaxStart(function() {       
+      $(".ajax-loading").show();
+    });
+
+    $(document).ajaxStop(function() {   
+      $(".ajax-loading").hide();
+
+    });
