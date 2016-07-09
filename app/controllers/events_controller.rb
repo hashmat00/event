@@ -111,19 +111,30 @@ class EventsController < ApplicationController
     
     
     def contact_email
-      EventMailer.contact_email(@event,params[:event]).deliver_now
-      flash[:success] = "Your Email has been successfully sent"
-      redirect_to action: :index
+      current_user.contact_emails.create(params[:event].permit!)
+      email_sent = EventMailer.contact_email(@event,params[:event]).deliver_now rescue ""
+      if email_sent
+        flash[:success] = "Your Email has been successfully sent"
+      else
+        flash[:success] = "Your Email could not be sent"
+      end  
+      redirect_to :back
     end
     
     
     
 
     private
-    
+      
+
       def set_event
           @event = Event.find(params[:id])
       end      
+      
+      # def contact_email_params
+      #   params.require(:contact_email).premit(:email, :subject, :body, :name, :phone, :user_id)
+      # end  
+
       def event_params
           params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy,  category_ids: [], schedules_attributes: [:event_id, :image, :title, :description, :start_time, :end_time,:_destroy],tickets_attributes: [:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country,:_destroy])
       end

@@ -22,7 +22,7 @@
           <% if @ticket.is_active %>
             <%= link_to "Print Tickets", ticket_download_path(:format => "pdf", ticket_id: @ticket.id), id: "ptint_pdf", class:"btn btn-primary btn-lg ticket_action" %>
           <% else %>
-            <%= link_to "Print Tickets", "javascript:void(0)", id: "ptint_pdf", class:"btn btn-primary btn-lg ticket_action" %>
+            <a href="javascript:void(0)" disabled class="btn btn-primary btn-lg ticket_action">Print Tickets</a>
           <% end %>
           <a href="javascript:void(0)" <% unless @ticket.is_active %> disabled <% end %> class="btn btn-danger btn-lg ticket_action" <% if @ticket.is_active %> onclick="cancel_ticket();" <% end %> >Cancel Order</a>
           <a href="javascript:void(0)" class="btn btn-info btn-lg ticket_action" data-toggle="modal" data-target="#myModal">Contact The <br> Organizer</a>
@@ -49,9 +49,9 @@
         </div>
       </div>
     </div>  
-    <div class="col-md-12">
+    <div class="col-md-12 footer-block">
       <a href="/users/tickets_history" class="back_nav">
-        <i class="ico-omnes-arrow-left"></i> 
+        <i class="glyphicon glyphicon-arrow-left"></i> 
         Back to Current Orders
       </a>
     </div>

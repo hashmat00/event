@@ -26,7 +26,11 @@
     <article class=" tab-content g-group" id="saved">
       <div class="l-align-center">
         <div class="g-cell g-cell-1-1 g-cell-lg-4-12 l-mar-vert-6">
-          <img width="200" alt="No saved events" data-d-retina-src="https://cdn.evbstatic.com/s3-build/perm_001/bd3414/django/images/pages/saved_events/no_events_2x.png" src="https://cdn.evbstatic.com/s3-build/perm_001/4e34f5/django/images/pages/saved_events/no_events.png" class="g-img l-mar-top-6 js-d-retina" dorsal-guid="fa6d1126-78a1-77eb-2667-5a35b7958a2f" data-xd-wired="retina">
+          <% if params[:tab] == nil || params[:tab] == "all" || params[:tab] == "upcomming"|| params[:tab] == "past" %>
+            <img width="200" alt="No <%= params[:tab] %> events" data-d-retina-src="https://cdn.evbstatic.com/s3-build/perm_001/bd3414/django/images/pages/saved_events/no_events_2x.png" src="https://cdn.evbstatic.com/s3-build/perm_001/fd7664/django/images/pages/mytickets/no-dates@2x.png" class="g-img l-mar-top-6 js-d-retina" dorsal-guid="fa6d1126-78a1-77eb-2667-5a35b7958a2f" data-xd-wired="retina">
+          <% else %>  
+            <img width="200" alt="No saved events" data-d-retina-src="https://cdn.evbstatic.com/s3-build/perm_001/bd3414/django/images/pages/saved_events/no_events_2x.png" src="https://cdn.evbstatic.com/s3-build/perm_001/4e34f5/django/images/pages/saved_events/no_events.png" class="g-img l-mar-top-6 js-d-retina" dorsal-guid="fa6d1126-78a1-77eb-2667-5a35b7958a2f" data-xd-wired="retina">
+          <% end %>
           <p class="l-mar-top-2 l-mar-bot-6 text-body--faint">There are No tickets for <%= params[:tab] ? params[:tab].capitalize : "All" %> Events and those will show up here so you can easily view them here later.</p>
         </div>
       </div>
@@ -38,7 +42,7 @@
   <% if params[:tab] == "inactive"%>
     .list-card
     {
-      background: grey !important;
+      background: #d2d6df !important;
     }
   <% end %>
 </style>

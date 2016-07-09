@@ -30,7 +30,33 @@
             <div class="form-group">
               <label class="control-label col-sm-2" for="pwd">Phone No *</label>
               <div class="col-sm-10">          
-                <%= f.text_field :phone, required: true, class: "form-control", placeholder: "Enter Phone No" %>
+                <div class="col-sm-4">
+                <select class="form-control" name="countrySelectBox">
+                  <option value="US">United States</option>
+                  <option value="BG">Bulgaria</option>
+                  <option value="BR">Brazil</option>
+                  <option value="CN">China</option>
+                  <option value="CZ">Czech Republic</option>
+                  <option value="DK">Denmark</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="IN">India</option>
+                  <option value="MA">Morocco</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="PK">Pakistan</option>
+                  <option value="RO">Romania</option>
+                  <option value="RU">Russia</option>
+                  <option value="SK">Slovakia</option>
+                  <option value="ES">Spain</option>
+                  <option value="TH">Thailand</option>
+                  <option value="AE">United Arab Emirates</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="VE">Venezuela</option>
+                </select>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_field :phone, required: true, class: "form-control", placeholder: "Enter Phone No" %>
+                </div>
                 <!-- <input type="password" class="form-control" id="pwd" placeholder="Enter password"> -->
               </div>
             </div>
@@ -43,14 +69,16 @@
             </div>
             <p>Your message will only be seen by the event organizer.</p>
             <div class="update-btn inline-block">
-              <button type="button" class="btn btn-success btn-lg" onclick="$('#contact_form').submit();">
+              <%= f.submit "Send", class: "btn btn-success btn-lg" %>
+              <!-- <button type="button" class="btn btn-success btn-lg" onclick="$('#contact_form').submit();">
                 <span class="glyphicon glyphicon-saved" aria-hidden="true"></span> Send
-              </button>
+              </button> -->
             </div>
             <div class="cancel-btn inline-block">
             <button type="button" class="btn btn-danger btn-lg" class="btn btn-default" data-dismiss="modal">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
             </button>
+
             </div>
           </div>
 
@@ -66,42 +94,62 @@
 <script>
 $(document).ready(function() {
     $('#contact_form')
-        .formValidation({
-            framework: 'bootstrap',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
+      .formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'event[name]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required'
+                    },
+                    stringLength: {
+                        max: 50,
+                        min: 2,
+                        message: 'The Name must be greater than 2 and less than 50 characters long'
+                    }
+                }
             },
-            fields: {
-                email: {
+            'event[email]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            'event[body]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The Message Body is required and cannot be empty'
+                    },
+                    stringLength: {
+                        max: 500,
+                        min: 50,
+                        message: 'The Message Body must be greater than 50 and less than 500 characters long'
+                    }
+                }
+            },
+            'event[phone]': {
                     validators: {
-                        emailAddress: {
-                            message: 'The value is not a valid email address'
-                        },
-                        regexp: {
-                            regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
-                            message: 'The value is not a valid email address'
+                        phone: {
+                            country: 'countrySelectBox',
+                            message: 'The value is not valid %s phone number'
                         }
                     }
                 }
-            }
-        })
-        .on('err.validator.fv', function(e, data) {
-            // data.bv        --> The FormValidation.Base instance
-            // data.field     --> The field name
-            // data.element   --> The field element
-            // data.validator --> The current validator name
+        }
+    })
+    // Revalidate phone number when changing the country
+    .on('change', '[name="countrySelectBox"]', function(e) {
+        $('#contact_form').formValidation('revalidateField', 'event[phone]');
+    });
 
-            if (data.field === 'email') {
-                // The email field is not valid
-                data.element
-                    .data('fv.messages')
-                    // Hide all the messages
-                    .find('.help-block[data-fv-for="' + data.field + '"]').hide()
-                    // Show only message associated with current validator
-                    .filter('[data-fv-validator="' + data.validator + '"]').show();
-            }
-        });
 });
 </script>

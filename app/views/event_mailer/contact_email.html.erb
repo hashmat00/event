@@ -1,9 +1,20 @@
-Hello ,
+<!DOCTYPE html>
+<html>
+<head>
 
-Here is a requirement of a user.
-User email: <% @contact_detail[:email] %>
-Message: <% @contact_detail[:message] %>
+</head>
+<body>
+		<p>Can I feature you as a case study of your event?</p>
+   	<h3><%= @event.user.name %></h3>
+    <p>The subject line pretty much says everything, but I’d like to ask again. Can I feature you as a case study? I think your event had a lot of highlights, and I’m eager to get the word out about attending the same.</p>
+    <p>Specifically, I plan to dig into these main aspects:</p>
+        <p><%= @contact_detail[:message] %></p>
+    <p>I look forward to attending your event</p>
+    <br>
+    <p>Thanks,</p>
+   	<p><%= @contact_detail[:name] %></p>
+    <p><%= @contact_detail[:phone] %></p>
+</body>
+</html>
 
-Event Detail
-
-Event Name <%= @event.name %>
+    
