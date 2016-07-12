@@ -17,14 +17,14 @@ class Event < ActiveRecord::Base
     has_many :tickets, dependent: :destroy
     accepts_nested_attributes_for :tickets, :allow_destroy => true
 
-    validates :user_id, presence: true
-    validates :name, presence: true, length: { minimum: 3, maximum: 50}
-    validates :summary, presence: true, length: {minimum: 10, maximum: 250}
-    validates :description, presence: true, length: {minimum: 20, maximum: 10000}
-    validates :address, presence: true, length: {minimum: 5, maximum: 150}
-    validates :city, presence: true, length: {minimum: 3, maximum: 25}
-    validates :zipcode, presence: true, length: {minimum: 1, maximum: 20}
-    validates :state, presence: true, length: {minimum: 2, maximum: 20}
+    # validates :user_id, presence: true
+    # validates :name, presence: true, length: { minimum: 3, maximum: 50}
+    # validates :summary, presence: true, length: {minimum: 10, maximum: 250}
+    # validates :description, presence: true, length: {minimum: 20, maximum: 10000}
+    # validates :address, presence: true, length: {minimum: 5, maximum: 150}
+    # validates :city, presence: true, length: {minimum: 3, maximum: 25}
+    # validates :zipcode, presence: true, length: {minimum: 1, maximum: 20}
+    # validates :state, presence: true, length: {minimum: 2, maximum: 20}
     # validates :country, presence: true, length: {minimum: 3, maximum: 55}   
    
    mount_uploader :picture, PictureUploader
