@@ -32,9 +32,9 @@ class EventsController < ApplicationController
       @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
       end
       
-      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
+      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
       @events = Event.all.active if !(@events)
-      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)#.where('pictures.is_active = ?', true)
+      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
       @events_pictures = @events.sort{|m| m.pictures.count }
       @events_videos = @events.sort{|m| m.videos.count }
       @events = @events
@@ -47,9 +47,9 @@ class EventsController < ApplicationController
       @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
       end
       
-      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
+      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
       @events = Event.all.active if !(@events)
-      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)#.where('pictures.is_active = ?', true)
+      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
       @events_pictures = @events.sort{|m| m.pictures.count }
       @events_videos = @events.sort{|m| m.videos.count }
       @events = @events
