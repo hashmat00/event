@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     member do
       post 'like'
     end
+    collection do
+      get 'tabs'
+    end
     resources :interests, :only => [:index, :create]    
     resources :tickets, only: [:index]
 
@@ -53,6 +56,7 @@ Rails.application.routes.draw do
   post '/events/:id/contact_email', to: 'events#contact_email', as: 'event_contact_email'
   post "/hook" => "order_items#hook"
   get "/ticket_download", to: "users#ticket_download", as: :ticket_download
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,0 +1,5 @@
+<% if event.present? %>
+	<img src = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=<%= event.latitude %>,<%= event.longitude %>
+	&fov=90&heading=235&pitch=10
+	&key=AIzaSyDk_1trU7te1evmY8eqaWAtBdkvJ1Sxtxc" style="width:100%; height:350px !important;">
+<% end %>

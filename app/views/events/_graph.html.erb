@@ -1,0 +1,19 @@
+<% if event.present? %>
+  <div id="googleMap_<%= event.id %>" style="width:100%; height:350px;"></div>
+   <script>
+    function initMap() {
+      var myLatLng = {lat: <%= event.latitude %>, lng: <%= event.longitude %>};
+
+      var map = new google.maps.Map(document.getElementById('googleMap_<%= event.id %>'), {
+        zoom: 16,
+        center: myLatLng
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Hello World!'
+      });
+    }
+  </script>
+<% end %>

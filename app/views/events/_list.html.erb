@@ -1,0 +1,68 @@
+<div id="tab3">
+  <div class="col-xs-12 content_2">
+    <div class="col-lg-10 col-lg-offset-1 col-md-12">
+      <div class="wide-2">
+        <% events .each do |i| %>
+          <div class="row white">
+            <div class="col-md-3 col-sm-3 prp-img">
+              <div class="exp-img-2" style="background-image:url(<%= i.bgpicture_url %>);background-size: cover;">
+                <span class="filter"></span>
+                <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
+                <div class="overlay">
+                  <div class="img-counter"><%= i.pictures.count %> Photo</div>
+                </div>
+              </div>
+            </div>
+            <div class="item-info col-lg-7 col-md-6 col-sm-6">
+              <h4><a href="property_page.html"><%= i.name %></a></h4>
+              <p class="team-color"><%= i.address %></p>
+              <div class="block">
+                <div class="col-md-3 col-sm-3 col-xs-3 cat-img">
+                  <img src="http://themes.fruitfulcode.com/suburb/assets/img/bedroom.png" alt="">
+                  <p class="info-line">3 Bedrooms</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 cat-img">
+                  <img src="http://themes.fruitfulcode.com/suburb/assets/img/bathroom.png" alt="">
+                  <p class="info-line">1 Bathroom</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 cat-img">
+                  <img src="http://themes.fruitfulcode.com/suburb/assets/img/square.png" alt="">
+                  <p class="info-line">100 m<span class="rank">2</span></p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 cat-img">
+                  <img src="http://themes.fruitfulcode.com/suburb/assets/img/garage.png" alt="">
+                  <p class="info-line">1 Garage</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-3 line"></div>
+              <div class="col-md-3 col-sm-3 col-xs-3 line"></div>
+              <div class="col-md-3 col-sm-3 col-xs-3 line"></div>
+              <div class="col-md-3 col-sm-3 col-xs-3 line"></div>
+              <hr>
+              <p>Aenean quis sem nisi. Aliquam vehicula gravida orci, nec pretium mi ultricies in. Donec fermentum pulvinar mauris neque justo ...</p>
+            </div>
+            <div class="item-price col-lg-2 col-md-3 col-sm-3 col-xs-12">
+              <div class="sum col-sm-12 col-xs-6">
+                <p>$1,000,000</p>
+                <p class="team-color">for rent</p>
+              </div>
+              <span class="ffs-bs col-xs-12 btn-half-wth"><a href="property_page.html" class="btn btn-default btn-small">learn more <i class="fa fa-caret-right"></i></a></span>
+              <div class="sum favorite col-sm-12 col-xs-6">
+                <div class="bookmark col-xs-3" data-bookmark-state="empty">
+                  <span class="title-add">Add to bookmark</span>
+                </div>
+                <p class="col-xs-3">Fav</p>
+                <div class="compare col-xs-3" data-compare-state="empty">
+                  <span class="plus-add">Add to compare</span>
+                </div>
+                <p class="col-xs-3">Comp</p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>  
+      <!-- end wide-2 -->
+    </div>
+  </div>                  
+</div>
+

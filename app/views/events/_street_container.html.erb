@@ -1,0 +1,10 @@
+<div id="tab_up4">
+  <header id="myCarousel3" style="height:100%;" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="item active">
+        <%= render partial: "street", locals: {event: events.first} %>
+      </div>
+      <%= render partial: "multiple_street", locals: {events: events} %>
+    </div>
+  </header>
+</div>

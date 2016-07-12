@@ -5,25 +5,57 @@ class EventsController < ApplicationController
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
     
     
-  def index  
-    if params[:category].present?  
-      @categories = Category.find(params[:category])
-      @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
-      elsif params[:search]
-        @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
-      elsif params[:distance]
-        city =  Rails.env == 'development' ? 'Delhi' : request.location.city
-        @events = Event.near(city, params[:distance], :order => :address) 
-      elsif params[:start_date] && params[:start_date]
-        @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time})
-      else 
-        @events = Event.all
-      end
-        @events = @events.paginate(page: params[:page], per_page: 6)
+  # def index  
+  #   @event_slider = Event.all
+  #   if params[:category].present?  
+  #     @categories = Category.find(params[:category])
+  #     @events = @categories.events.where("address LIKE? ", "%#{params[:search]}%" ).near(params[:search], params[:distance], :order => 'address')
+  #     elsif params[:search]
+  #       @events = Event.where("address LIKE? ", "%#{params[:search]}%" )
+  #     elsif params[:distance]
+  #       city =  Rails.env == 'development' ? 'Delhi' : request.location.city
+  #       @events = Event.near(city, params[:distance], :order => :address) 
+  #     elsif params[:start_date] && params[:start_date]
+  #       @events =Event.where("created_at >= :start_date AND created_at <= :end_date", {start_date: params[:start_date].to_time, end_date: params[:end_date].to_time})
+  #     else 
+  #       @events = Event.all
+  #     end
+  #       @events = @events.paginate(page: params[:page], per_page: 6)
         
-    end
+  #   end
      
     
+    def index
+      if params[:lat].present? && params[:long].present?
+      @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
+      else
+      @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
+      end
+      
+      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
+      @events = Event.all.active if !(@events)
+      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)#.where('pictures.is_active = ?', true)
+      @events_pictures = @events.sort{|m| m.pictures.count }
+      @events_videos = @events.sort{|m| m.videos.count }
+      @events = @events
+    end
+
+    def tabs
+      if params[:lat].present? && params[:long].present?
+      @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
+      else
+      @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
+      end
+      
+      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
+      @events = Event.all.active if !(@events)
+      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)#.where('pictures.is_active = ?', true)
+      @events_pictures = @events.sort{|m| m.pictures.count }
+      @events_videos = @events.sort{|m| m.videos.count }
+      @events = @events
+    end
+
+
     def new
         @event = Event.new
     end

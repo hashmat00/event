@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require_tree .
+//= require rvslider.min
+//= require rangeslider.min
 
 //= require jquery_nested_form
 

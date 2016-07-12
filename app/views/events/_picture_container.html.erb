@@ -1,0 +1,12 @@
+<div id="tab_up1">
+  <!-- Owl carousel -->
+    <header id="myCarousel" style="height:100%;" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= render partial: "slider", locals: {event: events_pictures.first} %>
+        </div>
+        <%= render partial: "multiple_slider", locals: {events: events_pictures} %>
+      </div>
+    </header>
+  <!-- End Owl carousel -->
+</div>

@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :current_order
+  helper_method :latlong
 
+  def latlong
+    {lat: request.location.latitude!=0 ? request.location.latitude : '28.6139', long: request.location.longitude!=0 ? request.location.longitude : '77.2090'}
+  end
   def current_order
     if !session[:order_id].nil?
       Order.find(session[:order_id])

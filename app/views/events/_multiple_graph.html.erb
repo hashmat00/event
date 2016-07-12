@@ -1,0 +1,23 @@
+<% if events.present? %>
+  <% events[1..-2].each_with_index do |event, index| %>
+    <div class="item">  
+      <div id="googleMap_<%= event.id %>" style="width:100%; height:350px;"></div>
+       <script>
+        function initMap() {
+          var myLatLng = {lat: <%= event.latitude %>, lng: <%= event.longitude %>};
+
+          var map = new google.maps.Map(document.getElementById('googleMap_<%= event.id %>'), {
+            zoom: 14,
+            center: myLatLng
+          });
+
+          var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!'
+          });
+        }
+      </script>
+    </div>
+  <% end %>
+<% end %>

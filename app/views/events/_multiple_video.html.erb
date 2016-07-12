@@ -1,0 +1,39 @@
+
+<% if events.present? %>
+	<% events[1..-2].each_with_index do |event, index| %>
+	  <div class="item">
+	  	<div class="rvs-container rvs-red-highlight rvs-bordered-circle-play", style="height:350px;">
+			  <div class="rvs-item-container">
+			    <div class="rvs-item-stage">
+			      <% event.videos.each do |v| %>   
+			        <% video = VideoInfo.new("http://www.youtube.com/watch?v=mZqGqE0D0n4") %>
+			        <div class="rvs-item" style="background-image: url(<%= video.thumbnail_small %>)">
+			          <p class="rvs-item-text"><%= video.try(:title) %> <small>by <%= video.try(:author) %></small></p>
+			          <a href="<%=v.video_url%>" class="rvs-play-video"></a>
+			        </div>
+			      <% end %>
+			    </div>
+			  </div>
+			  <div class="rvs-nav-container">
+			    <a class="rvs-nav-prev"></a>
+			    <div class="rvs-nav-stage">
+			      <% event.videos.each do |v|  %>
+			        <% video = VideoInfo.new("http://www.youtube.com/watch?v=mZqGqE0D0n4") %>
+			        <a class="rvs-nav-item">
+			          <span class="rvs-nav-item-thumb" style="background-image: url(<%= video.thumbnail_small %>)"></span>
+			          <h4 class="rvs-nav-item-title"><%= video.try(:title) %></h4>
+			          <small class="rvs-nav-item-credits">by <%= video.try(:author) %></small>
+			        </a>
+			      <% end %>
+			    </div>
+			    <a class="rvs-nav-next"></a>
+			  </div>
+			</div>
+			<script>
+			  jQuery(function($){
+			    $(".rvs-container").rvslider();
+			  });
+			</script>	
+	  </div>
+	<%end%>
+<% end %>

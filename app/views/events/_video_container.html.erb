@@ -1,0 +1,10 @@
+<div id="tab_up2">
+  <header id="myCarousel1" style="height:100%;" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="item active">
+        <%= render partial: "video", locals: {event: events_videos.first} %>
+      </div>
+      <%= render partial: "multiple_video", locals: {events: events_videos} %>
+    </div>
+  </header>
+</div>

@@ -6,33 +6,33 @@ var $ = jQuery.noConflict();
 
 $(document).ready(function($) {
 
-    // header-footer
-    $.get("header_page.html", function(data){
-      $('#header').append(data);
-      $('.selection').selectize({sortField: 'text'});
-      $(".selectize-input input").attr('readonly','readonly');
-    });
+    // // header-footer
+    // $.get("header_page.html", function(data){
+    //   $('#header').append(data);
+    //   $('.selection').selectize({sortField: 'text'});
+    //   $(".selectize-input input").attr('readonly','readonly');
+    // });
 
-    $.get("footer.html", function(data){
-      $('#footer').append(data);
-    });
+    // $.get("footer.html", function(data){
+    //   $('#footer').append(data);
+    // });
 
-    // modal blocks
-    $.get("modal_log_in.html", function(data){
-      $('#login-modal-open').append(data);
-    });
-    $.get("modal_register.html", function(data){
-      $('#register-modal-open').append(data);
-    });
-    $.get("modal_error_report.html", function(data){
-      $('#error-modal-open').append(data);
-    });
-    $.get("modal_agency_message.html", function(data){
-      $('#agency-modal-open').append(data);
-    });
-    $.get("modal_agent_message.html", function(data){
-      $('#agent-modal-open').append(data);
-    });
+    // // modal blocks
+    // $.get("modal_log_in.html", function(data){
+    //   $('#login-modal-open').append(data);
+    // });
+    // $.get("modal_register.html", function(data){
+    //   $('#register-modal-open').append(data);
+    // });
+    // $.get("modal_error_report.html", function(data){
+    //   $('#error-modal-open').append(data);
+    // });
+    // $.get("modal_agency_message.html", function(data){
+    //   $('#agency-modal-open').append(data);
+    // });
+    // $.get("modal_agent_message.html", function(data){
+    //   $('#agent-modal-open').append(data);
+    // });
 
     //Search page hidden content
     $('#toggle-link').on('click',function(e) {

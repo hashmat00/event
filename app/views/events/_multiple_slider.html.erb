@@ -1,0 +1,24 @@
+<% if events.present? %>
+  <% events[1..-2].each_with_index do |event, index| %>
+    <div class="item">
+      <div id="owl-demo_<%= event.id %>" class="owl-carousel">
+        <% event.pictures.each do |picture| %>
+          <div class="item">
+            <div class="image" style="background: url(<%= picture.image.url  %>)"></div>
+          </div>
+        <% end %>
+      </div>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $("#owl-demo_<%= event.id %>").owlCarousel({
+            items : 2,
+            itemsCustom : false,
+            itemsDesktop : [1199,4],
+      });
+        });
+      </script>
+    </div>
+  <% end %>
+<% end %>
+
+
