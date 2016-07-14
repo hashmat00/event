@@ -1,5 +1,5 @@
 <% if events.present? %>
-  <% events[1..-2].each_with_index do |event, index| %>
+  <% events[1..-1].each_with_index do |event, index| %>
     <div class="item">  
       <div id="googleMap_<%= event.id %>" style="width:100%; height:350px;"></div>
        <script>

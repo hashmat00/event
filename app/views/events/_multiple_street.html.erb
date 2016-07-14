@@ -1,5 +1,5 @@
 <% if events.present? %>
-	<% events[1..-2].each_with_index do |event, index| %>
+	<% events[1..-1].each_with_index do |event, index| %>
 	  <div class="item">
 	    <img src = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location=<%= event.latitude %>,<%= event.longitude %>
 	&fov=90&heading=235&pitch=10

@@ -1,5 +1,5 @@
 <% if events.present? %>
-  <% events[1..-2].each_with_index do |event, index| %>
+  <% events[1..-1].each_with_index do |event, index| %>
     <div class="item">
       <div id="owl-demo_<%= event.id %>" class="owl-carousel">
         <% event.pictures.each do |picture| %>
