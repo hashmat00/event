@@ -1,0 +1,7 @@
+<% if @wish_list %>
+$("#wish_list_<%= @event.id %>").removeClass("glyphicon-heart-empty");
+$("#wish_list_<%= @event.id %>").addClass("glyphicon-heart");
+<% else %>
+$("#wish_list_<%= @event.id %>").removeClass("glyphicon-heart");
+$("#wish_list_<%= @event.id %>").addClass("glyphicon-heart-empty");
+<% end %>

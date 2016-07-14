@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-    attr_accessor :email, :body, :name, :phone, :message
+    attr_accessor :email, :body, :phone, :message
     belongs_to :user
     geocoded_by :full_address
     geocoded_by :address
@@ -36,7 +36,10 @@ class Event < ActiveRecord::Base
    has_many :videos, as: :videoable, dependent: :destroy
    has_many :wish_lists, as: :wish_listable, dependent: :destroy
    scope :upcomming, -> { where('start_time  > ?',Time.now) }
-   
+  
+  def wish_list_class(user_id)
+    self.wish_lists.where(user_id:user_id).first.present? ? "glyphicon-heart" : "glyphicon-heart-empty"
+  end 
   def full_address
     "#{address}, #{city}, #{state}, #{country}"
   end
@@ -60,6 +63,120 @@ class Event < ActiveRecord::Base
   def ticket_price
     self.tickets.collect(&:fee)
   end  
+
+  def payMode(type)
+    p = self.tickets.collect(&:pay_mode).uniq
+    if p.count==0
+      case type
+      when "string" then
+      when "amount" then 
+        return 0.00
+      when "all" then 
+        return "Don't have Tickets"
+      else
+        return "Don't have Tickets"
+      end
+    elsif p.count==1
+      if p.include?("free") || p.include?("Free") || p.include?("FREE") 
+        case type
+        when "string" then
+          return "Free"
+        when "amount" then 
+          return 0.00
+        when "all" then 
+          return "Free"
+        else
+          return "Free"
+        end    
+      elsif p.include?("donation") || p.include?("Donation") || p.include?("DONATION")
+        case type
+        when "string" then
+          return "Donation"
+        when "amount" then 
+          return 0.00
+        when "all"   then
+          return "Donation"
+        else
+          return "Donation"
+        end
+      elsif p.include?("paid") || p.include?("Paid") || p.include?("PAID")
+        case type
+        when "string" then
+          return "Paid"
+        when "amount" then 
+          if self.tickets.minimum('price') == self.tickets.maximum('price')
+            return '%.2f' % self.tickets.minimum('price')
+          elsif self.tickets.minimum('price') == nil
+            return self.tickets.maximum('price')
+          elsif self.tickets.maximum('price') == nil
+            return '%.2f' % self.tickets.minimum('price')
+          else
+            return "#{self.tickets.minimum('price')} - #{self.tickets.maximum('price')}"
+          end  
+        when "all" then
+          if self.tickets.minimum('price') == self.tickets.maximum('price')
+            return '%.2f' % self.tickets.minimum('price')
+          elsif self.tickets.minimum('price') == nil
+            return self.tickets.maximum('price')
+          elsif self.tickets.maximum('price') ==nil
+            return '%.2f' % self.tickets.minimum('price')
+          else
+             return "#{self.tickets.minimum('price')} - #{self.tickets.maximum('price')}"
+          end
+        else
+          return "Paid"
+        end
+      end   
+    elsif p.count > 1
+      if p.include?("paid") || p.include?("Paid") || p.include?("PAID")
+        case type
+        when "string" then
+          return "Paid"
+        when "amount" then 
+          if self.tickets.minimum('price') == self.tickets.maximum('price')
+            return '%.2f' % self.tickets.minimum('price')
+          elsif self.tickets.minimum('price') == nil
+            return self.tickets.maximum('price')
+          elsif self.tickets.maximum('price') == nil
+            return '%.2f' % self.tickets.minimum('price')
+          else
+            "#{self.tickets.minimum('price')} - #{self.tickets.maximum('price')}"
+          end  
+        when "all" then
+          if self.tickets.minimum('price') == self.tickets.maximum('price')
+            return '%.2f' % self.tickets.minimum('price')
+          elsif self.tickets.minimum('price') == nil
+            return self.tickets.maximum('price')
+          elsif self.tickets.maximum('price') == nil
+              return '%.2f' % self.tickets.minimum('price')
+          else
+            return "#{self.tickets.minimum('price')} - #{self.tickets.maximum('price')}"
+          end
+        else
+          return "Paid"
+        end
+      else
+        case type
+        when "string" then
+          return "Free"
+        when "amount" then 
+          return 0.00
+        when "all" then 
+          return "Free"
+        else
+          return "Free"
+        end
+      end
+    end  
+  end
+
+  def pay_mode_ammount
+    
+  end
+
+  def pay_mode_all
+    
+  end
    
    private
    def picture_size

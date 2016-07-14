@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :events do
     member do
       post 'like'
+      get :add_wishlist
     end
     collection do
       get 'tabs'

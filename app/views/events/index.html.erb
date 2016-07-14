@@ -32,8 +32,23 @@
               <header class="col-md-8 col-xs-12 no-pad">
                 <div class="location-map col-sm-4 col-xs-4">
                   <div class="input-group inner-addon left-addon">
+                    <!-- <input id="pac-input" class="controls" type="text"
+                        placeholder="Enter a location"> -->
+                    <div id="type-selector" class="controls">
+                      <input type="radio" name="type" id="changetype-all" checked="checked">
+                      <label for="changetype-all">All</label>
+
+                      <input type="radio" name="type" id="changetype-establishment">
+                      <label for="changetype-establishment">Establishments</label>
+
+                      <input type="radio" name="type" id="changetype-address">
+                      <label for="changetype-address">Addresses</label>
+
+                      <input type="radio" name="type" id="changetype-geocode">
+                      <label for="changetype-geocode">Geocodes</label>
+                    </div>
                     <span class="glyphicon glyphicon-map-marker"></span>
-                    <input type="text" placeholder="Manhattan, New York" name="address" id="address-map" class="form-control" autocomplete="off">
+                    <input type="text" placeholder="Manhattan, New York" name="address" id="pac-input" class="form-control" autocomplete="off">
                   </div>
                 </div>
                 <div class="select-block col-sm-2 col-xs-2">
@@ -84,7 +99,7 @@
                       </div>
                     </div>
                   </div>
-                  </div><!-- options-overlay -->
+                </div><!-- options-overlay -->
               </header>
               <ul class="tab-links col-md-4 col-xs-12">
                 <li class="col-lg-3 col-lg-offset-2 col-md-4 col-xs-4 no-pad active"><a href="javascript:void(0)" onclick="tabRequest(1);" class="map2"><span class="glyphicon glyphicon-map-marker glf-icon"></span>Map</a></li>
@@ -144,6 +159,25 @@
       </div>
     </div><!-- end Page Content -->
   </div>
+  <!-- Modal -->
+  <div class="modal fade share" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Share with Friends</h4>
+        </div>
+        <div class="modal-body">
+            <a class="btn btn-social-icon btn-twitter">
+              <span class="fa fa-twitter"></span>
+            </a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <script>
@@ -195,7 +229,9 @@
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
-
+.share .modal-dialog {
+    width: 50% !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -207,20 +243,5 @@
       data: $.param({ tab: id})
     });
   };
-  // $('#ticket_btn_article1').on('click', function(){
-  //   $.ajax({
-  //     type:'GET',
-  //     url: '/users/tickets_history',
-  //     dataType: 'script',
-  //     data: $.param({ tab: 'all'})
-  //   });
-  // });
-  // $('#ticket_btn_article1').on('click', function(){
-  //   $.ajax({
-  //     type:'GET',
-  //     url: '/users/tickets_history',
-  //     dataType: 'script',
-  //     data: $.param({ tab: 'all'})
-  //   });
-  // });
+
 </script>

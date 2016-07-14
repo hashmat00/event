@@ -11,7 +11,7 @@
               <span class="show-small list-card__label"><%= t.ticket.pay_type %></span>
             </div>
             <div class="list-card__body">
-              <time class="list-card__date"><%= t.event.start_time.to_formatted_s(:long) %></time>
+              <time class="list-card__date"><%= t.event.start_time.to_formatted_s(:long) rescue "" %></time>
               <h3 data-automation="view-order" class="list-card__title">
                   <%= t.event.name %>
               </h3>

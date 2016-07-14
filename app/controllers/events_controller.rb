@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
 
-    before_action :set_event, only: [:edit, :update, :show, :like, :destroy, :contact_email]
+    before_action :set_event, only: [:edit, :update, :show, :like, :destroy, :contact_email, :add_wishlist]
     # before_action :require_same_user, only: [:edit, :destory, :update]    
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :like]
+
     
     
   # def index  
@@ -32,7 +33,7 @@ class EventsController < ApplicationController
       @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
       end
       
-      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
+      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
       @events = Event.all.active if !(@events)
       @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
       @events_pictures = @events.sort{|m| m.pictures.count }
@@ -47,7 +48,7 @@ class EventsController < ApplicationController
       @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
       end
       
-      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100).active   
+      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
       @events = Event.all.active if !(@events)
       @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
       @events_pictures = @events.sort{|m| m.pictures.count }
@@ -55,7 +56,16 @@ class EventsController < ApplicationController
       @events = @events
     end
 
-
+    def add_wishlist
+      @wish_list = @event.wish_lists.where(user_id:current_user.id).first
+      if @wish_list
+       @wish_list = @wish_list.destroy
+       @wish_list = false
+      else
+       @wish_list = @event.wish_lists.create(user_id:current_user.id)
+       @wish_list = true
+      end  
+    end  
     def new
         @event = Event.new
     end

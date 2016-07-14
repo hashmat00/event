@@ -95,7 +95,7 @@ $(function() {
                 
             <div class="panel-body text-center">
                 <section class="panel-profile-recipe-img">
-              <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
+              <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) rescue nil%>
               
               </section>
               

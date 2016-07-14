@@ -17,10 +17,10 @@
                   <h4><a href="property_page.html"><%= i.name %></a></h4>
                   <p class="team-color"><%= i.address %></p>
                   <div class="col-md-7 col-sm-7 col-xs-7">
-                    <p>Studio - 2 bd</p>
+                    <p><%= render i.categories %></p>
                   </div>
                   <div class="col-md-5 col-sm-5 col-xs-5">
-                    <p>86 m<span class="rank">2</span></p>
+                    <p><%= i.distance_from([latlong[:lat],latlong[:long]]).round(2)%> Km <span class="rank"></span></p>
                   </div>
                   <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
                   <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
@@ -29,15 +29,13 @@
                 <div class="item-title btm-part">
                   <div class="row">
                     <div class="col-md-8 col-sm-8 col-xs-8">
-                      <p>$5,000,000</p>
-                      <p class="team-color">FOR SALE</p>
+                      <p>$<%= i.payMode("amount") rescue "Something Wrong" %></p>
+                      <p class="team-color"><%= i.payMode("string") rescue "Something Wrong" %></p>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                      <div class="bookmark" data-bookmark-state="empty">
-                        <span class="title-add">Add to bookmark</span>
-                      </div>
-                      <div class="compare" data-compare-state="empty">
-                        <span class="plus-add">Add to compare</span>
+                      <div>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-share" style="font-size:20px;font-weight:bold" title="Share"></span></a>
+                        <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.id) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
                       </div>
                     </div>
                   </div>

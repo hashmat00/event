@@ -1,6 +1,6 @@
 ActiveAdmin.register Video do
 
-permit_params :user_id, :video, :videoable_id, :videoable_type, :is_active, :note, :video_url, 	:video_type
+permit_params :user_id, :video, :videoable, :videoable_type, :is_active, :note, :video_url, 	:video_type
 # or
 #
 # permit_params do
