@@ -1,15 +1,22 @@
+
 <% if event.present?  %>
-  <div id="owl-example_<%= event.id %>" class="owl-carousel">
-    <% event.pictures.each do |picture| %>
+  <div id="owl-example_<%= event.id %>" class="owl-carousel" >
+    <% if event.pictures.present? %>
+      <% event.pictures.each do |picture| %>
+        <div class="item">
+          <div class="image" style="background-image: url(<%= picture.image.url  %>)"></div>
+        </div>
+      <% end %>
+    <% else %>
       <div class="item">
-        <div class="image" style="background: url(<%= picture.image.url  %>)"></div>
+        <div class="image" style="background-image: url(http://cdn.iruni.ir/upload/noimage.jpg); background-size: 100% 350px !important; background-repeat: no-repeat;"></div>
       </div>
     <% end %>
   </div>
   <script type="text/javascript">
     $(document).ready(function() {
       $("#owl-example_<%= event.id %>").owlCarousel({
-            items : 2,
+            items : <% if event.pictures.present? %>2<% else %>1<% end %>,
             itemsCustom : false,
             // itemsDesktop : [1199,4],
       });

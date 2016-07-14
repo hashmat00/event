@@ -34,7 +34,7 @@
                   <div class="input-group inner-addon left-addon">
                     <!-- <input id="pac-input" class="controls" type="text"
                         placeholder="Enter a location"> -->
-                    <div id="type-selector" class="controls">
+                    <!-- <div id="type-selector" class="controls">
                       <input type="radio" name="type" id="changetype-all" checked="checked">
                       <label for="changetype-all">All</label>
 
@@ -46,9 +46,9 @@
 
                       <input type="radio" name="type" id="changetype-geocode">
                       <label for="changetype-geocode">Geocodes</label>
-                    </div>
+                    </div> -->
                     <span class="glyphicon glyphicon-map-marker"></span>
-                    <input type="text" placeholder="Manhattan, New York" name="address" id="pac-input" class="form-control" autocomplete="off">
+                    <input type="text" placeholder="Manhattan, New York" style="padding: 10px !important;" name="address" id="pac-input" class="form-control" autocomplete="off">
                   </div>
                 </div>
                 <div class="select-block col-sm-2 col-xs-2">
@@ -210,27 +210,11 @@
   padding:0px 15px !important;
 }
 
-/* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
-}
-
-/* style icon */
-.inner-addon .glyphicon {
-  position: absolute;
-  padding: 10px;
-  pointer-events: none;
-}
-
-/* align icon */
-.left-addon .glyphicon  { left:  0px;}
-.right-addon .glyphicon { right: 0px;}
-
-/* add padding  */
-.left-addon input  { padding-left:  30px; }
-.right-addon input { padding-right: 30px; }
-.share .modal-dialog {
-    width: 50% !important;
+.owl-theme .owl-controls {
+    background: white none repeat scroll 0 0;
+    margin-top: -25px;
+    text-align: center;
+    z-index: 9999999;
 }
 </style>
 

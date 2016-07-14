@@ -7,7 +7,7 @@
   <div class="content col-sm-8 col-xs-12">
     <div class="wide-2">
       <div class="col-xs-12">
-        <div class="row">
+        <div class="row event-container event-container">
           <% events.each do |i| %>
             <div class="col-md-4 col-sm-6 col-xs-6 prop">
               <div class="wht-cont">
@@ -25,7 +25,7 @@
                     <p><%= render i.categories %></p>
                   </div>
                   <div class="col-md-5 col-sm-5 col-xs-5">
-                    <p><%= i.distance_from([latlong[:lat],latlong[:long]]).round(2)%> Km<span class="rank"></span></p>
+                    <p><%= i.distance_from([latlong[:lat],latlong[:long]]).round(2) rescue 0%> Km<span class="rank"></span></p>
                   </div>
                   <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
                   <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
@@ -146,4 +146,9 @@ console.log(place.name); // Name of Place
         setupClickListener('changetype-geocode', ['geocode']);
       }
 
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script>
+<script type="text/javascript">
+  var eventconHeight =  $('.event-container').height();
+  $('#map').css('height',eventconHeight);
 </script>

@@ -1,106 +1,339 @@
-<!--display title from partials page-->
-
-
-<style type="text/css">
-  .show-page-text{color: #000;margin-top: 200px;}
-  .show-page-text2 {color: #000;margin-top:0px;;}
-</style>
-
-
-
-<div class="col-md-12" > 
-<div class="col-md-6">
-
-<%= image_tag(@event.picture.url, class: "img-responsive ", style: "width:600px;height:384px;margin:10px") if @event.picture? %>
-</div>
-<div class="col-md-6">
-<%= video_tag @event.try(
-:video), :style=>"width:600px;height:384px;margin:10px 2px;frameborder:0px;", :controls => true,:autobuffer => true %>
-</div>
-</div>
-
-
-<div class="container">
-  <div class="row">
-  <div class="col-md-6">
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=550x400&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
-</div>
-<div class="col-md-1"></div>
-<div class="col-md-5">
-  <div class="show-page-text">
-    <h1><%= @event.name %></h1>
+  <!-- Preloader -->
+  <div id="page-preloader">
+    <div class="loader-ring"></div>
+    <div class="loader-ring2"></div>
   </div>
-  <div class="show-page-text2">
-    <h3 class="center"><%= @event.summary %></h3>
-  </div>
-  </div>
-</div>
-</div>
-<!--Recipe content -->
-<div class="container show-page-detail-text">
-  <div class="row ">
-    <div class="col-md-4 user-avatar">
-      <section class="chef_info center">
-        <%#= link_to gravatar_for(@event.user, size: 200), user_path(@event.user) %>
-        <%= link_to (image_tag (@event.user.image), class: "gravatar", width: "100", height: "100"), user_path(@event.user) %>
-        <h5>Organizer Name: <%= @event.user.username %></h5>
-        <!--<hr>-->
-      </section>
-      <% if user_signed_in?  && (@event.user == current_user || current_user.admin?) %>
-      <%= link_to 'Edit Event', edit_event_path(@event), class: "btn btn-success btn-xs"  %>
-      <%= link_to 'Delete Event', event_path(@event), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: "are you sure you want to delte this event" } %>
-      <% end %>
-      <% if user_signed_in? %> 
-      <!-- <a href="<%= event_tickets_path(@event)%>" class="btn btn-primary">Get Tickets</a> -->
-
-      <div class="interested_<%= @event.id %>">
-        <%if !current_user.is_interested?(@event) %>
-          <a href="<%= event_interests_path(@event)%>" data-remote= 'true' data-method='post' class="btn btn-primary">Interested</a>
-        <%else %>
-          <a href="/not_interested/<%= @event.id %>" data-remote= 'true' data-method='post' class="btn btn-primary">Not Interested</a>
-        <% end %>
-      </div>
-      <% end %>
-      <hr>
-    </div>
-    <div class="col-md-6 center">
-      <span style="color: #777"> Category: <%= render @event.categories %></span>
-      <hr>
-    </div>
-    <div class="col-md-2 center">
-      <%= link_to like_event_path(@event, like: true), method: :post do %>
-      <i class="glyphicon glyphicon-thumbs-up">&nbsp<%= @event.thumbs_up_total %></i>
-      <% end %> &nbsp&nbsp&nbsp&nbsp
-      <%= link_to like_event_path(@event, like: false), method: :post do %>
-      <i class="glyphicon glyphicon-thumbs-down">&nbsp<%= @event.thumbs_down_total %></i>
-      <% end %>
-      <hr>
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-md-10-offset">
-        <%= render partial: "tickets", locals: { tickets: @event.tickets} %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-md-10-offset">
-        <div class="well">
-          <div class="col-md-4 pull-right">
-            <span class="quiet"><small>Created: <%= time_ago_in_words(@event.created_at) %> ago</small></span> - 
-            <span class="quiet"><small>Updated: <%= time_ago_in_words(@event.updated_at) %> ago</small></span>
-            <hr>
+  <!-- End Preloader -->  
+  <!-- Wrapper -->
+  <div class="wrapper">
+		<!-- Page Content -->
+		<div id="page-property-content">
+		  <div class="wide_container_3 carousel-full-width">
+		    <div class="tabs">
+          <div class="tab-content" id="tab-content_up">
+            <%= render partial: "slider", locals: { event: @event} %>
           </div>
-          <p>
-            <strong>Steps:</strong>
-          </p>
-          <%= simple_format(@event.description) %>
+          <ul class="tab-links col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+            <li class="active col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href", "#myCarousel");$("#right-carosusel").attr("href", "#myCarousel");tabRequest(4, <%= @event.id %>);'><span style="" class="glyphicon glyphicon-camera glf-icon"></span>Photos</a></li>
+            <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href","#myCarousel1");$("#right-carosusel").attr("href", "#myCarousel1");tabRequest(5);' ><span class="glyphicon glyphicon-facetime-video glf-icon"></span>Videos</a></li>
+            <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" class="map4" onclick='$("#left-carosusel").attr("href", "#myCarousel2");$("#right-carosusel").attr("href", "#myCarousel2");tabRequest(6);'><span class="glyphicon glyphicon-map-marker glf-icon"></span>Maps</a></li>
+            <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href", "#myCarousel3");$("#right-carosusel").attr("href", "#myCarousel3");tabRequest(7);' ><span class="glyphicon glyphicon-road glf-icon"></span>Street Views</a></li>
+          </ul>
         </div>
-        <!--Review form-->
-        <!--Return to listing page-->
-        <div class="container">
-          <h5><%= link_to 'Return to listing', events_path, class: "btn btn-warning btn-small" %></h5>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+		  </div>
+		  <div class="wide-2">
+		    <div class="container">
+		      <div class="row">
+		        <aside class="pr-summary col-md-4 col-xs-12">
+		          <form action="agent_profile.html">
+		            <div class="col-lg-7 col-md-6 col-sm-3 col-xs-6 hl-bl">
+		              <h2>$<%= @event.payMode("amount") rescue "Something Wrong" %></h2>
+		              <h5 class="team-color"><%= @event.payMode("string") rescue "Something Wrong" %></h5>
+		            </div>
+		            <div class="col-lg-5 col-md-6 col-sm-3 col-xs-6 hl-bl">
+		              <i class="glyphicon glyphicon-star"></i>
+		              <i class="glyphicon glyphicon-star"></i>
+		              <i class="glyphicon glyphicon-star"></i>
+		              <i class="glyphicon glyphicon-star"></i>
+		              <i class="glyphicon glyphicon-star"></i><br>
+		              <div class="row">
+		                <p class="team-color col-md-6 col-xs-3">Rating:</p>
+		                <p class="team-color col-md-6 col-xs-3"><strong>5.0</strong>/5.0</p>
+		              </div>
+		            </div>
+		            <div class="row">
+		              <div class="col-md-12 col-sm-6 col-xs-12">
+		                <div class="row">
+		                  <div class="col-lg-5 col-md-6 col-xs-6 cat-img">
+		                    <img src="http://themes.fruitfulcode.com/suburb/assets/img/bedroom.png" alt="">
+		                    <p>3 Bedrooms</p>
+		                  </div>
+		                  <div class="col-lg-7 col-md-6 col-xs-6 cat-img cat-img">
+		                    <img src="http://themes.fruitfulcode.com/suburb/assets/img/bathroom.png" alt="">
+		                    <p >1 Bathroom</p>
+		                  </div>
+		                </div>
+		                <hr>
+		                <div class="row">
+		                  <div class="col-xs-12">
+		                    <div class="row">
+		                      <div class="col-lg-5 col-md-6 col-xs-6 cat-img">
+		                        <img src="http://themes.fruitfulcode.com/suburb/assets/img/square.png" alt="">
+		                        <p class="info_line">86 m<span class="rank">2</span></p>
+		                      </div>
+		                      <div class="col-lg-7 col-md-6 col-xs-6 cat-img">
+		                        <img src="http://themes.fruitfulcode.com/suburb/assets/img/garage.png" alt="">
+		                        <p class="info_line">1 Garage</p>
+		                      </div>
+		                    </div>
+		                    <div class="row">
+		                      <div class="col-xs-12">
+		                        <div class="col-lg-5 col-md-6 col-xs-6 line"></div>
+		                        <div class="col-lg-5 col-md-6 col-xs-6 line"></div>
+		                      </div>
+		                    </div>
+		                  </div>
+		                </div>
+		                <hr class="full-width">
+		              </div>
+		            </div>
+		            <div class="picker-block col-md-12 col-sm-6 col-xs-12">
+		              <div class="row">
+		                <h3 class="chek">Сheck availability</h3>
+		                <div class="col-xs-6 rgt-bord">
+		                  <div class="form-group">
+		                    <input id="date-from" placeholder="From" readonly="">
+		                    <span class="point"></span>
+		                  </div>
+		                </div>
+		                <div class="col-xs-6">
+		                  <div class="form-group">
+		                    <input id="date-to" placeholder="To" readonly="">
+		                    <span class="point"></span>
+		                  </div>
+		                </div>
+		              </div>
+		              <div class="row">
+		                <div class=" col-xs-12">
+		                  <div class="circle">
+		                    <%= link_to (image_tag (@event.user.image), class: "gravatar", width: "40", height: "40"), user_path(@event.user) rescue nil%>
+		                  </div>
+		                  <div class="team-info">
+		                    <h3><%= @event.user.try(:name) %></h3>
+		                    <p class="team-color">Superhero Agent</p> 
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+		            <div class="row">
+		              <div class="col-md-12 col-sm-6 col-xs-12">
+		                <span class="ffs-bs">
+		                  <button type="submit" class="btn btn-large btn-primary">contact organizer</button>
+		                </span>
+		                <div class="col-xs-12 fav-block">
+		                  <div class="bookmark col-xs-6" data-bookmark-state="empty">
+		                    <span class="title-add">Add to bookmark</span>
+		                    <p class="col-xs-9 fav-text">Add to Favorit</p>
+		                  </div>
+		                  <div class="compare col-xs-6" data-compare-state="empty">
+		                    <span class="plus-add">Add to compare</span>
+		                    <p class="fav-text">Compare</p>
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+		          </form>
+		        </aside>
+		        <div class="pr-info col-md-8 col-xs-12">
+		          <h2><%= @event.name.try(:titleize) %></h2>
+		          <div class="map-marker"></div>
+		          <h5 class="team-color"><%= @event.address %> &nbsp;&nbsp;|&nbsp;&nbsp;<i class="fa fa-eye"></i><%= i.distance_from([latlong[:lat],latlong[:long]]).round(2) rescue 0%> Km</h5>
+		          <p><%= @event.description %></p>
+		        </div>
+		        <div class="pr-info col-md-8 col-xs-12">
+		          <h3>Property Features:</h3>
+		          <section class="block">
+		            <ul class="submit-features">
+		              <li class="col-md-4 col-xs-4"><div >Air conditioning</div></li>
+		              <li class="col-md-4 col-xs-4 nonexistent"><div class="team-color">Hi-Fi</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Balcony</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Balcony</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Internet</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Beach</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Bedding</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Iron</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Bedding</div></li>
+		              <li class="col-md-4 col-xs-4 nonexistent"><div class="team-color">Coffee pot</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Parquet</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Balcony</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Balcony</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Balcony</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Bedding</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Bedding</div></li>
+		              <li class="col-md-4 col-xs-4"><div >Bedding</div></li>
+		            </ul>
+		          </section>
+		        </div>
+		        <div class="pr-info col-md-8 col-xs-12">
+		          <h3>Event Photos:</h3>
+		          <div class="row cust-row">
+		            <% @event.pictures.first(4) do |ep| %>
+			            <div class="col-xs-3 cust-pad">
+			              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/plan.jpg);"></div>
+			            </div>
+		            <% end %>
+		            <div class="col-xs-3 cust-pad">
+		              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/property_page_slider_2.jpg);"></div>
+		            </div>
+		            <div class="col-xs-3 cust-pad">
+		              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/property_page_slider_1.jpg);"></div>
+		            </div>
+		            <div class="col-xs-3 cust-pad">
+		              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/property_page_slider_3.jpg);">
+		                <span class="filter"></span>
+		                <label class="img-label" for="op">+32 More</label>
+		              </div>
+		            </div>
+		          </div>
+		          <div class="row">
+		            <div class="col-xs-12">
+		              <h3>Video Presentation:</h3>
+		              <p><iframe src="https://player.vimeo.com/video/34741214"></iframe></p>
+		              <hr>
+		              <div class="row">
+		                <section class="social-block col-sm-6 col-xs-12">
+		                  <ul class="social">
+		                    <li class="social-text">SHARE:</li>
+		                    <li><a class="facebook" href="https://www.facebook.com" target="blank"><i class="fa fa-facebook"></i></a></li>
+		                    <li><a class="twitter" href="https://twitter.com" target="blank"><i class="fa fa-twitter"></i></a></li>
+		                    <li><a class="google" href="https://www.google.com" target="blank"><i class="fa fa-google-plus"></i></a></li>
+		                    <li><a class="pinterest" href="https://www.pinterest.com" target="blank"><i class="fa fa-pinterest"></i></a></li>
+		                  </ul>
+		                </section>
+		                <p class="error-block col-sm-6 col-xs-12 pull-right"><a href="#" data-toggle="modal" data-target="#modal-error"><i class="fa fa-exclamation-triangle"></i>Report About Error</a></p>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="wide_container_3">
+		    <div class="container">
+		      <div class="row">
+		        <div class="col-md-8 col-xs-12">
+		          <header><h4>3 Feedback</h4></header>
+		          <div class="hl-bl col-xs-12">
+		            <i class="fa fa-star"></i>
+		            <i class="fa fa-star"></i>
+		            <i class="fa fa-star"></i>
+		            <i class="fa fa-star"></i>
+		            <i class="fa fa-star"></i>
+		            <p class="team-color"><span class="bold_text">5.0</span>/5.0</p>
+		          </div>
+		          <ul class="comments">
+		            <li class="comment">
+		              <div class="comment-wrapper">
+		                <div class="name pull-left">Michael Salmon</div>
+		                <span class="date-block team-color">4 days ago</span>
+		                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+		                </p>
+		              </div>
+		            </li>
+		            <li class="comment">
+		              <div class="comment-wrapper">
+		                <div class="name pull-left">Michael Salmon</div>
+		                <span class="date-block team-color">4 days ago</span>
+		                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+		                </p>
+		              </div>
+		            </li>
+		          </ul>
+		          <div class="comments-more">
+		            <a href="#">Show More</a>
+		          </div>
+		          <span class="ffs-bs transparent">
+		            <button type="submit" id="show-reply-form" class="btn btn-default btn-large"><i class="fa fa-star-o"></i><span class="btn-text">leave review</span></button>
+		          </span>
+		          <section id="leave-reply">
+		            <header><h4>Leave Review</h4></header>
+		            <div class="clearfix">
+		              <aside>
+		                <div class="rating rating-user">
+		                  <div class="inner"></div>
+		                </div>
+		              </aside>
+		            </div>
+		            <div class="row">
+		              <form id="form-single-property-reply" method="post">
+		                <div class="col-sm-6 col-xs-12">
+		                  <input type="text" class="form-control" id="form-blog-reply-name" name="form-blog-reply-name" placeholder="Your Name" required>
+		                </div><!-- /.form-group -->
+		                <div class="col-sm-6 col-xs-12">
+		                  <input type="email" class="form-control" id="form-blog-reply-email" name="form-blog-reply-email" placeholder="Your Email" required>
+		                </div><!-- /.form-group -->
+		                <div class="col-xs-12">
+		                  <textarea class="form-control" id="form-blog-reply-message" rows="5" name="form-blog-reply-message" placeholder="Write Your Text..."></textarea>
+		                </div><!-- /.form-group -->
+		                <div class="col-xs-12 btm-indent">
+		                  <button type="submit" class="btn pull-right btn-small btn-primary" id="form-blog-reply-submit">Send</button>
+		                </div><!-- /.form-group -->
+		                <div id="form-rating-status"></div>
+		              </form><!-- /#form-contact -->
+		            </div>
+		          </section>
+		        </div>
+		        <div class="col-md-4 col-xs-12 some-prp">
+		          <h4>Here is some Similar property:</h4>
+		          <p class="team-color">in London, UK</p>
+		          <hr>
+		          <div class="property-block-small">
+		            <a href="property_page.html">
+		              <div class="property-image-small" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/5388048563_61c3bd3306_z.jpg);"></div>
+		              <h3>37 Great Russell St</h3>
+		              <p class="team-color">London, 37 Great Russell St Street Good</p>
+		              <h4>$15,000/month</h4>
+		            </a>
+		          </div>
+		          <hr>
+		          <div class="property-block-small">
+		            <a href="property_page.html">
+		              <div class="property-image-small" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/5388048563_61c3bd3306_z.jpg);"></div>
+		              <h3>37 Great Russell St</h3>
+		              <p class="team-color">London, 37 Great Russell St Street Good</p>
+		              <h4>$15,000/month</h4>
+		            </a>
+		          </div>
+		          <hr>
+		          <div class="property-block-small">
+		            <a href="property_page.html">
+		              <div class="property-image-small" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/5388048563_61c3bd3306_z.jpg);"></div>
+		              <h3>37 Great Russell St</h3>
+		              <p class="team-color">London, 37 Great Russell St Street Good</p>
+		              <h4>$15,000/month</h4>
+		            </a>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
 
+
+
+		<style>
+			.col-xs-4 {
+    		width: 24.333%;
+			}
+			.col-lg-offset-4 {
+			    margin-left:0 !important;
+			}
+			.col-lg-4 {
+			    width: 100%;
+			    padding:10px;
+			}
+			.glf-icon
+			{
+			  padding:0px 15px !important;
+			}
+			.owl-theme .owl-controls {
+			    background: white none repeat scroll 0 0;
+			    margin-top: -25px;
+			    text-align: center;
+			    z-index: 9999999;
+			}
+		</style>
+
+
+<script type="text/javascript">
+  function tabRequest(id){
+    $.ajax({
+      type:'GET',
+      url: '/events/tabs',
+      dataType: 'script',
+      data: $.param({ tab: id, single: true, event_id: <%= @event.id %>})
+    });
+  };
+
+</script>

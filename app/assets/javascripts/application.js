@@ -17,6 +17,7 @@
 //= require rangeslider.min
 
 //= require jquery_nested_form
+//= require custom
 
 
     $(document).ajaxStart(function() {       

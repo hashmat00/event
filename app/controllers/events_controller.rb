@@ -42,18 +42,21 @@ class EventsController < ApplicationController
     end
 
     def tabs
-      if params[:lat].present? && params[:long].present?
-      @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
-      else
-      @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
-      end
-      
-      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
-      @events = Event.all.active if !(@events)
-      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
-      @events_pictures = @events.sort{|m| m.pictures.count }
-      @events_videos = @events.sort{|m| m.videos.count }
-      @events = @events
+      if params[:single]
+        @event = Event.where(id: params[:event_id]).first
+      else  
+        if params[:lat].present? && params[:long].present?
+        @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
+        else
+        @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
+        end        
+        @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+        @events = Event.all.active if !(@events)
+        @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
+        @events_pictures = @events.sort{|m| m.pictures.count }
+        @events_videos = @events.sort{|m| m.videos.count }
+        @events = @events
+      end  
     end
 
     def add_wishlist

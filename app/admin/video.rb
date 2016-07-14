@@ -1,6 +1,6 @@
 ActiveAdmin.register Video do
 
-permit_params :user_id, :video, :videoable, :videoable_type, :is_active, :note, :video_url, 	:video_type
+permit_params :user_id, :video, :videoable_id, :videoable_type, :is_active, :note, :video_url, :video_type
 # or
 #
 # permit_params do
@@ -25,7 +25,7 @@ permit_params :user_id, :video, :videoable, :videoable_type, :is_active, :note, 
   end
 
   form do |f|
-    f.inputs "Picture Details" do
+    f.inputs "Video Details" do
       f.input :user_id
       f.input :video
       f.input :videoable_id
