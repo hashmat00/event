@@ -1,3 +1,4 @@
+
 // $navbar-default-bg: #312312;
 // $light-orange: #ff8c00;
 // $navbar-default-color: $light-orange;
@@ -832,4 +833,8 @@ div.ajax-loading span p i{
   font-weight: bold;
   margin: 20px 0px;
   font-size: 15px;
+}
+
+ .modal-dialog {
+    width: none !important;
 }

@@ -1,0 +1,46 @@
+<div class="modal fade share" id="myModal_<%= event.id %>" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Share with Friends</h4>
+        <div style="text-align:center; cursor: pointer">
+          <%= image_tag('fb.png', id: "shareBtnFB_#{event.id}") %>
+          <a href="https://twitter.com/intent/tweet?url=/events/<%= event.id %>&text=<%= event.name %> - '<%= event.address %>'&via=EvenytDev"onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('twitter.png') %></a>
+          <a href="https://plus.google.com/share?title= <%= event.name %>&url=/event/<%= event.id %>&description=<%= event.description %>& image= <%= event.picture.url %>"onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"  target="_blank" ><%= image_tag('google.png') %></a>
+          <a href="http://www.linkedin.com/shareArticle?mini=true&title= '<%= event.name %>'&url=/event/<%= event.id %>&summary='<%= event.description %>'&image= <%= event.picture.url %>&via=EventDev" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('linkedin.png') %></a>
+          <a href="http://pinterest.com/pin/create/button/?url=<%= url_for(:only_path => false) %>&title=<%= event.name %>&media=<%= event.picture.url %>&description=<%= event.description %>"onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('pin.png') %></a>
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+  .wide-2 .btn {
+    margin: 0px;
+    padding: 10px !important;
+  }
+  .modal-dialog {
+    width: none !important;
+}
+</style>
+
+<script type="text/javascript">
+  $(document).on('click','#shareBtnFB_<%= event.id %>',function(e){
+    e.preventDefault();
+    FB.ui(
+    {
+        method: 'feed',
+        link: '<%= event_path(event) %>',
+        name: '<%= event.name %>',
+        picture: '<%= event.picture.url %>',
+        description: '<%= event.summary %>'
+    }, function(response){});
+  });
+</script>

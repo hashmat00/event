@@ -34,7 +34,7 @@
                   <div class="input-group inner-addon left-addon">
                     <!-- <input id="pac-input" class="controls" type="text"
                         placeholder="Enter a location"> -->
-                    <!-- <div id="type-selector" class="controls">
+                    <div id="type-selector" class="controls" style="display:none">
                       <input type="radio" name="type" id="changetype-all" checked="checked">
                       <label for="changetype-all">All</label>
 
@@ -46,7 +46,7 @@
 
                       <input type="radio" name="type" id="changetype-geocode">
                       <label for="changetype-geocode">Geocodes</label>
-                    </div> -->
+                    </div>
                     <span class="glyphicon glyphicon-map-marker"></span>
                     <input type="text" placeholder="Manhattan, New York" style="padding: 10px !important;" name="address" id="pac-input" class="form-control" autocomplete="off">
                   </div>
@@ -123,10 +123,7 @@
                   </div>
                 </div><!-- row -->
                 <div class="row">
-                  <div class="explore col-xs-12">
-                    <h2>Properties for rent</h2>
-                    <h5 class="team-color col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10">Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum has been the industry's standard </h5>
-                  </div>
+                  <%= render partial: "event_result_title", locals: { events: @events } %>
                 </div><!-- row -->
               </div>  <!-- explore_grid -->
               <!-- tab-links -->
@@ -160,7 +157,7 @@
     </div><!-- end Page Content -->
   </div>
   <!-- Modal -->
-  <div class="modal fade share" id="myModal" role="dialog">
+<!--   <div class="modal fade share" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -177,15 +174,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-
-  <script>
-    // coordinates for current location
-    var _latitude = 40.717857;
-    var _longitude = -73.995042;
-    createHomepageGoogleMap(_latitude,_longitude);
-  </script>
 <script type="text/javascript">
   $('input[type="range"]').rangeslider({});
 
@@ -216,6 +206,11 @@
     text-align: center;
     z-index: 9999999;
 }
+#page-content-search .container .wide_container_2 .tabs {
+  display: block !important;
+  }
+
+
 </style>
 
 <script type="text/javascript">

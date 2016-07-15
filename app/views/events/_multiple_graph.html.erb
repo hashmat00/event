@@ -1,6 +1,6 @@
 <% if events.present? %>
-  <% events[1..-1].each_with_index do |event, index| %>
-    <div class="item">  
+  <% events.each_with_index do |event, index| %>
+    <% if index == "0" %><div class="item active"><% else %> <div class="item"><% end %> 
       <div id="googleMap_<%= event.id %>" style="width:100%; height:350px;"></div>
        <script>
         function initMap() {
@@ -18,9 +18,9 @@
           });
         }
       </script>
-      <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap">
-      </script>
     </div>
   <% end %>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap">
+  </script>
 <% end %>
