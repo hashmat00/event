@@ -33,7 +33,7 @@ class EventsController < ApplicationController
       @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
       end
       
-      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
       @events = Event.all.active if !(@events)
       @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
       @events_pictures = @events.sort{|m| m.pictures.count }
@@ -50,7 +50,7 @@ class EventsController < ApplicationController
         else
         @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
         end        
-        @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+        # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
         @events = Event.all.active if !(@events)
         @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
         @events_pictures = @events.sort{|m| m.pictures.count }
