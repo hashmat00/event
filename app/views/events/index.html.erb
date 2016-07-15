@@ -6,24 +6,26 @@
   <!-- End Preloader -->  
   <!-- Wrapper -->
   <div class="wrapper">    
-    <div id="page-property-content">
-      <div class="wide_container_3 carousel-full-width slider-kit">
-        <div class="tabs">
-          <div class="tab-content" id="tab-content_up">
-            <%= render partial: "picture_container", locals: { events_pictures: @events_pictures} %>
-          </div>
-          <ul class="tab-links col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
-            <li class="col-xs-4 event-index-tab"><a id="left-carosusel" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-arrow-left"></span></a></li>
-            <li class="active col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href", "#myCarousel");$("#right-carosusel").attr("href", "#myCarousel");tabRequest(4);'><span style="" class="glyphicon glyphicon-camera glf-icon"></span>Photo</a></li>
-            <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href","#myCarousel1");$("#right-carosusel").attr("href", "#myCarousel1");tabRequest(5);' ><span class="glyphicon glyphicon-facetime-video glf-icon"></span>Videos</a></li>
-            <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" class="map4" onclick='$("#left-carosusel").attr("href", "#myCarousel2");$("#right-carosusel").attr("href", "#myCarousel2");tabRequest(6);'><span class="glyphicon glyphicon-map-marker glf-icon"></span>Map</a></li>
-            <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href", "#myCarousel3");$("#right-carosusel").attr("href", "#myCarousel3");tabRequest(7);' ><span class="glyphicon glyphicon-road glf-icon"></span>Street View</a></li>
+    <% if @events.present? %>
+      <div id="page-property-content">
+        <div class="wide_container_3 carousel-full-width slider-kit">
+          <div class="tabs">
+            <div class="tab-content" id="tab-content_up">
+              <%= render partial: "picture_container", locals: { events_pictures: @events_pictures} %>
+            </div>
+            <ul class="tab-links col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3">
+              <li class="col-xs-4 event-index-tab"><a id="left-carosusel" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-arrow-left"></span></a></li>
+              <li class="active col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href", "#myCarousel");$("#right-carosusel").attr("href", "#myCarousel");tabRequest(4);'><span style="" class="glyphicon glyphicon-camera glf-icon"></span>Photo</a></li>
+              <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href","#myCarousel1");$("#right-carosusel").attr("href", "#myCarousel1");tabRequest(5);' ><span class="glyphicon glyphicon-facetime-video glf-icon"></span>Videos</a></li>
+              <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" class="map4" onclick='$("#left-carosusel").attr("href", "#myCarousel2");$("#right-carosusel").attr("href", "#myCarousel2");tabRequest(6);'><span class="glyphicon glyphicon-map-marker glf-icon"></span>Map</a></li>
+              <li class="col-xs-4 event-index-tab"><a href="javascript:void(0)" onclick='$("#left-carosusel").attr("href", "#myCarousel3");$("#right-carosusel").attr("href", "#myCarousel3");tabRequest(7);' ><span class="glyphicon glyphicon-road glf-icon"></span>Street View</a></li>
 
-            <li class="col-xs-4"><a id="right-carosusel" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-arrow-right"></span></a></li>
-          </ul>
+              <li class="col-xs-4"><a id="right-carosusel" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-arrow-right"></span></a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
     <div id="page-content-search">
       <div class="container">
         <div class="wide_container_2">
