@@ -18,7 +18,7 @@
 			    <a class="rvs-nav-prev"></a>
 			    <div class="rvs-nav-stage">
 			      <% event.videos.each do |v|  %>
-			        <% video = VideoInfo.new("http://www.youtube.com/watch?v=mZqGqE0D0n4") %>
+			        <% video = VideoInfo.new(v.video_url) %>
 			        <a class="rvs-nav-item">
 			          <span class="rvs-nav-item-thumb" style="background-image: url(<%= video.thumbnail_small %>)"></span>
 			          <h4 class="rvs-nav-item-title"><%= video.try(:title) %></h4>
