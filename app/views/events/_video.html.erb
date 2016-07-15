@@ -4,7 +4,7 @@
 	    <div class="rvs-item-stage">
 	      <% event.videos.each do |v| %>   
 	        <% video = VideoInfo.new(v.video_url) %>
-	        <div class="rvs-item" style="background-image: url(<%= video.thumbnail_small %>)">
+	        <div class="rvs-item" style="background-image: url(<%= video.thumbnail_large %>)">
 	          <p class="rvs-item-text"><%= video.try(:title) %> <small>by <%= video.try(:author) rescue "Author Not Found" %></small></p>
 	          <a href="<%=v.video_url%>" class="rvs-play-video"></a>
 	        </div>
@@ -23,7 +23,7 @@
 	        </a>
 	      <% end %>
 	    </div>
-	    <a class="rvs-nav-next"></a>
+	    <a class="rvs-nav-next" style="background:red; z-index:9999"></a>
 	  </div>
 	</div>
 	<script>
