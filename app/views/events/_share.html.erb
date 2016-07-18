@@ -7,9 +7,9 @@
         <div style="text-align:center; cursor: pointer">
           <%= image_tag('fb.png', id: "shareBtnFB_#{event.id}") %>
           <a href="https://twitter.com/intent/tweet?url=http://eventdev.herokuapp.com/events/<%= event.id %>&text=<%= event.name %> - '<%= event.address %>'&via=EvenytDev"onclick="javascript:window.open(this.href,'','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('twitter.png') %></a>
-          <a href="https://plus.google.com/share?title= <%= event.name %>&url=http://eventdev.herokuapp.com/events/<%= event.id %>&description=<%= event.description %>& image= http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename %>"onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"  target="_blank" ><%= image_tag('google.png') %></a>
-          <a href="http://www.linkedin.com/shareArticle?mini=true&title= '<%= event.name %>'&url=http://eventdev.herokuapp.com/events/<%= event.id %>&summary='<%= event.description %>'&image= http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename %>&via=EventDev" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('linkedin.png') %></a>
-          <a href="https://pinterest.com/pin/create/button/?url=http://eventdev.herokuapp.com/events/<%= event.id %>&title=<%= event.name %>&media=http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename %>&description=<%= event.description %>"onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('pin.png') %></a>
+          <a href="https://plus.google.com/share?title= <%= event.name %>&url=http://eventdev.herokuapp.com/events/<%= event.id %>&description=<%= event.description %>& image= http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename rescue ''%>"onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"  target="_blank" ><%= image_tag('google.png') %></a>
+          <a href="http://www.linkedin.com/shareArticle?mini=true&title= '<%= event.name %>'&url=http://eventdev.herokuapp.com/events/<%= event.id %>&summary='<%= event.description %>'&image= http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename rescue ''%>&via=EventDev" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('linkedin.png') %></a>
+          <a href="https://pinterest.com/pin/create/button/?url=http://eventdev.herokuapp.com/events/<%= event.id %>&title=<%= event.name %>&media=http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename rescue ''%>&description=<%= event.description %>"onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" target="_blank"><%= image_tag('pin.png') %></a>
         </div> 
       </div>
       <div class="modal-footer">
@@ -39,7 +39,7 @@
         method: 'feed',
         link: '<%= event_path(event) %>',
         name: '<%= event.name %>',
-        picture: 'http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename %>',
+        picture: 'http://eventdev.herokuapp.com/uploads/event/picture/<%= event.id %>/<%= event.picture.file.filename rescue "" %>',
         description: '<%= event.summary %>'
     }, function(response){});
   });

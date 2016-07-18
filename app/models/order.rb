@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
   end
   def update_order_attributes
-    self.update(order_uid: rand.to_s[2..11].to_i)
+    self.update(order_uid: rand.to_s[2..8].to_i)
   end
 private
   def set_order_status
