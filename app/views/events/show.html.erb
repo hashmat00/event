@@ -127,7 +127,7 @@
 		          <h2 style="padding:20px; font-weight:bold"><%= @event.name.try(:titleize) %></h2>
 		          <div class="map-marker"></div>
 		          <h5 class="team-color"><%= @event.address %></h5>
-		          <p><%= @event.description %></p>
+		          <p><%= @event.description.try(:html_safe) %></p>
 		        </div>
 		        <div class="pr-info col-md-8 col-xs-12">
 		          <h3>Tags:</h3>
@@ -197,6 +197,13 @@
 		        </div>
 		      </div>
 		    </div>
+		  </div>
+		  <div class="wide_container_3">
+		      <div class="row">
+		        <div class="col-md-10 col-md-offset-1">
+			        <%= render partial: "tickets", locals: { tickets: @event.tickets} %>
+			      </div>
+		      </div>
 		  </div>
 		  <div class="wide_container_3">
 		    <div class="container">

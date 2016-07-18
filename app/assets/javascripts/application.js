@@ -18,6 +18,9 @@
 
 //= require jquery_nested_form
 //= require custom
+//= require bootstrap-datetimepicker.min
+//= require country
+//= require select2-full
 
 
     $(document).ajaxStart(function() {       

@@ -33,12 +33,16 @@ class EventsController < ApplicationController
       @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
       end
       
-      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
-      @events = Event.all.active# if !(@events)
+      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+      @events = Event.all.active if !(@events)
       @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
       @events_pictures = @events.sort{|m| m.pictures.count }
       @events_videos = @events.sort{|m| m.videos.count }
       @events = @events
+    end
+
+    def location_update
+      @geocode =  Geocoder.search("#{params[:lat]},#{params[:long]}").first
     end
 
     def tabs
@@ -50,8 +54,8 @@ class EventsController < ApplicationController
         else
         @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
         end        
-        # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
-        @events = Event.all.active# if !(@events)
+        @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+        @events = Event.all.active if !(@events)
         @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
         @events_pictures = @events.sort{|m| m.pictures.count }
         @events_videos = @events.sort{|m| m.videos.count }
@@ -167,7 +171,9 @@ class EventsController < ApplicationController
     end
     
     
-    
+    # def subregion_options
+    #   render partial: 'subregion_select'
+    # end
 
     private
       
@@ -181,7 +187,7 @@ class EventsController < ApplicationController
       # end  
 
       def event_params
-          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy,  category_ids: [], schedules_attributes: [:event_id, :image, :title, :description, :start_time, :end_time,:_destroy],tickets_attributes: [:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country,:_destroy])
+          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacyWW, schedules_attributes: [:id,:event_id, :image, :title, :description, :start_date, :end_date, :start_time, :end_time, :event_occure, :event_day, :week_day, :month_day, :_destroy], pictures_attributes: [:id,:user_id, :image, :note, :_destroy], videos_attributes: [ :id,:user_id, :video_url,:videoable_id, :videoable_type, :is_active, :video,:video_type,:note,:_destroy], tickets_attributes: [:id,:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country, :pay_mode, :_destroy])
       end
 
 end

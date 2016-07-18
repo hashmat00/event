@@ -40,7 +40,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-3 line"></div>
                 <div class="col-md-3 col-sm-3 col-xs-3 line"></div>
                 <hr>
-                <p><b><%= truncate(i.description, length: 200, separator: ' ') %></b></p>
+                <p><b><%= truncate(i.description.try(:hml_safe), length: 200, separator: ' ') %></b></p>
               </div>
             </a>
             <div class="item-price col-lg-2 col-md-3 col-sm-3 col-xs-12">

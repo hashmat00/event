@@ -33,7 +33,9 @@ class Event < ActiveRecord::Base
    default_scope -> { order(created_at: :desc) }
    has_many :interests, as: :interestable
    has_many :pictures, as: :picturable, dependent: :destroy
+   accepts_nested_attributes_for :pictures, :allow_destroy => true
    has_many :videos, as: :videoable, dependent: :destroy
+   accepts_nested_attributes_for :videos, :allow_destroy => true
    has_many :wish_lists, as: :wish_listable, dependent: :destroy
    scope :upcomming, -> { where('start_time  > ?',Time.now) }
   

@@ -84,4 +84,6 @@ gem "bullet", :group => "development"
 gem "pdfkit"
 gem "wkhtmltopdf-binary"
 gem 'rqrcode'
-gem 'video_info'		
+gem 'video_info'
+gem 'carmen-rails'
+gem "select2-rails"

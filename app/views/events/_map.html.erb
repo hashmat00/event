@@ -4,7 +4,7 @@
 <div id="tab1">
   <div class="sidebar col-sm-4 col-xs-12">
     <!-- Map -->
-    <div id="map"></div>
+    <!-- <div id="map" style="width:100% height:30px;"></div> -->
     <!-- end Map -->
   </div><!-- sidebar -->
   <div class="content col-sm-8 col-xs-12">
@@ -87,7 +87,7 @@
 }
 </style>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   
 
   
@@ -124,7 +124,15 @@
           // If the place has a geometry, then present it on a map.
           if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
+            $.ajax({
+              type:'GET',
+              url: '/events',
+              dataType: 'script',
+              data: $.param({ lat: place.geometry.location.lat(), long: place.geometry.location.lng()})
+            });
+
           } else {
+
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
           }
@@ -174,7 +182,7 @@ console.log(place.name); // Name of Place
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script> -->
 <script type="text/javascript">
   var eventconHeight =  $('.event-container').height();
   $('#map').css('height',eventconHeight);

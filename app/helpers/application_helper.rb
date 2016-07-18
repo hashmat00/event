@@ -25,4 +25,9 @@ end
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: user.username, class: "gravatar")
   end
+
+  def only_us_and_canada
+    Carmen::Country.all.select{|c| %w{US CA}.include?(c.code)}
+  end
+
 end

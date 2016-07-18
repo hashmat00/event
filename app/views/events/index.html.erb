@@ -32,7 +32,11 @@
           <form>
             <div class="tabs">
               <header class="col-md-8 col-xs-12 no-pad">
-                <div class="location-map col-sm-4 col-xs-4">
+                <div class="col-sm-1 col-xs-1" style="font-size: 25px; padding: 20px 0 0 60px;">
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                  
+                </div>
+                <div class="location-map col-sm-7 col-xs-7">
                   <div class="input-group inner-addon left-addon">
                     <!-- <input id="pac-input" class="controls" type="text"
                         placeholder="Enter a location"> -->
@@ -49,20 +53,14 @@
                       <input type="radio" name="type" id="changetype-geocode">
                       <label for="changetype-geocode">Geocodes</label>
                     </div>
-                    <span class="glyphicon glyphicon-map-marker"></span>
-                    <input type="text" placeholder="Manhattan, New York" style="padding: 10px !important;" name="address" id="pac-input" class="form-control" autocomplete="off">
+                    <div id="map" class="placeSearch"></div>
+                    <input type="text" placeholder="<%= request.location.address %>" style="padding: 25px !important;  z-index: 999999999999999 !important;" name="address" id="pac-input" class="form-control" autocomplete="off">
                   </div>
                 </div>
-                <div class="select-block col-sm-2 col-xs-2">
-                  <select class="selection selectized" tabindex="-1" style="display: none;"><option selected="selected" value="Beds"></option></select><div class="selectize-control selection single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="Beds">Beds</div><input type="text" autocomplete="off" tabindex="" style="width: 4px; opacity: 0; position: absolute; left: -10000px;" readonly="readonly"></div><div class="selectize-dropdown selection single" style="display: none; visibility: visible; width: 142px; top: 48px; left: 0px;"><div class="selectize-dropdown-content"><div class="option" data-selectable="" data-value="1">1</div><div class="option" data-selectable="" data-value="2">2</div><div class="option" data-selectable="" data-value="3">3</div><div class="option selected" data-selectable="" data-value="Beds">Beds</div></div></div></div>
-                </div>
-                <div class="select-block col-sm-2 col-xs-2 ">
-                  <select class="selection selectized" tabindex="-1" style="display: none;"><option selected="selected" value="Type"></option></select><div class="selectize-control selection single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="Type">Type</div><input type="text" autocomplete="off" tabindex="" style="width: 4px; opacity: 0; position: absolute; left: -10000px;" readonly="readonly"></div><div class="selectize-dropdown selection single" style="display: none; visibility: visible; width: 142px; top: 48px; left: 0px;"><div class="selectize-dropdown-content"><div class="option" data-selectable="" data-value="For Rent">For Rent</div><div class="option" data-selectable="" data-value="For Sale">For Sale</div><div class="option selected" data-selectable="" data-value="Type">Type</div></div></div></div>
-                </div>
-                <div class="select-block col-md-3 col-xs-4 last">
+                <div class="select-block col-md-4 col-xs-4 last">
                   <a id="toggle-link" class="options-button">More Filters</a>
                 </div>
-                <div style="display: none;" id="hidden_content" class="options-overlay col-md-offset-4 col-sm-offset-5 col-sm-7">
+                <div style="display: none;" id="hidden_content" class="options-overlay col-md-12 col-sm-12">
                   <div class="row">
                     <div class="col-xs-6 top-mrg">
                       <div class="internal-container features">
@@ -212,7 +210,15 @@
   display: block !important;
   }
 
-
+.placeSearch
+{
+  width:100%!important;
+  height: 70px !important ;
+}
+#pac-input
+{
+  z-index: 999999999999999999999 !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -226,3 +232,100 @@
   };
 
 </script>
+
+<script type="text/javascript">
+  
+
+  
+  function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13
+        });
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+            // $.ajax({
+            //   type:'GET',
+            //   url: '/tabs',
+            //   dataType: 'script',
+            //   data: $.param({ lat: place.geometry.location.lat(), long: place.geometry.location.lng(), tab: })
+            // });
+
+          } else {
+
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            console.log(place.geometry.location.G); // Get Latitude
+console.log(place.geometry.location.K); // Get Longitude
+
+//Additional information
+console.log(place.formatted_address); // Formated Address of Place
+console.log(place.name); // Name of Place
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+      }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script>

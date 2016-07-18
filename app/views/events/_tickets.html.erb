@@ -1,13 +1,8 @@
 <% if tickets.present? %>
-	<h3 class="text-center">tickets for Event <b><%= @event.name %></b></h3>
-
-	<div class="row">
-	  <div class="col-xs-6 col-xs-offset-3">
+	<h3 style="text-align:center">tickets for Event <b><%= @event.name %></b></h3>
 	    <% tickets.each do |ticket| %>
 	      <%= render "ticket_row", ticket: ticket, order_item: @order_item, :event => @event %>
 	    <% end %>
-	  </div>
-	</div>
 <% else %>
-	<h3 class="text-center">There are no tickets for Event <b><%= @event.name %></h3>
+	<h3 style="text-align:center">There are no tickets for Event <b><%= @event.name %></h3>
 <% end %>

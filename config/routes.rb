@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/events/subregion_options' => 'events#subregion_options'
   get 'interests/index'
 
   get 'order_items/create'
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
   get '/users/ticket_show', to: "users#ticket_show", as: :ticket_show  
   get 'auth/:provider/callback', to: "users#omniauth" 
   put '/orders', to: 'orders#update'
-
+  get '/location_update', to: 'events#location_update'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users  

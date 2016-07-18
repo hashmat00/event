@@ -11,244 +11,404 @@
     </div>
   </div>
 <% end %>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
 <div class="row">
-    <div class="well col-md-8 col-md-offset-2">
-      
-       <%= nested_form_for @event do |f| %>
-
-   <div class="form-group col-md-6">
-    <label for="name">Name</label>
-    <%= f.text_field :name, :class=>"form-control" %>
-   </div>
-        
-   <div class="form-group col-md-6">
-    <label for="name">Summary</label>
-    <%= f.text_field :summary, :class=>"form-control" %>
-   </div>
-
-    <div class="form-group col-md-12">
-    <label for="name">Description</label>
-    <%= f.text_area :description, :class=>"form-control",rows:5 %>
-   </div>
-
-    <div class="form-group col-md-12">
-    <label for="name">Address</label>
-    <%= f.text_field :address, :class=>"form-control" %>
-   </div>
-        
-   <div class="form-group col-md-4">
-    <label for="name">City</label>
-    <%= f.text_field :city, :class=>"form-control" %>
-   </div>
-   <div class="form-group col-md-4">
-    <label for="name">State</label>
-    <%= f.text_field :state, :class=>"form-control" %>
-   </div>
-        
-    <div class="form-group col-md-4">
-    <label for="name">Zip Code</label>
-    <%= f.text_field :zipcode, :class=>"form-control" %>
-   </div>
-        
-     
-        <%#= f.label :is_paid, "Paid", :value => "Paid"  %>
-        <%#= f.radio_button :is_paid, true, :checked => true %>
-        <%#= f.label :is_paid, "Free", :value => "Free" %>
-        <%#= f.radio_button :is_paid, false%>
-           
-    <div class="form-group col-md-4">
-    <label for="name">Country</label>
-    <%= f.text_field :country, :class=>"form-control" %>
-    </div>    
-        
-    <div class="form-group col-md-4">
-    <label for="name">Event Start Date </label>
-    <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control" %>
-    </div>
-        
-  <div class="form-group col-md-4">
-    <label for="name">Event End Date </label>
-    <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control" %>
-    </div>
-    <div class="form-group col-md-12">
-         <label for="name">Categories List :-</label></div>
-        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |v| %>
-        <div class="form-group col-md-3">
-         <%= v.label(class: "checkbox-inline input_checkbox") {v.check_box(class: "checkbox") + v.text }%>
-       </div>
-    <% end %>
-       
-        <hr/>
-
-    <div class="form-group col-md-6">
-    <label for="name">Picture</label>
-    <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
-    </div>
-    <div class="form-group col-md-6">
-    <label for="name">Video</label>
-     <%= f.file_field :video %>
-    </div>
-
-    <div class="form-group col-md-12">
-    <label for="name">Youtube Video</label>
-       <%= f.text_field :youtube_video, :class=>"form-control" %>
-    </div>
-         
-    <div class="form-group col-md-12">
-    <label for="name">Vimeo Video</label>
-       <%= f.text_field :vimeo_video, :class=>"form-control" %>
-    </div>
-    <br>
-            <h3>Step-2 | Add Schedules</h3>
-            
-            <div class="nested_form jumbotron col-md-12">
-              <%= f.fields_for :schedules do |schedule_form| %>
-
-           <div class="form-group col-md-12">
-           <label for="name">Title</label>
-           <%= schedule_form.text_field :title, :class=>"form-control" %>
-           </div>
-
-            <div class="form-group col-md-12">
-           <label for="name">Upload Image</label>
-           <%=  schedule_form.file_field :image, :class=>"form-control" %>
-           </div>
-
-            <div class="form-group col-md-12">
-           <label for="name">Description</label>
-           <%=  schedule_form.text_area :description, :class=>"form-control",row:5 %>
-           </div>
-
-             <div class="form-group col-md-6">
-           <label for="name">Start Time</label>
-           <%=  schedule_form.text_field :start_time,:id=>"start_time",:class=>"form-control"   %>
-           </div>
-
-             <div class="form-group col-md-6">
-           <label for="name">End Time</label>
-           <%=  schedule_form.text_field :end_time,:id=>"end_time",:class=>"form-control" %>
-           </div>
-              
-            <div class="form-group col-md-12">
-          <%= schedule_form.link_to_remove "Remove this Schedules" %>
-           </div> 
-             
-              <% end %>
-            <div class="form-group col-md-12">
-           <%= f.link_to_add "Add a Schedules", :schedules %>
-           </div> 
-            </div>
-      <br>
-
-
-               <h3> Step-3 | Add Ticket </h3>
-
-             <div class="nested_form jumbotron">
-
-
-
-        <%= f.fields_for :tickets do |ticket_form| %>
-           
-           <div class="form-group col-md-6">
-           <label for="name">Ticket Name</label>
-           <%= ticket_form.text_field :name, :class=>"form-control" %>
-           </div>
-           <div class="form-group col-md-6">
-           <label for="quantity">Quantity available*</label>
-            <%= ticket_form.text_field :quantity, :class=>"form-control" %>
-           </div>
-
-            <label for="price">Ticket Type</label>
-             <div class="form-group col-md-12">
-              
-               <div class="form-group col-md-2"> <label >Paid Ticket</label></div>
-               <div class="form-group col-md-1"> 
-              <!-- <input onclick="document.getElementById('price').disabled = false; document.getElementById('charstype').disabled = true;" type="radio" name="type"> -->
-
-              <%= f.radio_button :is_paid , :onclick => "document.getElementById('price').disabled = false; document.getElementById('charstype').disabled = true;" %>
+  <div class="well col-md-10 col-md-offset-1"> 
+    <%= nested_form_for @event do |f| %>  
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-1-Black-icon.png", style: "width:30px; height:30px") %></span>Event Details</b></h2>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <div class="form-group col-md-12">
+                <label for="name">Name</label>
+                <%= f.text_field :name, :class=>"form-control", required: true %>
               </div>
-               <div class="form-group col-md-2">
-               <label name="charstype" id="charstype" disabled="disabled">Fee Ticket</label>
-               </div>
-               <div class="form-group col-md-1">
-              <!-- <input onclick="document.getElementById('price').disabled = true; document.getElementById('charstype').disabled = false;" type="radio" name="type" value="customurl">
- -->              
+              <div class="form-group col-md-12">
+                <label for="name">Description</label>
+                <%= f.text_area :description, id: "desc", :class=>"form-control", rows:5, required: true %>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="name">Event Start Date </label>
+                <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control", required: true %>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="name">Event End Date </label>
+                <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control", required: true %>
+              </div>
+              <div class="form-group col-md-4">
+              <label for="name">Picture</label>
+                <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="name">Location</label>
+                <div>
+                <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#auto" aria-controls="auto" role="tab" data-toggle="tab">Auto Fill</a></li>
+                    <li role="presentation"><a href="#manual" aria-controls="manual" role="tab" data-toggle="tab">Manually Fill</a></li>
+                    <li role="presentation"><a href="#online" aria-controls="online" role="tab" data-toggle="tab">Online Event</a></li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="auto">
+                      
+                      <div class="form-group col-md-12">
+                        <label for="name">Address</label>
+                        <div id="mapPlace" class="placeSearch"></div>
+                        <input type="text" placeholder="<%= request.location.address %>" style="z-index: 999999999999999 !important;" name="address_fiekld" id="pacInput" class="form-control" autocomplete="on">
+                        <div id="type-selector" class="controls" style="display:none">
+                          <input type="radio" name="type" id="changetype-all" checked="checked">
+                          <label for="changetype-all">All</label>
 
-           <%= f.radio_button :is_paid , :onclick => "document.getElementById('price').disabled = true; document.getElementById('charstype').disabled = false;" %>
-              
-              </div></div>
-            <br>
+                          <input type="radio" name="type" id="changetype-establishment">
+                          <label for="changetype-establishment">Establishments</label>
 
-           <div class="form-group col-md-12">
-           <label for="price">Price</label>
-            <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control" %>
+                          <input type="radio" name="type" id="changetype-address">
+                          <label for="changetype-address">Addresses</label>
 
-           </div>
-               
-          <div class="form-group col-md-12">
-           <label for="ticket_description">Ticket Description</label>
-            <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5%>
-           </div>
-                
-             <div class="form-group col-md-6">
-           <label for="show_ticket_description">Show Ticket Description</label>
-            <%= ticket_form.check_box :show_ticket_description, :class=>"form-control" %>
-           </div>
-      
-
-       
-            <div class="form-group col-md-6">
-            <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
-            <%= ticket_form.select :sale_channel, [['Every where', 'Everywhere'], ['Online only', 'Onlineonly'], ['At the door only', 'dooronly']] %>
-          </div> 
-          <div class="form-group col-md-6">
-           <label for="tickets_start_date">Ticket Sales Start</label>
-            <%= ticket_form.text_field :tickets_start_date, :class=>"form-control" %>
-           </div>
-            <div class="form-group col-md-6">
-           <label for="ticket_end_date">Ticket Sales End</label>
-            <%= ticket_form.text_field :ticket_end_date, :class=>"form-control" %>
-           </div>
-     
-         <div class="form-group col-md-6">
-            <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
-            <%= ticket_form.select :country, [['United States', 'US'], ['Argentina', 'AR'], ['Australia', 'Au']] %>
-          </div>           
-
-          <div class="form-group col-md-6">
-            <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
-            <%= ticket_form.select :currency, [['U.S. Dollars $', 'Dollars'], ['Canadian Dollars C$', 'C$'], ['Mexican Peso Mex$', 'MXN']] %>
-          </div> 
-
-
-                <%= ticket_form.link_to_remove "Remove this Ticket" %>
-              <% end %>
-            <p><%= f.link_to_add "Add a Ticket", :tickets %></p>
+                          <input type="radio" name="type" id="changetype-geocode">
+                          <label for="changetype-geocode">Geocodes</label>
+                        </div>
+                        <%#= f.text_field :address, :class=>"form-control" %>
+                      </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="manual">
+                      <%= render partial: "manual_location" %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="online"><%= f.text_field :address, placeholder: "This is am Online event", disabled: true %></div>
+                  </div>
+                </div>
+              </div>  
             </div>
-
-    <h3>Additional Settings</h3>
-      <div class="form-group inline-form col-md-12 ">
-        <%= f.label :event_privacy, "Public :-list this event on Eventbrite and search engines", :value => "Public"  %>
-        <%= f.radio_button :event_privacy, true, :checked => true %> 
-        <%= f.label :event_privacy, "Private :-do not list this event publicly", :value => "Private" %>
-        <%= f.radio_button :event_privacy, false %><label for="sel1"></label>
+          </div>
         </div>
         
-
-          <div class="form-group col-md-12">
-            <label for="sel1">Event Type</label>
-            <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']] %>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-2-Black-icon.png", style: "width:30px; height:30px") %></span>Event Scheduler</b></h2>
+              </a>
+            </h4>
           </div>
-          <div class="form-group col-md-12">
-            <label for="sel1">Event Topic</label>
-            <%=f.select :event_topic, [['Auto, Boat & Air', 'AutoAir'], ['Business & Professional', 'BusinessProfessional'], ['Charity & Causes', 'CharityCauses']] %>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <div class="nested_form col-md-12">
+                <%= f.fields_for :schedules do |schedule_form| %>
+                  <div class="form-group col-md-3 col-md-offset-9">
+                    <%= schedule_form.link_to_remove class:"btn btn-danger", id: "removeShedule", style:"background: rgb(102, 0, 0) !important" do %>
+                      <i class="glyphicon glyphicon glyphicon-minus glf-icon" style="font-size:15px; font-weight:bold;" >Remove</i>
+                    <% end %>
+                  </div>   
+                  <div class="form-group col-md-12">
+                    <label for="name">Title</label>
+                    <%= schedule_form.text_field :title, :class=>"form-control" %>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="name">Description</label>
+                    <%=  schedule_form.text_area :description, :class=>"form-control",row:5 %>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="name">How often does this event occur?</label>
+                    <%=schedule_form.select :event_occure, [['Daily', 'days'], ['Weekly', 'weeks'], ['Monthly', 'months'], ['Custom', 'custom']] %>
+                  </div>
+                  <!-- <div class="form-group col-md-12">
+                    <label for="name">Repeating Every</label>
+                    <%#=schedule_form.select :month_day, [['First', '0'], ['Second', '1'], ['Third', '2'], ['Fourth', '3']] %>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="name">It occures Evey</label>
+                    <%#=schedule_form.select :month_day, [['1st', '1'], ['2nd', '2'], ['3rd', '3'], ['4th', '4'],['5th', '5'], ['6th', '6'], ['7th', '7'],['8th', '8'], ['9th', '9'], ['10th', '10'], ['11th', '11'],['12th', '12'], ['13th', '13'], ['14th', '14'],['15th', '15'], ['16th', '16'], ['17th', '17'], ['18th', '18'],['19th', '19'], ['20th', '20'], ['21st', '21'],['22nd', '22'], ['23rd', '23'], ['24th', '24'], ['25th', '25'],['26th', '26'], ['27th', '27'], ['28th', '28'], ['29th', '29'],['30th', '30'], ['31st', '31'], ['28th', '28']] %>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="name">Select Days</label>
+                    <%#=schedule_form.select :week_day, [['Sunday', '0'], ['Monday', '1'], ['Tuesday', '2'], ['Wednesday', '3'],['Thursday', '4'], ['Friday', '5'], ['Saturday', '6'] ], id: "weekDays" %>
+                  </div> -->
+                  <div class="form-group col-md-4">
+                    <label for="name">Start Time</label>
+                    <%=  schedule_form.text_field :start_time,:id=>"start_time",:class=>"form-control"   %>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="name">End Time</label>
+                    <%=  schedule_form.text_field :end_time,:id=>"end_time",:class=>"form-control" %>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="name">Of the</label>
+                    <%=schedule_form.select :event_day, [['Same day', '0'], ['Next day', '1'], ['2nd day', '2'], ['3rd day', '3'],['4th day', '4'], ['5th day', '5'], ['6th day', '6']] %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="name">Start From</label>
+                    <%=  schedule_form.text_field :start_date,:id=>"start_time",:class=>"form-control"   %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="name">to</label>
+                    <%=  schedule_form.text_field :end_date,:id=>"end_time",:class=>"form-control" %>
+                  </div>
+                <% end %>
+                <div class="form-group col-md-12">
+                  <%= f.link_to_add "Add a Schedules", :schedules, class:"btn btn-success", style:"width:100%", id: "addSchedule" %>
+                </div> 
+              </div>
+            </div>
           </div>
-          <%= f.submit class: "btn btn-success" %>
-        <% end %>
-
-
-    </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-3-Black-icon.png", style: "width:30px; height:30px") %></span>Event Tickets</b></h2>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <div class="nested_form ">
+                <%= f.fields_for :tickets do |ticket_form| %>
+                  <div class="form-group col-md-3 col-md-offset-9">
+                    <%= ticket_form.link_to_remove class:"btn btn-danger", id: "removeTicket", style:"background: rgb(102, 0, 0) !important" do %>
+                      <i class="glyphicon glyphicon glyphicon-minus glf-icon" style="font-size:15px; font-weight:bold;" >Remove</i>
+                    <% end %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="name">Ticket Name</label>
+                    <%= ticket_form.text_field :name, :class=>"form-control" %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="quantity">Quantity available*</label>
+                    <%= ticket_form.text_field :quantity, :class=>"form-control" %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div><label for="price">Pay Mode</label></div>
+                    <div class="btn-group" data-toggle="buttons" class="form-control">
+                      <label class="btn btn-primary active" onclick = "$('#price').attr('disabled','true');">
+                        <%= ticket_form.radio_button :pay_mode, "free", id:"option1", autocomplete:"off", checked: true, onclick: "$('#price').attr('disabled','true');" %>
+                        <%= ticket_form.label :pay_mode, 'Free', :value => 'free', onclick: "$('#price').attr('disabled','true');" %>
+                        <!-- <input type="radio" name="options" id="option1" autocomplete="off" checked> Free -->
+                      </label>
+                      <label class="btn btn-primary" onclick ="$('#price').removeAttr('disabled');">
+                        <%= ticket_form.radio_button :pay_mode, "paid", id:"option2", autocomplete:"off", onclick: "$('#price').removeAttr('disabled');" %>
+                        <%= ticket_form.label :pay_mode, 'Paid', :value => 'paid', onclick: "$('#price').removeAttr('disabled');" %>
+                        <!-- <input type="radio" name="options" id="option2" autocomplete="off"> Paid -->
+                      </label>
+                      <label class="btn btn-primary" onclick= "$('#price').attr('disabled','true');">
+                        <%= ticket_form.radio_button :pay_mode, "donation", id:"option3", autocomplete:"off", onclick: "$('#price').attr('disabled','true');" %>
+                        <%= ticket_form.label :pay_mode, 'Donation', :value => 'donation', onclick: "$('#price').attr('disabled','true');" %>
+                        <!-- <input type="radio" name="options" id="option3" autocomplete="off"> Donation -->
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="price">Price</label>
+                    <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control", disabled: true %>
+                  </div>
+                  <div class="col-md-12" style="margin:10px 0px">
+                    <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11">Advance</button> -->
+                    <!-- <div id="demo" class="collapse"> -->
+                      <div class="form-group col-md-12">
+                        <label for="ticket_description">Ticket Description</label>
+                        <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5%>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <div><label for="show_ticket_description">Show Ticket Description</label></div>
+                        <div class="btn-group" data-toggle="buttons" class="form-control">
+                          <label class="btn btn-primary active">
+                            <%= ticket_form.radio_button :show_ticket_description, "yes", id:"option11", autocomplete:"off", checked: true %>
+                            <%= ticket_form.label :show_ticket_description, 'Yes', :value => 'true' %>
+                          </label>
+                          <label class="btn btn-primary">
+                            <%= ticket_form.radio_button :show_ticket_description, "no", id:"option12", autocomplete:"off" %>
+                            <%= ticket_form.label :show_ticket_description, 'No', :value => 'false' %>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-12">
+                        <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
+                        <%= ticket_form.select :sale_channel, [['Every where', 'Everywhere'], ['Online only', 'Onlineonly'], ['At the door only', 'dooronly']] %>
+                      </div> 
+                      <div class="form-group col-md-6">
+                        <label for="tickets_start_date">Ticket Sales Start</label>
+                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control" %>
+                       </div>
+                      <div class="form-group col-md-6">
+                        <label for="ticket_end_date">Ticket Sales End</label>
+                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control" %>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
+                        <%= ticket_form.select :country, [['United States', 'US'], ['Argentina', 'AR'], ['Australia', 'Au']] %>
+                      </div>           
+                      <div class="form-group col-md-6">
+                        <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
+                        <%= ticket_form.select :currency, [['U.S. Dollars $', 'Dollars'], ['Canadian Dollars C$', 'C$'], ['Mexican Peso Mex$', 'MXN']] %>
+                      </div> 
+                    <!-- </div> -->
+                  </div>             
+                <% end %>
+                <p><%= f.link_to_add "Add a Ticket", :tickets , class:"btn btn-success", style:"width:100%", id: "addticket"%></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFour">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-4-Black-icon.png", style: "width:30px; height:30px") %></span>Event Images</b></h2>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+            <div class="panel-body">
+              <div class="nested_form ">
+                <%= f.fields_for :pictures do |picture_form| %>
+                  <div class="form-group col-md-3 col-md-offset-9">
+                    <%= picture_form.link_to_remove class:"btn btn-danger", id: "removePicture", style:"background: rgb(102, 0, 0) !important" do %>
+                      <i class="glyphicon glyphicon glyphicon-minus glf-icon" style="font-size:15px; font-weight:bold;" >Remove</i>
+                    <% end %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="name">Image</label>
+                    <%= picture_form.file_field :image, :class=>"form-control" %>
+                  </div>
+                  
+                  <div class="col-md-12" style="margin:10px 0px">
+                    <div class="form-group col-md-12">
+                      <label for="ticket_description">Note</label>
+                      <%= picture_form.text_area :note, :class=>"form-control",row:5%>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div><label for="is_active">Active</label></div>
+                      <div class="btn-group" data-toggle="buttons" class="form-control">
+                        <label class="btn btn-primary active">
+                          <%= picture_form.radio_button :is_active, "yes", id:"option21", autocomplete:"off", checked: true %>
+                          <%= picture_form.label :is_active, 'Yes', :value => 'true' %>
+                        </label>
+                        <label class="btn btn-primary">
+                          <%= picture_form.radio_button :is_active, "no", id:"option22", autocomplete:"off" %>
+                          <%= picture_form.label :is_active, 'No', :value => 'false' %>
+                        </label>
+                      </div>
+                    </div>
+                  </div>             
+                <% end %>
+                <p><%= f.link_to_add "Add a Picture", :pictures , class:"btn btn-success", style:"width:100%", id: "addPicture"%></p>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFive">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-5-Black-icon.png", style: "width:30px; height:30px") %></span>Event Videos</b></h2>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <div class="nested_form ">
+                <%= f.fields_for :videos do |video_form| %>
+                  <div class="form-group col-md-3 col-md-offset-9">
+                    <%= video_form.link_to_remove class:"btn btn-danger", id: "removeVideo", style:"background: rgb(102, 0, 0) !important" do %>
+                      <i class="glyphicon glyphicon glyphicon-minus glf-icon" style="font-size:15px; font-weight:bold;" >Remove</i>
+                    <% end %>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="name">Video</label>
+                    <%= video_form.text_field :video_url, :class=>"form-control" %>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="name">Provider</label>
+                    <%=video_form.select :video_type, [['Upload', 'upload'], ['Youtube', 'youtube'], ['Dailymotion', 'dailymotion'], ['Vimeo', 'vimeo'],['Other', 'other']] %>
+                  </div>
+                  <div class="col-md-12" style="margin:10px 0px">
+                    <div class="form-group col-md-12">
+                      <label for="ticket_description">Note</label>
+                      <%= video_form.text_area :note, :class=>"form-control",row:5%>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <div><label for="is_active">Active</label></div>
+                      <div class="btn-group" data-toggle="buttons" class="form-control">
+                        <label class="btn btn-primary active">
+                          <%= video_form.radio_button :is_active, "yes", id:"option21", autocomplete:"off", checked: true %>
+                          <%= video_form.label :is_active, 'Yes', :value => 'true' %>
+                        </label>
+                        <label class="btn btn-primary">
+                          <%= video_form.radio_button :is_active, "no", id:"option22", autocomplete:"off" %>
+                          <%= video_form.label :is_active, 'No', :value => 'false' %>
+                        </label>
+                      </div>
+                    </div>
+                  </div>             
+                <% end %>
+                <p><%= f.link_to_add "Add a Video", :videos , class:"btn btn-success", style:"width:100%", id: "addPicture"%></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingSix">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-6-Black-icon.png", style: "width:30px; height:30px") %></span>Event Categories</b></h2>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+            <div class="panel-body">
+              <select id="e1">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+          </div>
+        </div>  
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingSeven">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseThree">
+                <h2><b><span class="numberIcon"><%= image_tag("Numbers-7-Black-icon.png", style: "width:30px; height:30px") %></span>Event Settings</b></h2>
+              </a>
+            </h4>
+          </div>
+          <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+            <div class="panel-body">
+              <div class="form-group col-md-6">
+                <div><label for="event_privacy">Event Privacy</label></div>
+                <div class="btn-group" data-toggle="buttons" class="form-control">
+                  <label class="btn btn-primary active">
+                    <%= f.radio_button :event_privacy, "Public", id:"option31", autocomplete:"off", checked: true %>
+                    <%= f.label :event_privacy, 'Public', :value => 'Public' %>
+                  </label>
+                  <label class="btn btn-primary">
+                    <%= f.radio_button :event_privacy, "Private", id:"option32", autocomplete:"off" %>
+                    <%= f.label :event_privacy, 'Private', :value => 'Private' %>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="sel1">Event Type</label>
+                <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']] %>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="sel1">Event Topic</label>
+                <%=f.select :event_topic, [['Auto, Boat & Air', 'AutoAir'], ['Business & Professional', 'BusinessProfessional'], ['Charity & Causes', 'CharityCauses']] %>
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div Style="width:40%; text-align:center; padding:20px;">
+        <%= f.submit class: "btn btn-success", style:"" %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 
@@ -271,6 +431,19 @@
   });
  
   </script>
+  <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    <script>
+        $(document).ready(function() { $("#e1").select2(); });
+    </script>
+  <script type="text/javascript">
+    CKEDITOR.replace( 'desc', {
+    // skin: 'moonocolor,/myskins/moonocolor/' 
+} );  
+  </script>
 
 <style type="text/css">
   
@@ -280,7 +453,137 @@
     font-size: 14px; 
  }
 
+.well {
+    background-color: #ffffff !important;
+  }
+  h2{
+    text-align: left;
+    text-decoration: none;
+    font-size:25px;
+  }
+
+  .numberIcon
+  {
+    padding:20px;
+  }
+
+  .numberIcon image
+  {
+    width:40px !important;
+    height: 40px !important;
+  }
+    .placeSearch
+  {
+    width:100%!important;
+    height: 38px !important ;
+  }
+  #pacInput
+  {
+    z-index: 999999999999999999999 !important;
+  }
 </style>
+
+
+<script type="text/javascript">
+
+
+  
+  function initMap() {
+        
+        var map = new google.maps.Map(document.getElementById('mapPlace'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13
+        });
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pacInput'));
+
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+             $.ajax({
+              
+              type: 'GET',
+              url: '/location_update',
+              dataType: 'script',
+              data: $.param({ lat: place.geometry.location.lat(), long: place.geometry.location.lng() })
+            });
+          if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+
+
+
+          } else {
+
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            console.log(place.geometry.location.G); // Get Latitude
+console.log(place.geometry.location.K); // Get Longitude
+
+//Additional information
+console.log(place.formatted_address); // Formated Address of Place
+console.log(place.address_components[0]); // Name of Place
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+      }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script>
 
 
 
