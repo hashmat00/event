@@ -5,11 +5,16 @@
 	  	<div class="rvs-container rvs-red-highlight rvs-bordered-circle-play", style="height:350px;">
 			  <div class="rvs-item-container">
 			    <div class="rvs-item-stage">
-			      <% event.videos.each do |v| %>   
-			        <% video = VideoInfo.new("http://www.youtube.com/watch?v=mZqGqE0D0n4") %>
-			        <div class="rvs-item" style="background-image: url(<%= video.thumbnail_large %>)">
-			          <p class="rvs-item-text"><%= video.try(:title) %> <small>by <%= video.try(:author) 	rescue "Author Not Found" %></small></p>
-			          <a href="<%=v.video_url%>" class="rvs-play-video"></a>
+			      <% if event.videos.present? %>
+				      <% event.videos.each do |v| %>   
+				        <% video = VideoInfo.new("http://www.youtube.com/watch?v=mZqGqE0D0n4") %>
+				        <div class="rvs-item" style="background-image: url(<%= video.thumbnail_large %>)">
+				          <p class="rvs-item-text"><%= video.try(:title) %> <small>by <%= video.try(:author) 	rescue "Author Not Found" %></small></p>
+				          <a href="<%=v.video_url%>" class="rvs-play-video"></a>
+				        </div>
+				      <% end %>
+			      <% else %>
+			      	<div class="rvs-item" style="background-image: url(http://www.hfsinternationalpowai.com/img/no-video.gif); background-size: 100% 350px !important; background-repeat: no-repeat;">
 			        </div>
 			      <% end %>
 			    </div>
