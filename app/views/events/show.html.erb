@@ -30,7 +30,7 @@
 		              <h2>$<%= @event.payMode("amount") rescue "Something Wrong" %></h2>
 		              <h5 style="font-size:25px;" class="team-color"><%= @event.payMode("string") rescue "Something Wrong" %></h5>
 		            </div>
-		            <div class="col-lg-5 col-md-6 col-sm-3 col-xs-6 hl-bl">
+		            <!-- <div class="col-lg-5 col-md-6 col-sm-3 col-xs-6 hl-bl">
 		              <i class="glyphicon glyphicon-star"></i>
 		              <i class="glyphicon glyphicon-star"></i>
 		              <i class="glyphicon glyphicon-star"></i>
@@ -40,7 +40,7 @@
 		                <p class="team-color col-md-6 col-xs-3">Rating:</p>
 		                <p class="team-color col-md-6 col-xs-3"><strong>5.0</strong>/5.0</p>
 		              </div>
-		            </div>
+		            </div> -->
 		            <div class="row">
 		              <div class="col-md-12 col-sm-6 col-xs-12">
 		                <div class="row">
@@ -63,7 +63,7 @@
 		                      </div>
 		                      <div class="col-lg-7 col-md-6 col-xs-6 cat-img">
 		                        <img src="http://themes.fruitfulcode.com/suburb/assets/img/garage.png" alt="">
-		                        <p class="info_line">1 Garage</p>
+		                        <p class="info_line"><%= @event.tickets.active.count rescue 0 %>Tickets </p>
 		                      </div>
 		                    </div>
 		                    <div class="row">
@@ -144,58 +144,6 @@
 		          </section>
 		        </div>
 		        <hr>
-		        <div class="pr-info col-md-8 col-xs-12">
-		          <h3>Event Photos:</h3>
-		          <div class="row cust-row">
-		            <% @event.pictures.first(4).each_with_index do |ep, index| %>
-			            
-			            <div class="col-xs-3 cust-pad">
-			              <div class="pr-img" style="background-image: url(<%= ep.image.url %>);"></div>
-			              <% if index == 3 %>
-				              <!-- <span class="filter"></span> -->
-			                <label class="img-label" for="op">+<%= (@event.pictures.count) - (4) %> More</label>
-		                <% end %>
-			            </div>
-		            <% end %>
-		            <!-- <div class="col-xs-3 cust-pad">
-		              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/property_page_slider_2.jpg);"></div>
-		            </div>
-		            <div class="col-xs-3 cust-pad">
-		              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/property_page_slider_1.jpg);"></div>
-		            </div> -->
-		            <!-- <div class="col-xs-3 cust-pad">
-		              <div class="pr-img" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/property_page_slider_3.jpg);">
-		                <span class="filter"></span>
-		                <label class="img-label" for="op">+32 More</label>
-		              </div>
-		            </div>
-		          </div> -->
-		          <div class="row">
-		            <div class="col-xs-12">
-		              <h3>Video Presentation:</h3>
-		              <% if @event.videos.present? %>
-
-		              	<p><iframe src="<%= @event.videos.order("RANDOM()").first.video_url %>"></iframe></p>
-		              <% else %>
-		              	<p><iframe src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe></p>	
-	              	<% end %>
-		              <hr>
-		              <div class="row">
-		                <section class="social-block col-sm-6 col-xs-12">
-		                  <ul class="social">
-		                    <li class="social-text">SHARE:</li>
-		                    <li><a class="facebook" href="https://www.facebook.com" target="blank"><i class="fa fa-facebook"></i></a></li>
-		                    <li><a class="twitter" href="https://twitter.com" target="blank"><i class="fa fa-twitter"></i></a></li>
-		                    <li><a class="google" href="https://www.google.com" target="blank"><i class="fa fa-google-plus"></i></a></li>
-		                    <li><a class="pinterest" href="https://www.pinterest.com" target="blank"><i class="fa fa-pinterest"></i></a></li>
-		                  </ul>
-		                </section>
-		                <p class="error-block col-sm-6 col-xs-12 pull-right"><a href="#" data-toggle="modal" data-target="#modal-error"><i class="fa fa-exclamation-triangle"></i>Report About Error</a></p>
-		              </div>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
 		    </div>
 		  </div>
 		  <div class="wide_container_3">
@@ -204,105 +152,6 @@
 			        <%= render partial: "tickets", locals: { tickets: @event.tickets} %>
 			      </div>
 		      </div>
-		  </div>
-		  <div class="wide_container_3">
-		    <div class="container">
-		      <div class="row">
-		        <div class="col-md-8 col-xs-12">
-		          <header><h4>3 Feedback</h4></header>
-		          <div class="hl-bl col-xs-12">
-		            <i class="fa fa-star"></i>
-		            <i class="fa fa-star"></i>
-		            <i class="fa fa-star"></i>
-		            <i class="fa fa-star"></i>
-		            <i class="fa fa-star"></i>
-		            <p class="team-color"><span class="bold_text">5.0</span>/5.0</p>
-		          </div>
-		          <ul class="comments">
-		            <li class="comment">
-		              <div class="comment-wrapper">
-		                <div class="name pull-left">Michael Salmon</div>
-		                <span class="date-block team-color">4 days ago</span>
-		                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-		                </p>
-		              </div>
-		            </li>
-		            <li class="comment">
-		              <div class="comment-wrapper">
-		                <div class="name pull-left">Michael Salmon</div>
-		                <span class="date-block team-color">4 days ago</span>
-		                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-		                </p>
-		              </div>
-		            </li>
-		          </ul>
-		          <div class="comments-more">
-		            <a href="#">Show More</a>
-		          </div>
-		          <span class="ffs-bs transparent">
-		            <button type="submit" id="show-reply-form" class="btn btn-default btn-large"><i class="fa fa-star-o"></i><span class="btn-text">leave review</span></button>
-		          </span>
-		          <section id="leave-reply">
-		            <header><h4>Leave Review</h4></header>
-		            <div class="clearfix">
-		              <aside>
-		                <div class="rating rating-user">
-		                  <div class="inner"></div>
-		                </div>
-		              </aside>
-		            </div>
-		            <div class="row">
-		              <form id="form-single-property-reply" method="post">
-		                <div class="col-sm-6 col-xs-12">
-		                  <input type="text" class="form-control" id="form-blog-reply-name" name="form-blog-reply-name" placeholder="Your Name" required>
-		                </div><!-- /.form-group -->
-		                <div class="col-sm-6 col-xs-12">
-		                  <input type="email" class="form-control" id="form-blog-reply-email" name="form-blog-reply-email" placeholder="Your Email" required>
-		                </div><!-- /.form-group -->
-		                <div class="col-xs-12">
-		                  <textarea class="form-control" id="form-blog-reply-message" rows="5" name="form-blog-reply-message" placeholder="Write Your Text..."></textarea>
-		                </div><!-- /.form-group -->
-		                <div class="col-xs-12 btm-indent">
-		                  <button type="submit" class="btn pull-right btn-small btn-primary" id="form-blog-reply-submit">Send</button>
-		                </div><!-- /.form-group -->
-		                <div id="form-rating-status"></div>
-		              </form><!-- /#form-contact -->
-		            </div>
-		          </section>
-		        </div>
-		        <div class="col-md-4 col-xs-12 some-prp">
-		          <h4>Here is some Similar property:</h4>
-		          <p class="team-color">in London, UK</p>
-		          <hr>
-		          <div class="property-block-small">
-		            <a href="property_page.html">
-		              <div class="property-image-small" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/5388048563_61c3bd3306_z.jpg);"></div>
-		              <h3>37 Great Russell St</h3>
-		              <p class="team-color">London, 37 Great Russell St Street Good</p>
-		              <h4>$15,000/month</h4>
-		            </a>
-		          </div>
-		          <hr>
-		          <div class="property-block-small">
-		            <a href="property_page.html">
-		              <div class="property-image-small" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/5388048563_61c3bd3306_z.jpg);"></div>
-		              <h3>37 Great Russell St</h3>
-		              <p class="team-color">London, 37 Great Russell St Street Good</p>
-		              <h4>$15,000/month</h4>
-		            </a>
-		          </div>
-		          <hr>
-		          <div class="property-block-small">
-		            <a href="property_page.html">
-		              <div class="property-image-small" style="background-image: url(http://themes.fruitfulcode.com/suburb/assets/img/5388048563_61c3bd3306_z.jpg);"></div>
-		              <h3>37 Great Russell St</h3>
-		              <p class="team-color">London, 37 Great Russell St Street Good</p>
-		              <h4>$15,000/month</h4>
-		            </a>
-		          </div>
-		        </div>
-		      </div>
-		    </div>
 		  </div>
 		</div>
 	</div>

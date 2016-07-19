@@ -5,21 +5,22 @@ class OrderItemsController < ApplicationController
       @order_item= current_order.order_items.where(ticket_id:  params[:order_item][:ticket_id].to_i, order_id: current_order.try(:id), event_id: params[:order_item][:event_id].to_i).first
     if @order_item
       @order_item.quantity = @order_item.quantity.to_i + params[:order_item][:quantity].to_i
-      already_cart = true
+      if (@order_item.ticket.ticket_price == 0)
+        @order_item.update(total_price: 0, unit_price:0)
+      else
+        @order_item.update(total_price: (@order_item.quantity * @order_item.unit_price))
+      end  
     else
       @order_item = @order.order_items.new(order_item_params)
     end  
+      if (@order_item.ticket.ticket_price == 0)
+        @order_item.unit_price = 0
+        @order_item.total_price = 0
+      end
     @order_item.user_id = current_user.id
     @order.user_id = current_user.id
-    @order.save
-    @order_item.update(total_price: (@order_item.quantity * @order_item.unit_price)) if already_cart
-    if !(@order_item.ticket.ticket_price >= 0)
-      @order_item.update(total_price: 0, unit_price: 0)
-    end  
     @order.quantity = @order_item.quantity
-    # @order.order_type = @order_item.event.is_paid? ? "paid" : "free"
     @order.save
-
     session[:order_id] = @order.id
   end
 

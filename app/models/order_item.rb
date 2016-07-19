@@ -9,17 +9,16 @@ class OrderItem < ActiveRecord::Base
 
   before_save :finalize
   serialize :notification_params, Hash
-
   def unit_price
     if persisted?
-      self[:unit_price]
+      self[:unit_price] rescue 0
     else
-      self.ticket.try(:price)
+      self.ticket.try(:price) rescue 0
     end
   end
 
   def total_price
-    unit_price * quantity if unit_price.present?
+    unit_price * quantity if unit_price.present? rescue 0
   end
 
   def self.paypal_url(return_url, subtotal, event_id, ticket_id, size)
@@ -62,7 +61,7 @@ private
   end
 
   def finalize
-    self[:unit_price] = unit_price
-    self[:total_price] = quantity * self[:unit_price]
+    self[:unit_price] = unit_price rescue 0
+    self[:total_price] = quantity * self[:unit_price] rescue 0
   end
 end

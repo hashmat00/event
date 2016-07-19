@@ -6,7 +6,7 @@ class Order < ActiveRecord::Base
   after_create :update_order_attributes
 
   def subtotal
-    order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+    order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum rescue 0
   end
   def update_order_attributes
     self.update(order_uid: rand.to_s[2..8].to_i)
