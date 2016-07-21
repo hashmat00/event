@@ -20,7 +20,7 @@ class Ticket < ActiveRecord::Base
 		end
 
 		def available_count
-			available_count = self.quantity.to_i - self.ticket_histories.active.count
+			available_count = self.quantity.to_i - self.ticket_histories.active.collect(&:quantity).compact.sum.count rescue 0
 			return available_count > 0 ? available_count : 0
 		end	
 end
