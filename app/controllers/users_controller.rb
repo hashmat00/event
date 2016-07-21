@@ -31,9 +31,9 @@ class UsersController < ApplicationController
     def tickets_history
     	if params[:id]
     		@ticket.update(is_active: false)
-    		@ticket.order.update(is_active: false)
+    		@ticket.subscription.update(is_active: false)
     	end	
-    	@tickets = current_user.ticket_histories.eager_load(:event, :ticket, :order).references(:event, :ticket, :order)	
+    	@tickets = current_user.ticket_histories.eager_load(:event, :ticket, :subscription).references(:event, :ticket, :subscription)	
     	@all_tickets_count = @tickets.try(:active).try(:count)
     	@upcomming_tickets_count = @tickets.where('events.start_time > ?', Time.now).try(:active).try(:count)
     	@saved_tickets_count = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }.try(:count)

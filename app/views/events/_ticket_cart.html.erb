@@ -1,0 +1,22 @@
+<%= form_for cart, url: carts_path, method: :post, remote: true do |f| %>
+  <h4 class="text-right">Unit Price: <span style="color: green">
+  <%= number_to_currency ticket.ticket_price %></span></h4>
+  <div class="input-group">
+    <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, max: ticket.available_count, id: "quantity_#{ticket.id}" %>
+      <%= f.hidden_field :ticket_id, value: ticket.id %>
+      <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+  		<b>
+  		<% if cart.errors.any? %>
+  			<script type="text/javascript">
+  				alertify.message("<%= cart.errors.full_messages.first %>");
+  			</script>
+  		<% else %>
+  			<% if request.xhr? %>
+	  			<script type="text/javascript">
+	  				alertify.message("Item Successfully Added in Your cart");
+	  			</script>
+  			<% end %>
+  		<% end %>	
+  		</b>
+  </div>
+<% end %>

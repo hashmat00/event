@@ -1,15 +1,9 @@
 class TicketHistory < ActiveRecord::Base
+	belongs_to :subscription
 	belongs_to :user
 	belongs_to :event
 	belongs_to :order
 	belongs_to :ticket
-	after_update :update_order
 	scope :active, ->{ where(is_active: true) }
 	scope :inactive, ->{ where(is_active: false) }
-	def update_order
-		unless self.is_active
-			self.order.update(is_active: false)
-		end 	
-	end 
-
 end

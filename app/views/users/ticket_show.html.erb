@@ -13,7 +13,7 @@
           </h1>
         </div>
         <div class="col-md-12">
-          <div class="col-md-4"><b><p><%= @ticket.ticket.pay_type %> order #<%= @ticket.order.try(:order_uid) %> on <%= @ticket.order.purchased_at.strftime('%b  %d, %y') %></p>
+          <div class="col-md-4"><b><p><%= @ticket.ticket.pay_type %> order #<%= @ticket.subscription.try(:order_id) %> on <%= @ticket.subscription.purchased_at.strftime('%b  %d, %y') %></p>
             <p><%= @ticket.event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') %>  &ndash;<br> <%= @ticket.event.end_time.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') %></p>
             <p><%= @ticket.event.try(:city).try(:titleize) %></p></b></div>
           <div class="col-md-8"></div>

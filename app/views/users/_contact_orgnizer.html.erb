@@ -10,9 +10,6 @@
 
           <%= form_for Event.new, url: "/events/#{ticket.try(:event).try(:id)}/contact_email", method: "post", html: {id: "contact_form"} do |f| %>
           <div class="text-con">
-            <%#= f.hidden_field :id, value: ticket.order.id %>
-            <%#= f.hidden_field :ticket_history_id, value: ticket.id %>
-            
             <div class="form-group">
               <label class="control-label col-sm-2" for="email">Name *</label>
               <div class="col-sm-10">

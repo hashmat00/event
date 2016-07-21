@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
   has_many :wish_lists, dependent: :destroy
   has_many :wish_lists_events, :through => :wish_lists, :source => :wish_listable, source_type: 'Event'
   has_many :contact_emails, dependent: :destroy
-  mount_uploader :image, PictureUploader 
+  mount_uploader :image, PictureUploader
+  has_many :carts, dependent: :destroy 
   def self.sign_in_from_omniauth(auth)
         user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
         user.email =  auth['info']['email']

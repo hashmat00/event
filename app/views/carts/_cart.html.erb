@@ -1,0 +1,88 @@
+
+ <div class="well">
+
+  <div class="row">
+    <div class="col-xs-10">
+      <h4><%= cart.ticket.name.try(:titleize) %></h4>
+      <p><%= cart.ticket.ticket_description.present? ? cart.ticket.ticket_description : "No description available for this ticket" %></p>
+      <div class="row">
+        <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket.quantity %></div>
+        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket. available_count %></div>        
+      </div>
+     
+    </div>
+    <div class="col-xs-2">
+      
+      <%= form_for @cart, remote: true do |f| %>
+      <h4 class="text-right">Unit Price: <span style="color: green">
+        <%= number_to_currency cart.ticket.ticket_price %></span></h4>
+        <div class="input-group">
+          <%= f.number_field :quantity, value: cart.quantity, class: "form-control", min: 1, max: cart.ticket.available_count %>
+            <%= f.hidden_field :ticket_id, value: cart.ticket.id %>
+            <%= f.hidden_field :is_cart, value: true %>            
+            <%= f.submit "update", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <%= link_to "Continue Shopping", event_path(cart.try(:ticket).try(:event).try(:id)), class:"btn btn-primary" %>
+      <%= link_to "remove From Cart", cart_path(cart.id), method: :delete, class:"btn btn-danger"%>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Checkout
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">User Detail form</h4>
+            </div>
+            <div class="modal-body">
+              <%= form_for cart.build_payment, class: "form-horizontal", role: "form" do |f| %>
+                <%=  f.hidden_field :cart_id, :value => cart.id %>
+                <% url = "#{baseUrl}/subscriptions/subscription_create?cart_id=#{cart.id}&subscriptions=true" %>
+                <%=  f.hidden_field :url, :value => url %>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">First Name:</label>
+                  <div class="col-sm-10">
+                    <%= f.text_field :first_name, class: "form-control", placeholder: "Enter the First Name", required:true %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Last Name:</label>
+                  <div class="col-sm-10">
+                    <%= f.text_field :last_name, class: "form-control", placeholder: "Enter the Last Name", required:true %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Email:</label>
+                  <div class="col-sm-10">
+                    <%= f.email_field :email, class: "form-control", placeholder: "Enter the Email", required:true %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="pwd">Contact:</label>
+                  <div class="col-sm-10">
+                    <%= f.text_field :contact_no, class: "form-control", placeholder: "Enter the Coontact NO", required:true %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <%= f.submit "#{cart.total_price > 0 ? 'Save Details and Go for Payment' : 'Save Details and Get Free Ticket'}", class:"btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <% url = "#{baseUrl}/subscriptions/subscription_create?cart_id=#{cart.id}&subscriptions=true" %>
+
+    </div>
+    
+  </div>
+</div>  

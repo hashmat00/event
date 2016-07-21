@@ -1,0 +1,2 @@
+$('#cart-text').html("<%= j render partial: 'layouts/cart_text' %>");
+$('#ticket_cart_<%= @cart.ticket.id %>').html("<%= j render partial: 'events/ticket_cart', locals: {ticket: @cart.ticket, cart: @cart} %>");

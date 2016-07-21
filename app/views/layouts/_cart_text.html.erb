@@ -1,3 +1,4 @@
-<div style="background-color:#2AE5BC;height:40px; margin-top:5px;text-align: center;">
-<%= link_to "Ticketcart #{current_order.order_items.size}(#{number_to_currency current_order.subtotal})", cart_path, class: "btn btn-link glyphicon glyphicon-shopping-cart" %>
-</div>
+<%= link_to carts_path do %><%= current_user.carts.active.count %>
+<br>
+$<%= current_user.carts.collect(&:total_price).sum  %>
+<% end %>

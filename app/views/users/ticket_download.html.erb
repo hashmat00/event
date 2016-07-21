@@ -32,7 +32,7 @@ theViewer.defaultViewer = new theViewer.Viewer({});
                     <td rowspan="2"><%= image_tag(Rails.root.join('public','qrcode',"qrcode_#{rc}.png")) %></td>
                   </tr>
                   <tr>                 
-                    <td  colspan="2"><p>Order Info</p><h3>Order #<%= @ticket.order.try(:order_uid) %>. Ordered by <%= @ticket.order.try(:first_name) %>&nbsp<%= @ticket.order.try(:last_name) %> on <%= @ticket.order.purchased_at.strftime('%b  %d, %y') %></h3></td>
+                    <td  colspan="2"><p>Order Info</p><h3>Order #<%= @ticket.subscription.try(:order_uid) %>. Ordered by <%= @ticket.subscription.try(:first_name) %>&nbsp<%= @ticket.order.try(:last_name) %> on <%= @ticket.subscription.purchased_at.strftime('%b  %d, %y') %></h3></td>
                   </tr>
                   <!-- <tr> 
                     <td  colspan="2"><p>Type</p><h3><%=@ticket.event.try(:name) %></h3></td>

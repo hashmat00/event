@@ -38,7 +38,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li>              
-           <div class="cart-text"><%= render 'layouts/cart_text' %></div>
+           <div class="cart-text" id= "cart-text"><%= render 'layouts/cart_text' %></div>
           </li>
           <li></li>
           <li><%= render 'notifications/notifications' %></li>

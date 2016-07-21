@@ -6,7 +6,7 @@
       <p><%= ticket.ticket_description.present? ? ticket.ticket_description : "No description available for this ticket" %></p>
       <div class="row">
         <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= ticket.quantity %></div>
-        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3">10</div>        
+        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= ticket.available_count %></div>        
       </div>
       <div class="row">
         <div class="col-md-3"><b><h5>Country</h5></b></div><div class="col-md-3"><%= ticket.country %></div>
@@ -20,20 +20,26 @@
         <div class="col-md-3"><b><h5>Sale Channel</h5></b></div><div class="col-md-9"><%= ticket.sale_channel %></div>
       </div>
     </div>
-    <div class="col-xs-2">
-      
-      <%= form_for order_item, remote: true do |f| %>
-      <h4 class="text-right">Unit Price: <span style="color: green">
-        <%= number_to_currency ticket.ticket_price %></span></h4>
-        <div class="input-group">
-          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
-            <%= f.hidden_field :ticket_id, value: ticket.id %>
-            <%= f.hidden_field :event_id, value: event.id %>
-
-            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
-        </div>
-      <% end %>
+    <div class="col-xs-2" id="ticket_cart_<%= ticket.id %>">
+      <%= render partial: "ticket_cart", locals: {cart: @cart, ticket: ticket} %>     
     </div>
     
   </div>
 </div>
+
+<!-- <script type="text/javascript">
+  $("#addCart_<%= ticket.id %>").submit(function(e){
+    // if ($('#quantity').val == )
+    if ($('#quantity_<%= ticket.id %>').val();> <%#= current_user.carts.where(cartable_id: ticket.id, cartable_type: "Ticket").first.quantity %> )
+    {
+      e.preventDefault()
+      alert("You can not add more than <%= ticket.available_count %>");
+      return false
+    }
+    else
+    {
+      return true
+    }
+})
+</script>
+ -->

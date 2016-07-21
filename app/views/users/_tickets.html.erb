@@ -15,8 +15,8 @@
               <h3 data-automation="view-order" class="list-card__title">
                   <%= t.event.name %>
               </h3>
-              <p class="hide-small l-mar-top-2 text-body-small text-body--faint" data-automation="order-payment-status-text"><%= t.ticket.pay_type %> order #<%= t.order.try(:order_uid) %> of <%= t.quantity %> Tickets on <%= t.order.purchased_at.to_formatted_s(:long) %></p>
-              <p class="show-small l-mar-top-2 text-body-small text-body--faint">Order #<%= t.order.try(:order_uid) %></p>    
+              <p class="hide-small l-mar-top-2 text-body-small text-body--faint" data-automation="order-payment-status-text"><%= t.ticket.pay_mode %> order #<%= t.subscription.try(:order_id) %> of <%= t.quantity %> Tickets on <%= t.subscription.purchased_at.to_formatted_s(:long) %></p>
+              <p class="show-small l-mar-top-2 text-body-small text-body--faint">Order #<%= t.subscription.try(:order_id) %></p>    
             </div>
           </a>
         </div>

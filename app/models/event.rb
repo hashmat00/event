@@ -66,7 +66,7 @@ class Event < ActiveRecord::Base
     self.tickets.collect(&:fee)
   end  
 
-  def payMode(type)
+  def payMode(type)   
     p = self.tickets.collect(&:pay_mode).uniq
     if p.count==0
       case type

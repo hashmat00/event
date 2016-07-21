@@ -1,0 +1,7 @@
+<% if current_user.carts.present? %>
+<div class="row">
+  <%= render current_user.carts %>
+</div>
+<% else %>
+  No items in cart
+<% end %>
