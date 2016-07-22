@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8"/>
@@ -15,35 +14,32 @@ theViewer.defaultViewer = new theViewer.Viewer({});
 <title></title>
 </head>
 <body>
-		<div class="container">
-      <% @random_codes.each_with_index do |rc, i| %>
-        <div class="row" style="height:900px;, width:100%;">
-          <div class="col-md-8">
-            <div style="height:350px;">
-              <table class="table table-bordered">
-                <tbody>
-                  <tr>
-                    <td colspan="2"><p>Event</p><h1><%=@ticket.event.try(:name) %></h1></td>
-                    <td><p>Payment Status</p><h3><%= @ticket.ticket.pay_type %></h3></td>
-                  </tr>
-                  <tr>
-                     <td style="width:50% !important;"><p>Date+Time</p><h3><%= @ticket.event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') %>  &ndash;<br> <%= @ticket.event.end_time.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') %></h3></td>
-                     <td style="width:50% !important;"> <p>Location</p><h3><%= @ticket.event.city %></h3></td>
-                    <td rowspan="2"><%= image_tag(Rails.root.join('public','qrcode',"qrcode_#{rc}.png")) %></td>
-                  </tr>
-                  <tr>                 
-                    <td  colspan="2"><p>Order Info</p><h3>Order #<%= @ticket.subscription.try(:order_uid) %>. Ordered by <%= @ticket.subscription.try(:first_name) %>&nbsp<%= @ticket.order.try(:last_name) %> on <%= @ticket.subscription.purchased_at.strftime('%b  %d, %y') %></h3></td>
-                  </tr>
-                  <!-- <tr> 
-                    <td  colspan="2"><p>Type</p><h3><%=@ticket.event.try(:name) %></h3></td>
-                  </tr> -->
-                </tbody>
-              </table>
-            </div>
+	<div class="container">
+    <% @random_codes.each_with_index do |rc, i| %>
+      <div class="row" style="height:900px;, width:100%;">
+        <div class="col-md-8">
+          <div style="height:350px;">
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <td colspan="2"><p>Event</p><h1><%=@ticket.event.try(:name) %></h1></td>
+                  <td><p>Payment Status</p><h3><%= @ticket.subscription.pay_mode %></h3></td>
+                </tr>
+                <tr>
+                   <td style="width:50% !important;"><p>Date+Time</p><h3><%= @ticket.event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') %>  &ndash;<br> <%= @ticket.event.end_time.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') %></h3></td>
+                   <td style="width:50% !important;"> <p>Location</p><h3><%= @ticket.event.city %></h3></td>
+                  <td rowspan="2"><%= image_tag(Rails.root.join('public','qrcode',"qrcode_#{rc}.png")) %></td>
+                </tr>
+                <tr>                 
+                  <td  colspan="2"><p>Order Info</p><h3>Order #<%= @ticket.subscription.try(:order_id) %>. Ordered by <%= @ticket.subscription.try(:first_name) %>&nbsp<%= @ticket.order.try(:last_name) %> on <%= @ticket.subscription.purchased_at.strftime('%b  %d, %y') %></h3></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+  </div>
 </body>
 </html>
 

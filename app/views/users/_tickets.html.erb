@@ -8,7 +8,7 @@
               <div class="list-card__image">
               <%= image_tag(t.event.picture_url, class: "panel-recipe #{t.event.picture.blank? ? 'panel-border' : ''}") %>
               </div>
-              <span class="show-small list-card__label"><%= t.ticket.pay_type %></span>
+              <span class="show-small list-card__label"><%= t.subscription.pay_mode %></span>
             </div>
             <div class="list-card__body">
               <time class="list-card__date"><%= t.event.start_time.to_formatted_s(:long) rescue "" %></time>

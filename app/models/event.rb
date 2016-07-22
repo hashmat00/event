@@ -186,8 +186,5 @@ class Event < ActiveRecord::Base
       if picture.size > 5.megabytes
           errors.add(:picture, "Should be less than 5MB")
       end
-   end
-    
-    
-    
+   end 
 end

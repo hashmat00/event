@@ -1,6 +1,5 @@
 class Cart < ActiveRecord::Base
 	belongs_to :cartable, polymorphic: true
-	# belongs_to :ticket
 	has_one :payment
 	validate :validate_quantity
 	before_save :set_columns
@@ -10,12 +9,12 @@ class Cart < ActiveRecord::Base
   scope :free, ->{ where(pay_mode: "free") }
 	scope :donation, ->{ where(pay_mode: "donation") }
 
+	# Method For validate the quantity, It doesn't allowed quantity of tickets more than available tickets while saving in cart
   def validate_quantity
     if self[:quantity] > self.available_quantity
       errors.add(:_, "You can not add more than #{available_quantity} tickets in your cart")
     end
   end
-
 
 	def set_columns
 		self[:unit_price] = self.cartable.try(:ticket_price)

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-     
+  scope :active, ->{ where(is_active: true) }    
   has_many :events
   has_many :like
   has_many :active_relationships,  class_name:  "Relationship",
@@ -32,12 +32,12 @@ class User < ActiveRecord::Base
   mount_uploader :image, PictureUploader
   has_many :carts, dependent: :destroy 
   def self.sign_in_from_omniauth(auth)
-        user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
-        user.email =  auth['info']['email']
-        user.name = auth['info']['name']
-        user.password = Devise.friendly_token[0,20]
-        user.save
-        user
+    user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
+    user.email =  auth['info']['email']
+    user.name = auth['info']['name']
+    user.password = Devise.friendly_token[0,20]
+    user.save
+    user
   end
 
   def admin?
@@ -63,25 +63,12 @@ class User < ActiveRecord::Base
     self.interests.where(:id => event.id).first.present?
   end
 
-
   def self.to_csv(options = {})
-  CSV.generate(options) do |csv|
+    CSV.generate(options) do |csv|
       csv << column_names
       all.each do |user|
         csv << user.attributes.values_at(*column_names)
       end
     end
   end
-
-
-      
-    #    before_save { self.email = email.downcase }
-    #    validates :username, presence: true, length: {minimum: 3, maximum: 40}
-    #    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-    #     validates :email, presence: true, length: {maximum: 50},
-    #                         uniqueness: {case_sensitive: false },
-    #                         format: { with: VALID_EMAIL_REGEX }
-                            
-                            
-    # has_secure_password
 end
