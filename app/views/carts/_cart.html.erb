@@ -5,7 +5,7 @@
       <p><%= cart.ticket.ticket_description.present? ? cart.ticket.ticket_description : "No description available for this ticket" %></p>
       <div class="row">
         <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket.quantity %></div>
-        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket. available_count %></div>        
+        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket.available_count %></div>        
       </div>     
     </div>
     <div class="col-xs-2">      

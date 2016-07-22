@@ -15,8 +15,8 @@
         <h4>Ticket name:  <%= e.name.try(:titleize) %></h4>
         <p>Ticket description: <%= e.ticket_description.present? ? e.ticket_description : "No description available for this ticket" %></p>
         <div class="row">
-          <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= e.quantity %></div>
-          <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= e.available_count %></div>        
+          <div class="col-md-3"><b><h5>Ticket Type</h5></b></div><div class="col-md-3"><%= e.pay_mode %></div>
+          <div class="col-md-3"><b><h5>Ticket Price</h5></b></div><div class="col-md-3"><%=  e.price.present? ? (number_to_currency e.price) : '$0' %></div>        
         </div>
         <div class="row">
           <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= e.quantity %></div>
@@ -36,7 +36,7 @@
         </div>
         <div class="row">
           <div class="col-md-3"><b><h5>Total Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.count rescue 0%></div>      
-          <div class="col-md-3"><b><h5>Total Earning</h5></b></div><div class="col-md-3">$<%= e.ticket_histories.active.collect(&:subscription).collect(&:total_price).sum rescue 0 %></div> 
+          <div class="col-md-3"><b><h5>Total Earning</h5></b></div><div class="col-md-3">$0<%= e.ticket_histories.active.collect(&:subscription).collect(&:total_price).sum rescue 0 %></div> 
         </div>
         <div class="row">
           <div class="col-md-3"><b><h5>Total Active Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.active.count rescue 0%></div> 
