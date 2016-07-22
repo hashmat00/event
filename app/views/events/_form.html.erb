@@ -34,18 +34,18 @@
                 <label for="name">Description</label>
                 <%= f.text_area :description, id: "desc", :class=>"form-control", rows:5, required: true %>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="name">Event Start Date </label>
                 <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control", required: true %>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
                 <label for="name">Event End Date </label>
                 <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control", required: true %>
               </div>
-              <div class="form-group col-md-4">
+              <!-- <div class="form-group col-md-4">
               <label for="name">Picture</label>
-                <%= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
-              </div>
+                <%#= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
+              </div> -->
               <div class="form-group col-md-12">
                 <label for="name">Location</label>
                 <div>
@@ -115,10 +115,10 @@
                     <label for="name">Description</label>
                     <%=  schedule_form.text_area :description, :class=>"form-control",row:5 %>
                   </div>
-                  <div class="form-group col-md-12">
+                  <!-- <div class="form-group col-md-12">
                     <label for="name">How often does this event occur?</label>
-                    <%=schedule_form.select :event_occure, [['Daily', 'days'], ['Weekly', 'weeks'], ['Monthly', 'months'], ['Custom', 'custom']] %>
-                  </div>
+                    <%#=schedule_form.select :event_occure, [['Daily', 'days'], ['Weekly', 'weeks'], ['Monthly', 'months'], ['Custom', 'custom']] %>
+                  </div> -->
                   <!-- <div class="form-group col-md-12">
                     <label for="name">Repeating Every</label>
                     <%#=schedule_form.select :month_day, [['First', '0'], ['Second', '1'], ['Third', '2'], ['Fourth', '3']] %>
@@ -131,25 +131,25 @@
                     <label for="name">Select Days</label>
                     <%#=schedule_form.select :week_day, [['Sunday', '0'], ['Monday', '1'], ['Tuesday', '2'], ['Wednesday', '3'],['Thursday', '4'], ['Friday', '5'], ['Saturday', '6'] ], id: "weekDays" %>
                   </div> -->
-                  <div class="form-group col-md-4">
+                  <!-- <div class="form-group col-md-4">
                     <label for="name">Start Time</label>
-                    <%=  schedule_form.text_field :start_time,:id=>"start_time",:class=>"form-control"   %>
+                    <%#=  schedule_form.text_field :start_time,:id=>"start_time",:class=>"form-control"   %>
                   </div>
                   <div class="form-group col-md-4">
                     <label for="name">End Time</label>
-                    <%=  schedule_form.text_field :end_time,:id=>"end_time",:class=>"form-control" %>
-                  </div>
-                  <div class="form-group col-md-4">
+                    <%#=  schedule_form.text_field :end_time,:id=>"end_time",:class=>"form-control" %>
+                  </div> -->
+                  <!-- <div class="form-group col-md-4">
                     <label for="name">Of the</label>
-                    <%=schedule_form.select :event_day, [['Same day', '0'], ['Next day', '1'], ['2nd day', '2'], ['3rd day', '3'],['4th day', '4'], ['5th day', '5'], ['6th day', '6']] %>
-                  </div>
+                    <%#=schedule_form.select :event_day, [['Same day', '0'], ['Next day', '1'], ['2nd day', '2'], ['3rd day', '3'],['4th day', '4'], ['5th day', '5'], ['6th day', '6']] %>
+                  </div> -->
                   <div class="form-group col-md-6">
                     <label for="name">Start From</label>
-                    <%=  schedule_form.text_field :start_date,:id=>"start_time",:class=>"form-control"   %>
+                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});", value: "#{Time.now}"  %>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="name">to</label>
-                    <%=  schedule_form.text_field :end_date,:id=>"end_time",:class=>"form-control" %>
+                    <label for="name">To</label>
+                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});", value: "#{Time.now}" %>
                   </div>
                 <% end %>
                 <div class="form-group col-md-12">
@@ -187,26 +187,23 @@
                   <div class="form-group col-md-6">
                     <div><label for="price">Pay Mode</label></div>
                     <div class="btn-group" data-toggle="buttons" class="form-control">
-                      <label class="btn btn-primary active" onclick = "$('#price').attr('disabled','true');">
-                        <%= ticket_form.radio_button :pay_mode, "free", id:"option1", autocomplete:"off", checked: true, onclick: "$('#price').attr('disabled','true');" %>
-                        <%= ticket_form.label :pay_mode, 'Free', :value => 'free', onclick: "$('#price').attr('disabled','true');" %>
-                        <!-- <input type="radio" name="options" id="option1" autocomplete="off" checked> Free -->
+                      <label class="btn btn-primary active payMode0" onclick="$(this).parent().parent().next().find('.price').attr('disabled','true');">
+                        <%= ticket_form.radio_button :pay_mode, "free", id:"option1", autocomplete:"off", checked: true %>
+                        <%= ticket_form.label :pay_mode, 'Free', :value => 'free' %>
                       </label>
-                      <label class="btn btn-primary" onclick ="$('#price').removeAttr('disabled');">
-                        <%= ticket_form.radio_button :pay_mode, "paid", id:"option2", autocomplete:"off", onclick: "$('#price').removeAttr('disabled');" %>
-                        <%= ticket_form.label :pay_mode, 'Paid', :value => 'paid', onclick: "$('#price').removeAttr('disabled');" %>
-                        <!-- <input type="radio" name="options" id="option2" autocomplete="off"> Paid -->
+                      <label class="btn btn-primary payMode1" onclick="$(this).parent().parent().next().find('.price').removeAttr('disabled');">
+                        <%= ticket_form.radio_button :pay_mode, "paid", id:"option2", autocomplete:"off" %>
+                        <%= ticket_form.label :pay_mode, 'Paid', :value => 'paid' %>
                       </label>
-                      <label class="btn btn-primary" onclick= "$('#price').attr('disabled','true');">
-                        <%= ticket_form.radio_button :pay_mode, "donation", id:"option3", autocomplete:"off", onclick: "$('#price').attr('disabled','true');" %>
-                        <%= ticket_form.label :pay_mode, 'Donation', :value => 'donation', onclick: "$('#price').attr('disabled','true');" %>
-                        <!-- <input type="radio" name="options" id="option3" autocomplete="off"> Donation -->
+                      <label class="btn btn-primary payMode0" onclick="$(this).parent().parent().next().find('.price').attr('disabled','true');">
+                        <%= ticket_form.radio_button :pay_mode, "donation", id:"option3", autocomplete:"off" %>
+                        <%= ticket_form.label :pay_mode, 'Donation', :value => 'donation' %>
                       </label>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <label for="price">Price</label>
-                    <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control", disabled: true %>
+                    <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control price", disabled: true %>
                   </div>
                   <div class="col-md-12" style="margin:10px 0px">
                     <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11">Advance</button> -->
@@ -234,11 +231,11 @@
                       </div> 
                       <div class="form-group col-md-6">
                         <label for="tickets_start_date">Ticket Sales Start</label>
-                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control" %>
+                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});", value: "#{Time.now}" %>
                        </div>
                       <div class="form-group col-md-6">
                         <label for="ticket_end_date">Ticket Sales End</label>
-                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control" %>
+                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});", value: "#{Time.now}" %>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
@@ -420,27 +417,28 @@
     }
   });
 </script>
-  <script>
+<script>
   $(function() {
     $("#start_date").datetimepicker({
-                        defaultDate: Date.now(),
-                        disabledDates: [
-                            moment("12/25/2013"),
-                            new Date(2013, 11 - 1, 21),
-                            "11/22/2013 00:53"
-                        ]
-                    });
+      defaultDate: Date.now(),
+      disabledDates: [
+        moment("12/25/2013"),
+        new Date(2013, 11 - 1, 21),
+        "11/22/2013 00:53"
+      ]
+    });
     $("#end_date").datetimepicker({
-                        defaultDate: Date.now(),
-                        disabledDates: [
-                            moment("12/25/2013"),
-                            Date.now(),
-                            "11/22/2013 00:53"
-                        ]
-                    });
-                });
- 
-  </script>
+      defaultDate: Date.now(),
+      disabledDates: [
+        moment("12/25/2013"),
+        Date.now(),
+        "11/22/2013 00:53"
+      ]
+    });
+  });
+</script>
+
+
   <script type="text/javascript">
             // $(function () {
             //     $('#datetimepicker1').datetimepicker();
