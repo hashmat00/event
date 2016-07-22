@@ -401,10 +401,18 @@
           </div>
         </div>
       </div>
-      <div Style="width:40%; text-align:center; padding:20px;">
-        <%= f.submit class: "btn btn-success", style:"" %>
+      <div Style="width:100%; text-align:center; padding:20px;">
+        <%= f.submit class: "btn btn-primary", style:"" %>
+         <% if @event.id.present? %>
+      <% if !(@event.is_active) %><a class="btn btn-success" href="/events/<%= @event.id %>?single=true&active=true&id=<%= @event.id %>" data-method="put">Launch My Event</a><% end %>
+      <% if (@event.is_active) %><a class="btn btn-warning" href="/events/<%= @event.id %>?single=true&active=false&id=<%= @event.id %>" data-method="put">Make My Event Inactive</a><% end %>
+      <a href="/events/<%= @event.id %>" class="btn btn-info">Preview My Event</a>
+      <a href="/events/<%= @event.id %>" data-method="delete" class="btn btn-danger">Delete My Event</a>
+    <% end %>
       </div>
     <% end %>
+   
+
   </div>
 </div>
 

@@ -1,6 +1,13 @@
-<!--display title from partials page-->
-<%= render 'shared/page_title', title: "Edit Event" %>
-
-
-<!--edit recipe form-->
+   
+<div style="display:inline-block">
+  <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2 l-sm-align-center" style="width:100%;">
+    <span class="main-heading text-heading-primary text-body--significant" data-automation="event-name-display">
+      Edit <%= @event.name.try(:titleize) %>
+    </span>
+    <span id="event-status-badge" class="badge badge--alert">Edit</span>
+    <div class="text-body-medium text-body--faint l-mar-top-1" data-automation="event-date-range">
+      <%= Time.now.strftime('%A, %B %d, %Y at %I:%M %p') %>
+    </div>
+  </div>
+</div>
 <%= render 'form' %>

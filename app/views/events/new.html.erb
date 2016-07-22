@@ -1,54 +1,13 @@
    
-    <div style="display:inline-block">
-        <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2 l-sm-align-center" style="width:100%;">
-            <span class="main-heading text-heading-primary text-body--significant" data-automation="event-name-display">
-                    Create An Event
-            </span>
-            <span id="event-status-badge" class="badge badge--alert">draft</span>
-
-
-        <div class="text-body-medium text-body--faint l-mar-top-1" data-automation="event-date-range">
-            Thursday, August 18, 2016 from 7:00 PM to 10:00 PM (IST)
-        </div>
-
-        </div>
+<div style="display:inline-block">
+  <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-mar-top-2 l-sm-align-center" style="width:100%;">
+    <span class="main-heading text-heading-primary text-body--significant" data-automation="event-name-display">
+      Create An Event
+    </span>
+    <span id="event-status-badge" class="badge badge--alert">New</span>
+    <div class="text-body-medium text-body--faint l-mar-top-1" data-automation="event-date-range">
+      <%= Time.now.strftime('%A, %B %d, %Y at %I:%M %p') %>
     </div>
-    <div style="display:inline-block">
-    <div class="g-cell g-cell-1-1 g-cell-md-6-12 l-sm-align-center l-md-align-right l-lg-align-right"  style="width:100%; text-align: right;">
-    
-    <a class="btn btn--secondary l-mar-top-2" id="save-event-button" onclick="EB.CreatePage.submit();" data-automation="save-event">
-        <span class="show-small">
-            <i class="ico-save"></i>
-        </span>
-        <span class="hide-small">
-            Save
-        </span>
-    </a>
-
-    <a class="btn btn--secondary preview_button l-mar-top-2" href="" id="preview-event-button-header" data-automation="preview-event">
-        <span class="show-small">
-            <i class="ico-view-event-page"></i>
-        </span>
-        <span class="hide-small">
-            Preview
-        </span>
-    </a>
-        <a class="btn btn--epic l-mar-top-2" id="make-event-live-button-header" onclick="EB.CreatePage.submit(1);" data-automation="make_event_live">
-            <span class="show-small">
-                <i class="ico-checkmark"></i>
-            </span>
-            <span class="hide-small">
-                Make Event Live
-            </span>
-        </a>
-
-    <div id="last_saved" class="l-mar-top-1 hide-small text-body-medium text-body--faint">Last saved at 07:27 pm
-        &nbsp;
-    </div>
-
-    </div>
-    </div>
-
-
-
+  </div>
+</div>
 <%= render 'form' %>

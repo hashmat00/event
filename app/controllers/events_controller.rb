@@ -84,7 +84,7 @@ class EventsController < ApplicationController
         User.all.each do |user|
           Notification.create(recipient: user , user: current_user, body: "#{current_user.name } has created event #{@event.name} ", notificable: @event)
         end
-        flash[:success] = "You have successfully created the Event"
+        flash[:success] = "You have successfully created the Event Please Launch Your Event by click on Launch My Event Button"
         redirect_to events_path
         else
             render 'new'
@@ -102,16 +102,24 @@ class EventsController < ApplicationController
         #used set_event on bottom and top
     end
     
-    
-    
-    
-    def update      
-    if @event.update(event_params)
-      flash[:success] = "Your Event was updated succesfully!"
-      redirect_to event_path(@event)
-    else
-      render :edit
-    end
+    def update
+    if params[:single] == "true"
+      @event.update(is_active:params[:active])
+      if params[:active] == "true"
+         flash[:success] = "You have successfully Launch your event"
+        redirect_to event_path(@event)
+      else
+        flash[:danger] = "You have successfully Inactive your event"
+        redirect_to :back
+      end  
+    else  
+      if @event.update(event_params)
+        flash[:success] = "Your Event was updated succesfully!"
+        redirect_to event_path(@event)
+      else
+        render :edit
+      end
+    end  
   end
     
     
