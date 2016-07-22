@@ -19,6 +19,10 @@
           <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= e.available_count %></div>        
         </div>
         <div class="row">
+          <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= e.quantity %></div>
+          <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= e.available_count %></div>        
+        </div>
+        <div class="row">
           <div class="col-md-3"><b><h5>Country</h5></b></div><div class="col-md-3"><%= e.country %></div>
           <div class="col-md-3"><b><h5>Currency</h5></b></div><div class="col-md-3"><%= e.currency %></div>
         </div>
@@ -32,7 +36,7 @@
         </div>
         <div class="row">
           <div class="col-md-3"><b><h5>Total Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.count rescue 0%></div>      
-          <div class="col-md-3"><b><h5>Toatl Earning</h5></b></div><div class="col-md-3"><%= e.ticket_histories.active.collect(&:subscription).collect(&:total_price).sum rescue 0 %></div> 
+          <div class="col-md-3"><b><h5>Total Earning</h5></b></div><div class="col-md-3">$<%= e.ticket_histories.active.collect(&:subscription).collect(&:total_price).sum rescue 0 %></div> 
         </div>
         <div class="row">
           <div class="col-md-3"><b><h5>Total Active Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.active.count rescue 0%></div> 

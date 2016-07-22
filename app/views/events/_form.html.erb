@@ -422,19 +422,29 @@
 </script>
   <script>
   $(function() {
-    $( "#start_date" ).datepicker({
-        dateFormat: 'dd-mm-yy'
-     });
-    $( "#end_date" ).datepicker({
-        dateFormat: 'dd-mm-yy'
-     });
-  });
+    $("#start_date").datetimepicker({
+                        defaultDate: Date.now(),
+                        disabledDates: [
+                            moment("12/25/2013"),
+                            new Date(2013, 11 - 1, 21),
+                            "11/22/2013 00:53"
+                        ]
+                    });
+    $("#end_date").datetimepicker({
+                        defaultDate: Date.now(),
+                        disabledDates: [
+                            moment("12/25/2013"),
+                            Date.now(),
+                            "11/22/2013 00:53"
+                        ]
+                    });
+                });
  
   </script>
   <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
+            // $(function () {
+            //     $('#datetimepicker1').datetimepicker();
+            // });
         </script>
     <script>
         $(document).ready(function() { $("#e1").select2(); });
