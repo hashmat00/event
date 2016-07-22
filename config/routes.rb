@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: "users#omniauth" 
   put '/orders', to: 'orders#update'
   get '/location_update', to: 'events#location_update'
+  get '/users/reports', to: 'users#reports'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users  
@@ -38,8 +39,6 @@ Rails.application.routes.draw do
     end
     resources :interests, :only => [:index, :create]    
     resources :tickets, only: [:index]
-
-    #resources :reviews, except: [:index, :show]   
   end
   post '/not_interested/:event_id', to: "interests#not_interested" , as: :not_interested_path
 
