@@ -38,6 +38,7 @@ class Event < ActiveRecord::Base
    accepts_nested_attributes_for :videos, :allow_destroy => true
    has_many :wish_lists, as: :wish_listable, dependent: :destroy
    scope :upcomming, -> { where('start_time  > ?',Time.now) }
+   before_save :address_fill
   
   def wish_list_class(user_id)
     self.wish_lists.where(user_id:user_id).first.present? ? "glyphicon-heart" : "glyphicon-heart-empty"
@@ -180,7 +181,12 @@ class Event < ActiveRecord::Base
   def pay_mode_all
     
   end
-   
+  
+  def address_fill
+    if event_type == "online"
+      self.update(address: "This is an Online Evemt NO location filled", city: nil, status: nil, zipcode: nil, country: nil)
+    end 
+  end  
    private
    def picture_size
       if picture.size > 5.megabytes

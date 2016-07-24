@@ -1,30 +1,33 @@
 <div class="well">
   <div class="row">
-    <div class="col-xs-10">
+    <div class="col-xs-8">
       <h4><%= cart.ticket.name.try(:titleize) %></h4>
       <p><%= cart.ticket.ticket_description.present? ? cart.ticket.ticket_description : "No description available for this ticket" %></p>
       <div class="row">
         <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket.quantity %></div>
-        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket.available_count %></div>        
+        <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= cart.ticket.available_count %></div>
+                 
       </div>     
     </div>
-    <div class="col-xs-2">      
+    <div class="col-xs-4">      
       <%= form_for @cart, remote: true do |f| %>
-      <h4 class="text-right">Unit Price: <span style="color: green">
+        <h4 class="text-right">Unit Price: <span style="color: green">
         <%= number_to_currency cart.ticket.ticket_price %></span></h4>
-        <div class="input-group">
+        <!-- <div class="input-group"> -->
           <%= f.number_field :quantity, value: cart.quantity, class: "form-control", min: 1, max: cart.ticket.available_count %>
             <%= f.hidden_field :ticket_id, value: cart.ticket.id %>
             <%= f.hidden_field :is_cart, value: true %>            
-            <%= f.submit "update", class: "btn btn-primary" %>
-        </div>
-      <% end %>
-      <%= link_to "Continue Shopping", event_path(cart.try(:ticket).try(:event).try(:id)), class:"btn btn-primary" %>
-      <%= link_to "remove From Cart", cart_path(cart.id), method: :delete, class:"btn btn-danger"%>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Checkout
-      </button>
+            <div style="padding:10px">
+            <%= f.submit "update", class: "btn btn-primary btnMar10" %>
+            <%= link_to "Continue Shopping", event_path(cart.try(:ticket).try(:event).try(:id)), class:"btn btn-primary btnMar10" %>
+            <%= link_to "remove From Cart", cart_path(cart.id), method: :delete, class:"btn btn-danger btnMar10"%>
+            <a class="btn btn-primary btnMar10" data-toggle="modal" data-target="#myModal">
+              Checkout
+            </a>
+          </div>
+        <!-- </div> -->
+      <% end %> 
+    </div>
       <!-- Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -79,3 +82,10 @@
     </div>
   </div>
 </div>
+
+<style type="text/css">
+  .btnMar10
+  {
+    margin: 5px 0px;
+  }
+</style>

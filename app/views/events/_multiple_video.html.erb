@@ -2,6 +2,15 @@
 <% if events.present? %>
 	<% events[1..-1].each_with_index do |event, index| %>
 	  <div class="item">
+		  <div class="titleHeader">
+	      <div class="col-md-10 col-md-offset-1">
+	      <h1><%= event.name.try(:titleize) %></h1>
+	      <h3><%= event.try(:address) %></h3>
+	      <h3><%= @event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') rescue Time.now.strftime('%A, %B %d, %Y at %I:%M %p') %> To <%= @event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') rescue Time.now.strftime('%A, %B %d, %Y at %I:%M %p') %></h3>
+	      <h3><%= event.payMode("string") rescue "Something Wrong" %> $<%= event.payMode("amount") rescue "Something Wrong" %></h3>
+	      <a href="/events/<%= event.id %>" class="btn btn-success btnSetting">View Event</a><a class="btn btn-primary btnSetting" href="javascript:voide(0)" onclick="$(this).parent().parent().css('z-index','-99999999')">Watch Videos</a>
+	      </div>
+	    </div>
 	  	<div class="rvs-container rvs-red-highlight rvs-bordered-circle-play", style="height:350px;">
 			  <div class="rvs-item-container">
 			    <div class="rvs-item-stage">

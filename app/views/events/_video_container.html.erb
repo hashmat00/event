@@ -8,3 +8,45 @@
     </div>
   </header>
 </div>
+
+<style type="text/css">
+  .titleHeader
+  {
+    background: #1a0033 none repeat scroll 0 0;
+    height: 355px;
+    opacity: 0.85;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 999999;
+  }
+  h1
+  {
+    text-align: left !important;
+    background: gray none repeat scroll 0 0;
+    color: #35393b;
+    font-size: 45px;
+    padding: 10px 25px;
+    width: -moz-max-content;
+  }
+  h3
+  {
+    text-align: left !important;
+    background: gray none repeat scroll 0 0;
+    color: #35393b;
+    font-size: 20px;
+    padding: 10px 25px;
+    width: -moz-max-content;
+  }
+  .btnSetting
+  {
+    margin: 10px 10px;
+    padding:10px 20px;
+  }
+</style>
+
+<script type="text/javascript">
+  $('#myCarousel1').bind('slide.bs.carousel', function (e) {
+    $('.titleHeader').css('z-index','99999999');
+});
+</script>

@@ -25,10 +25,12 @@
 
     $(document).ajaxStart(function() {       
       $(".ajax-loading").show();
+      $('.titleHeader').css('z-index','-99999999');
     });
 
     $(document).ajaxStop(function() {   
       $(".ajax-loading").hide();
+      $('.titleHeader').css('z-index','99999999');
 
     });
 

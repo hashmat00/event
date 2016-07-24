@@ -82,7 +82,21 @@
                     <div role="tabpanel" class="tab-pane" id="manual">
                       <%= render partial: "manual_location" %>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="online"><%= f.text_field :address, placeholder: "This is am Online event", disabled: true %></div>
+                    <div role="tabpanel" class="tab-pane" id="online">
+                      <div class="form-group col-md-6">
+                        <div><label for="show_ticket_description">Online Event</label></div>
+                        <div class="btn-group" data-toggle="buttons" class="form-control">
+                          <label class="btn btn-primary active">
+                            <%= f.radio_button :event_type, "offline", id:"option01", autocomplete:"off", checked: true %>
+                            <%= f.label :event_type, 'No', :value => 'true' %>
+                          </label>
+                          <label class="btn btn-primary">
+                            <%= f.radio_button :event_type, "online", id:"option02", autocomplete:"off" %>
+                            <%= f.label :event_type, 'Yes', :value => 'false' %>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>  
