@@ -2,15 +2,15 @@
 <% if params[:single] %>
 	<% case params[:tab] %>
 	<% when "4" then %>
-		$('#tab-content_up').html("<%= j render partial: 'slider', locals: { event: @event} %>");
+		$('#tab-content_up').html("<%= j render partial: 'slider', locals: { event: @event, action_page: 'show'} %>");
 	<% when "5" then %>
-		$('#tab-content_up').html("<%= j render partial: 'video', locals: { event: @event} %>");
+		$('#tab-content_up').html("<%= j render partial: 'video', locals: { event: @event, action_page: 'show'} %>");
 	<% when "6" then %>
 		$('#tab-content_up').html("<%= j render partial: 'graph', locals: { event: @event} %>");	
 	<% when "7" then %>
 		$('#tab-content_up').html("<%= j render partial: 'street', locals: { event: @event} %>");
 	<% else %>
-			$('#tab-content').html("<%= j render partial: 'slider', locals: { event: @event} %>");
+			$('#tab-content').html("<%= j render partial: 'slider', locals: { event: @event, action_page: 'show'} %>");
 	<% end %>
 <% else %>
 	<% case params[:tab] %>

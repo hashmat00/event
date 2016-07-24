@@ -1,5 +1,5 @@
 <% if event.present? %>
-	<% unless params[:action]=="show" %>
+	<% unless (params[:action] == "show") || (action_page =="show") %>
 		<div class="titleHeader">
 	    <div class="col-md-10 col-md-offset-1">
 	    <h1><%= event.name.try(:titleize) %></h1>

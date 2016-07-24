@@ -1,6 +1,6 @@
 <% if events.present? %>
   <% events[1..-1].each_with_index do |event, index| %>
-    <% if index == "0" %><div class="item active"><% else %> <div class="item"><% end %> 
+    <div class="item">
       <div id="owl-demo_<%= event.id %>" class="owl-carousel">
         <div class="titleHeader">
           <div class="col-md-10 col-md-offset-1">
