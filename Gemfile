@@ -87,3 +87,5 @@ gem 'rqrcode'
 gem 'video_info'
 gem 'carmen-rails'
 gem "select2-rails"
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'

@@ -135,15 +135,17 @@
 		            <div class="row">
 		              <div class="col-md-12 col-sm-6 col-xs-12">
 		                <span class="ffs-bs">
-		                  <button type="submit" class="btn btn-large btn-primary">contact organizer</button>
+		                  <a href="javascript:void(0)" class="btn btn-info btn-lg ticket_action" data-toggle="modal" data-target="#myModal">Contact The <br> Organizer</a>
+		                	<%= render partial: "users/contact_orgnizer", locals: {ticket: @event.tickets.first} %>
 		                </span>
-		                <div class="col-xs-12 fav-block">
-		                  <div class="bookmark col-xs-6">
+		                <div class="col-xs-12 fav-block" style="text-align: center">
+		                  
+		                  <!-- <div class="bookmark col-xs-6"> -->
 		                     <a href="<%=add_wishlist_event_path(@event.id) %>" data-remote="true" ><span class="glyphicon glf-icon <%= @event.wish_list_class(current_user.id) %>" id="wish_list_<%= @event.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span> <b>Favorite</b></a>
-		                  </div>
-		                  <div class="compare col-xs-6" data-compare-state="empty">
-		                    <a data-toggle="modal" data-target="#myModal_<%= @event.id %>"><span class="glyphicon glyphicon-share glf-icon" style="font-size:20px;font-weight:bold" title="Share"></span><b>Sharae</b></a>
-		                  </div>
+		                  <!-- </div> -->
+		                  <!-- <div class="compare col-xs-6" data-compare-state="empty"> -->
+		                    <a data-toggle="modal" data-target="#myModal_<%= @event.id %>"><span class="glyphicon glyphicon-share glf-icon" style="font-size:20px;font-weight:bold" title="Share"></span><b>Share</b></a>
+		                  <!-- </div> -->
 		                  <%= render partial: "share", locals: { event: @event } %>
 		                </div>
 		              </div>

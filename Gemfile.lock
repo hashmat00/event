@@ -71,6 +71,8 @@ GEM
       sass (>= 3.3.4)
     bootstrap-will_paginate (0.0.10)
       will_paginate
+    bootstrap3-datetimepicker-rails (4.17.37)
+      momentjs-rails (>= 2.8.1)
     bourbon (4.2.7)
       sass (~> 3.4)
       thor (~> 0.19)
@@ -296,6 +298,8 @@ GEM
     mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -442,6 +446,7 @@ DEPENDENCIES
   bcrypt (= 3.1.11)
   bootstrap-sass (~> 3.3.6)
   bootstrap-will_paginate
+  bootstrap3-datetimepicker-rails (~> 4.17.37)
   bullet
   byebug
   carmen-rails
@@ -456,6 +461,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails (>= 1.0.0)
   mini_magick
+  momentjs-rails
   nested_form
   omniauth
   omniauth-facebook

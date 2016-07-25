@@ -159,11 +159,11 @@
                   </div> -->
                   <div class="form-group col-md-6">
                     <label for="name">Start From</label>
-                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});"  %>
+                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});"  %>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="name">To</label>
-                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});" %>
+                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});" %>
                   </div>
                 <% end %>
                 <div class="form-group col-md-12">
@@ -245,11 +245,11 @@
                       </div> 
                       <div class="form-group col-md-6">
                         <label for="tickets_start_date">Ticket Sales Start</label>
-                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});", value: "#{Time.now}" %>
+                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});" %>
                        </div>
                       <div class="form-group col-md-6">
                         <label for="ticket_end_date">Ticket Sales End</label>
-                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({defaultDate: Date.now(),disabledDates:[moment('12/25/2013'),Date.now(),'11/22/2013 00:53']});", value: "#{Time.now}" %>
+                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});" %>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
@@ -442,20 +442,10 @@
 <script>
   $(function() {
     $("#start_date").datetimepicker({
-      defaultDate: Date.now(),
-      disabledDates: [
-        moment("12/25/2013"),
-        new Date(2013, 11 - 1, 21),
-        "11/22/2013 00:53"
-      ]
+        format: 'YYYY-MM-DD HH:mm:ss'
     });
-    $("#end_date").datetimepicker({
-      defaultDate: Date.now(),
-      disabledDates: [
-        moment("12/25/2013"),
-        Date.now(),
-        "11/22/2013 00:53"
-      ]
+     $("#end_date").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
     });
   });
 </script>

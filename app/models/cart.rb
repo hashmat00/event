@@ -11,7 +11,7 @@ class Cart < ActiveRecord::Base
 	scope :donation, ->{ where(pay_mode: "donation") }
 
 	def sale_time
-		if !(self[:tickets_start_date] < Time.now && self[:tickets_end_date] > Time.now rescue nil) 
+		if !(self.ticket[:tickets_start_date] < Time.now && self.ticket[:ticket_end_date] > Time.now rescue nil) 
 			errors.add(:_, "You can not add ticket in your cart due to sale ticket time has been expired")
 		end
 	end

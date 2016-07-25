@@ -85,7 +85,7 @@ class EventsController < ApplicationController
           Notification.create(recipient: user , user: current_user, body: "#{current_user.name } has created event #{@event.name} ", notificable: @event)
         end
         flash[:success] = "You have successfully created the Event Please Launch Your Event by click on Launch My Event Button"
-        redirect_to :back
+        redirect_to "/events/edit/#{@event.id}"
         else
             render 'new'
         end
@@ -173,7 +173,7 @@ class EventsController < ApplicationController
       # end  
 
       def event_params
-          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacyWW, schedules_attributes: [:id,:event_id, :image, :title, :description, :start_date, :end_date, :start_time, :end_time, :event_occure, :event_day, :week_day, :month_day, :_destroy], pictures_attributes: [:id,:user_id, :image, :note, :_destroy], videos_attributes: [ :id,:user_id, :video_url,:videoable_id, :videoable_type, :is_active, :video,:video_type,:note,:_destroy], tickets_attributes: [:id,:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country, :pay_mode, :_destroy])
+          params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy, schedules_attributes: [:id,:event_id, :image, :title, :description, :start_date, :end_date, :start_time, :end_time, :event_occure, :event_day, :week_day, :month_day, :_destroy], pictures_attributes: [:id,:user_id, :image, :note, :_destroy], videos_attributes: [ :id,:user_id, :video_url,:videoable_id, :videoable_type, :is_active, :video,:video_type,:note,:_destroy], tickets_attributes: [:id,:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country, :pay_mode, :_destroy])
       end
 
 end
