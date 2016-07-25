@@ -1,1 +1,3 @@
-$('.interested_<%= @event.id %>').html('<%= escape_javascript(render "interests/interested") %>')
+
+$('.interested_<%= @event.id %>').html('<%= escape_javascript(render partial: "interests/interested", locals: {event:@event}) %>')
+$('.interested_count_<%= @event.id %>').html('<%= escape_javascript(render partial: "interests/interest_count", locals: {event:@event}) %>')

@@ -1,6 +1,7 @@
 class Cart < ActiveRecord::Base
 	belongs_to :cartable, polymorphic: true
 	has_one :payment
+	validate :sale_time
 	validate :validate_quantity
 	before_save :set_columns
 	scope :active, ->{ where(is_active: true) }
@@ -9,6 +10,11 @@ class Cart < ActiveRecord::Base
   scope :free, ->{ where(pay_mode: "free") }
 	scope :donation, ->{ where(pay_mode: "donation") }
 
+	def sale_time
+		if !(self[:tickets_start_date] < Time.now && self[:tickets_end_date] > Time.now rescue nil) 
+			errors.add(:_, "You can not add ticket in your cart due to sale ticket time has been expired")
+		end
+	end
 	# Method For validate the quantity, It doesn't allowed quantity of tickets more than available tickets while saving in cart
   def validate_quantity
     if self[:quantity] > self.available_quantity

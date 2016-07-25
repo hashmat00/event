@@ -3,8 +3,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :event
   has_many :order_items
   has_many :carts, as: :cartable, dependent: :destroy
-
-  default_scope { where(active: true) }
+  scope :active, ->{ where(active: true) }
+  scope :inactive, ->{ where(active: false) }
+  
 
 	def ticket_price
 		if (self.pay_mode == "free") || (self.pay_mode == "FREE") || (self.pay_mode == "Free")

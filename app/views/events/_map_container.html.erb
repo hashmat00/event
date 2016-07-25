@@ -1,7 +1,54 @@
-<div id="tab_up3">
-  <header id="myCarousel2" style="height:100%;" class="carousel slide">
-    <div class="carousel-inner">
-      <%= render partial: "multiple_graph", locals: {events: events} %>
-    </div>
-  </header>
+<div id="myCarousel2"  style="height:100%;" class="carousel slide">
+  <div class="carousel-inner" role="listbox">
+    <% events.each_with_index do |event, index|%>
+    	<% index==0 ? (classname = "item active") : (classname= "item") %>
+    	<div class="<%= classname %>">
+    		<div id="map_canvas_<%= index+1 %>" style="width:100%; height:500px;"></div>
+    	</div>
+    <% end %>
+    <script type="text/javascript">
+				<% events.each_with_index do |event, index| %>
+					var map_<%= index+1 %>;
+					var marker_<%= index+1 %>;
+					var infowindow_<%= index+1 %>;
+				<% end %>
+				
+
+				function initialize(condition) {
+				    // create the maps
+				    <% events.each_with_index do |event, index| %>
+				    var myOptions_<%= index+1 %> = {
+				        zoom: 14,
+				        center: new google.maps.LatLng(<%= event.latitude%>,<%= event.longitude %>),
+				        mapTypeId: google.maps.MapTypeId.ROADMAP
+				    }
+				    <% end %>
+				   	<% events.each_with_index do |event, index| %> 
+				    	map_<%= index+1 %> = new google.maps.Map(document.getElementById("map_canvas_<%= index+1 %>"), myOptions_<%= index+1 %>);
+				    <% end %>
+				    <% events.each_with_index do |event, index| %>
+							marker_<%= index %> = new google.maps.Marker({
+							  position: new google.maps.LatLng(<%= event.latitude%>,<%= event.longitude %>),
+							});
+							marker_<%= index %>.setMap(map_<%= index+1 %>);
+						<% end %>
+						// <%# events.each_with_index do |event, index| %>
+						// infowindow_<%#= index+1 %> = new google.maps.InfoWindow({
+						//   content:"Hello World!"
+						//   });
+
+						// infowindow_<%#= index+1 %>.open(map_<%#= index+1 %>,marker_<%#= index %>);
+						// }
+						// <%# end %>
+						
+				    
+				}
+				</script>
+  </div>
 </div>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initialize">
+</script>
+
+
+

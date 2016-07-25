@@ -30,6 +30,35 @@
 		              <h2>$<%= @event.payMode("amount") rescue "Something Wrong" %></h2>
 		              <h5 style="font-size:25px;" class="team-color"><%= @event.payMode("string") rescue "Something Wrong" %></h5>
 		            </div>
+              	<div class="row">
+		              <div class="col-md-12 col-sm-6 col-xs-12">
+		                <div class="row">
+		                  <div class="col-lg-12 col-md-12 col-xs-12 cat-img">
+		                    <% if user_signed_in? %> 
+										      <!-- <a href="<%= event_tickets_path(@event)%>" class="btn btn-primary">Get Tickets</a> -->
+										      <div class="interested_<%= @event.id %>">
+										        <%if !current_user.is_interested?(@event) %>
+										          <a href="<%= event_interests_path(@event)%>" data-remote= 'true' data-method='post' class="btn btn-primary">Interested</a>
+										        <%else %>
+										          <a href="/not_interested/<%= @event.id %>" data-remote= 'true' data-method='post' class="btn btn-primary">Not Interested</a>
+										        <% end %>
+										      </div>
+										    <% end %>
+		                  </div>
+	                  </div>
+                  </div>
+                  <hr>
+                  <div class="col-lg-12 col-md-12 col-xs-12 cat-img">
+							      <b>
+							      <div style="display:inline-block" class="interested_count_<%= @event.id %>">
+							       	<%= render partial: "interests/interest_count", locals: {event: @event} %> 
+							      </div>
+							      <div style="display:inline-block">person Interested In this Event</div>
+							      </b>
+                  	<hr>
+                  </div>
+                </div>	
+
 		            <!-- <div class="col-lg-5 col-md-6 col-sm-3 col-xs-6 hl-bl">
 		              <i class="glyphicon glyphicon-star"></i>
 		              <i class="glyphicon glyphicon-star"></i>
@@ -45,7 +74,6 @@
 		              <div class="col-md-12 col-sm-6 col-xs-12">
 		                <div class="row">
 		                  <div class="col-lg-12 col-md-12 col-xs-12 cat-img">
-		                    
 		                    <p><span class="glyphicon glyphicon-calendar glf-icon"></span><%= @event.start_time.strftime('%A, %B %d, %Y at %I:%M %p') rescue Time.now.strftime('%A, %B %d, %Y at %I:%M %p') %></p>
 		                  <hr>
 		                  </div>
@@ -63,7 +91,7 @@
 		                      </div>
 		                      <div class="col-lg-7 col-md-6 col-xs-6 cat-img">
 		                        <img src="http://themes.fruitfulcode.com/suburb/assets/img/garage.png" alt="">
-		                        <p class="info_line"><%= @event.tickets.active.count rescue 0 %>Tickets </p>
+		                        <p class="info_line"><%= @event.tickets.active.count rescue 0 %>&nbsp Tickets </p>
 		                      </div>
 		                    </div>
 		                    <div class="row">
@@ -129,27 +157,32 @@
 		          <h5 class="team-color"><%= @event.address %></h5>
 		          <p><%= @event.description.try(:html_safe) %></p>
 		        </div>
-		        <div class="pr-info col-md-8 col-xs-12">
-		          <h3>Tags:</h3>
-		          <section class="block">
-		            <ul class="submit-features">
-		              <% if @event.categories.present? %>
+		        <% if @event.categories.present? %>
+			        <div class="pr-info col-md-8 col-xs-12">
+			          <h3>Tags:</h3>
+			          <section class="block">
+			            <ul class="submit-features">
 			              <% @event.categories.each do |cat| %>
 			              	<li class="col-md-4 col-xs-4"><div ><span class="glyphicon glyphicon-tag glf-icon"></span><%= cat.name %></div></li>
 			            	<% end %>
-			            <% else %>
-			            	<h2>No Tags Available</h2>
-			            <% end %>	
-		            </ul>
-		          </section>
-		        </div>
-		        <hr>
+			            </ul>
+			          </section>
+			        </div>
+			        <hr>
+		        <% end %>
 		    </div>
 		  </div>
 		  <div class="wide_container_3">
 		      <div class="row">
 		        <div class="col-md-10 col-md-offset-1">
 			        <%= render partial: "tickets", locals: { tickets: @event.tickets} %>
+			      </div>
+		      </div>
+		  </div>
+		  <div class="wide_container_3">
+		      <div class="row">
+		        <div class="col-md-10 col-md-offset-1">
+			        <%= render partial: "schedules", locals: { schedules: @event.schedules} %>
 			      </div>
 		      </div>
 		  </div>

@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def is_interested?(event)
-    self.interests.where(:id => event.id).first.present?
+    self.interests.where(:interestable_id => event.id).first.present?
   end
 
   def self.to_csv(options = {})

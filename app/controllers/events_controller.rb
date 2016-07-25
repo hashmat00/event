@@ -85,7 +85,7 @@ class EventsController < ApplicationController
           Notification.create(recipient: user , user: current_user, body: "#{current_user.name } has created event #{@event.name} ", notificable: @event)
         end
         flash[:success] = "You have successfully created the Event Please Launch Your Event by click on Launch My Event Button"
-        redirect_to events_path
+        redirect_to :back
         else
             render 'new'
         end
