@@ -1,4 +1,4 @@
-<div class="well">
+<div class="well" id="well_<%= cart.id %>">
   <div class="row">
     <div class="col-xs-8">
       <h4><%= cart.ticket.name.try(:titleize) %></h4>
@@ -20,7 +20,7 @@
             <div style="padding:10px">
             <%= f.submit "update", class: "btn btn-primary btnMar10" %>
             <%= link_to "Continue Shopping", event_path(cart.try(:ticket).try(:event).try(:id)), class:"btn btn-primary btnMar10" %>
-            <%= link_to "remove From Cart", cart_path(cart.id), method: :delete, class:"btn btn-danger btnMar10"%>
+            <%= link_to "remove From Cart", cart_path(cart.id), method: :delete, remote:true, class:"btn btn-danger btnMar10"%>
             <% if !(@cart.ticket.tickets_start_date < Time.now && @cart.ticket.ticket_end_date > Time.now rescue nil)  %>
               <a class="btn btn-primary btnMar10" onclick="alertify.message('you cant not purchase ticket due sale time out');">
                 Checkout

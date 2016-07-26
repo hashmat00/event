@@ -1,0 +1,8 @@
+$('#cart-text').html("<%= j render partial: 'layouts/cart_text' %>");
+$('#well_<%= @temp.id %>').hide();
+<% if current_user.carts.empty? %>
+	document.getElementById("cart_con").innerHTML = "No Items in your cart";
+	alertify.message('Item Successfully Remove From Cart and your cart is empty	');
+<% else %>
+	alertify.message('Item Successfully Remove From Cart');
+<% end %>	
