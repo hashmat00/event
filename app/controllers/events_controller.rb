@@ -79,13 +79,15 @@ class EventsController < ApplicationController
     
     def create
        @event = Event.new(event_params)
+       cat_ids = params[:event][:categories].map(&:to_i).drop(1)
        @event.user = current_user
        if @event.save
+        cat_ids.map{ |m| @event.event_categories.create(category_id: m)}
         User.all.each do |user|
           Notification.create(recipient: user , user: current_user, body: "#{current_user.name } has created event #{@event.name} ", notificable: @event)
         end
         flash[:success] = "You have successfully created the Event Please Launch Your Event by click on Launch My Event Button"
-        redirect_to "/events/edit/#{@event.id}"
+        redirect_to "/events/#{@event.id}/edit"
         else
             render 'new'
         end
@@ -113,9 +115,16 @@ class EventsController < ApplicationController
         redirect_to :back
       end  
     else  
+      cat_ids = params[:event][:categories].map(&:to_i).drop(1)
       if @event.update(event_params)
+        @event.event_categories.destroy_all
+        cat_ids.map{ |m| @event.event_categories.create(category_id: m)}
         flash[:success] = "Your Event was updated succesfully!"
-        redirect_to event_path(@event)
+        if @event.is_active
+          redirect_to event_path(@event)
+        else
+          redirect_to :back  
+        end
       else
         render :edit
       end

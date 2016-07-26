@@ -373,10 +373,14 @@
           </div>
           <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
             <div class="panel-body">
-              <select id="e1">
-                <option value="AL">Alabama</option>
-                <option value="WY">Wyoming</option>
-              </select>
+              <%#= f.select(:categories, Category.all.collect {|p| [ p.name, p.id ] },
+
+                                           { :prompt => "Please select"}, 
+                                           { :multiple => true})
+                                           
+                                            %>
+                <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories", :multiple => true) %>
+              <%#= f.select :categories, options_for_select(Category.all.map{ |c| [c.name, c.id] },:multiple=>true){}, id: "categories", class: "form-control" %>
             </div>
           </div>
         </div>  
@@ -456,14 +460,27 @@
             //     $('#datetimepicker1').datetimepicker();
             // });
         </script>
-    <script>
-        $(document).ready(function() { $("#e1").select2(); });
-    </script>
+    
+    <%if @event.id.present? %>
+      <script type="text/javascript">
+        $( "#event_categories" ).select2();
+         $( "#event_categories" ).val(<%= @event.categories.collect(&:id)%>).change()
+      </script>
+    <% else %>
+      <script type="text/javascript">
+        $( "#event_categories" ).select2();
+      </script>
+    <% end %>
   <script type="text/javascript">
     CKEDITOR.replace( 'desc', {
     // skin: 'moonocolor,/myskins/moonocolor/' 
 } );  
   </script>
+  <style type="text/css">
+  section#content ul {
+    margin-left: 0px;
+}
+</style>
 
 <style type="text/css">
   
@@ -500,6 +517,11 @@
   #pacInput
   {
     z-index: 999999999999999999999 !important;
+  }
+
+  .select2 
+  {
+    width: 100% !important;
   }
 </style>
 

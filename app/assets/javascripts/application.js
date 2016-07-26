@@ -21,7 +21,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require country
-//= require select2-full
+//= require select2
 
 
     $(document).ajaxStart(function() {       

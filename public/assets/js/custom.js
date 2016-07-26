@@ -220,61 +220,61 @@ $(document).ready(function($) {
         $('input:not(.no-icheck)').iCheck();
     }
 
-    //  Smooth Navigation Scrolling
-    $('a[href^="#"].roll').live('click',function (e) {
-        e.preventDefault();
-        var target = this.hash,
-        $target = $(target);
-        if ($(window).width() > 768) {
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top - $('.navigation').height()
-            }, 2000)
-        } else {
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, 2000)
-        }
-    }); 
+    // //  Smooth Navigation Scrolling
+    // $('a[href^="#"].roll').live('click',function (e) {
+    //     e.preventDefault();
+    //     var target = this.hash,
+    //     $target = $(target);
+    //     if ($(window).width() > 768) {
+    //         $('html, body').stop().animate({
+    //             'scrollTop': $target.offset().top - $('.navigation').height()
+    //         }, 2000)
+    //     } else {
+    //         $('html, body').stop().animate({
+    //             'scrollTop': $target.offset().top
+    //         }, 2000)
+    //     }
+    // }); 
     
     // Menu Button
-    $('.navbar a.drop-left, .navbar a.drop-close').live('click', function (e) {
-        if ($('.drop-left').hasClass("hidden")) {
-            $('.drop-left, .primary>ul').removeClass("hidden");
-            $('.drop-close, .secondary>ul').addClass("hidden");
-            $('.blog-nv .secondary>ul, .blog-mn .secondary>ul').removeClass("hidden");
-        }
-        else {
-            $('.drop-close, .secondary>ul').removeClass("hidden");
-            $('.drop-left, .primary>ul').addClass("hidden");
-        }
-    });
+    // $('.navbar a.drop-left, .navbar a.drop-close').live('click', function (e) {
+    //     if ($('.drop-left').hasClass("hidden")) {
+    //         $('.drop-left, .primary>ul').removeClass("hidden");
+    //         $('.drop-close, .secondary>ul').addClass("hidden");
+    //         $('.blog-nv .secondary>ul, .blog-mn .secondary>ul').removeClass("hidden");
+    //     }
+    //     else {
+    //         $('.drop-close, .secondary>ul').removeClass("hidden");
+    //         $('.drop-left, .primary>ul').addClass("hidden");
+    //     }
+    // });
 
-    $('.wrapper').live('click', function (e) {
-        if ($('.secondary').hasClass("open")) { 
-            $('.drop-left, .primary>ul').removeClass("hidden");
-        }
-    });
+    // $('.wrapper').live('click', function (e) {
+    //     if ($('.secondary').hasClass("open")) { 
+    //         $('.drop-left, .primary>ul').removeClass("hidden");
+    //     }
+    // });
     
     // Sliding submenu in mobile menu
-    $( '.navigation .site-header .mob-menu li.has-child>a' ).live('touchstart click', function (e) {
-      e.preventDefault();
-      var $t=$(this).parent();
-      if(!($t).hasClass("opened")) {
-            $('.mob-menu .child-navigation').slideUp( "fast" );
-            $('.mob-menu .child-navigation').parent().removeClass("opened");
-            $($t).addClass("opened");
-            $($t).children('.mob-menu .child-navigation').slideToggle( "fast" );
-        } else {
-            $('.mob-menu .child-navigation').slideUp( "fast" );
-            $('.mob-menu .child-navigation').parent().removeClass("opened");
-        }
-    });
+    // $( '.navigation .site-header .mob-menu li.has-child>a' ).live('touchstart click', function (e) {
+    //   e.preventDefault();
+    //   var $t=$(this).parent();
+    //   if(!($t).hasClass("opened")) {
+    //         $('.mob-menu .child-navigation').slideUp( "fast" );
+    //         $('.mob-menu .child-navigation').parent().removeClass("opened");
+    //         $($t).addClass("opened");
+    //         $($t).children('.mob-menu .child-navigation').slideToggle( "fast" );
+    //     } else {
+    //         $('.mob-menu .child-navigation').slideUp( "fast" );
+    //         $('.mob-menu .child-navigation').parent().removeClass("opened");
+    //     }
+    // });
     
-    $( '.navigation .container li.has-child>a' ).live('touchstart click', function (e) {
-        e.preventDefault();
-        var $t=$(this).parent();
-        $($t).children('.child-navigation').slideDown( "fast" );
-    });
+    // $( '.navigation .container li.has-child>a' ).live('touchstart click', function (e) {
+    //     e.preventDefault();
+    //     var $t=$(this).parent();
+    //     $($t).children('.child-navigation').slideDown( "fast" );
+    // });
  
     // Video Wrapping with container preserves width and height
     $( 'embed, iframe' ).wrap( "<div class='video-container'></div>" );
@@ -373,15 +373,15 @@ $(window).load(function(){
     }
 
     //Masonry grid init
-    function triggerMasonry() {
-        if ( !$grid ) { return; }
-        $grid.masonry({
-            itemSelector: '.grid-item'
-        });
-    }
+    // function triggerMasonry() {
+    //     if ( !$grid ) { return; }
+    //     $grid.masonry({
+    //         itemSelector: '.grid-item'
+    //     });
+    // }
 
-    $grid = $('.grid');
-    triggerMasonry();
+    // $grid = $('.grid');
+    // triggerMasonry();
     
     // Owl Carousel
     // Disable click when dragging
