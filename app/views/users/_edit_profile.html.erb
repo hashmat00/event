@@ -1,0 +1,220 @@
+
+<%= nested_form_for @user, class: "form-horizontal", role:"form", remote: true  do |f| %>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">Personal Details</a>
+        </h4>
+      </div>
+      
+      <div id="collapse11" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">First Name:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :first_name, required: true, class: "form-control", id: "first_name", placeholder: "Enter First Name" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Last Name:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :last_name, required: true, class: "form-control", id: "last_name", placeholder: "Enter Last Name" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div><label for="event_privacy">Gender</label></div>
+            <div class="btn-group" data-toggle="buttons" class="form-control">
+              <label class="btn btn-primary active">
+                <%= f.radio_button :gender, "Male", id:"option31", autocomplete:"off", :checked => Proc.new { @user.gender == "male" ? true : false } %>
+                <%= f.label :gender, 'male', :value => 'male' %>
+              </label>
+              <label class="btn btn-primary">
+                <%= f.radio_button :gender, "Female", id:"option32", autocomplete:"off" %>
+                <%= f.label :gender, 'female', :value => 'female' %>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Date OF Birth:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :dob, required: true, class: "form-control", id: "dob" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Job Title:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :job_title, required: true, class: "form-control", id: "job_title", placeholder: "Enter Job Title" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Company:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :company, required: true, class: "form-control", id: "company", placeholder: "Enter Company" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Website:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :website_url, required: true, class: "form-control", id: "website_url", placeholder: "Enter Website Url" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Blog:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :blog, required: true, class: "form-control", id: "blog", placeholder: "Enter Blog Url" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">About:</label>
+            <div class="col-sm-10">
+              <%= f.text_area :about_organizer, required: true, class: "form-control", id: "about_organizer", placeholder: "Enter Words About The Organizer" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">Privacy</a>
+        </h4>
+      </div>
+      
+      <div id="collapse13" class="panel-collapse collapse">
+        <div class="panel-body">
+          <%= f.fields_for :privacy do |privacy| %>
+            <div class="form-group">
+              <div><label for="event_privacy">Email Notifictaion</label></div>
+              <div class="btn-group" data-toggle="buttons" class="form-control">
+                <label class="btn btn-primary active">
+                  <%= privacy.radio_button :is_email, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_email? ? true : false } %>
+                  <%= privacy.label :is_email, "On", :value => false %>
+                </label>
+                <label class="btn btn-primary">
+                  <%= privacy.radio_button :is_email, "Off", id:"option32", autocomplete:"off" %>
+                  <%= privacy.label :is_email, "OFF", :value => false %>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div><label for="event_privacy">Message Notifictaion</label></div>
+              <div class="btn-group" data-toggle="buttons" class="form-control">
+                <label class="btn btn-primary active">
+                  <%= privacy.radio_button :is_message, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_message? ? true : false } %>
+                  <%= privacy.label :is_message, "On", :value => true %>
+                </label>
+                <label class="btn btn-primary">
+                  <%= privacy.radio_button :is_message, "Off", id:"option32", autocomplete:"off" %>
+                  <%= privacy.label :is_message, "OFF", :value => false %>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div><label for="event_privacy">App Notifictaion</label></div>
+              <div class="btn-group" data-toggle="buttons" class="form-control">
+                <label class="btn btn-primary active">
+                  <%= privacy.radio_button :is_notification, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_notification? ? true : false } %>
+                  <%= privacy.label :is_notification, "On", :value => true %>
+                </label>
+                <label class="btn btn-primary">
+                  <%= privacy.radio_button :is_notification, "Off", id:"option32", autocomplete:"off" %>
+                  <%= privacy.label :is_notification, "OFF", :value => false %>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div><label for="event_privacy">Profile Visibility</label></div>
+              <div class="btn-group" data-toggle="buttons" class="form-control">
+                <label class="btn btn-primary active">
+                  <%= privacy.radio_button :is_visible, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_visible? ? true : false } %>
+                  <%= privacy.label :is_visible, "On", :value => true %>
+                </label>
+                <label class="btn btn-primary">
+                  <%= privacy.radio_button :is_visible, "Off", id:"option32", autocomplete:"off" %>
+                  <%= privacy.label :is_visible, "OFF", :value => false %>
+                </label>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse14">Social Contacts</a>
+        </h4>
+      </div>
+      <div id="collapse14" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Google+ URL:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :google_url, required: true, class: "form-control", id: "google_url", placeholder: "Enter Google+ Url" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Facebook URL:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :fb_url, required: true, class: "form-control", id: "fb_url", placeholder: "Enter Facebook URL" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Twitter URL:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :twitter_url, required: true, class: "form-control", id: "twitter_url", placeholder: "Enter Twitter Url" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Linkedin Url:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :linkedin_url, required: true, class: "form-control", id: "linkedin_url", placeholder: "Enter Linkedin Url" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Primary Email:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :primary_email, required: true, class: "form-control", id: "primary_email", placeholder: "Enter Primary Email" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Secondary Email:</label>
+            <div class="col-sm-10">
+              <%= f.text_field :secondary_email, required: true, class: "form-control", id: "secondary_email", placeholder: "Enter Secondary Email" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse15">Payment Credentials</a>
+        </h4>
+      </div>
+      
+      <div id="collapse15" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Paypal Email: </label>
+            <div class="col-sm-10">
+              <%= f.text_field :paypal_email, required: true, class: "form-control", id: "paypal_email", placeholder: "Enter Paypal Email" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email"><%= f.submit "Update", class:"btn btn-primary" %></label>
+    </div>
+  </div>  
+<% end %> 
+
+<script>
+  $(function() {
+    $("#dob").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    });
+  });
+</script>

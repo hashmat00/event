@@ -1,0 +1,19 @@
+<% case params[:tab] %>
+<% when "1" then %>
+	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/user_profile_details', locals: {user: @user} %>");
+<% when "2" then %>
+	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/edit_profile', locals: {user: @user} %>");
+<% when "3" then %>
+	<% if params[:sign_out] %>
+		window.location.assign("<%= request.base_url %>?unconfirmed=true")
+	<% else %>
+		$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/account_settings', locals: {user: @user, account:'edit'} %>");
+	<% end %>
+
+<% when "4" then %>
+	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/delete_account', locals: {user: @user} %>");
+<% when "5" then %>
+	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/purchase_report', locals: {user: @user} %>");
+<% else %>
+	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/account_settings', locals: {user: @user, account:'edit'} %>");
+<% end %>

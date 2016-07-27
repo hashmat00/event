@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show]
+	before_action :set_user, only: [:show, :update, :tabs]
 	before_action :set_ticket, only: [:tickets_history, :ticket_show]
   before_action :authenticate_user!, only: [:tickets_history]
   # layout false, only: [:reports]
@@ -78,11 +78,33 @@ class UsersController < ApplicationController
 	def show
 	  @events = @user.events.paginate(page: params[:page], per_page: 6)
 	end
+
+  def update
+    if @user.update(users_params)
+      if !(@user.is_active)
+        sign_out @user
+        flash[:success] = "You have successfully deactivate your account, You can login any time"
+        redirect_to "/users/sign_in"
+      else  
+        render :update
+      end
+    end
+  end
+
+  def tabs
+    @user.build_privacy
+  end  
+  def destroy
+    
+  end
 	 
   private   
   def set_user
   	@user = User.find(params[:id])
-  end  
+  end 
+  def users_params
+     params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :is_admin, :image, :about_organizer, :website_url, :is_active, :prefix, :first_name, :last_name, :job_title, :company, :blog, :dob, :gender, :google_url, :fb_url, :twitter_url, :linkedin_url, :primary_email, :secondary_email, :paypal_email, privacy_attributes: [:id, :user_id, :is_email, :is_message, :is_notification, :is_visible])
+  end 
   def set_ticket
   	@ticket = current_user.ticket_histories.where(id: params[:id]).first
   end

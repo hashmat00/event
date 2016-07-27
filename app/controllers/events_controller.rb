@@ -75,6 +75,10 @@ class EventsController < ApplicationController
     end  
     def new
         @event = Event.new
+        @event.schedules.build
+        @event.tickets.build
+        @event.pictures.build
+        @event.videos.build
     end
     
     def create

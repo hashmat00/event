@@ -29,6 +29,17 @@ class User < ActiveRecord::Base
   has_many :wish_lists, dependent: :destroy
   has_many :wish_lists_events, :through => :wish_lists, :source => :wish_listable, source_type: 'Event'
   has_many :contact_emails, dependent: :destroy
+  # has_many :contact_details, dependent: :destroy
+  has_many :contact_details, dependent: :destroy do
+    def by_address_type(address_type_id)
+       # use `self` here to access to current `Customer` record
+       where(:address_type_id => address_type_id).first
+    end
+ end
+ has_one :privacy, dependent: :destroy
+ accepts_nested_attributes_for :privacy, :allow_destroy => true
+
+
   mount_uploader :image, PictureUploader
   has_many :carts, dependent: :destroy 
   def self.sign_in_from_omniauth(auth)

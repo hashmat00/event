@@ -1,9 +1,31 @@
-<!--display user gravatar-->
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="col-md-3 left-con">
+      <div class="center">
+        <%= image_tag (@user.image), class: "gravatar", style:"max-width:220px!important; height: 220px;" %> 
+      </div>
+      <div class="center marg">
+        <button class="btn btn-primary">Change Image</button>
+      </div>
+      <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(1);">View Profile</button></div>
+      <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(2);">Edit Profile</button></div>
+      <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(3);">Account Settings</button></div>
+      <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(4);">Delete Account</button></div>
+      <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(5);">Purchase Report</button></div>
+    </div>
+    <div class="col-md-9">
+      <div class="userShow" id="userShow_<%= @user.id %>">
+        <%= render partial: "user_profile_details", locals: {user: @user} %>
+        <%#= render partial: "edit_profile"%>
+    </div>
+  </div>  
+
+  <div class="col-md-1"></div>
+</div>
 </br>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4 center">
-        <%= image_tag (@user.image), class: "gravatar", width: "100", height: "100" %>        
-    </div>
+    
 </div>
 
 <!--display title from partials page-->
@@ -70,3 +92,24 @@
 
 
 
+<style type="text/css">
+  .marg
+  {
+    margin: 10px 0px;
+  }
+  .left-con
+  {
+    border: solid 2px black;
+  }
+</style>
+
+<script type="text/javascript">
+  function tabRequest(id){
+    $.ajax({
+      type:'GET',
+      url: '/users/tabs',
+      dataType: 'script',
+      data: $.param({ tab: id, id: <%= @user.id %>})
+    });
+  };
+</script>

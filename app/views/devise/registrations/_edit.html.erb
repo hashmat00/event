@@ -1,0 +1,73 @@
+
+
+<% if devise_error_messages!.length > 1 %>
+<% account = "edit" %>
+<% end %>
+<% if account %>
+  <% if account == "edit" %>
+    <h2>Event Organizer Account Settings <%#= resource_name.to_s.humanize %></h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal", role:"form", remote: true}) do |f| %>
+      <% if devise_error_messages!.length > 1  %>
+           
+           <%= devise_error_messages! %>
+      <% else %>  
+        <% if params[:action] == "tabs"%>
+          Your Details successfully updated
+        <% end %>
+      <% end %>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Username:</label>
+        <div class="col-sm-10">
+          <%= f.text_field :username, required: true, class: "form-control", id: "username", placeholder: "Enter Username" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Email:</label>
+        <div class="col-sm-10">
+          <%= f.email_field :email, required: true, class: "form-control", id: "email", placeholder: "Enter Email" %>
+        </div>
+      </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Password:</label>
+        <div class="col-sm-10">
+          <input type="password" name="user[password]" value="<%= @user.password %>" id="password" class="form-control" placeholder="Enter Password" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Password Confirmation:</label>
+        <div class="col-sm-10">
+          <%= f.password_field :password_confirmation, required: true, class: "form-control", id: "password_confirmation", placeholder: "Enter Your Password Again" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Current Password:</label>
+        <div class="col-sm-10">
+          <%= f.password_field :current_password, required: true, class: "form-control", id: "current_password", placeholder: "Enter Your Current Password" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email"><%= f.submit "Update", class:"btn btn-primary" %></label>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email"></label>
+      <div class="col-sm-10">
+        <%= form_for resource do |ff| %>
+          <%= ff.hidden_field :is_active, value: false %>
+          <p> <%= ff.submit "Deactivate my account", data: { confirm: "Are you sure? to deactiveate your account you can any time activate your account" }, class: "btn btn-primary" %></p>
+        <% end %>  
+      </div>
+    </div>
+    <br/>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email"></label>
+      <div class="col-sm-10">
+        <p> <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure? to delete your account you can't activated your account and your account would be deleted permanently" }, method: :delete, class: "btn btn-primary" %></p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
