@@ -93,7 +93,8 @@ class UsersController < ApplicationController
 
   def tabs
     @user.build_privacy
-  end  
+      @user.contact_details.build
+    end  
   def destroy
     
   end
@@ -103,10 +104,9 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   end 
   def users_params
-     params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :is_admin, :image, :about_organizer, :website_url, :is_active, :prefix, :first_name, :last_name, :job_title, :company, :blog, :dob, :gender, :google_url, :fb_url, :twitter_url, :linkedin_url, :primary_email, :secondary_email, :paypal_email, privacy_attributes: [:id, :user_id, :is_email, :is_message, :is_notification, :is_visible])
+     params.require(:user).permit(:username, :name, :email, :password, :password_confirmation, :is_admin, :image, :about_organizer, :website_url, :is_active, :prefix, :first_name, :last_name, :job_title, :company, :blog, :dob, :gender, :google_url, :fb_url, :twitter_url, :linkedin_url, :primary_email, :secondary_email, :paypal_email, privacy_attributes: [:id, :user_id, :is_email, :is_message, :is_notification, :is_visible], contact_details_attributes: [:id, :user_id, :address_type_id, :address1, :address2, :address3, :land_mark, :town, :city, :state, :country, :zipcode, :contact1, :contact2, :landline, :fax, :is_active])
   end 
   def set_ticket
   	@ticket = current_user.ticket_histories.where(id: params[:id]).first
   end
-
 end

@@ -55,61 +55,65 @@
     </div>
     <div id="collapse2" class="panel-collapse collapse">
       <div class="panel-body">
-        <% AddressType.all.active.each do |address_type|  %>
-          <h2><%= address_type.name.try(:titleize) %></h2>
-          <% resource = user.contact_details.by_address_type(address_type.id) %>
-          <div class="row">
-            <div class="col-md-3">Address 1</div>
-            <div class="col-md-9"><%= resource.address1 rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Address 2</div>
-            <div class="col-md-9"><%= resource.address2 rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Address 3</div>
-            <div class="col-md-9"><%= resource.address3 rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Land Mark</div>
-            <div class="col-md-9"><%= resource.land_mark rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Town</div>
-            <div class="col-md-9"><%= resource.town rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">City</div>
-            <div class="col-md-9"><%= resource.city rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">State</div>
-            <div class="col-md-9"><%= resource.state rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Country</div>
-            <div class="col-md-9"><%= resource.country rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Zipcode</div>
-            <div class="col-md-9"><%= resource.zipcode rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Primary Contact</div>
-            <div class="col-md-9"><%= resource.contact1 rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Secondary Contact</div>
-            <div class="col-md-9"><%= resource.contact2 rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Phone</div>
-            <div class="col-md-9"><%= resource.landline rescue "" %></div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">Fax</div>
-            <div class="col-md-9"><%= resource.fax rescue "" %></div>
-          </div>
+        <% if AddressType.all.active.present? %>
+          <% AddressType.all.active.each do |address_type|  %>
+            <h2><%= address_type.name.try(:titleize) %></h2>
+            <% resource = user.contact_details.by_address_type(address_type.id) %>
+            <div class="row">
+              <div class="col-md-3">Address 1</div>
+              <div class="col-md-9"><%= resource.address1 rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Address 2</div>
+              <div class="col-md-9"><%= resource.address2 rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Address 3</div>
+              <div class="col-md-9"><%= resource.address3 rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Land Mark</div>
+              <div class="col-md-9"><%= resource.land_mark rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Town</div>
+              <div class="col-md-9"><%= resource.town rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">City</div>
+              <div class="col-md-9"><%= resource.city rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">State</div>
+              <div class="col-md-9"><%= resource.state rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Country</div>
+              <div class="col-md-9"><%= resource.country rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Zipcode</div>
+              <div class="col-md-9"><%= resource.zipcode rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Primary Contact</div>
+              <div class="col-md-9"><%= resource.contact1 rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Secondary Contact</div>
+              <div class="col-md-9"><%= resource.contact2 rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Phone</div>
+              <div class="col-md-9"><%= resource.landline rescue "" %></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Fax</div>
+              <div class="col-md-9"><%= resource.fax rescue "" %></div>
+            </div>
+          <% end %>
+        <% else %>
+          NO address Type created yet or inactive
         <% end %>
       </div>
     </div>

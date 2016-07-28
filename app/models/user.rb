@@ -36,12 +36,23 @@ class User < ActiveRecord::Base
        where(:address_type_id => address_type_id).first
     end
  end
+ accepts_nested_attributes_for :contact_details, :allow_destroy => true
  has_one :privacy, dependent: :destroy
  accepts_nested_attributes_for :privacy, :allow_destroy => true
 
 
   mount_uploader :image, PictureUploader
-  has_many :carts, dependent: :destroy 
+  has_many :carts, dependent: :destroy
+  after_create :create_contact_details
+
+  def create_contact_details
+    if AddressType.all.active.present?
+      AddressType.all.active.each_with_index do |ad|
+        self.contact_details.find_or_create_by(address_type_id: ad)
+      end
+    end  
+  end 
+
   def self.sign_in_from_omniauth(auth)
     user = where(provider: auth['provider'], uid: auth['uid']).first_or_initialize 
     user.email =  auth['info']['email']

@@ -26,7 +26,7 @@
             <div><label for="event_privacy">Gender</label></div>
             <div class="btn-group" data-toggle="buttons" class="form-control">
               <label class="btn btn-primary active">
-                <%= f.radio_button :gender, "Male", id:"option31", autocomplete:"off", :checked => Proc.new { @user.gender == "male" ? true : false } %>
+                <%= f.radio_button :gender, "Male", id:"option31", autocomplete:"off" %>
                 <%= f.label :gender, 'male', :value => 'male' %>
               </label>
               <label class="btn btn-primary">
@@ -77,6 +77,112 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse12">Address Detail</a>
+        </h4>
+      </div>
+      <div id="collapse12" class="panel-collapse collapse">
+        <div class="panel-body">
+          <% form_count = 0 %>
+          <% @address_types = [] %>
+          <% @address_types.push(AddressType.all.active) %>
+          <% if @address_types.first.present? %>
+            <%= f.fields_for :contact_details do |cn| %>
+              <% if !(form_count == @address_types.first.count) %>  
+                <%= form_count+1 %>
+                <% if @address_resource =  @address_types.first[form_count] %>
+                <%= @address_resource.name.try(:titleize) %>
+                <% end %>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Address1:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :address1, class: "form-control", id: "address1", placeholder: "Enter Address 1" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Address2:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :address2, class: "form-control", id: "address2", placeholder: "Enter Address 2" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Address3:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :address3, class: "form-control", id: "address3", placeholder: "Enter Address 3" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Land Mark:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :land_mark, class: "form-control", id: "land_mark", placeholder: "Enter Land Mark" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Town:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :town, class: "form-control", id: "town", placeholder: "Enter Town" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">City:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :city, class: "form-control", id: "city", placeholder: "Enter City" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">State:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :state, class: "form-control", id: "state", placeholder: "Enter State" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Country:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :country, class: "form-control", id: "country", placeholder: "Enter Country" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Zipcode:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :zipcode, class: "form-control", id: "zipcode", placeholder: "Enter Zipcode" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Primary Contact:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :contact1, class: "form-control", id: "contact1", placeholder: "Enter Primary Contact no" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Secondary Contact:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :contact2, class: "form-control", id: "contact2", placeholder: "Enter Secondary Contact no" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Landline:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :landline, class: "form-control", id: "landline", placeholder: "Enter Landline No" %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Fax:</label>
+                  <div class="col-sm-10">
+                    <%= cn.text_field :fax, class: "form-control", id: "fax", placeholder: "Enter Fax" %>
+                  </div>
+                </div>
+                <%= cn.hidden_field :address_type_id, value: @address_resource.id %>
+                <% form_count = form_count+1 %>
+              <% end %>
+            <% end %>
+          <% else %>
+            no address type created yet or inactive
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse13">Privacy</a>
         </h4>
       </div>
@@ -88,7 +194,7 @@
               <div><label for="event_privacy">Email Notifictaion</label></div>
               <div class="btn-group" data-toggle="buttons" class="form-control">
                 <label class="btn btn-primary active">
-                  <%= privacy.radio_button :is_email, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_email? ? true : false } %>
+                  <%= privacy.radio_button :is_email, "On", id:"option31", autocomplete:"off" %>
                   <%= privacy.label :is_email, "On", :value => false %>
                 </label>
                 <label class="btn btn-primary">
@@ -101,7 +207,7 @@
               <div><label for="event_privacy">Message Notifictaion</label></div>
               <div class="btn-group" data-toggle="buttons" class="form-control">
                 <label class="btn btn-primary active">
-                  <%= privacy.radio_button :is_message, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_message? ? true : false } %>
+                  <%= privacy.radio_button :is_message, "On", id:"option31", autocomplete:"off" %>
                   <%= privacy.label :is_message, "On", :value => true %>
                 </label>
                 <label class="btn btn-primary">
@@ -114,7 +220,7 @@
               <div><label for="event_privacy">App Notifictaion</label></div>
               <div class="btn-group" data-toggle="buttons" class="form-control">
                 <label class="btn btn-primary active">
-                  <%= privacy.radio_button :is_notification, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_notification? ? true : false } %>
+                  <%= privacy.radio_button :is_notification, "On", id:"option31", autocomplete:"off" %>
                   <%= privacy.label :is_notification, "On", :value => true %>
                 </label>
                 <label class="btn btn-primary">
@@ -127,7 +233,7 @@
               <div><label for="event_privacy">Profile Visibility</label></div>
               <div class="btn-group" data-toggle="buttons" class="form-control">
                 <label class="btn btn-primary active">
-                  <%= privacy.radio_button :is_visible, "On", id:"option31", autocomplete:"off", :checked => Proc.new { privacy.is_visible? ? true : false } %>
+                  <%= privacy.radio_button :is_visible, "On", id:"option31", autocomplete:"off" %>
                   <%= privacy.label :is_visible, "On", :value => true %>
                 </label>
                 <label class="btn btn-primary">
