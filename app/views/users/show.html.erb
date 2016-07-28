@@ -2,11 +2,17 @@
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <div class="col-md-3 left-con">
-      <div class="center">
-        <%= image_tag (@user.image), class: "gravatar", style:"max-width:220px!important; height: 220px;" %> 
+      <div id="avatarImage_<%= @user.id %>">
+        <%= render partial: "avatar_image", locals: {user: @user}  %>
       </div>
       <div class="center marg">
-        <button class="btn btn-primary">Change Image</button>
+        <%= form_for @user, remote: true, html: {multipart: true} do |f| %>
+          <%= f.file_field :image %>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="image_change" value="true">
+          <%= f.submit "Change Image", class: "btn btn-primary"  %>
+        <% end %>
+        <!-- <button class="btn btn-primary">Change Image</button> -->
       </div>
       <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(1);">View Profile</button></div>
       <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(2);">Edit Profile</button></div>

@@ -22,6 +22,7 @@
 //= require bootstrap-datetimepicker
 //= require country
 //= require select2
+//= require jquery.remotipart
 
 
     $(document).ajaxStart(function() {       

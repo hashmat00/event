@@ -86,7 +86,11 @@ class UsersController < ApplicationController
         flash[:success] = "You have successfully deactivate your account, You can login any time"
         redirect_to "/users/sign_in"
       else  
-        render :update
+        if request.xhr?
+          render :update
+        else
+          redirect_to user_path(@user)
+        end  
       end
     end
   end
