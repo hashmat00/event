@@ -1,0 +1,34 @@
+<% if events.present? %>
+  <% events.each do |x| %>
+    <div class="col-md-4 m-b-lg">
+      <div class="panel panel-default panel-profile m-b-0">
+        <%= image_tag(x.picture.url, class: "panel-recipe") if x.picture? %>
+        <div class="panel-body text-center">
+          <section class="panel-profile-recipe-img">
+            <%= link_to (image_tag (x.user.image), class: "gravatar", width: "40", height: "40"), user_path(x.user) %>
+          </section>
+          <h4><%= link_to x.name, event_path(x) %></h4>
+          <h2 class="quiet"><%#= x.summary.split[0..4].join(" ") %></h2>
+          <div>
+            <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
+            <span class="icon icon-add-user"></span> <%= link_to 'View Reports', "/users/reports?event_id=#{x.id}", class: "btn btn-success btn-small" %>
+          </div> 
+          <div class="thumbs">
+            <%= link_to like_event_path(x, like: true), method: :post do %>
+              <i class="white glyphicon glyphicon-thumbs-up">&nbsp<%= x.thumbs_up_total %></i>
+            <% end %> &nbsp&nbsp&nbsp&nbsp
+            <%= link_to like_event_path(x, like: false), method: :post do %>
+              <i class="white glyphicon glyphicon-thumbs-down">&nbsp<%= x.thumbs_down_total %></i>
+            <% end %>
+          </div> 
+          </br>
+          <div class="ingredient pull-left">
+            <p style="color: #777">Category: <%= render x.categories %></p>
+          </div>
+        </div>
+      </div>
+    </div>      
+  <% end %>
+<% else %>
+  <h1>There Are No Events</h1>
+<% end %>

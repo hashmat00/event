@@ -14,6 +14,10 @@
 	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/delete_account', locals: {user: @user} %>");
 <% when "5" then %>
 	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/purchase_report', locals: {user: @user} %>");
+<% when "6" then %>
+	$('#userEvents_<%= @user.id %>').html("<%= j render partial: 'users/user_events', locals: {events: @upcomming_events} %>");
+<% when "7" then %>
+	$('#userEvents_<%= @user.id %>').html("<%= j render partial: 'users/user_events', locals: {events: @past_events} %>");
 <% else %>
 	$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/account_settings', locals: {user: @user, account:'edit'} %>");
 <% end %>

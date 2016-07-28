@@ -77,6 +77,8 @@ class UsersController < ApplicationController
 	
 	def show
 	  @events = @user.events.paginate(page: params[:page], per_page: 6)
+    @upcomming_events = @events.where('events.start_time > ?', Time.now).try(:active)
+    @past_events = @events.where('events.end_time < ?', Time.now).try(:active)
 	end
 
   def update
@@ -97,8 +99,11 @@ class UsersController < ApplicationController
 
   def tabs
     @user.build_privacy
-      @user.contact_details.build
-    end  
+    @user.contact_details.build
+    @events = @user.events.paginate(page: params[:page], per_page: 6)
+    @upcomming_events = @events.where('events.start_time > ?', Time.now).try(:active)
+    @past_events = @events.where('events.end_time < ?', Time.now).try(:active)
+  end  
   def destroy
     
   end
