@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   put '/orders', to: 'orders#update'
   get '/location_update', to: 'events#location_update'
   get '/users/reports', to: 'users#reports'
+  get '/users/tabs', to: 'users#tabs'
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users  
+  devise_for :users, :controllers => { :registrations => :registrations }
   root 'welcome#home'
   #get 'about', to: 'welcome#about'
   resource :subscriptions do
