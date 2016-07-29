@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   has_many :ticket_histories, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
   has_many :wish_lists_events, :through => :wish_lists, :source => :wish_listable, source_type: 'Event'
+  has_many :subscriptions, dependent: :destroy
+  has_many :ticket_subscriptions, :through => :subscriptions, :source => :subscriptionable, source_type: 'Ticket'
   has_many :contact_emails, dependent: :destroy
   # has_many :contact_details, dependent: :destroy
   has_many :contact_details, dependent: :destroy do

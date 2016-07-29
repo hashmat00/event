@@ -1,0 +1,75 @@
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
+<% if user.subscriptions.present? %>
+  <h1>Purchase Page For <%= user.name %> </h1>    
+    <hr>
+    <div class="row">
+      <div class="row">
+        <div class="col-md-3"><b><h5>All Types of Tickets Purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:ticket).count %></div>
+        <div class="col-md-3"><b><h5>All Events for which ticket purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:ticket).collect(&:event).count rescue 0 %></div>        
+      </div>
+      <div class="row">
+        <div class="col-md-3"><b><h5>Toal purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:total_ammount).compact.sum rescue 0 %></div>
+        <div class="col-md-3"><b><h5>Toal No of Tickets</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:ticket_history).collect(&:quantity).compact.sum rescue 0 %></div>        
+      </div>
+    </div>
+
+  
+    <div class="container" style="">
+     
+      <h3>All Purchase Reprort</h3>
+      <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>Quantity</th>
+            <th>Code</th>
+            <th>Order Id</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Purchased At</th>
+            <th>Note</th>
+            <th>Pay Mode</th>
+            <th>Status</th>
+            <th>Customer First Name</th>
+            <th>Customer last Name</th>
+            <th>Customer Email</th>
+            <th>Customer Contact No</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.subscriptions.each_with_index do |e, index| %>
+           <tr>
+            <% status = e.is_active %> 
+              <td><%= e.quantity rescue 0 %></td>
+              <td><%= e.code rescue "-" %></td>
+              <td><%= e.order_id rescue "-" %></td>
+              <td><%= e.unit_price rescue "-" %></td>
+              <td><%= e.total_price rescue "-" %></td>
+              <td><%= e.purchased_at rescue "-" %></td>
+              <td><%= e.note rescue "-" %></td>
+              <td><%= e.pay_mode rescue "-" %></td>
+              <td><%= status ? "Active Subscription" : "Cancel Subscription" rescue "-" %></td>
+              <td><%= e.payment.first_name rescue "-" %></td>
+              <td><%= e.payment.last_name rescue "-" %></td>
+              <td><%= e.payment.email rescue "-" %></td>
+              <td><%= e.payment.contact_no rescue "-" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <script type="text/javascript">$(document).ready(function() {
+      $('#example').dataTable();
+    });</script>
+ 
+<% else %>
+  <h2> You have not purchase any thing.></h2>
+<% end %>
+
+
+
+

@@ -11,7 +11,9 @@
           <h2 class="quiet"><%#= x.summary.split[0..4].join(" ") %></h2>
           <div>
             <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
-            <span class="icon icon-add-user"></span> <%= link_to 'View Reports', "/users/reports?event_id=#{x.id}", class: "btn btn-success btn-small" %>
+            <% if current_user == x.user %>
+              <span class="icon icon-add-user"></span> <%= link_to 'View Reports', "/users/reports?event_id=#{x.id}", class: "btn btn-success btn-small" %>
+            <% end %>
           </div> 
           <div class="thumbs">
             <%= link_to like_event_path(x, like: true), method: :post do %>
