@@ -47,175 +47,177 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Contact Details</a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">
-        <% if AddressType.all.active.present? %>
-          <% AddressType.all.active.each do |address_type|  %>
-            <h2><%= address_type.name.try(:titleize) %></h2>
-            <% resource = user.contact_details.by_address_type(address_type.id) %>
-            <div class="row">
-              <div class="col-md-3">Address 1</div>
-              <div class="col-md-9"><%= resource.address1 rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Address 2</div>
-              <div class="col-md-9"><%= resource.address2 rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Address 3</div>
-              <div class="col-md-9"><%= resource.address3 rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Land Mark</div>
-              <div class="col-md-9"><%= resource.land_mark rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Town</div>
-              <div class="col-md-9"><%= resource.town rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">City</div>
-              <div class="col-md-9"><%= resource.city rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">State</div>
-              <div class="col-md-9"><%= resource.state rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Country</div>
-              <div class="col-md-9"><%= resource.country rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Zipcode</div>
-              <div class="col-md-9"><%= resource.zipcode rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Primary Contact</div>
-              <div class="col-md-9"><%= resource.contact1 rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Secondary Contact</div>
-              <div class="col-md-9"><%= resource.contact2 rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Phone</div>
-              <div class="col-md-9"><%= resource.landline rescue "" %></div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">Fax</div>
-              <div class="col-md-9"><%= resource.fax rescue "" %></div>
-            </div>
+  <% if current_user == user %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Contact Details</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+          <% if AddressType.all.active.present? %>
+            <% AddressType.all.active.each do |address_type|  %>
+              <h2><%= address_type.name.try(:titleize) %></h2>
+              <% resource = user.contact_details.by_address_type(address_type.id) %>
+              <div class="row">
+                <div class="col-md-3">Address 1</div>
+                <div class="col-md-9"><%= resource.address1 rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Address 2</div>
+                <div class="col-md-9"><%= resource.address2 rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Address 3</div>
+                <div class="col-md-9"><%= resource.address3 rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Land Mark</div>
+                <div class="col-md-9"><%= resource.land_mark rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Town</div>
+                <div class="col-md-9"><%= resource.town rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">City</div>
+                <div class="col-md-9"><%= resource.city rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">State</div>
+                <div class="col-md-9"><%= resource.state rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Country</div>
+                <div class="col-md-9"><%= resource.country rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Zipcode</div>
+                <div class="col-md-9"><%= resource.zipcode rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Primary Contact</div>
+                <div class="col-md-9"><%= resource.contact1 rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Secondary Contact</div>
+                <div class="col-md-9"><%= resource.contact2 rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Phone</div>
+                <div class="col-md-9"><%= resource.landline rescue "" %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">Fax</div>
+                <div class="col-md-9"><%= resource.fax rescue "" %></div>
+              </div>
+            <% end %>
+          <% else %>
+            NO address Type created yet or inactive
           <% end %>
-        <% else %>
-          NO address Type created yet or inactive
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Account Details</a>
-      </h4>
-    </div>
-    <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-3">Email</div>
-          <div class="col-md-9"><%= user.email %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Username</div>
-          <div class="col-md-9"><%= user.username %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Account Since</div>
-          <div class="col-md-9"></div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Preference</a>
-      </h4>
-    </div>
-    <div id="collapse4" class="panel-collapse collapse">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-3">Email Notification</div>
-          <div class="col-md-9"><%= user.privacy.is_email ? "On" : "OFF" rescue "On"%></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Message Notification</div>
-          <div class="col-md-9"><%= user.privacy.is_message ? "On" : "OFF" rescue "On"%></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Notification</div>
-          <div class="col-md-9"><%= user.privacy.is_notification ? "On" : "OFF" rescue "On"%></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Profile Visibilty</div>
-          <div class="col-md-9"><%= user.privacy.is_visible ? "On" : "OFF" rescue "On"%></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Account Details</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">Email</div>
+            <div class="col-md-9"><%= user.email %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Username</div>
+            <div class="col-md-9"><%= user.username %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Account Since</div>
+            <div class="col-md-9"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Social Contacts</a>
-      </h4>
-    </div>
-    <div id="collapse5" class="panel-collapse collapse">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-3">Google +</div>
-          <div class="col-md-9"><%= user.google_url %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Facebook</div>
-          <div class="col-md-9"><%= user.fb_url %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Twitter</div>
-          <div class="col-md-9"><%= user.twitter_url %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Linked IN</div>
-          <div class="col-md-9"><%= user.linkedin_url %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Primary Email</div>
-          <div class="col-md-9"><%= user.primary_email %></div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">Secondary Email</div>
-          <div class="col-md-9"><%= user.secondary_email %></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Preference</a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">Email Notification</div>
+            <div class="col-md-9"><%= user.privacy.is_email ? "On" : "OFF" rescue "On"%></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Message Notification</div>
+            <div class="col-md-9"><%= user.privacy.is_message ? "On" : "OFF" rescue "On"%></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Notification</div>
+            <div class="col-md-9"><%= user.privacy.is_notification ? "On" : "OFF" rescue "On"%></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Profile Visibilty</div>
+            <div class="col-md-9"><%= user.privacy.is_visible ? "On" : "OFF" rescue "On"%></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Payment Credentials</a>
-      </h4>
-    </div>
-    <div id="collapse6" class="panel-collapse collapse">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-3">Paypal Email</div>
-          <div class="col-md-9"><%= user.paypal_email %></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Social Contacts</a>
+        </h4>
+      </div>
+      <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">Google +</div>
+            <div class="col-md-9"><%= user.google_url %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Facebook</div>
+            <div class="col-md-9"><%= user.fb_url %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Twitter</div>
+            <div class="col-md-9"><%= user.twitter_url %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Linked IN</div>
+            <div class="col-md-9"><%= user.linkedin_url %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Primary Email</div>
+            <div class="col-md-9"><%= user.primary_email %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">Secondary Email</div>
+            <div class="col-md-9"><%= user.secondary_email %></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Payment Credentials</a>
+        </h4>
+      </div>
+      <div id="collapse6" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">Paypal Email</div>
+            <div class="col-md-9"><%= user.paypal_email %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

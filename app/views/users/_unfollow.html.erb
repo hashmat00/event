@@ -1,1 +1,1 @@
-<%= link_to "UnFollow", unfollow_path(:id => x.id), :method => :post, :remote => 'true'%>
+<%= link_to "UnFollow", unfollow_path(:id => x.id), class: "btn btn-danger", :method => :post, :remote => 'true'%> Followers (<%= x.followers.count %>) &nbsp Following (<%= x.following.count %>)
