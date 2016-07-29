@@ -27,15 +27,11 @@
 
     $(document).ajaxStart(function() {       
       $(".ajax-loading").show();
-      $('.titleHeader').css('z-index','-99999999');
-       $('.mapTextField').css('z-index','-999999999999999');
+      $('.ajax-loading').css('z-index','9999999999');
     });
 
     $(document).ajaxStop(function() {   
       $(".ajax-loading").hide();
-      $('.titleHeader').css('z-index','99999999');
-      $('.mapTextField').css('z-index','999999999999999');
-
     });
 
 
