@@ -110,115 +110,133 @@
                           </div>
                           <div id="menu1" class="tab-pane fade">
                             <h2>Filter By Location</h2>
-                            <div class="btn-group" data-toggle="buttons">
-                              <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Current Location
+                            <div class="btn-group" data-toggle="buttons" id="locationFilter">
+                              <label class="btn btn-primary active" onclick="$('#city_filter').hide();$('#city_filter').val('');$('#state_filter').hide();$('#state_filter').val();$('#country_filter').hide();$('#country_filter').val();">
+                                <input type="radio" name="locationFilter" id="option111" autocomplete="off" checked> Current Location
                               </label>
-                              <label class="btn btn-success">
-                                <input type="radio" name="options" id="option2" autocomplete="off"> Current City
+                              <label class="btn btn-success" onclick="$('#city_filter').hide();$('#city_filter').val('');$('#state_filter').hide();$('#state_filter').val();$('#country_filter').hide();$('#country_filter').val();">
+                                <input type="radio" name="locationFilter" id="option222" autocomplete="off"> Current City
                               </label>
-                              <label class="btn btn-success">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Custom City
+                              <label class="btn btn-success" onclick="$('#city_filter').show();$('#state_filter').hide();$('#state_filter').val();$('#country_filter').hide();$('#country_filter').val();">
+                                <input type="radio" name="locationFilter" id="option3" autocomplete="off"> Custom City
                               </label>
-                              <label class="btn btn-success">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Current State
+                                <input type="text" name="city_filter" class="form-control" id="city_filter" placeholder="Enter City" style="display:none">
+                              <label class="btn btn-success" onclick="$('#city_filter').hide();$('#city_filter').val('');$('#state_filter').hide();$('#state_filter').val();$('#country_filter').hide();$('#country_filter').val();">
+                                <input type="radio" name="locationFilter" id="option333" autocomplete="off"> Current State
                               </label>
-                              <label class="btn btn-success">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Custom State
+                              <label class="btn btn-success" onclick="$('#state_filter').show();$('#city_filter').hide();$('#city_filter').val();$('#country_filter').hide();$('#country_filter').val();">
+                                <input type="radio" name="locationFilter" id="option444" autocomplete="off"> Custom State
                               </label>
-                              <label class="btn btn-success">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Current Country
+                              <input type="text" name="state_filter" class="form-control" id="state_filter" placeholder="Enter State" style="display:none">
+                              <label class="btn btn-success" onclick="$('#city_filter').hide();$('#city_filter').val('');$('#state_filter').hide();$('#state_filter').val();$('#country_filter').hide();$('#country_filter').val();">
+                                <input type="radio" name="locationFilter" id="option555" autocomplete="off"> Current Country
                               </label>
-                              <label class="btn btn-success">
-                                <input type="radio" name="options" id="option3" autocomplete="off"> Custom Country
+                              <label class="btn btn-success" onclick="$('#country_filter').show();$('#city_filter').hide();$('#city_filter').val();$('#state_filter').hide();$('#state_filter').val();">
+                                <input type="radio" name="locationFilter" id="option666" autocomplete="off"> Custom Country
                               </label>
+                              <input type="text" name="country_filter" class="form-control" id="country_filter" placeholder="Enter Country" style="display:none">
                             </div>  
                           </div>
                           <div id="menu2" class="tab-pane fade">
                             <h2>Filter By Date</h2>
                             <div class="btn-group" data-toggle="buttons">
-                              <label class="btn btn-primary active">
+                              <label class="btn btn-primary active" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option1" autocomplete="off" checked> Upcomming Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option2" autocomplete="off"> Past Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Today's Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Yesterday's Event
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Tommorw's Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off">  Day after Tommorw's Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Current Week Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Current Month Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Current Year Events
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Events in 7days
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Events in 30days
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Events in 365days
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#customDateBlock').show();">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Custom Date
                               </label>
+                              <div class="row" id="customDateBlock" style="display:none">
+                                <div class="col-md-6">
+                                  <label for="name">Start Date </label>
+                                  <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control", required: true %>
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="name">End Date </label>
+                                  <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control", required: true %>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <div id="menu3" class="tab-pane fade">
                             <h2>Filter By Price</h2>
                             <div class="btn-group" data-toggle="buttons">
-                              <label class="btn btn-primary active">
+                              <div class="priceFiled" id = "priceFiled">
+                                <input class="price-input" type="text" name="price" value="">
+                              </div>  
+                              <label class="btn btn-primary active" onclick="$('#priceFiled').show();">
                                 <input type="radio" name="options" id="option1" autocomplete="off" checked> All
                               </label>
-                              <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Free
+                              <label class="btn btn-primary" onclick="$('#priceFiled').hide();$('#price-input').val('');">
+                                <input type="radio" name="options" id="option1" autocomplete="off"> Free
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#priceFiled').show();">
                                 <input type="radio" name="options" id="option2" autocomplete="off"> Paid
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#priceFiled').show();">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Free + Paid
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#priceFiled').hide();$('#price-input').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Donation
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#priceFiled').hide();$('#price-input').val('');">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Free + Donation
                               </label>
-                              <label class="btn btn-success">
+                              <label class="btn btn-success" onclick="$('#priceFiled').show();">
                                 <input type="radio" name="options" id="option3" autocomplete="off"> Paid + Donation
                               </label>
                             </div>
                           </div>
                           <div id="menu4" class="tab-pane fade">
                             <h2>Filter By Category</h2>
-                            <div class="btn-group" data-toggle="buttons">
-                              <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Select All
+                            <div class="btn-group" data-toggle="buttons" style="width:100%">
+                              <label class="btn btn-primary active" onclick=" $('#event_categories_filter' ).val(<%= Category.all.collect(&:id)%>).change()">
+                                <input type="radio" name="options" id="option1" autocomplete="off"> Select All
                               </label>
-                              <label class="btn btn-primary active">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> Reset All
+                              <label class="btn btn-primary" onclick=" $('#event_categories_filter' ).val('').change()">
+                                <input type="radio" name="options" id="option" autocomplete="off"> Reset All
                               </label>
                               <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories_filter", :multiple => true) %>
                             </div>
                           </div>
                           <div id="menu5" class="tab-pane fade">
                             <h2>Filter By Event Type</h2>
-                             <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']], id: "event_type_filter" %>
+                             <div class="form-control">
+                              <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']], id: "event_type_filter" %>
+                            </div>
                           </div>
                         </div>
                       <% end %>
@@ -355,16 +373,56 @@ label
   };
 
 </script>
+<script>
+  $(function() {
+    $("#start_date").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    });
+     $("#end_date").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss'
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $('input[name=locationFilter]:checked', '#locationFilter').val();
+</script>
 <script type="text/javascript">
   $( "#event_categories_filter" ).select2();
   $( "#event_type_filter" ).select2();
-   $( "#event_categories_filter" ).val(<%= Category.all.collect(&:id)%>).change()
 </script>
 <script type="text/javascript">
   $(".distance-input").ionRangeSlider({
     type: "double",
     min: 0,
     max: 10000,
+    from: 10,
+    to: 100,
+    keyboard: true,
+    step: 10,
+    grid: true,
+    force_edges: true,
+    onStart: function (data) {
+        console.log("onStart");
+    },
+    onChange: function (data) {
+        console.log("onChange");
+    },
+    onFinish: function (data) {
+        console.log("onFinish");
+    },
+    onUpdate: function (data) {
+        console.log("onUpdate");
+    }
+});
+
+</script>
+price-input
+<script type="text/javascript">
+  $(".price-input").ionRangeSlider({
+    type: "double",
+    min: 0,
+    max: 100000,
     from: 10,
     to: 100,
     keyboard: true,
