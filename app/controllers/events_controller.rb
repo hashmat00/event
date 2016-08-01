@@ -27,6 +27,7 @@ class EventsController < ApplicationController
      
     
     def index
+      @tab = Event.new
       if params[:lat].present? && params[:long].present?
       @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
       else

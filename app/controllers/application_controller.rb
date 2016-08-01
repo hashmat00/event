@@ -1,9 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_filter :current_events
   helper_method :latlong
   helper_method :baseUrl
   helper_method :requestUrl
+
+  def current_events
+
+  end  
 
   def latlong
     {lat: request.location.latitude!=0 ? request.location.latitude : '28.6139', long: request.location.longitude!=0 ? request.location.longitude : '77.2090'}
