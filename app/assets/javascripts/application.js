@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require rvslider.min
-//= require rangeslider.min
-
 //= require jquery_nested_form
 //= require custom
 //= require moment
@@ -23,6 +21,7 @@
 //= require country
 //= require select2
 //= require jquery.remotipart
+//= require ion.rangeSlider.min
 
 
     $(document).ajaxStart(function() {       

@@ -58,68 +58,61 @@
                   </div>
                 </div>
                 <div class="select-block col-md-4 col-xs-4 last">
-                  <a id="toggle-link" class="options-button">More Filters</a>
+                  <a id="toggle-link" class="options-button">Filters</a>
                 </div>
-                <div style="display: none;" id="hidden_content" class="options-overlay col-md-12 col-sm-12">
-                  <div class="row">
-                    <div class="col-xs-6 top-mrg">
-                      <div class="internal-container features">
-                        <div class="form-group">
-                          <label>Minimum Square Footage:</label>
-                          <input type="text" placeholder="Enter an Amount" class="form-control">
+                <div style="display: none; min-height:400px; max-height:600px;overflow-y:scroll" id="hidden_content" class="options-overlay col-md-12 col-sm-12">
+                  <div class="row" >
+                    <div class="container" style="padding:20px">
+                      <h2>Filter</h2>
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Reset Filter</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Location</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Date</a></li>
+                        <li><a data-toggle="tab" href="#menu3">Price</a></li>
+                        <li><a data-toggle="tab" href="#menu4">Category</a></li>
+                        <li><a data-toggle="tab" href="#menu5">Event Type</a></li>
+                      </ul>
+
+                      <div class="tab-content" style="padding:20px">
+                        <div id="home" class="tab-pane fade in active">
+                          <h2>HOME</h2>
                         </div>
-                        <label>Building Features:</label>
-                        <section class="block">
-                          <section>
-                            <ul class="submit-features">
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Elevator</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Gym</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Pool</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Lorem Ipsum</label></div></li>
-                            </ul>
-                          </section>
-                        </section>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 top-mrg">
-                      <div class="internal-container features">
-                        <label>Property Features:</label>
-                        <section class="block">
-                          <section>
-                            <ul class="submit-features">
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Air conditioning</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Balcony</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Garage Internet</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Dishwasher</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Washer Mashine</label></div></li>
-                              <li><div class="checkbox"><label><div class="icheckbox"><input type="checkbox" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; border: 0px none; opacity: 0;"></ins></div>Some Lorem Ipsum</label></div></li>
-                            </ul>
-                          </section>
-                        </section>
+                        <div id="menu1" class="tab-pane fade">
+                          <h2>Filter By Location</h2>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                          <h2>Filter By Date</h2>
+                          
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                          <h2>Filter By Price</h2>
+                          
+                        </div>
+                        <div id="menu4" class="tab-pane fade">
+                          <h2>Filter By Category</h2>
+                          
+                        </div>
+                         <div id="menu5" class="tab-pane fade">
+                          <h2>Filter By Event Type</h2>
+                          
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div><!-- options-overlay -->
               </header>
               <ul class="tab-links col-md-4 col-xs-12">
-                <li class="col-lg-3 col-lg-offset-2 col-md-4 col-xs-4 no-pad active"><a href="javascript:void(0)" onclick="tabRequest(1);" class="map2"><span class="glyphicon glyphicon-map-marker glf-icon"></span>Map</a></li>
+                <li class="col-lg-3 col-lg-offset-2 col-md-4 col-xs-4 no-pad active"><a href="javascript:void(0)" onclick="tabRequest(1);" id="mapView" class="map2"><span class="glyphicon glyphicon-map-marker glf-icon"></span>Map</a></li>
                 <li class="col-lg-3 col-md-4 col-xs-4 no-pad"><a href="javascript:void(0)" onclick="tabRequest(2);"><span class="glyphicon glyphicon-th-large glf-icon"></span>Grig</a></li>
                 <li class="col-lg-3 col-md-4 col-xs-4 bdr-rgh no-pad"><a href="javascript:void(0)" onclick="tabRequest(3);"><span class="glyphicon glyphicon-th-list glf-icon"></span>List</a></li>
               </ul>
               <div class="col-xs-12">
                 <div class="row">
-                  <div class="col-md-3 col-sm-4">
-                    <div class="form-inline">
+                  <div class="col-md-2 col-sm-4">
                       <label class="top-indent">Distance:</label>
-                    </div>
                   </div>
-                  <div class="col-md-9 col-sm-8">
-                    <div class="form-group">
-                      <div class="price-range price-range-wrapper">
-                        <!-- <input class="price-input" type="text" name="price" value="0;5000000"> -->
-                        <input type="range" min="10" max="1000" step="10" value="300" data-orientation="vertical" default horizontal>
-                      </div>
-                    </div>
+                  <div class="col-md-10 col-sm-8" style="padding: 0 40px">
+                    <input class="distance-input" type="text" name="price" value="0;5000000">
                   </div>
                 </div><!-- row -->
                 <div class="row">
@@ -172,11 +165,6 @@
     </div>
   </div> -->
 
-<script type="text/javascript">
-  $('input[type="range"]').rangeslider({});
-
-
-</script>
 
 <style>
 .slider-kit .col-xs-4
@@ -228,16 +216,50 @@
   };
 
 </script>
+<script type="text/javascript">
+  $(".distance-input").ionRangeSlider({
+    type: "double",
+    min: 0,
+    max: 10000,
+    from: 10,
+    to: 100,
+    keyboard: true,
+    step: 10,
+    grid: true,
+    force_edges: true,
+    onStart: function (data) {
+        console.log("onStart");
+    },
+    onChange: function (data) {
+        console.log("onChange");
+    },
+    onFinish: function (data) {
+        console.log("onFinish");
+    },
+    onUpdate: function (data) {
+        console.log("onUpdate");
+    }
+});
 
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#mapView').click();
+  });
+</script>
 <script type="text/javascript">
   
-
-  
-  function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
-        });
+        var map;
+      
+        function initMap() {
+          
+          var myOptionsB = {
+              zoom: 14,
+              center: {lat: 28.5910985, lng: 77.2252626},
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          map = new google.maps.Map(document.getElementById("map"), myOptionsB);
+        
         var input = /** @type {!HTMLInputElement} */(
             document.getElementById('pac-input'));
 
@@ -320,7 +342,7 @@ console.log(place.name); // Name of Place
         setupClickListener('changetype-address', ['address']);
         setupClickListener('changetype-establishment', ['establishment']);
         setupClickListener('changetype-geocode', ['geocode']);
-      }
+     } 
 
 </script>
 

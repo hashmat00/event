@@ -1,10 +1,10 @@
 
-
+<% eventsGraph = events.where.not(events: {latitude: nil, longitude: nil, name: nil }) %>
 
 <div id="tab1">
   <div class="sidebar col-sm-4 col-xs-12">
     <!-- Map -->
-    <!-- <div id="map" style="width:100% height:30px;"></div> -->
+    <div id="mapGoogle" style="width:100% height:3000px;"></div>
     <!-- end Map -->
   </div><!-- sidebar -->
   <div class="content col-sm-8 col-xs-12">
@@ -86,106 +86,106 @@
     display: block !important;
 }
 </style>
+<% if request.xhr? %>
+ <script>
 
-<!-- <script type="text/javascript">
-  
+      // The following example creates complex markers to indicate beaches near
+      // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+      // to the base of the flagpole.
 
-  
-  function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13
-        });
-        var input = /** @type {!HTMLInputElement} */(
-            document.getElementById('pac-input'));
-
-        var types = document.getElementById('type-selector');
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
-
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.bindTo('bounds', map);
-
-        var infowindow = new google.maps.InfoWindow();
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
+      
+      function initMap() {
+        var map1 = new google.maps.Map(document.getElementById('mapGoogle'), {
+          zoom: 10,
+          center: {lat: 28.5910985, lng: 77.2252626}
         });
 
-        autocomplete.addListener('place_changed', function() {
-          infowindow.close();
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
-            return;
-          }
-
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-            $.ajax({
-              type:'GET',
-              url: '/events',
-              dataType: 'script',
-              data: $.param({ lat: place.geometry.location.lat(), long: place.geometry.location.lng()})
-            });
-
-          } else {
-
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-          }
-          marker.setIcon(/** @type {google.maps.Icon} */({
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
-          }));
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
-
-          var address = '';
-          if (place.address_components) {
-            console.log(place.geometry.location.G); // Get Latitude
-console.log(place.geometry.location.K); // Get Longitude
-
-//Additional information
-console.log(place.formatted_address); // Formated Address of Place
-console.log(place.name); // Name of Place
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-          infowindow.open(map, marker);
-        });
-
-        // Sets a listener on a radio button to change the filter type on Places
-        // Autocomplete.
-        function setupClickListener(id, types) {
-          var radioButton = document.getElementById(id);
-          radioButton.addEventListener('click', function() {
-            autocomplete.setTypes(types);
-          });
-        }
-
-        setupClickListener('changetype-all', []);
-        setupClickListener('changetype-address', ['address']);
-        setupClickListener('changetype-establishment', ['establishment']);
-        setupClickListener('changetype-geocode', ['geocode']);
+        setMarkers1(map1);
       }
 
-</script>
+      // Data for the markers consisting of a name, a LatLng and a zIndex for the
+      // order in which these markers should display on top of each other.
+      var beaches = [
+        <% eventsGraph.flatten.compact.each_with_index do |event, index| %>
+          ['<%= event.name %>',<%= event.latitude %>,<%= event.longitude %>, <%= index %>, '<h2>$<%= event.payMode("amount") rescue "Something Wrong" %></h2>', '<h5 style="font-size:25px;" class="team-color"><%= event.payMode("string") rescue "Something Wrong" %></h5>', '<b>Start From: </b><%= event.start_time.strftime("%A, %B %d, %Y at %I:%M %p") rescue Time.now.strftime("%A, %B %d, %Y at %I:%M %p") %>', '<b>Till:</b> <%= event.start_time.strftime("%A, %B %d, %Y at %I:%M %p") rescue Time.now.strftime("%A, %B %d, %Y at %I:%M %p") %>' ,'<%=  event.description.gsub("<p>","").gsub("</p>","").gsub("&nbsp;","").split("\r\n").map { |x| "#{x.strip}" }.join %>',<%= event.id %>]<% unless index == @events.count(:all)-1 %>, <% end %>
+        <% end %>
+      ];
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script> -->
+      function setMarkers1(map1) {
+        // Adds markers to the map.
+
+        // Marker sizes are expressed as a Size of X,Y where the origin of the image
+        // (0,0) is located in the top left of the image.
+
+        // Origins, anchor positions and coordinates of the marker increase in the X
+        // direction to the right and in the Y direction down.
+        var image = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(20, 32),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 32)
+        };
+        // Shapes define the clickable region of the icon. The type defines an HTML
+        // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+        // The final coordinate closes the poly by connecting to the first coordinate.
+        var shape1 = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+
+        markers1 = Array();
+        infoWindows1 = Array();
+
+        for(var i in beaches)
+        {
+            var beach = beaches[i];
+            var marker1 = new google.maps.Marker({
+                position: {lat: beach[1], lng: beach[2]},
+                map : map1,
+                animation : google.maps.Animation.DROP,
+                infoWindowIndex : i //<---Thats the extra attribute
+            });
+            var content1 = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">'+ beach[0] +'</h2>'+
+            '<div id="bodyContent">'+
+            '<p>'+ beach[4] +'</p>'+
+            '<div class="row"><div class="col-md-6"><p>'+ beach[5] +'</p></div>'+
+            '<div class="col-md-6"><a href="<%= baseUrl %>/events/' + beach[9] + '" class="btn btn-primary" style="padding:20px 20px;">View Event</a></div></div>'+
+            '<p>'+ beach[6] +'</p>'+
+            '<p>'+ beach[7] +'</p>'+
+            '<p>'+ beach[8] +'</p>'+
+            '</div>'+
+            '</div>';
+            var infoWindow1 = new google.maps.InfoWindow({
+                content : content1
+            });
+
+            google.maps.event.addListener(marker1, 'click', 
+                function(event)
+                {
+                    map1.panTo(event.latLng);
+                    map1.setZoom(10);
+                    infoWindows1[this.infoWindowIndex].open(map1, this);
+                }
+            );
+
+            infoWindows1.push(infoWindow1);
+            markers1.push(marker1);
+        }
+
+      }
+    </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap" async defer></script>
+<% end %>
 <script type="text/javascript">
   var eventconHeight =  $('.event-container').height();
-  $('#map').css('height',eventconHeight);
+  $('#mapGoogle').css('height',eventconHeight);
   // $('#SeeMore').click(function(){
   //   var $this = $(this);
   //   $this.toggleId('seeMore');
