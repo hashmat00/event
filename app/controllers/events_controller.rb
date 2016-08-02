@@ -68,12 +68,12 @@ class EventsController < ApplicationController
     end
 
     def add_wishlist
-      @wish_list = @event.wish_lists.where(user_id:current_user.id).first
+      @wish_list = @event.wish_lists.where(user_id:current_user.try(:id)).first
       if @wish_list
        @wish_list = @wish_list.destroy
        @wish_list = false
       else
-       @wish_list = @event.wish_lists.create(user_id:current_user.id)
+       @wish_list = @event.wish_lists.create(user_id:current_user.try(:id))
        @wish_list = true
       end  
     end  
@@ -92,7 +92,7 @@ class EventsController < ApplicationController
        if @event.save
         cat_ids.map{ |m| @event.event_categories.create(category_id: m)}
         User.all.each do |user|
-          Notification.create(recipient: user , user: current_user, body: "#{current_user.name } has created event #{@event.name} ", notificable: @event)
+          Notification.create(recipient: user , user: current_user, body: "#{current_user.try(:name) } has created event #{@event.name} ", notificable: @event)
         end
         flash[:success] = "You have successfully created the Event Please Launch Your Event by click on Launch My Event Button"
         redirect_to "/events/#{@event.id}/edit"
@@ -163,7 +163,7 @@ class EventsController < ApplicationController
     
     
     def contact_email
-      current_user.contact_emails.create(params[:event].permit!)
+      current_user.contact_emails.create(params[:event].permit!) rescue ""
       email_sent = EventMailer.contact_email(@event,params[:event]).deliver_now rescue ""
       if email_sent
         flash[:success] = "Your Email has been successfully sent"

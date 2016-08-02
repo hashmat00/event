@@ -13,7 +13,11 @@
 			$('#tab-content').html("<%= j render partial: 'slider', locals: { event: @event, action_page: 'show'} %>");
 	<% end %>
 <% elsif params[:form_filter] %>
-		$('hidden_content').hide();
+		$('#hidden_content').hide();
+		<% unless current_events %>
+			$('#page-property-content').hide();
+			
+		<% end %>
 		$('#tab-content-result').html("<%= j render partial: 'event_result_title', locals: {events: current_events} %>");
 	<% case current_tab1 %>
 	<% when "1" then %>
@@ -40,21 +44,21 @@
 <% else %>
 	<% case params[:tab] %>
 	<% when "1" then %>
-		$('#tab-content').html("<%= j render partial: 'map', locals: {events: @events} %>");
+		$('#tab-content').html("<%= j render partial: 'map', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% when "2" then %>
-		$('#tab-content').html("<%= j render partial: 'grid', locals: {events: @events} %>");
+		$('#tab-content').html("<%= j render partial: 'grid', locals: {events: current_events} %>");
 	<% when "3" then %>
-		$('#tab-content').html("<%= j render partial: 'list', locals: {events: @events} %>");
+		$('#tab-content').html("<%= j render partial: 'list', locals: {events: current_events} %>");
 	<% when "4" then %>
-		$('#tab-content_up').html("<%= j render partial: 'picture_container', locals: { events_pictures: @events_pictures} %>");
+		$('#tab-content_up').html("<%= j render partial: 'picture_container', locals: { events_pictures: (current_events.sort{|m| m.pictures.count} rescue nil )} %>");
 	<% when "5" then %>
-		$('#tab-content_up').html("<%= j render partial: 'video_container', locals: { events_videos: @events_videos} %>");
+		$('#tab-content_up').html("<%= j render partial: 'video_container', locals: { events_videos: (current_events.sort{|m| m.pictures.count} rescue nil )} %>");
 	<% when "6" then %>
-		$('#tab-content_up').html("<%= j render partial: 'map_container', locals: {events: @events} %>");	
+		$('#tab-content_up').html("<%= j render partial: 'map_container', locals: {events: current_events} %>");	
 	<% when "7" then %>
-		$('#tab-content_up').html("<%= j render partial: 'street_container', locals: {events: @events} %>");
+		$('#tab-content_up').html("<%= j render partial: 'street_container', locals: {events: current_events} %>");
 	<% else %>
-			$('#tab-content').html("<%= j render partial: 'map', locals: {events: @events} %>");
+			$('#tab-content').html("<%= j render partial: 'map', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% end %>
 <% end %>
 

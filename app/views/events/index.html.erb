@@ -61,8 +61,8 @@
               <div class="select-block col-md-4 col-xs-4 last">
                 <a id="toggle-link" class="options-button">Filters</a>
               </div>
-              <div style="display: none; min-height:400px; max-height:600px;overflow-y:scroll" id="hidden_content" class="options-overlay col-md-12 col-sm-12">
-                <div class="row" >
+              <div style="display: none; min-height:400px; max-height:600px;overflow-y:scroll; z-index: 999" id="hidden_content" class="options-overlay col-md-12 col-sm-12">
+                <div class="row">
                   <div class="container" style="padding:20px">
                     <h2>Filter</h2>
                     <ul class="nav nav-tabs">
@@ -144,7 +144,7 @@
                         <div id="menu2" class="tab-pane fade">
                           <h2>Filter By Date</h2>
                           <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-primary active" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');$('#filterFormSubmit').click();$('#filterDate').click();">
+                            <label class="btn btn-primary" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');$('#filterFormSubmit').click();$('#filterDate').click();">
                               <input type="radio" name="dateFilter" value="upcommingEventOn" id="option1" autocomplete="off"> Upcomming Events
                             </label>
                             <label class="btn btn-success" onclick="$('#customDateBlock').hide();$('#start_date').val('');$('#end_date').val('');$('#filterFormSubmit').click();$('#filterDate').click();">
@@ -207,10 +207,10 @@
                             <label class="btn btn-primary" onclick="$('#priceFiled').hide();$('#price-input').val('');$('#filterFormSubmit').click();$('#filterPrice').click();">
                               <input type="radio" name="priceFilter" value="freePriceOn" id="option1" autocomplete="off"> Free
                             </label>
-                            <label class="btn btn-success" onclick="$('#priceFiled').show();$('#filterPrice').click();">
+                            <label class="btn btn-success" onclick="$('#priceFiled').show();$('#filterPrice').click();$('#filterFormSubmit').click();">
                               <input type="radio" name="priceFilter" value="paidPriceOn" id="option2" autocomplete="off"> Paid
                             </label>
-                            <label class="btn btn-success" onclick="$('#priceFiled').show();$('#filterPrice').click();">
+                            <label class="btn btn-success" onclick="$('#priceFiled').show();$('#filterPrice').click();$('#filterFormSubmit').click();">
                               <input type="radio" name="priceFilter" value="freePaidPriceOn" id="option3" autocomplete="off"> Free + Paid
                             </label>
                             <label class="btn btn-success" onclick="$('#priceFiled').hide();$('#price-input').val('');$('#filterFormSubmit').click();$('#filterPrice').click();">
@@ -219,7 +219,7 @@
                             <label class="btn btn-success" onclick="$('#priceFiled').hide();$('#price-input').val('');$('#filterFormSubmit').click();$('#filterPrice').click();">
                               <input type="radio" name="priceFilter" value="freeDonationPriceOn" id="option3" autocomplete="off"> Free + Donation
                             </label>
-                            <label class="btn btn-success" onclick="$('#priceFiled').show();$('#filterPrice').click();">
+                            <label class="btn btn-success" onclick="$('#priceFiled').show();$('#filterPrice').click();$('#filterFormSubmit').click();">
                               <input type="radio" name="priceFilter" value="paidDonationPriceOn" id="option3" autocomplete="off"> Paid + Donation
                             </label>
                           </div>
@@ -400,7 +400,7 @@ label
     type: "single",
     min: 0,
     max: 10000,
-    from: 10,
+    from: 100,
     to: 100,
     keyboard: true,
     step: 10,
@@ -427,7 +427,7 @@ label
     type: "double",
     min: 0,
     max: 100000,
-    from: 10,
+    from: 100,
     to: 100,
     keyboard: true,
     step: 10,

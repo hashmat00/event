@@ -66,7 +66,7 @@
                       <div class="col-md-4 col-sm-4 col-xs-4 favorite">
                         <div>
                           <a data-toggle="modal" data-target="#myModal_<%= i.id %>"><span class="glyphicon glyphicon-share" style="font-size:20px;font-weight:bold" title="Share"></span></a>
-                          <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.id) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
+                          <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.try(:id)) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
                         </div>
                       </div>
                     </div>
@@ -99,7 +99,7 @@
       function initMap() {
         var map1 = new google.maps.Map(document.getElementById('mapGoogle'), {
           zoom: 10,
-          center: {lat: 28.5910985, lng: 77.2252626}
+          center: {lat: <%= eventsGraph.flatten.compact.latitude rescue 28.5910985%>, lng: <%= eventsGraph.flatten.compact.longitude rescue 77.2252626 %>}
         });
 
         setMarkers1(map1);

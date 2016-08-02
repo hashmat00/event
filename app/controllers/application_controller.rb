@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     
     if params[:controller] == "events" && params[:action] == "tabs"
       if (params[:tab].to_i) > 0 && (params[:tab].to_i) < 4
-        session[:current_tab_id] =  params[:tab]
-        current_tab_id = session[:current_tab_id]
+        session[:current_tab_id1] =  params[:tab]
+        current_tab_id1 = session[:current_tab_id1]
       end
     end
   end
@@ -27,13 +27,18 @@ class ApplicationController < ActionController::Base
     
     if params[:controller] == "events" && params[:action] == "tabs"
       if params[:tab].to_i > 3 && (params[:tab].to_i) < 8
-        session[:current_tab_id] =  params[:tab]
-        current_tab_id = session[:current_tab_id]
+        session[:current_tab_id2] =  params[:tab]
+        current_tab_id2 = session[:current_tab_id2]
       end
     end
   end  
 
   def current_events
+    unless request.format == "js"
+      session[:current_tab_id1] = nil
+      session[:current_tab_id2] = nil
+      session[:current_events] = nil
+    end  
     if params[:form_filter]
       distanceInput = params[:distanceInput].present? ? params[:distanceInput].to_i : 100
       if params[:filterLocation]
@@ -143,10 +148,12 @@ class ApplicationController < ActionController::Base
         end  
       end
       begin
-        current_events = current_events.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
+        session[:current_events] = current_events.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
+        current_events = session[:current_events]
       rescue
         nil
       end
+
     end    
   end
   def latlong
