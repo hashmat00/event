@@ -37,10 +37,12 @@
 		                    <% if user_signed_in? %> 
 										      <!-- <a href="<%= event_tickets_path(@event)%>" class="btn btn-primary">Get Tickets</a> -->
 										      <div class="interested_<%= @event.id %>">
-										        <%if !current_user.is_interested?(@event) %>
-										          <a href="<%= event_interests_path(@event)%>" data-remote= 'true' data-method='post' class="btn btn-primary">Interested</a>
-										        <%else %>
-										          <a href="/not_interested/<%= @event.id %>" data-remote= 'true' data-method='post' class="btn btn-primary">Not Interested</a>
+											      <% if current_user.present? %>
+											        <%if !current_user.is_interested?(@event) %>
+											          <a href="<%= event_interests_path(@event)%>" data-remote= 'true' data-method='post' class="btn btn-primary">Interested</a>
+											        <%else %>
+											          <a href="/not_interested/<%= @event.id %>" data-remote= 'true' data-method='post' class="btn btn-primary">Not Interested</a>
+											        <% end %>
 										        <% end %>
 										      </div>
 										    <% end %>
@@ -136,12 +138,12 @@
 		              <div class="col-md-12 col-sm-6 col-xs-12">
 		                <span class="ffs-bs">
 		                  <a href="javascript:void(0)" class="btn btn-info btn-lg ticket_action" data-toggle="modal" data-target="#myModal">Contact The <br> Organizer</a>
-		                	<%#= render partial: "users/contact_orgnizer", locals: {ticket: @event.tickets.first} %>
+		                	<%= render partial: "users/contact_orgnizer", locals: {ticket: @event.tickets.first} %>
 		                </span>
 		                <div class="col-xs-12 fav-block" style="text-align: center">
 		                  
 		                  <!-- <div class="bookmark col-xs-6"> -->
-		                     <a href="<%=add_wishlist_event_path(@event.id) %>" data-remote="true" ><span class="glyphicon glf-icon <%= @event.wish_list_class(current_user.id) %>" id="wish_list_<%= @event.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span> <b>Favorite</b></a>
+		                     <a href="<%=add_wishlist_event_path(@event.id) %>" data-remote="true" ><span class="glyphicon glf-icon <%= @event.wish_list_class(current_user.try(:id)) %>" id="wish_list_<%= @event.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span> <b>Favorite</b></a>
 		                  <!-- </div> -->
 		                  <!-- <div class="compare col-xs-6" data-compare-state="empty"> -->
 		                    <a data-toggle="modal" data-target="#myModal_<%= @event.id %>"><span class="glyphicon glyphicon-share glf-icon" style="font-size:20px;font-weight:bold" title="Share"></span><b>Share</b></a>
