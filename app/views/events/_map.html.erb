@@ -99,7 +99,7 @@
       function initMap() {
         var map1 = new google.maps.Map(document.getElementById('mapGoogle'), {
           zoom: 10,
-          center: {lat: 28.5910985, lng: 77.2252626}
+          center: {lat: <%= eventsGraph.flatten.compact.latitude %>, lng: <%= eventsGraph.flatten.compact.longitude %>}
         });
 
         setMarkers1(map1);
