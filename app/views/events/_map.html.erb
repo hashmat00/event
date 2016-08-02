@@ -1,5 +1,4 @@
 
-<% eventsGraph = events.where.not(events: {latitude: nil, longitude: nil, name: nil }) %>
 
 <div id="tab1">
   <div class="sidebar col-sm-4 col-xs-12">
@@ -11,68 +10,71 @@
     <div class="wide-2">
       <div class="col-xs-12">
         <div class="row event-container event-container">
-          <% events.each do |i| %>
-            <div class="col-md-4 col-sm-6 col-xs-6 prop">
-              <div class="wht-cont">
-                <a href = "/events/<%= i.id %>">
-                  <div class="exp-img-2" style="background-image:url(<%= i.picture_url%>);background-size: cover;">
-                    <span class="filter"></span>
-                    <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                    <div class="overlay">
-                      <div class="img-counter"><%= i.pictures.count %> Photo</div>
-                    </div>
-                  </div>
-                  <div class="item-title">
-                    <h4><%= i.name.try(:titleize) %></h4>
-                    <p class="team-color"><%= i.address %></p>
-                    <% if i.categories.present? %>
-                      <div class="col-md-7 col-sm-7 col-xs-7" style="padding:0 ">
-                        <p id="cat_<%= i.id %>" style="font-size:10px;">
-                          <% i.categories.limit(4).each do |ic| %>
-                            <span class="glyphicon glyphicon-tag"><b><%= ic.name %></b></span>
-                          <% end %>
-                        </p>
-                        <p id="collapseTwo" class="accordion-body collapse" style="font-size:10px;">
-                          <% i.categories[1..-4].each do |ic| %>
-                            <span class="glyphicon glyphicon-tag"><b><%= ic.name %></b></span>
-                          <% end %>
-                        </p>
-                        <% if i.categories.length > 4 %>
-                          <a data-toggle="collapse" href="#collapseTwo" id="seeMore">
-                           More<span class="glyphicon glyphicon-plus"></span>
-                          </a>
-                        <% end %>
+          <% if events.present? %>
+            <% eventsGraph = events.where.not(events: {latitude: nil, longitude: nil, name: nil }) %>
+            <% events.each do |i| %>
+              <div class="col-md-4 col-sm-6 col-xs-6 prop">
+                <div class="wht-cont">
+                  <a href = "/events/<%= i.id %>">
+                    <div class="exp-img-2" style="background-image:url(<%= i.picture_url%>);background-size: cover;">
+                      <span class="filter"></span>
+                      <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
+                      <div class="overlay">
+                        <div class="img-counter"><%= i.pictures.count %> Photo</div>
                       </div>
-                    <% else %>
-                      <div class="col-md-7 col-sm-7 col-xs-7">
-                        <p style="font-size:10px;"><span class="glyphicon glyphicon-tag"></span> <b>No tags Available</b></p>
+                    </div>
+                    <div class="item-title">
+                      <h4><%= i.name.try(:titleize) %></h4>
+                      <p class="team-color"><%= i.address %></p>
+                      <% if i.categories.present? %>
+                        <div class="col-md-7 col-sm-7 col-xs-7" style="padding:0 ">
+                          <p id="cat_<%= i.id %>" style="font-size:10px;">
+                            <% i.categories.limit(4).each do |ic| %>
+                              <span class="glyphicon glyphicon-tag"><b><%= ic.name %></b></span>
+                            <% end %>
+                          </p>
+                          <p id="collapseTwo" class="accordion-body collapse" style="font-size:10px;">
+                            <% i.categories[1..-4].each do |ic| %>
+                              <span class="glyphicon glyphicon-tag"><b><%= ic.name %></b></span>
+                            <% end %>
+                          </p>
+                          <% if i.categories.length > 4 %>
+                            <a data-toggle="collapse" href="#collapseTwo" id="seeMore">
+                             More<span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                          <% end %>
+                        </div>
+                      <% else %>
+                        <div class="col-md-7 col-sm-7 col-xs-7">
+                          <p style="font-size:10px;"><span class="glyphicon glyphicon-tag"></span> <b>No tags Available</b></p>
+                        </div>
+                      <% end %>
+                      <div class="col-md-5 col-sm-5 col-xs-5">
+                        <p><%= i.distance_from([latlong[:lat],latlong[:long]]).round(2) rescue 0%> Km<span class="rank"></span></p>
                       </div>
-                    <% end %>
-                    <div class="col-md-5 col-sm-5 col-xs-5">
-                      <p><%= i.distance_from([latlong[:lat],latlong[:long]]).round(2) rescue 0%> Km<span class="rank"></span></p>
+                      <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
+                      <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
                     </div>
-                    <div class="col-md-7 col-sm-7 col-xs-7 lft-brd"></div>
-                    <div class="col-md-5 col-sm-5 col-xs-5 lft-brd"></div>
-                  </div>
-                </a>
-                <hr>
-                <div class="item-title btm-part">
-                  <div class="row">
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                      <p>$<%= i.payMode("amount") rescue "Something Wrong" %> </p>
-                      <p class="team-color"><%= i.payMode("string") rescue "Something Wrong" %></p>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-4 favorite">
-                      <div>
-                        <a data-toggle="modal" data-target="#myModal_<%= i.id %>"><span class="glyphicon glyphicon-share" style="font-size:20px;font-weight:bold" title="Share"></span></a>
-                        <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.id) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
+                  </a>
+                  <hr>
+                  <div class="item-title btm-part">
+                    <div class="row">
+                      <div class="col-md-8 col-sm-8 col-xs-8">
+                        <p>$<%= i.payMode("amount") rescue "Something Wrong" %> </p>
+                        <p class="team-color"><%= i.payMode("string") rescue "Something Wrong" %></p>
+                      </div>
+                      <div class="col-md-4 col-sm-4 col-xs-4 favorite">
+                        <div>
+                          <a data-toggle="modal" data-target="#myModal_<%= i.id %>"><span class="glyphicon glyphicon-share" style="font-size:20px;font-weight:bold" title="Share"></span></a>
+                          <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.id) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <%= render partial: "share", locals: { event: i } %>
+              <%= render partial: "share", locals: { event: i } %>
+            <% end %>
           <% end %>
         </div><!-- end row -->
       </div><!-- end container -->
@@ -105,12 +107,13 @@
 
       // Data for the markers consisting of a name, a LatLng and a zIndex for the
       // order in which these markers should display on top of each other.
+      <% if events.present? %>
       var beaches = [
         <% eventsGraph.flatten.compact.each_with_index do |event, index| %>
           ['<%= event.name %>',<%= event.latitude %>,<%= event.longitude %>, <%= index %>, '<h2>$<%= event.payMode("amount") rescue "Something Wrong" %></h2>', '<h5 style="font-size:25px;" class="team-color"><%= event.payMode("string") rescue "Something Wrong" %></h5>', '<b>Start From: </b><%= event.start_time.strftime("%A, %B %d, %Y at %I:%M %p") rescue Time.now.strftime("%A, %B %d, %Y at %I:%M %p") %>', '<b>Till:</b> <%= event.start_time.strftime("%A, %B %d, %Y at %I:%M %p") rescue Time.now.strftime("%A, %B %d, %Y at %I:%M %p") %>' ,'<%=  event.description.gsub("<p>","").gsub("</p>","").gsub("&nbsp;","").split("\r\n").map { |x| "#{x.strip}" }.join %>',<%= event.id %>]<% unless index == @events.count(:all)-1 %>, <% end %>
         <% end %>
       ];
-
+      <% end %>
       function setMarkers1(map1) {
         // Adds markers to the map.
 

@@ -40,6 +40,9 @@ class EventsController < ApplicationController
       @events_pictures = @events.sort{|m| m.pictures.count }
       @events_videos = @events.sort{|m| m.videos.count }
       @events = @events
+      if request.format == "js"
+        render :tabs
+      end  
     end
 
     def location_update

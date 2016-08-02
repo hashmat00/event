@@ -1,4 +1,4 @@
 <div class="explore col-xs-12">
-	<h2><%= events.all.length %> Events Found near The location</h2>
+	<h2><%= events.all.length rescue 0 %> Events Found near The location</h2>
 	<h5 class="team-color col-sm-offset-3 col-sm-6 col-xs-offset-1 col-xs-10"><%= request.location.address %> </h5>
 </div>

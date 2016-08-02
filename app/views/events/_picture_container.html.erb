@@ -2,10 +2,12 @@
   <!-- Owl carousel -->
     <header id="myCarousel" style="height:100%;" class="carousel slide">
       <div class="carousel-inner">
+      <% if events_pictures %>
         <div class="item active">
-          <%= render partial: "slider", locals: {event: events_pictures.first, action_page: nil} %>
+            <%= render partial: "slider", locals: {event: events_pictures.first, action_page: nil} %>
         </div>
         <%= render partial: "multiple_slider", locals: {events: events_pictures} %>
+      <% end %>
       </div>
     </header>
   <!-- End Owl carousel -->
