@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :carts
   get '/events/subregion_options' => 'events#subregion_options'
-  get 'interests/index'
+  # get 'interests/index'
 
   get 'order_items/create'
 
@@ -39,10 +39,10 @@ Rails.application.routes.draw do
     collection do
       get 'tabs'
     end
-    resources :interests, :only => [:index, :create]    
+    resources :interests    
     resources :tickets, only: [:index]
   end
-  post '/not_interested/:event_id', to: "interests#not_interested" , as: :not_interested_path
+  # post '/not_interested/:event_id', to: "interests#not_interested" , as: :not_interested_path
 
   resources :checkouts, only: [:create]
   resources :users, except: [:new]
