@@ -1,6 +1,14 @@
 module ApplicationHelper
     
-
+  def customDayFormat(date)
+    case date
+    when date.today? then "Today"
+    when (date.yesterday) == (date-1.day) then "Yesterday"
+    when (date.tomorrow) == (date+1.day)  then "Tomorrow"
+    else
+      date.strftime('%B %d')  
+    end  
+  end  
   def resource_name
     :user
   end

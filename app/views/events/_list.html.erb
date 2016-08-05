@@ -53,7 +53,7 @@
                 <div class="sum favorite col-sm-12 col-xs-6">
                   <div style="text-align:center">
                     <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal_<%= i.id %>"><span class="glyphicon glyphicon-share" style="color:black !important; font-size:20px;font-weight:bold" title="Share"></span></a>
-                    <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.id) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
+                    <a data-remote="true" href="<%=add_wishlist_event_path(i.id) %>"><span class="glyphicon <%= i.wish_list_class(current_user.try(:id)) %>" id="wish_list_<%= i.id %>" style="font-size:20px;font-weight:bold" title="Save" ></span></a>
                   </div>
                   <p class="col-xs-3"></p>
                 </div>

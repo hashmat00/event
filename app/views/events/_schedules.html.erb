@@ -1,8 +1,14 @@
 <% if schedules.present? %>
 	<h3 style="text-align:center">Schedules for Event <b><%= @event.name %></b></h3>
-	    <% schedules.each do |schedule| %>
-	      <%= render "schedule_row", schedule: schedule %>
-	    <% end %>
+  <div class="container">
+		<div class="row">
+			<div class="timeline-centered">
+		    <% schedules.each_with_index do |schedule, index| %>
+		      <%= render "schedule_row", schedule: schedule, index: index %>
+		    <% end %>
+	    </div>
+		</div>
+	</div>
 <% else %>
 	<h3 style="text-align:center">There are no Schedule for Event <b><%= @event.name %></h3>
 <% end %>

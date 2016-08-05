@@ -1,2 +1,1 @@
-$('.interested_<%= @event.id %>').html('<%= escape_javascript(render "interests/not_interested") %>')
-$('.interested_count_<%= @event.id %>').html('<%= escape_javascript(render partial: "interests/interest_count", locals: {event:@event}) %>')
+$('#interestedPanel').html("<%= j render partial: 'interests/form', locals: { object: @resource} %>");

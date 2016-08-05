@@ -1,1 +1,4 @@
-<%= link_to "Follow", relationships_path(:id => x.id), class: "btn btn-success", :method => :post, :remote => 'true' %> Followers (<%= x.followers.count %>) &nbsp Following (<%= x.following.count %>)
+<% if user_signed_in? && x!= current_user %>
+	<%= link_to "Follow", relationships_path(:id => x.id), class: "btn btn-success", :method => :post, :remote => 'true' %>
+<% end %>
+<%= render partial: "users/followers_following", locals: {x: x} %>

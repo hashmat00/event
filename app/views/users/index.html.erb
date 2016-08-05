@@ -22,15 +22,13 @@
               </a>
             </div>
             <div class="panel-body text-center">
-              <% if user_signed_in? && x!= current_user %>
-                <div id="follow_form_<%= x.id %>">
-                  <% if current_user.following?(x) %>
-                    <%= render 'unfollow', x: x %>
-                  <% else %>
-                    <%= render 'follow', x: x %>
-                  <% end %>
-                </div>
-              <% end %>
+              <div id="follow_form_<%= x.id %>">
+                <% if current_user.following?(x) %>
+                  <%= render 'unfollow', x: x %>
+                <% else %>
+                  <%= render 'follow', x: x %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>

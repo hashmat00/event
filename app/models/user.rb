@@ -1,11 +1,9 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   scope :active, ->{ where(is_active: true) }    
-  has_many :events
-  has_many :like
+  has_many :events, dependent: :destroy
+  has_many :like, dependent: :destroy
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",
                                    dependent:   :destroy
@@ -24,17 +22,15 @@ class User < ActiveRecord::Base
    :foreign_key => 'recipient_id'
 
   has_many :interests, :dependent => :destroy
-  has_many :user_interests, :through => :interests, :source => :event
+  has_many :user_interests, :through => :interests, :source => :interestable , source_type: 'Event'
   has_many :ticket_histories, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
   has_many :wish_lists_events, :through => :wish_lists, :source => :wish_listable, source_type: 'Event'
   has_many :subscriptions, dependent: :destroy
   has_many :ticket_subscriptions, :through => :subscriptions, :source => :subscriptionable, source_type: 'Ticket'
   has_many :contact_emails, dependent: :destroy
-  # has_many :contact_details, dependent: :destroy
   has_many :contact_details, dependent: :destroy do
     def by_address_type(address_type_id)
-       # use `self` here to access to current `Customer` record
        where(:address_type_id => address_type_id).first
     end
  end
@@ -83,8 +79,8 @@ class User < ActiveRecord::Base
     following.include?(other_user)
   end
 
-  def is_interested?(event)
-    self.interests.where(:interestable_id => event.id).first.present?
+  def event_interests(event)
+    self.interests.where(:interestable_id => event.id)     
   end
 
   def self.to_csv(options = {})

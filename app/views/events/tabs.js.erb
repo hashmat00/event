@@ -46,17 +46,17 @@
 	<% when "1" then %>
 		$('#tab-content').html("<%= j render partial: 'map', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% when "2" then %>
-		$('#tab-content').html("<%= j render partial: 'grid', locals: {events: current_events} %>");
+		$('#tab-content').html("<%= j render partial: 'grid', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% when "3" then %>
-		$('#tab-content').html("<%= j render partial: 'list', locals: {events: current_events} %>");
+		$('#tab-content').html("<%= j render partial: 'list', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% when "4" then %>
-		$('#tab-content_up').html("<%= j render partial: 'picture_container', locals: { events_pictures: (current_events.sort{|m| m.pictures.count} rescue nil )} %>");
+		$('#tab-content_up').html("<%= j render partial: 'picture_container', locals: { events_pictures: (current_events.present? ? current_events.sort{|m| m.pictures.count} : @events.sort{|m| m.pictures.count} rescue nil )} %>");
 	<% when "5" then %>
-		$('#tab-content_up').html("<%= j render partial: 'video_container', locals: { events_videos: (current_events.sort{|m| m.pictures.count} rescue nil )} %>");
+		$('#tab-content_up').html("<%= j render partial: 'video_container', locals: { events_videos: (current_events.present? ? current_events.sort{|m| m.pictures.count} : @events.sort{|m| m.pictures.count} rescue nil )} %>");
 	<% when "6" then %>
-		$('#tab-content_up').html("<%= j render partial: 'map_container', locals: {events: current_events} %>");	
+		$('#tab-content_up').html("<%= j render partial: 'map_container', locals: {events: current_events.present? ? current_events : @events} %>");	
 	<% when "7" then %>
-		$('#tab-content_up').html("<%= j render partial: 'street_container', locals: {events: current_events} %>");
+		$('#tab-content_up').html("<%= j render partial: 'street_container', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% else %>
 			$('#tab-content').html("<%= j render partial: 'map', locals: {events: current_events.present? ? current_events : @events} %>");
 	<% end %>

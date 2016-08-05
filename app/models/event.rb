@@ -31,15 +31,25 @@ class Event < ActiveRecord::Base
    mount_uploader :video, AvatarUploader
    validate :picture_size
    default_scope -> { order(created_at: :desc) }
-   has_many :interests, as: :interestable
+   has_many :interests, as: :interestable, dependent: :destroy
    has_many :pictures, as: :picturable, dependent: :destroy
    accepts_nested_attributes_for :pictures, :allow_destroy => true
    has_many :videos, as: :videoable, dependent: :destroy
    accepts_nested_attributes_for :videos, :allow_destroy => true
    has_many :wish_lists, as: :wish_listable, dependent: :destroy
    scope :upcomming, -> { where('start_time  > ?',Time.now) }
-   before_save :address_fill
-  
+   before_save :address_fill 
+
+   def interested
+      self.interests.where(interests: {flag: true})   
+   end 
+   def partially_interested
+      self.interests.where(interests: {flag: nil})   
+   end
+   def not_interested
+    self.interests.where(interests: {flag: false})   
+   end 
+
   def wish_list_class(user_id)
     self.wish_lists.where(user_id:user_id).first.present? ? "glyphicon-heart" : "glyphicon-heart-empty"
   end 

@@ -1,12 +1,14 @@
-<div class="well">
-  <div class="row">
-    <div class="col-xs-10">
-      <h4><%= schedule.title.try(:titleize) %></h4>
-      <p><%= schedule.description.present? ? schedule.description : "No description available for this schedule" %></p>
-      <div class="row">
-        <div class="col-md-3"><b><h5>Start Date</h5></b></div><div class="col-md-3"><%= schedule.start_date  rescue Time.now %></div>
-        <div class="col-md-3"><b><h5>End Date</h5></b></div><div class="col-md-3"><%= schedule.end_date  rescue Time.now %></div>        
+<% strat_date = schedule.start_date ? schedule.start_date : Time.now rescue Time.now %>
+<% leftAlign= index.odd? ? "left-aligned" : "" %>
+  <article class="timeline-entry <%= leftAlign %>">
+    <div class="timeline-entry-inner">
+      <time class="timeline-time" datetime="2014-01-10T03:45"><span><%= strat_date.strftime('%I:%M %p') %></span> <span><%= customDayFormat(strat_date) %></span></time>
+      <div class="timeline-icon bg-success">
+        <i class="entypo-feather"></i>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="timeline-label">
+        <h2><span><%= schedule.title.try(:titleize) %></span></h2>
+        <p><%= schedule.description.present? ? schedule.description : "No description available for this schedule" %></p>
+      </div>
+    </div>    
+  </article>

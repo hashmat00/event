@@ -1,0 +1,54 @@
+<div>
+	Peoples Interested
+	<div>
+		<% if object.interested %>
+			<% object.interested.limit(5).each_with_index do |interest, index|%>
+				<% if interest.user %>	
+					<%= link_to user_path(interest.user.try(:id)) do %>
+						<%= image_tag interest.user.image, width: 50, height: 50 %>
+					<% end %>
+				<% end %>
+			<% end %> 
+			<%= object.interested.count %>
+			<a href = "#">View All</a>
+		<% else %>
+			No Response Yet
+		<% end %>
+	</div>
+</div>
+<div>
+	Peoples May be Attand
+	<div>
+		<% if object.partially_interested %>
+				<% object.partially_interested.limit(5).each_with_index do |interest, index|%>
+					<% if interest.user %>	
+						<%= link_to user_path(interest.user.try(:id)) do %>
+							<%= image_tag interest.user.image, width: 50, height: 50 %>
+						<% end %>
+					<% end %>
+				<% end %> 
+				<%= object.partially_interested.count %>
+				<a href = "#">View All</a>
+		<% else %>
+			No Response Yet 
+		<% end %>
+	</div>
+</div>
+<div>
+	Peoples Not Interested
+	<div>
+		<% if object.not_interested %>
+			<% object.not_interested.limit(5).each_with_index do |interest, index|%>
+				<% if interest.user %>
+					<%= link_to  user_path(interest.user.try(:id)) do %>
+						<%= image_tag interest.user.image, width: 50, height: 50 %>
+					<% end %>
+				<% end %>
+			<% end %> 
+			<%= object.not_interested.count %>
+			<a href = "#">View All</a>
+		<% else %>
+			No Response Yet 
+		<% end %>
+	</div>
+</div>

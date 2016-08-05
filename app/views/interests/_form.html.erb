@@ -1,0 +1,46 @@
+<div id="interestedPanel">
+	<% if current_user %>
+		<%= form_for [object, object.interests.build], method: :post, remote: true do |f|  %>
+			<%= f.hidden_field :interstable_type, value: object.class.name %>
+			
+			<div id="interestedForm">
+				<div class="center "><b class="question"> Are You Going To attend this event </b></div>
+				<div class="btn-group" data-toggle="buttons">
+				  
+				  <label class="btn btn-primary">Interested
+				    <%= f.radio_button :flag, true %>
+				  </label>
+				  <label class="btn btn-primary", onclick="$('#new_interest').submit();">
+				   <%= f.radio_button :flag, "nil" %>May Be
+				  </label>
+				  <label class="btn btn-primary">
+				    <%= f.radio_button :flag, false %>Not Interested
+				  </label>
+				</div>
+			</div>
+			<% if current_user.event_interests(object).present?  %>
+				<%= current_user.event_interests(object).try(:message) %>
+				<a href= "javascript:void(0)" onclick="changeFrom();">change</a>
+			<% end %>
+		<% end %>
+	<% else %>
+		Please login If you are Inetrested in this event
+	<% end %>		
+	<div id ="interest_<%= object.id %>">
+		<%= render partial: "interests/index", locals: {object: object} %>
+	</div>
+	<script>
+		$( "input[type='radio']" ).change(function() {
+	  	$('#new_interest').submit();
+		});
+		<% if current_user.event_interests(object).present? %>
+			$('#interestedForm').hide();
+		<% end %>
+		function changeFrom()
+		{
+			$('#interestedForm').show();
+			$('.question').html('Chaneg if You Think change')
+		}
+	</script>
+</div>
+

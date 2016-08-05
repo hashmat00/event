@@ -9,15 +9,8 @@
         <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= ticket.available_count %></div>        
       </div>
       <div class="row">
-        <div class="col-md-3"><b><h5>Country</h5></b></div><div class="col-md-3"><%= ticket.country %></div>
-        <div class="col-md-3"><b><h5>Currency</h5></b></div><div class="col-md-3"><%= ticket.currency %></div>
-      </div>
-      <div class="row">
         <div class="col-md-3"><b><h5>Sale Start From</h5></b></div><div class="col-md-3"><%= ticket.tickets_start_date.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') rescue ''%></div>       
         <div class="col-md-3"><b><h5>Sale Till</h5></b></div><div class="col-md-3"><%= ticket.ticket_end_date.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') rescue '' %></div>
-      </div>
-      <div class="row">
-        <div class="col-md-3"><b><h5>Sale Channel</h5></b></div><div class="col-md-9"><%= ticket.sale_channel %></div>
       </div>
     </div>
     <div class="col-xs-2" id="ticket_cart_<%= ticket.id %>">
