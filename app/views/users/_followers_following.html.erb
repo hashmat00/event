@@ -1,12 +1,14 @@
+<% if x %>
 	<% if x.followers %>
 		<% x.followers.each_with_index do |follower, index| %>
 			<%= image_tag follower.image, style: "height:50px; width:50px;" %>
 		<% end %>
 	<% end %>	
-(<%= x.followers.count %>) Followers 
-<% if x.followers %>
-		<% x.following.each_with_index do |following, index| %>
-			<%= image_tag following.image, style: "height:50px; width:50px;" %>
+	(<%= x.followers.count %>) Followers 
+	<% if x.followers %>
+			<% x.following.each_with_index do |following, index| %>
+				<%= image_tag following.image, style: "height:50px; width:50px;" %>
+			<% end %>
 		<% end %>
-	<% end %>
-(<%= x.following.count %>) Following
+	(<%= x.following.count %>) Following
+<% end %>
