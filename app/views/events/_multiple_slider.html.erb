@@ -21,7 +21,7 @@
       <script type="text/javascript">
         $(document).ready(function() {
           $("#owl-demo_<%= event.id %>").owlCarousel({
-            items : 2,
+            items : <% if (event.pictures.present? && event.pictures.count > 1)  %>2<% else %>1<% end %>,
             itemsCustom : false,
             itemsDesktop : [1199,4],
       });
