@@ -29,7 +29,7 @@
 	              <h2>$<%= @event.payMode("amount") rescue "Something Wrong" %></h2>
 	              <h5 style="font-size:25px;" class="team-color"><%= @event.payMode("string") rescue "Something Wrong" %></h5>
 	            </div>
-	            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#TcktmyModal">Get Tickets</button>
+	            <center><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#TcktmyModal">Get Tickets</button></center>
             	<div class="row">
             		<%= render partial: "interests/form", locals: {object: @event} %>
             	</div>
@@ -110,9 +110,12 @@
 	              <div class="col-md-12 col-sm-6 col-xs-12">
 	                <span class="ffs-bs">
 	                  <a href="javascript:void(0)" class="btn btn-info btn-lg ticket_action" data-toggle="modal" data-target="#myModal">Contact The <br> Organizer</a>
-	                  <a href="/users" class="btn btn-info btn-lg ticket_action">View <br> Organizer Page</a>
+	                  <br>
+	                  <a href="/users" class="btn btn-success btn-lg ticket_action">View <br> Organizer Page</a>
+	                	<br>
 	                	<%= render partial: "users/contact_orgnizer", locals: {ticket: @event.tickets.first} %>
 	                </span>
+	              
 	                <span class="icon icon-add-user"></span><span class="btn btn-info">Total Events (<%= @event.user.events.active.count rescue 0 %>)</span> 
 	                <div class="panel-body text-center">
 			              <% if user_signed_in?  %>
@@ -225,6 +228,10 @@
 			.bookmark::before, .compare::before{
     		content: none !important;
   		}
+  		.text-center {
+    	height: auto !important;
+    
+		}
 		</style>
 
 
