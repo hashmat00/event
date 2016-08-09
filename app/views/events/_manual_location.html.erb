@@ -1,21 +1,21 @@
 <div class="form-group col-md-12">
   <label for="name">Address</label>
-  <input type="text"  name="event[address]" value="<% if params[:action]=="edit" %><%= @event.address %><% else %><%= request.location.address %><%= geocode.address rescue '' %><% end %>" id="addressComponent" class="form-control"/>
+  <input type="text"  name="event[address]" value="<% if params[:action]=="edit" || params[:action]=="create" || params[:action]=="update" %><%= @event.address %><% else %><%= request.location.address %><%= geocode.address rescue '' %><% end %>" id="addressComponent" class="form-control"/>
 </div>
 <div class="form-group col-md-3">
   <label for="name">City</label>
-  <input type="text"  name="event[city]" value="<% if params[:action]=="edit" %><%= @event.city %><% else %><%=request.location.city rescue '' %><% end %>" id="cityComponent" class="form-control"/>
+  <input type="text"  name="event[city]" value="<% if params[:action]=="edit" || params[:action]=="create" || params[:action]=="update" %><%= @event.city %><% else %><%=request.location.city rescue '' %><% end %>" id="cityComponent" class="form-control"/>
 </div>
 <div class="form-group col-md-3">
   <label for="name">Zip Code</label>
-  <input type="text"  name="event[zipcode]" value="<% if params[:action]=="edit" %><%= @event.zipcode %><% else %><%= request.location.postal_code rescue '' %><% end %>" id="zipcodeComponent" class="form-control"/>
+  <input type="text"  name="event[zipcode]" value="<% if params[:action]=="edit" || params[:action]=="create" || params[:action]=="update" %><%= @event.zipcode %><% else %><%= request.location.postal_code rescue '' %><% end %>" id="zipcodeComponent" class="form-control"/>
 </div>
 
 <div class="form-group col-md-3">
   <label for="name">State</label>
-  <input type="text"  name="event[state]" value="<% if params[:action]=="edit" %><%= @event.state %><% else %><%= request.location.state rescue '' %><% end %>" id="stateComponent" class="form-control"/>
+  <input type="text"  name="event[state]" value="<% if params[:action]=="edit" || params[:action]=="create" || params[:action]=="update" %><%= @event.state %><% else %><%= request.location.state rescue '' %><% end %>" id="stateComponent" class="form-control"/>
 </div> 
 <div class="form-group col-md-3">
 <label for="name">Country</label>
-<input type="text"  name="event[country]" value="<% if params[:action]=="edit" %><%= @event.country %><% else %><%= request.location.country rescue '' %><% end %>" id="countryComponent" class="form-control"/>
+<input type="text"  name="event[country]" value="<% if params[:action]=="edit" || params[:action]=="create" || params[:action]=="update" %><%= @event.country %><% else %><%= request.location.country rescue '' %><% end %>" id="countryComponent" class="form-control"/>
 </div>

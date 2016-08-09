@@ -148,7 +148,7 @@ a {
 
         <div class="clearfix userInfo posRel"> <a href="<%= profile_path(notification.user) rescue nil%>" class="userImg">
         
-        <img src="assets/profile.png" class="img img-circle"></a> 
+        <img src="/assets/profile.png" class="img img-circle"></a> 
         <a href="<%= profile_path(notification.user) rescue nil %>" class="userNAme font14"><%=notification.user.username %></a> <br>
           <div class="grayColor"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
           <div class="font13"><%= notification.body.truncate(50) %></div>

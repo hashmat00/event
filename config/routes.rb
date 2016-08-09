@@ -56,7 +56,6 @@ Rails.application.routes.draw do
       post :mark_as_read  
     end
   end
-
   # Accept and Regect path
   post 'accept/:id', to: 'notifications#accept', as: :notification_accept
   post 'reject/:id', to: 'notifications#reject', as: :notification_reject

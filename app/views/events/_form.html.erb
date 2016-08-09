@@ -1,4 +1,3 @@
-  
 <% if @event.errors.any? %>
   <div class="row">
     <div class="alert alert-danger col-md-8 col-md-offset-2">
@@ -11,7 +10,6 @@
     </div>
   </div>
 <% end %>
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
 <div class="row">
   <div class="well col-md-10 col-md-offset-1"> 
     <%= nested_form_for @event do |f| %>  
@@ -19,7 +17,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">
-              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" href="javascript:void(0)" aria-expanded="true" aria-controls="collapseOne">
                 <h2><b><span class="numberIcon"><%= image_tag("Numbers-1-Black-icon.png", style: "width:30px; height:30px") %></span>Event Details</b></h2>
               </a>
             </h4>
@@ -34,6 +32,7 @@
                 <label for="name">Description</label>
                 <%= f.text_area :description, id: "desc", :class=>"form-control", rows:5, required: true %>
               </div>
+          
               <div class="form-group col-md-6">
                 <label for="name">Event Start Date </label>
                 <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control", required: true %>
@@ -42,10 +41,6 @@
                 <label for="name">Event End Date </label>
                 <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control", required: true %>
               </div>
-              <!-- <div class="form-group col-md-4">
-              <label for="name">Picture</label>
-                <%#= f.file_field :picture, accept: "image/jpg, image/jpeg, image/png, image/gif" %>
-              </div> -->
               <div class="form-group col-md-12">
                 <label for="name">Location</label>
                 <div>
@@ -76,7 +71,6 @@
                           <input type="radio" name="type" id="changetype-geocode">
                           <label for="changetype-geocode">Geocodes</label>
                         </div>
-                        <%#= f.text_field :address, :class=>"form-control" %>
                       </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="manual">
@@ -107,7 +101,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingTwo">
             <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseTwo">
                 <h2><b><span class="numberIcon"><%= image_tag("Numbers-2-Black-icon.png", style: "width:30px; height:30px") %></span>Event Scheduler</b></h2>
               </a>
             </h4>
@@ -123,47 +117,20 @@
                   </div>   
                   <div class="form-group col-md-12">
                     <label for="name">Title</label>
-                    <%= schedule_form.text_field :title, :class=>"form-control" %>
+                    <%= schedule_form.text_field :title, :class=>"form-control", required: true, style: "width:102%;" %>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="name">Description</label>
-                    <%=  schedule_form.text_area :description, :class=>"form-control",row:5 %>
+                    <%=  schedule_form.text_area :description, :class=>"form-control",row:5, required: true %>
                   </div>
-                  <!-- <div class="form-group col-md-12">
-                    <label for="name">How often does this event occur?</label>
-                    <%#=schedule_form.select :event_occure, [['Daily', 'days'], ['Weekly', 'weeks'], ['Monthly', 'months'], ['Custom', 'custom']] %>
-                  </div> -->
-                  <!-- <div class="form-group col-md-12">
-                    <label for="name">Repeating Every</label>
-                    <%#=schedule_form.select :month_day, [['First', '0'], ['Second', '1'], ['Third', '2'], ['Fourth', '3']] %>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="name">It occures Evey</label>
-                    <%#=schedule_form.select :month_day, [['1st', '1'], ['2nd', '2'], ['3rd', '3'], ['4th', '4'],['5th', '5'], ['6th', '6'], ['7th', '7'],['8th', '8'], ['9th', '9'], ['10th', '10'], ['11th', '11'],['12th', '12'], ['13th', '13'], ['14th', '14'],['15th', '15'], ['16th', '16'], ['17th', '17'], ['18th', '18'],['19th', '19'], ['20th', '20'], ['21st', '21'],['22nd', '22'], ['23rd', '23'], ['24th', '24'], ['25th', '25'],['26th', '26'], ['27th', '27'], ['28th', '28'], ['29th', '29'],['30th', '30'], ['31st', '31'], ['28th', '28']] %>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="name">Select Days</label>
-                    <%#=schedule_form.select :week_day, [['Sunday', '0'], ['Monday', '1'], ['Tuesday', '2'], ['Wednesday', '3'],['Thursday', '4'], ['Friday', '5'], ['Saturday', '6'] ], id: "weekDays" %>
-                  </div> -->
-                  <!-- <div class="form-group col-md-4">
-                    <label for="name">Start Time</label>
-                    <%#=  schedule_form.text_field :start_time,:id=>"start_time",:class=>"form-control"   %>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label for="name">End Time</label>
-                    <%#=  schedule_form.text_field :end_time,:id=>"end_time",:class=>"form-control" %>
-                  </div> -->
-                  <!-- <div class="form-group col-md-4">
-                    <label for="name">Of the</label>
-                    <%#=schedule_form.select :event_day, [['Same day', '0'], ['Next day', '1'], ['2nd day', '2'], ['3rd day', '3'],['4th day', '4'], ['5th day', '5'], ['6th day', '6']] %>
-                  </div> -->
+                  
                   <div class="form-group col-md-6">
                     <label for="name">Start From</label>
-                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});"  %>
+                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});"%>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="name">To</label>
-                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});" %>
+                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});;", required: true %>
                   </div>
                 <% end %>
                 <div class="form-group col-md-12">
@@ -176,7 +143,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingThree">
             <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"  data-target="#collapseThree" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseThree">
                 <h2><b><span class="numberIcon"><%= image_tag("Numbers-3-Black-icon.png", style: "width:30px; height:30px") %></span>Event Tickets</b></h2>
               </a>
             </h4>
@@ -192,11 +159,11 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="name">Ticket Name</label>
-                    <%= ticket_form.text_field :name, :class=>"form-control" %>
+                    <%= ticket_form.text_field :name, :class=>"form-control", required: true %>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="quantity">Quantity available*</label>
-                    <%= ticket_form.text_field :quantity, :class=>"form-control" %>
+                    <%= ticket_form.text_field :quantity, :class=>"form-control", required: true %>
                   </div>
                   <div class="form-group col-md-6">
                     <div><label for="price">Pay Mode</label></div>
@@ -220,11 +187,9 @@
                     <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control price", disabled: true %>
                   </div>
                   <div class="col-md-12" style="margin:10px 0px">
-                    <!-- <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo11">Advance</button> -->
-                    <!-- <div id="demo" class="collapse"> -->
                       <div class="form-group col-md-12">
                         <label for="ticket_description">Ticket Description</label>
-                        <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5%>
+                        <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5, required: true%>
                       </div>
                       <div class="form-group col-md-6">
                         <div><label for="show_ticket_description">Show Ticket Description</label></div>
@@ -254,23 +219,23 @@
                       </div>
                       <div class="form-group col-md-12">
                         <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
-                        <%= ticket_form.select :sale_channel, [['Every where', 'Everywhere'], ['Online only', 'Onlineonly'], ['At the door only', 'dooronly']] %>
+                        <%= ticket_form.select :sale_channel, [['Every where', 'Everywhere'], ['Online only', 'Onlineonly'], ['At the door only', 'dooronly']], required: true %>
                       </div> 
                       <div class="form-group col-md-6">
                         <label for="tickets_start_date">Ticket Sales Start</label>
-                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});" %>
+                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", required: true %>
                        </div>
                       <div class="form-group col-md-6">
                         <label for="ticket_end_date">Ticket Sales End</label>
-                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'});" %>
+                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", required: true %>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
-                        <%= ticket_form.select :country, [['United States', 'US'], ['Argentina', 'AR'], ['Australia', 'Au']] %>
+                        <%= ticket_form.select :country, [['United States', 'US'], ['Argentina', 'AR'], ['Australia', 'Au']], required: true %>
                       </div>           
                       <div class="form-group col-md-6">
                         <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
-                        <%= ticket_form.select :currency, [['U.S. Dollars $', 'Dollars'], ['Canadian Dollars C$', 'C$'], ['Mexican Peso Mex$', 'MXN']] %>
+                        <%= ticket_form.select :currency, [['U.S. Dollars $', 'Dollars'], ['Canadian Dollars C$', 'C$'], ['Mexican Peso Mex$', 'MXN']], required: true %>
                       </div> 
                     <!-- </div> -->
                   </div>             
@@ -283,7 +248,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingFour">
             <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFour" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseFour">
                 <h2><b><span class="numberIcon"><%= image_tag("Numbers-4-Black-icon.png", style: "width:30px; height:30px") %></span>Event Images</b></h2>
               </a>
             </h4>
@@ -299,7 +264,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="name">Image</label>
-                    <%= picture_form.file_field :image, :class=>"form-control" %>
+                      <%= picture_form.file_field :image, :class=>"form-control" %>
                   </div>
                   
                   <div class="col-md-12" style="margin:10px 0px">
@@ -329,7 +294,7 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingFive">
             <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFive" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseThree">
                 <h2><b><span class="numberIcon"><%= image_tag("Numbers-5-Black-icon.png", style: "width:30px; height:30px") %></span>Event Videos</b></h2>
               </a>
             </h4>
@@ -379,21 +344,14 @@
         <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingSix">
             <h4 class="panel-title">
-              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseSix" href="javascript:void(0)" aria-expanded="false" aria-controls="collapseThree">
                 <h2><b><span class="numberIcon"><%= image_tag("Numbers-6-Black-icon.png", style: "width:30px; height:30px") %></span>Event Categories</b></h2>
               </a>
             </h4>
           </div>
           <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
             <div class="panel-body">
-              <%#= f.select(:categories, Category.all.collect {|p| [ p.name, p.id ] },
-
-                                           { :prompt => "Please select"}, 
-                                           { :multiple => true})
-                                           
-                                            %>
-                <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories", :multiple => true) %>
-              <%#= f.select :categories, options_for_select(Category.all.map{ |c| [c.name, c.id] },:multiple=>true){}, id: "categories", class: "form-control" %>
+                <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories", :multiple => true, required: true) %>
             </div>
           </div>
         </div>  
@@ -411,22 +369,22 @@
                 <div><label for="event_privacy">Event Privacy</label></div>
                 <div class="btn-group" data-toggle="buttons" class="form-control">
                   <label class="btn btn-primary active">
-                    <%= f.radio_button :event_privacy, "Public", id:"option31", autocomplete:"off", checked: true %>
+                    <%= f.radio_button :event_privacy, "false", id:"option31", autocomplete:"off", checked: true %>
                     <%= f.label :event_privacy, 'Public', :value => 'Public' %>
                   </label>
                   <label class="btn btn-primary">
-                    <%= f.radio_button :event_privacy, "Private", id:"option32", autocomplete:"off" %>
+                    <%= f.radio_button :event_privacy, "true", id:"option32", autocomplete:"off" %>
                     <%= f.label :event_privacy, 'Private', :value => 'Private' %>
                   </label>
                 </div>
               </div>
               <div class="form-group col-md-12">
                 <label for="sel1">Event Type</label>
-                <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']] %>
+                <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']], required: true %>
               </div>
               <div class="form-group col-md-12">
                 <label for="sel1">Event Topic</label>
-                <%=f.select :event_topic, [['Auto, Boat & Air', 'AutoAir'], ['Business & Professional', 'BusinessProfessional'], ['Charity & Causes', 'CharityCauses']] %>
+                <%=f.select :event_topic, [['Auto, Boat & Air', 'AutoAir'], ['Business & Professional', 'BusinessProfessional'], ['Charity & Causes', 'CharityCauses']], required: true %>
               </div>  
             </div>
           </div>
@@ -456,34 +414,46 @@
     }
   });
 </script>
-<script>
-  $(function() {
-    $("#start_date").datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
-    });
-     $("#end_date").datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
-    });
-  });
-</script>
-
 
   <script type="text/javascript">
-            // $(function () {
-            //     $('#datetimepicker1').datetimepicker();
-            // });
-        </script>
-    
-    <%if @event.id.present? %>
-      <script type="text/javascript">
-        $( "#event_categories" ).select2();
-         $( "#event_categories" ).val(<%= @event.categories.collect(&:id)%>).change()
-      </script>
-    <% else %>
-      <script type="text/javascript">
-        $( "#event_categories" ).select2();
-      </script>
+    $( "#event_categories" ).select2();
+    <% if @event.id.present?%>
+      $( "#event_categories" ).val(<%= @event.categories.collect(&:id)%>).change()
+    <% elsif params[:action]=="create" || params[:action]=="update" %>
+      $( "#event_categories" ).val(<%=params[:event][:categories].map(&:to_i).drop(1)%>).change()
     <% end %>
+  </script>
+    <% if (params[:action]=="create" || params[:action]=="edit" || params[:action]=="update") 
+     %>
+     <% startTime = @event.start_time %> 
+     <% endTime = @event.end_time %>
+     <% else %>
+     <% startTime = Time.now %>
+     <% endTime = Time.now %>
+     <% end %>
+    <% final_start_time = DateTime.new(startTime.year, startTime.month, startTime.day,(startTime.hour+1), 0, 0, 0) %>
+    <% final_end_time = DateTime.new(endTime.year, endTime.month, endTime.day,(endTime.hour+1), 0, 0, 0) %>
+  <script type="text/javascript">
+
+
+    $('#start_date').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm:ss',
+      defaultDate: "<%= final_start_time %>",
+      minDate: new Date()
+    });
+    $('#end_date').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm:ss',
+      defaultDate: "<%= final_end_time %>",
+      minDate: new Date()
+    });
+    $("#start_date").on("dp.change", function (e) {
+      $('#end_date').data("DateTimePicker").minDate(e.date);
+    });
+    $("#end_date").on("dp.change", function (e) {
+      $('#start_date').data("DateTimePicker").maxDate(e.date);
+    }); 
+
+  </script>
   <script type="text/javascript">
     CKEDITOR.replace( 'desc', {
     // skin: 'moonocolor,/myskins/moonocolor/' 
@@ -525,7 +495,7 @@
     .placeSearch
   {
     width:100%!important;
-    height: 38px !important ;
+    height: 35px !important ;
   }
   #pacInput
   {
@@ -536,11 +506,14 @@
   {
     width: 100% !important;
   }
+  .has-feedback label ~ .form-control-feedback {
+    right: 10px;
+    top: 25px;
+  }
 </style>
 
 
 <script type="text/javascript">
-
 
   
   function initMap() {

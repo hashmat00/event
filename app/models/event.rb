@@ -17,19 +17,25 @@ class Event < ActiveRecord::Base
     has_many :tickets, dependent: :destroy
     accepts_nested_attributes_for :tickets, :allow_destroy => true
 
-    # validates :user_id, presence: true
-    # validates :name, presence: true, length: { minimum: 3, maximum: 50}
-    # validates :summary, presence: true, length: {minimum: 10, maximum: 250}
-    # validates :description, presence: true, length: {minimum: 20, maximum: 10000}
-    # validates :address, presence: true, length: {minimum: 5, maximum: 150}
-    # validates :city, presence: true, length: {minimum: 3, maximum: 25}
-    # validates :zipcode, presence: true, length: {minimum: 1, maximum: 20}
-    # validates :state, presence: true, length: {minimum: 2, maximum: 20}
-    # validates :country, presence: true, length: {minimum: 3, maximum: 55}   
+    validates :user_id, presence: true
+    validates :name, presence: true, length: { minimum: 3, maximum: 50}
+    validates :description, presence: true, length: {minimum: 20, maximum: 10000}
+    validates :address, presence: true, length: {minimum: 5, maximum: 150}
+    validates :city, presence: true, length: {minimum: 3, maximum: 25}
+    validates :zipcode, presence: true
+    validates :state, presence: true, length: {minimum: 2, maximum: 20}
+    validates :country, presence: true, length: {minimum: 2, maximum: 55}  
+    validates :start_time, presence: true
+    validates :end_time, presence: true
+    validates :event_type, presence: true
+    validates :event_topic, presence: true 
+    validates :event_privacy, presence: true 
    
    mount_uploader :picture, PictureUploader
    mount_uploader :video, AvatarUploader
    validate :picture_size
+   validate :event_date
+   validate :ticket_price
    default_scope -> { order(created_at: :desc) }
    has_many :interests, as: :interestable, dependent: :destroy
    has_many :pictures, as: :picturable, dependent: :destroy
@@ -197,10 +203,53 @@ class Event < ActiveRecord::Base
       self.update(address: "This is an Online Evemt NO location filled", city: nil, status: nil, zipcode: nil, country: nil)
     end 
   end  
-   private
-   def picture_size
-      if picture.size > 5.megabytes
-          errors.add(:picture, "Should be less than 5MB")
+  private
+  def picture_size
+    if picture.size > 5.megabytes
+        errors.add(:picture, "Should be less than 5MB")
+    end
+  end
+  def event_date
+    if self.start_time > self.end_time
+      errors.add(:_, "event start time could not greater than event end time")
+    end
+    if self.end_time < self.start_time
+      errors.add(:_, "event end time could not greater than event start time")
+    end
+    self.schedules.each do |schedule|
+      if schedule.start_date < self.start_time
+        errors.add(:_, "schedule start date could not less then event start time")
       end
-   end 
+      if schedule.start_date > self.end_time  
+        errors.add(:_, "schedule start date could not greater then event end time")
+      end
+      if schedule.start_date > schedule.end_date  
+        errors.add(:_, "schedule start date could not greater then shcedule end date")
+      end
+      if schedule.end_date < self.start_time
+        errors.add(:_, "schedule end date could not less then event start time")
+      end
+      if schedule.end_date > self.end_time
+        errors.add(:_, "schedule end date could not greater then event end time")  
+      end
+      if schedule.end_date < schedule.start_date  
+        errors.add(:_, "schedule end date could not less then schedule start date")
+      end
+    end
+    self.tickets.each do |ticket|
+      if ticket.tickets_start_date > self.end_time  
+        errors.add(:_, "Ticket sale start date could not greater then schedule end time")
+      end
+      if ticket.tickets_start_date > ticket.ticket_end_date  
+        errors.add(:_, "Ticket sale start date could not greater then Ticket sale end date")
+      end
+      if ticket.ticket_end_date > self.end_time
+        errors.add(:_, "Ticket sale end date could not greater then event end time")  
+      end
+      if ticket.ticket_end_date < ticket.tickets_start_date 
+        errors.add(:_, "Ticket sale end date could not less then Ticket sale start date") 
+      end
+    end  
+
+  end 
 end

@@ -86,7 +86,7 @@ class EventsController < ApplicationController
     end
     
     def create
-       @event = Event.new(event_params)
+       @event = Event.new(event_params.merge(event_privacy: params[:event][:event_privacy]))
        cat_ids = params[:event][:categories].map(&:to_i).drop(1)
        @event.user = current_user
        if @event.save
