@@ -1,4 +1,13 @@
+<% if params[:tab]=="6" %>
+  <% heading = "Upcomming Events" %>
+<% else %>
+  <% heading = "Past Events" %>
+<% end %>
 <% if events.present? %>
+  <br>
+  <h1>List Of <%= heading %></h1>
+  <br>
+  <br>
   <% events.each do |x| %>
     <div class="col-md-4 m-b-lg">
       <div class="panel panel-default panel-profile m-b-0">
@@ -12,17 +21,17 @@
           <div>
             <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
             <% if current_user == x.user %>
-              <span class="icon icon-add-user"></span> <%= link_to 'View Reports', "/users/reports?event_id=#{x.id}", class: "btn btn-success btn-small" %>
+              <span class="icon icon-add-user"></span> <%= link_to 'View Reports', "/users/reports?event_id=#{x.id}&report_category=current", class: "btn btn-success btn-small" %>
             <% end %>
           </div> 
-          <div class="thumbs">
-            <%= link_to like_event_path(x, like: true), method: :post do %>
+          <!-- <div class="thumbs">
+            <%#= link_to like_event_path(x, like: true), method: :post do %>
               <i class="white glyphicon glyphicon-thumbs-up">&nbsp<%= x.thumbs_up_total %></i>
-            <% end %> &nbsp&nbsp&nbsp&nbsp
-            <%= link_to like_event_path(x, like: false), method: :post do %>
+            <%# end %> &nbsp&nbsp&nbsp&nbsp
+            <%#= link_to like_event_path(x, like: false), method: :post do %>
               <i class="white glyphicon glyphicon-thumbs-down">&nbsp<%= x.thumbs_down_total %></i>
-            <% end %>
-          </div> 
+            <%# end %>
+          </div> --> 
           </br>
           <div class="ingredient pull-left">
             <p style="color: #777">Category: <%= render x.categories %></p>
@@ -32,5 +41,5 @@
     </div>      
   <% end %>
 <% else %>
-  <h1>There Are No Events</h1>
+  <h1>There Are No <%= heading %></h1>
 <% end %>

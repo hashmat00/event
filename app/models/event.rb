@@ -43,8 +43,9 @@ class Event < ActiveRecord::Base
    has_many :videos, as: :videoable, dependent: :destroy
    accepts_nested_attributes_for :videos, :allow_destroy => true
    has_many :wish_lists, as: :wish_listable, dependent: :destroy
-   scope :upcomming, -> { where('start_time  > ?',Time.now) }
-   before_save :address_fill 
+   scope :upcomming, -> { where('start_time  > ?',Time.now).try(:active) }
+   scope :past, -> { where('end_time  < ?',Time.now).try(:active) }
+   before_save :address_fill
 
    def interested
       self.interests.where(interests: {flag: true})   

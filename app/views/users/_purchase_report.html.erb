@@ -13,8 +13,12 @@
           <div class="col-md-3"><b><h5>All Events for which ticket purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:ticket).collect(&:event).count rescue 0 %></div>        
         </div>
         <div class="row">
-          <div class="col-md-3"><b><h5>Toal purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:total_ammount).compact.sum rescue 0 %></div>
+          <div class="col-md-3"><b><h5>Toal purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:total_price).compact.sum rescue 0 %></div>
           <div class="col-md-3"><b><h5>Toal No of Tickets</h5></b></div><div class="col-md-3"><%= user.subscriptions.collect(&:ticket_history).collect(&:quantity).compact.sum rescue 0 %></div>        
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Toal Free Tickets purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.free.count 0 %></div>
+          <div class="col-md-3"><b><h5>Toal Free Tickets purchases</h5></b></div><div class="col-md-3"><%= user.subscriptions.paid.count 0 %></div>        
         </div>
       </div>
 

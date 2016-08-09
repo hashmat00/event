@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-10 full-con">
     <div class="col-md-3 left-con">
       <div id="avatarImage_<%= @user.id %>">
         <%= render partial: "avatar_image", locals: {user: @user}  %>
@@ -21,6 +21,8 @@
         <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(5);">Purchase Report</button></div>
       <% end %>
     </div>
+    <br>
+    <br>
     <div class="col-md-9">
       <div class="userShow" id="userShow_<%= @user.id %>">
         <%= render partial: "user_profile_details", locals: {user: @user} %>
@@ -28,6 +30,7 @@
   </div>  
   <div class="col-md-1"></div>
 </div>
+
 <div class="container">
   <button class="btn btn-success" onclick="tabRequest(6);">Upcoming Events</button>
   <button class="btn btn-danger" onclick="tabRequest(7);">Past Events</button>
@@ -49,8 +52,13 @@
   }
   .left-con
   {
-    border: solid 2px black;
+    border: solid 2px grey;
+    padding: 5px 20px !important;
   }
+.full-con
+  {
+  margin: 30px 0 !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -63,3 +71,18 @@
     });
   };
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+<% case params[:tab_click] %>
+<% when "purchaseReport" then %>
+  tabRequest(5);
+<% when "accountSettings" then %>
+  tabRequest(3);
+<% when "updateProfile" then %>
+  tabRequest(2);
+<% else %>
+  tabRequest(1);
+<% end %> 
+});
+</script>
+

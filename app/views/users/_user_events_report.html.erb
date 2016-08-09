@@ -1,0 +1,121 @@
+<h1>Report Page For <%= event.name %> Event</h1>  
+<% if event.tickets.present? %>
+        <div class="row">
+          <h4>Event name:  <%= event.name.try(:titleize) %></h4>
+          <p>: <%= event.description.present? ? event.description.try(:html_safe) : "No description available for this ticket" %></p>
+        </div>  
+        <div class="row">
+          <div class="col-md-3"><b><h5>Address</h5></b></div><div class="col-md-3"><%= event.address %></div>
+          <div class="col-md-3"><b><h5>No of Tickets</h5></b></div><div class="col-md-3"><%= event.tickets.active.count %></div>        
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Start Date</h5></b></div><div class="col-md-3"><%= event.start_time %></div>
+          <div class="col-md-3"><b><h5>End Date</h5></b></div><div class="col-md-3"><%= event.end_time %></div>        
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Total Collection </h5></b></div><div class="col-md-3"><%= event.tickets.collect(&:ticket_histories).active.collect(&:subscription).collect(&:total_price).sum rescue 0 %></div>
+          <div class="col-md-3"><b><h5>Total Subscriber</h5></b></div><div class="col-md-3"><%= event.collect(&:tickets).collect(&:subscriptions).count rescue 0 %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>City </h5></b></div><div class="col-md-3"><%= event.city %></div>
+          <div class="col-md-3"><b><h5>State</h5></b></div><div class="col-md-3"><%= event.state %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Country </h5></b></div><div class="col-md-3"><%= event.country %></div>
+          <div class="col-md-3"><b><h5>Zipcode</h5></b></div><div class="col-md-3"><%= event.zipcode %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Event Type</h5></b></div><div class="col-md-3"><%= event.event_type %></div>       
+          <div class="col-md-3"><b><h5>Event Topic</h5></b></div><div class="col-md-3"><%= event.event_topic %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Event Privacy</h5></b></div><div class="col-md-3"><%= event.event_privacy %></div> 
+          <div class="col-md-3"></div><div class="col-md-3"></div>      
+        </div>
+  <% event.tickets.each_with_index do |e, index| %>
+    <div class="container" style="">
+      <h1><b><%=index+1 %>-</b> <%= e.name %> Tickets Reports</h1>
+      <br>
+      <hr>
+      <div class="row">
+        <h4>Ticket name:  <%= e.name.try(:titleize) %></h4>
+        <p>Ticket description: <%= e.ticket_description.present? ? e.ticket_description : "No description available for this ticket" %></p>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Ticket Type</h5></b></div><div class="col-md-3"><%= e.pay_mode %></div>
+          <div class="col-md-3"><b><h5>Ticket Price</h5></b></div><div class="col-md-3"><%=  e.price.present? ? (number_to_currency e.price) : '$0' %></div>        
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Total Tickets</h5></b></div><div class="col-md-3"><%= e.quantity %></div>
+          <div class="col-md-3"><b><h5>Available Tickets</h5></b></div><div class="col-md-3"><%= e.available_count %></div>        
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Country</h5></b></div><div class="col-md-3"><%= e.country %></div>
+          <div class="col-md-3"><b><h5>Currency</h5></b></div><div class="col-md-3"><%= e.currency %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Sale Start From</h5></b></div><div class="col-md-3"><%= e.tickets_start_date.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') rescue ''%></div>       
+          <div class="col-md-3"><b><h5>Sale Till</h5></b></div><div class="col-md-3"><%= e.ticket_end_date.strftime('%A, %B %d, %Y at %I:%M %p (%Z)') rescue '' %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Sale Channel</h5></b></div><div class="col-md-3"><%= e.sale_channel rescue 0%></div>
+          <div class="col-md-3"><b><h5>Total Tickets Sale</h5></b></div><div class="col-md-3"><%= e.ticket_histories.active.collect(&:quantity).sum rescue 0%></div>
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Total Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.count rescue 0%></div>      
+          <div class="col-md-3"><b><h5>Total Earning</h5></b></div><div class="col-md-3">$0<%= e.ticket_histories.active.collect(&:subscription).collect(&:total_price).sum rescue 0 %></div> 
+        </div>
+        <div class="row">
+          <div class="col-md-3"><b><h5>Total Active Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.active.count rescue 0%></div> 
+          <div class="col-md-3"><b><h5>Total Deactive Subscriptions</h5></b></div><div class="col-md-3"><%= e.ticket_histories.inactive.count rescue 0%></div>
+        </div>
+      </div>
+      <h3>Report List For Ticket <%= e.name %></h3>
+      <table id="example_<%= index %>" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>User Name</th>
+            <th>Quantity</th>
+            <th>Code</th>
+            <th>Order Id</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Purchased At</th>
+            <th>Note</th>
+            <th>Pay Mode</th>
+            <th>Status</th>
+            <th>Customer First Name</th>
+            <th>Customer last Name</th>
+            <th>Customer Email</th>
+            <th>Customer Contact No</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% e.ticket_histories.each_with_index do |ticket_history, index| %>
+           <tr>
+            <% status = ticket_history.is_active %>
+              <td><%= ticket_history.subscription.user.name rescue "-" %></td>
+              <td><%= ticket_history.subscription.quantity rescue 0 %></td>
+              <td><%= ticket_history.subscription.code rescue "-" %></td>
+              <td><%= ticket_history.subscription.order_id rescue "-" %></td>
+              <td><%= ticket_history.subscription.unit_price rescue "-" %></td>
+              <td><%= ticket_history.subscription.total_price rescue "-" %></td>
+              <td><%= ticket_history.subscription.purchased_at rescue "-" %></td>
+              <td><%= ticket_history.subscription.note rescue "-" %></td>
+              <td><%= ticket_history.subscription.pay_mode rescue "-" %></td>
+              <td><%= status ? "Active Subscription" : "Cancel Subscription" rescue "-" %></td>
+              <td><%= ticket_history.subscription.payment.first_name rescue "-" %></td>
+              <td><%= ticket_history.subscription.payment.last_name rescue "-" %></td>
+              <td><%= ticket_history.subscription.payment.email rescue "-" %></td>
+              <td><%= ticket_history.subscription.payment.contact_no rescue "-" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <script type="text/javascript">$(document).ready(function() {
+      $('#example_<%= index %>').dataTable();
+    });</script>
+  <% end %>
+<% else %>
+  <h2> There are no Tickets for event <%= event.name %></h2>
+<% end %>

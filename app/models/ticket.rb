@@ -14,6 +14,7 @@ class Ticket < ActiveRecord::Base
 	validates :sale_channel, presence: true
 	validates :country, presence: true 
 	validates :currency, presence: true
+	has_many :subscriptions, as: :subscriptionable
 	# validates :pay_mode, presence: true
 	# validates :price_validate
 

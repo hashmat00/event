@@ -12,7 +12,10 @@ class UsersController < ApplicationController
 	end
 	
 	def reports
-		@event = Event.find(params[:event_id])	
+		@event = Event.find(params[:event_id]) if params[:event_id]
+    @events = current_user.events.active
+    @upcomming_events =  current_user.events.upcomming.active
+    @past_events =  current_user.events.past.active	
 	end	
 
   def index
@@ -36,15 +39,15 @@ class UsersController < ApplicationController
   	end	
   	@tickets = current_user.ticket_histories.eager_load(:event, :ticket, :subscription).references(:event, :ticket, :subscription)	
   	@all_tickets_count = @tickets.try(:active).try(:count)
-  	@upcomming_tickets_count = @tickets.where('events.start_time > ?', Time.now).try(:active).try(:count)
+  	@upcomming_tickets_count = @tickets.upcomming.try(:count)
   	@saved_tickets_count = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }.try(:count)
-  	@past_tickets_count = @tickets.where('events.end_time < ?', Time.now).try(:active).try(:count)
+  	@past_tickets_count = @tickets.past.try(:count)
   	@inactive_tickets_count = @tickets.try(:inactive).try(:count)
   	case params[:tab]
   	when 'all' then @tickets = @tickets
-  	when 'upcomming' then @tickets = @tickets.where('events.start_time > ?', Time.now)
+  	when 'upcomming' then @tickets = @tickets.upcomming
   	when 'saved' then @tickets = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }
-  	when 'past' then @tickets = @tickets.where('events.end_time < ?', Time.now)
+  	when 'past' then @tickets = @tickets.past
   	when 'inactive' then @tickets = @tickets.try(:inactive)	
   	else
   		@tickets = @tickets	
@@ -101,8 +104,8 @@ class UsersController < ApplicationController
     @user.build_privacy
     @user.contact_details.build
     @events = @user.events.paginate(page: params[:page], per_page: 6)
-    @upcomming_events = @events.where('events.start_time > ?', Time.now).try(:active)
-    @past_events = @events.where('events.end_time < ?', Time.now).try(:active)
+    @upcomming_events = @events.upcomming
+    @past_events = @events.past
   end  
   def destroy
     
