@@ -10,7 +10,7 @@
     <% @users.each do |x| %>
         <div class="col-md-4 m-b-lg">
           <div class="panel panel-default panel-profile m-b-0">
-            <div class="panel-heading"></div>
+            <div class="panel-heading"><span class="icon icon-add-user"></span><span class="btn btn-info">Total Events (<%= x.events.active.count %>)</span></div>
             <div class="panel-body text-center">
                 <section class="panel-profile-img">
               <%= link_to (image_tag (x.image), class: "gravatar", width: "100", height: "100"), user_path(x) %>
@@ -18,20 +18,19 @@
               <h2><%= x.username %></h2> 
               <h2><%= x.email %></h2>            
                 <span class="icon icon-add-user"></span> <%= link_to 'View User', user_path(x), class: "btn btn-success btn-small" %>
-                <span class="icon icon-add-user"></span><span class="btn btn-info">Total Events (<%= x.events.active.count %>)</span> 
-              </a>
+                <div class="panel-body">
+                  <div id="follow_form_<%= x.id %>">
+                    <% if current_user %>
+                      <% if current_user.following?(x) %>
+                        <%= render 'unfollow', x: x %>
+                      <% else %>
+                        <%= render 'follow', x: x %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
             </div>
-            <div class="panel-body text-center">
-              <div id="follow_form_<%= x.id %>">
-                <% if current_user %>
-                  <% if current_user.following?(x) %>
-                    <%= render 'unfollow', x: x %>
-                  <% else %>
-                    <%= render 'follow', x: x %>
-                  <% end %>
-                <% end %>
-              </div>
-            </div>
+            
           </div>
         </div>
         <% end %>
