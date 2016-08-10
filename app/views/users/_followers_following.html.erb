@@ -1,5 +1,5 @@
 <% unless params[:flw] == "false" %>
-<% if x %>
+<% if x.present? %>
 	<b>Followers (<%= x.followers.count %>) </b> 
 	<% if x.followers.present? %>
 		<div style="text-align: left">
@@ -30,7 +30,7 @@
 		</div>
 	<% end %>
 <% end %>
-
+<% if x.present? %>
 <div class="container">
   <div class="modal fade" id="myModal00" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -125,4 +125,5 @@
 <% else %>
 <b>Followers (<%= x.followers.count %>) </b>
 <b>Followings (<%= x.following.count %>) </b>
+<% end %>
 <% end %>
