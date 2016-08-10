@@ -97,11 +97,11 @@
 			                <% if current_user %>
 			                  <% if current_user.following?(following) %>
 				                  <% if user_signed_in? && following!= current_user %>
-														<%= link_to "UnFollow", unfollow_path(:id => following.try(:id)), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+														<%= link_to "UnFollow", unfollow_path(:id => following.try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
 													<% end %>
 			                  <% else %>
 			                  	<% if user_signed_in? && following!= current_user %>
-														<%= link_to "Follow", relationships_path(:id => following.try(:id)), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+														<%= link_to "Follow", relationships_path(:id => following.try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
 													<% end %>
 			                  <% end %>
 			                <% end %>
