@@ -7,12 +7,8 @@
             <div class="row white">
               <a href = "/events/<%= i.id %>">
                 <div class="col-md-3 col-sm-3 prp-img">
-                  <div class="exp-img-2" style="background-image:url(<%= i.bgpicture_url %>);background-size: cover;">
-                    <span class="filter"></span>
-                    <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                    <div class="overlay">
-                      <div class="img-counter"><%= i.pictures.count %> Photo</div>
-                    </div>
+                  <div class="exp-img-2">
+                    <%= image_tag(i.picture_url, class: "panel-recipe #{i.picture.blank? ? 'panel-border' : ''}", height: "195") %>
                   </div>
                 </div>
                 <div class="item-info col-lg-7 col-md-6 col-sm-6">

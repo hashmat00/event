@@ -17,11 +17,7 @@
                 <div class="wht-cont">
                   <a href = "/events/<%= i.id %>">
                     <div class="exp-img-2" style="background-image:url(<%= i.picture_url%>);background-size: cover;">
-                      <span class="filter"></span>
-                      <span class="ffs-bs"><label for="op" style="width:auto" class="btn btn-small btn-primary">browse photos</label></span>
-                      <div class="overlay">
-                        <div class="img-counter"><%= i.pictures.count %> Photo</div>
-                      </div>
+                      <%= image_tag(i.picture_url, class: "panel-recipe #{i.picture.blank? ? 'panel-border' : ''}", height: "195") %>
                     </div>
                     <div class="item-title">
                       <h4><%= i.name.try(:titleize) %></h4>
@@ -87,6 +83,7 @@
   #page-content-search .container .wide_container_2 .tabs .tab-content {
     display: block !important;
 }
+.wide-2 .btn {margin: auto;padding: auto;width: auto;}
 </style>
 <% if request.xhr? %>
  <script>

@@ -8,12 +8,8 @@
               <div class="col-md-3 col-sm-3 col-xs-6 prop">
                 <div class="wht-cont">
                   <a href = "/events/<%= i.id %>">
-                    <div class="exp-img-2" style="background-image:url(<%= i.bgpicture_url %>);background-size: cover;">
-                      <span class="filter"></span>
-                      <span class="ffs-bs"><label for="op" class="btn btn-small btn-primary">browse photos</label></span>
-                      <div class="overlay">
-                        <div class="img-counter"><%= i.pictures.count %> Photo</div>
-                      </div>
+                    <div class="exp-img-2">
+                      <%= image_tag(i.picture_url, class: "panel-recipe #{i.picture.blank? ? 'panel-border' : ''}", height: "195") %>     
                     </div>
                     <div class="item-title">
                       <h4><%= i.name.try(:titleize) %></h4>
