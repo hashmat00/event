@@ -1,3 +1,4 @@
+<br>
 <div id="interestedPanel">
 	<% if current_user %>
 		<%= form_for [object, object.interests.build], method: :post, remote: true do |f|  %>
@@ -5,6 +6,7 @@
 			
 			<div id="interestedForm">
 				<div class="center "><b class="question"> Are You Going To attend this event </b></div>
+				<br>
 				<div class="btn-group" data-toggle="buttons">
 				  
 				  <label class="btn btn-primary">Interested
@@ -19,16 +21,19 @@
 				</div>
 			</div>
 			<% if current_user.event_interests(object).present?  %>
-				<%= current_user.event_interests(object).try(:message) %>
-				<a href= "javascript:void(0)" onclick="changeFrom();">change</a>
+				<br>
+				<center><b><%= current_user.event_interests(object).first.try(:message) %></b></center>
+				<center><a href= "javascript:void(0)" class="btn btn-info btn-lg btn-block" onclick="changeFrom();">Would you like to change</a></center>
 			<% end %>
 		<% end %>
 	<% else %>
 		Please login If you are Inetrested in this event
-	<% end %>		
+	<% end %>
+	<br>		
 	<div id ="interest_<%= object.id %>">
 		<%= render partial: "interests/index", locals: {object: object} %>
 	</div>
+	<br>
 	<script>
 		$( "input[type='radio']" ).change(function() {
 	  	$('#new_interest').submit();
@@ -39,7 +44,7 @@
 		function changeFrom()
 		{
 			$('#interestedForm').show();
-			$('.question').html('Chaneg if You Think change')
+			$('.question').html('Chanege if You Think change')
 		}
 	</script>
 </div>

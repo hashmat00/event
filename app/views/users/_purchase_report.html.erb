@@ -5,6 +5,11 @@
 <script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 <div class="container">
   <% if user.subscriptions.present? %>
+    <p>
+      Download:
+      <%= link_to "CSV", purchase_report_path(format: "csv"), class: "btn btn-primary" %> |
+      <%= link_to "Excel", purchase_report_path(format: "xls"), class: "btn btn-primary" %>
+    </p>
     <h1>Purchase Page For <%= user.name %> </h1>    
       <hr>
       <div class="row">

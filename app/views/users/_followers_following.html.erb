@@ -1,14 +1,123 @@
 <% if x %>
+	<b>Followers (<%= x.followers.count %>) </b> 
 	<% if x.followers %>
-		<% x.followers.each_with_index do |follower, index| %>
-			<%= image_tag follower.image, style: "height:50px; width:50px;" %>
-		<% end %>
-	<% end %>	
-	(<%= x.followers.count %>) Followers 
-	<% if x.followers %>
-			<% x.following.each_with_index do |following, index| %>
-				<%= image_tag following.image, style: "height:50px; width:50px;" %>
+		<div style="text-align: left">
+			<% x.followers.limit(4).each_with_index do |follower, index| %>
+				<%= link_to user_path(follower.id) do %>
+					<%= image_tag follower.image, style: "height:50px; width:50px;", title: "#{follower.name}" %>
+				<% end %>
 			<% end %>
-		<% end %>
-	(<%= x.following.count %>) Following
+			<% if x.followers.present? %>
+				<b><% if x.followers.count>4 %> + <% x.following.count - 4 %> More <% end %></b> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal00">View ALL</button>
+			<% end %>
+		</div>
+	<% end %>	
+	<% if x.followers.present? || x.following.present? %>
+	<br>
+	<% end %>
+	<b>Followings (<%= x.following.count %>) </b>
+	<% if x.following %>
+		<div style="text-align: left">
+			<% x.following.limit(4).each_with_index do |following, index| %>
+				<%= link_to user_path(following.id) do %>
+					<%= image_tag following.image, style: "height:50px; width:50px;", title: "#{following.name}"%>
+				<% end %>
+			<% end %>
+			<% if x.following.present? %>
+			<b><% if x.following.count>4 %> + <% x.following.count - 4 %> More <% end %></b> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal11">View ALL</button>
+			<% end %>
+		</div>
+	<% end %>
 <% end %>
+
+<div class="container">
+  <div class="modal fade" id="myModal00" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">List OF All Followers</h4>
+        </div>
+        <div class="modal-body">
+          <% if x.followers %>
+	          <% x.followers.each_with_index do |follower, index| %>
+	          <div class="row">
+		          <div class="col-md-2"><%= image_tag follower.image, style: "height:50px; width:50px;", title: "#{follower.name}"%></div>
+		           <div class="col-md-6" style="text-align: left;"><b><%= follower.name.try(:titleize) %></b></div>
+		          <div class="col-md-4">
+		          	<div class="panel-body text-center">
+		              <div id="follow_form_<%= follower.id %>">
+		                <% if current_user %>
+		                  <% if current_user.following?(follower) %>
+			                  <% if user_signed_in? && follower!= current_user %>
+													<%= link_to "UnFollow", unfollow_path(:id => follower.try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+												<% end %>
+		                  <% else %>
+		                  	<% if user_signed_in? && follower!= current_user %>
+													<%= link_to "Follow", relationships_path(:id => follower.try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+												<% end %>
+		                  <% end %>
+		                <% end %>
+										<b>Followers (<%= follower.followers.count %>) </b>
+										<b>Followings (<%= follower.following.count %>) </b>
+		              </div>
+		            </div>
+		          </div>
+	          </div>
+	          <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal11" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">List OF All Followings</h4>
+        </div>
+        <div class="modal-body">
+          <% if x.following %>
+	          <% x.following.each_with_index do |following, index| %>
+	          <div class="row">
+		          <div class="col-md-2"><%= image_tag following.image, style: "height:50px; width:50px;", title: "#{following.name}"%></div>
+		          <div class="col-md-6" style="text-align: left;"><b><%= following.name.try(:titleize) %></b></div>
+		          <div class="col-md-4">
+		          	<div class="panel-body text-center">
+		              <div class="panel-body text-center">
+			              <div id="follow_form_<%= following.id %>">
+			                <% if current_user %>
+			                  <% if current_user.following?(following) %>
+				                  <% if user_signed_in? && following!= current_user %>
+														<%= link_to "UnFollow", unfollow_path(:id => following.try(:id)), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+													<% end %>
+			                  <% else %>
+			                  	<% if user_signed_in? && following!= current_user %>
+														<%= link_to "Follow", relationships_path(:id => following.try(:id)), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+													<% end %>
+			                  <% end %>
+			                <% end %>
+											<b>Followers (<%= following.followers.count %>) </b>
+											<b>Followings (<%= following.following.count %>) </b>
+			              </div>
+			            </div>
+		            </div>
+		          </div>
+	          </div>
+	          <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

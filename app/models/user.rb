@@ -91,4 +91,13 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def to_purchase_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << self.subscriptions.column_names
+      self.subscriptions.each do |subscription|
+        csv << subscription.attributes.values_at(*self.subscriptions.column_names)
+      end
+    end
+  end  
 end

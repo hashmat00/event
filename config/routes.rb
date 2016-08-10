@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/location_update', to: 'events#location_update'
   get '/users/reports', to: 'users#reports'
   get '/users/tabs', to: 'users#tabs'
+  get '/users/purchase_report', to: 'users#purchase_report', as: :purchase_report
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

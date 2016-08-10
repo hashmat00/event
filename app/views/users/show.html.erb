@@ -19,6 +19,7 @@
         <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(3);">Account Settings</button></div>
         <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(4);">Delete Account</button></div>
         <div class="row"><button class="btn btn-primary btn-block" onclick="tabRequest(5);">Purchase Report</button></div>
+        <div class="row"><%= link_to 'Event Report', "/users/reports?report_category=all", class: "btn btn-primary btn-block" %></div>
       <% end %>
     </div>
     <br>

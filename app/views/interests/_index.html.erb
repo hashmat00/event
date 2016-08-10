@@ -1,7 +1,7 @@
 <div>
-	Peoples Interested
+	<center><b>Attanding (<%= object.interested.count %>)</b></center>
 	<div>
-		<% if object.interested %>
+		<% if object.interested.present? %>
 			<% object.interested.limit(5).each_with_index do |interest, index|%>
 				<% if interest.user %>	
 					<%= link_to user_path(interest.user.try(:id)) do %>
@@ -9,17 +9,18 @@
 					<% end %>
 				<% end %>
 			<% end %> 
-			<%= object.interested.count %>
-			<a href = "#">View All</a>
+			<b><% if object.interested.count>4 %> + <% object.interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal00">View ALL</button>
 		<% else %>
-			No Response Yet
+			<b>No Response Yet</b>
 		<% end %>
+		<br>
+		<br>
 	</div>
 </div>
 <div>
-	Peoples May be Attand
+		<center><b>May Be Attanding (<%= object.partially_interested.count %>)</b></center>
 	<div>
-		<% if object.partially_interested %>
+		<% if object.partially_interested.present? %>
 				<% object.partially_interested.limit(5).each_with_index do |interest, index|%>
 					<% if interest.user %>	
 						<%= link_to user_path(interest.user.try(:id)) do %>
@@ -27,17 +28,18 @@
 						<% end %>
 					<% end %>
 				<% end %> 
-				<%= object.partially_interested.count %>
-				<a href = "#">View All</a>
+				<b><% if object.partially_interested.count>4 %> + <% object.partially_interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal11">View ALL</button>
 		<% else %>
-			No Response Yet 
+			<b>No Response Yet </b>
 		<% end %>
+		<br>
+		<br>
 	</div>
 </div>
 <div>
-	Peoples Not Interested
+	<center><b>Not Attanding (<%= object.not_interested.count %>)</b></center>
 	<div>
-		<% if object.not_interested %>
+		<% if object.not_interested.present? %>
 			<% object.not_interested.limit(5).each_with_index do |interest, index|%>
 				<% if interest.user %>
 					<%= link_to  user_path(interest.user.try(:id)) do %>
@@ -45,10 +47,156 @@
 					<% end %>
 				<% end %>
 			<% end %> 
-			<%= object.not_interested.count %>
-			<a href = "#">View All</a>
+			<b><% if object.not_interested.count>4 %> + <% object.not_interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal22">View ALL</button>
 		<% else %>
-			No Response Yet 
+			<b>No Response Yet</b> 
 		<% end %>
+		<br>
+		<br>
 	</div>
+</div>
+
+
+
+
+<div class="container">
+  <div class="modal fade" id="myModal00" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">List OF Interested Peoples</h4>
+        </div>
+        <div class="modal-body">
+          <% if object.interested.present? %>
+	          <% object.interested.each_with_index do |int, index| %>
+		          <% if int.user.present?%>
+			          <div class="row">
+				          <div class="col-md-2"><%= image_tag int.try(:user).image, style: "height:50px; width:50px;", title: "#{int.try(:user).name}"%></div>
+				           <div class="col-md-6" style="text-align: left;"><b><%= int.try(:user).name.try(:titleize) %></b></div>
+				          <div class="col-md-4">
+				          	<div class="panel-body text-center">
+				              <div id="follow_form_<%= int.try(:user).id %>">
+				                <% if current_user %>
+				                  <% if current_user.following?(int.try(:user)) %>
+					                  <% if user_signed_in? && int.try(:user)!= current_user %>
+															<%= link_to "UnFollow", unfollow_path(:id => int.try(:user).try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+														<% end %>
+				                  <% else %>
+				                  	<% if user_signed_in? && int.try(:user)!= current_user %>
+															<%= link_to "Follow", relationships_path(:id => int.try(:user).try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+														<% end %>
+				                  <% end %>
+				                <% end %>
+												<b>Followers (<%= int.try(:user).followers.count %>) </b>
+												<b>Followings (<%= int.try(:user).following.count %>) </b>
+				              </div>
+				            </div>
+				          </div>
+			          </div>
+
+	          	<% end %>
+	          <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal11" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">List OF May Be Interested Peoples</h4>
+        </div>
+        <div class="modal-body">
+          <% if object.partially_interested.present? %>
+	          <% object.partially_interested.each_with_index do |int, index| %>
+			        <%if int.user.present?%>
+			          <div class="row">
+				          <div class="col-md-2"><%= image_tag int.try(:user).image, style: "height:50px; width:50px;", title: "#{int.try(:user).name}"%></div>
+				           <div class="col-md-6" style="text-align: left;"><b><%= int.try(:user).name.try(:titleize) %></b></div>
+				          <div class="col-md-4">
+				          	<div class="panel-body text-center">
+				              <div id="follow_form_<%= int.try(:user).id %>">
+				                <% if current_user %>
+				                  <% if current_user.following?(int.try(:user)) %>
+					                  <% if user_signed_in? && int.try(:user)!= current_user %>
+															<%= link_to "UnFollow", unfollow_path(:id => int.try(:user).try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+														<% end %>
+				                  <% else %>
+				                  	<% if user_signed_in? && int.try(:user)!= current_user %>
+															<%= link_to "Follow", relationships_path(:id => int.try(:user).try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+														<% end %>
+				                  <% end %>
+				                <% end %>
+												<b>Followers (<%= int.try(:user).followers.count %>) </b>
+												<b>Followings (<%= int.try(:user).following.count %>) </b>
+				              </div>
+				            </div>
+				          </div>
+			          </div>
+			         <% end %>
+	          <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modal fade" id="myModal22" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">List OF Not Interested Peoples</h4>
+        </div>
+        <div class="modal-body">
+          <% if object.not_interested.present? %>
+	          <% object.not_interested.each_with_index do |int, index| %>
+		          <%if int.user.present?%>
+			          <div class="row">
+				          <div class="col-md-2"><%= image_tag int.try(:user).image, style: "height:50px; width:50px;", title: "#{int.try(:user).name}"%></div>
+				           <div class="col-md-6" style="text-align: left;"><b><%= int.try(:user).name.try(:titleize) %></b></div>
+				          <div class="col-md-4">
+				          	<div class="panel-body text-center">
+				              <div id="follow_form_<%= int.try(:user).id %>">
+				                <% if current_user %>
+				                  <% if current_user.following?(int.try(:user)) %>
+					                  <% if user_signed_in? && int.try(:user)!= current_user %>
+															<%= link_to "UnFollow", unfollow_path(:id => int.try(:user).try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+														<% end %>
+				                  <% else %>
+				                  	<% if user_signed_in? && int.try(:user)!= current_user %>
+															<%= link_to "Follow", relationships_path(:id => int.try(:user).try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+														<% end %>
+				                  <% end %>
+				                <% end %>
+												<b>Followers (<%= int.try(:user).followers.count %>) </b>
+												<b>Followings (<%= int.try(:user).following.count %>) </b>
+				              </div>
+				            </div>
+				          </div>
+			          </div>
+		          <% end %>
+	          <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

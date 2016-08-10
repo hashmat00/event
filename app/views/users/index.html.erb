@@ -1,8 +1,8 @@
 <%= render 'shared/page_title', title: "Our organizers" %>
 <p>
   Download:
-  <%= link_to "CSV", users_path(format: "csv") %> |
-  <%= link_to "Excel", users_path(format: "xls") %>
+  <%= link_to "CSV", users_path(format: "csv"), class: "btn btn-primary" %> |
+  <%= link_to "Excel", users_path(format: "xls"), class: "btn btn-primary" %>
 </p>
 <% @users.each_slice(6) do |works| %>
 <div class="container">
@@ -17,20 +17,22 @@
               </section>
               <h2><%= x.username %></h2> 
               <h2><%= x.email %></h2>            
-                <span class="icon icon-add-user"></span> <%= link_to 'View User', user_path(x), class: "btn btn-success btn-small" %>
-                <div class="panel-body">
-                  <div id="follow_form_<%= x.id %>">
-                    <% if current_user %>
-                      <% if current_user.following?(x) %>
-                        <%= render 'unfollow', x: x %>
-                      <% else %>
-                        <%= render 'follow', x: x %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
+                <span class="icon icon-add-user"></span> <%= link_to 'View User', user_path(x), class: "btn btn-success btn-lg btn-block" %>
+                
             </div>
-            
+            <div class="panel-body text-center">
+              <div id="follow_form_<%= x.id %>">
+                <% if current_user %>
+                  <% if current_user.following?(x) %>
+                    <%= render 'unfollow', x: x %>
+                  <% else %>
+                    <%= render 'follow', x: x %>
+                  <% end %>
+                <% else %>
+                  <%= render 'follow', x: x %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
         <% end %>
@@ -43,4 +45,3 @@
     <%= will_paginate %>
     </div>
   </div>
-  

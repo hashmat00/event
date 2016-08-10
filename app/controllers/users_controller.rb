@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     @events = current_user.events.active
     @upcomming_events =  current_user.events.upcomming.active
     @past_events =  current_user.events.past.active	
-	end	
+	 
+  end	
 
   def index
    	@users = User.all.active.eager_load(:events).where('events.is_active=?', true).references(:events).paginate(page: params[:page], per_page: 6)
@@ -110,6 +111,13 @@ class UsersController < ApplicationController
   def destroy
     
   end
+  def purchase_report
+    respond_to do |format|
+      # format.html redirect_to user_path(current_user)
+      format.csv { send_data current_user.to_purchase_csv}
+      format.xls { send_data current_user.to_purchase_csv(col_sep: "\t") }
+    end  
+  end  
 	 
   private   
   def set_user

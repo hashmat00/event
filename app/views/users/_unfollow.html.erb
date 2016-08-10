@@ -1,4 +1,7 @@
 <% if user_signed_in? && x!= current_user %>
-	<%= link_to "UnFollow", unfollow_path(:id => x.try(:id)), class: "btn btn-danger", :method => :post, :remote => 'true'%>	
+	<%= link_to "UnFollow", unfollow_path(:id => x.try(:id)), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>	
 <% end %>
-<%= render partial: "users/followers_following", locals: {x: x} %>
+<br>
+<% unless params[:flw] == "false" %>
+	<%= render partial: "users/followers_following", locals: {x: x} %>
+<% end %>

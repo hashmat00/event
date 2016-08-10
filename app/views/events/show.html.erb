@@ -29,7 +29,7 @@
 	              <h2>$<%= @event.payMode("amount") rescue "Something Wrong" %></h2>
 	              <h5 style="font-size:25px;" class="team-color"><%= @event.payMode("string") rescue "Something Wrong" %></h5>
 	            </div>
-	            <center><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#TcktmyModal">Get Tickets</button></center>
+	            <center><button type="button" class="btn btn-info btn-lg btn-block" data-toggle="modal" data-target="#TcktmyModal">Get Tickets</button></center>
             	<div class="row">
             		<%= render partial: "interests/form", locals: {object: @event} %>
             	</div>
@@ -117,7 +117,7 @@
 	                </span>
 	              
 	                <span class="icon icon-add-user"></span><span class="btn btn-info">Total Events (<%= @event.user.events.active.count rescue 0 %>)</span> 
-	                <div class="panel-body text-center">
+	                <div class="panel-body text-center followPanel">
 			              <% if user_signed_in?  %>
 			                <div id="follow_form_<%= @event.user.try(:id) %>">
 			                  <% if current_user.following?(@event.user) %>
@@ -231,6 +231,10 @@
   		.text-center {
     	height: auto !important;
     
+		}
+		.btn-lg, .btn-large {
+    height: auto !important;
+    width: auto !important;
 		}
 		</style>
 
