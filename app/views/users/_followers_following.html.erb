@@ -1,7 +1,7 @@
 <% unless params[:flw] == "false" %>
 <% if x %>
 	<b>Followers (<%= x.followers.count %>) </b> 
-	<% if x.followers %>
+	<% if x.followers.present? %>
 		<div style="text-align: left">
 			<% x.followers.limit(4).each_with_index do |follower, index| %>
 				<%= link_to user_path(follower.id) do %>
@@ -40,7 +40,7 @@
           <h4 class="modal-title">List OF All Followers</h4>
         </div>
         <div class="modal-body">
-          <% if x.followers %>
+          <% if x.followers.present? %>
 	          <% x.followers.each_with_index do |follower, index| %>
 	          <div class="row">
 		          <div class="col-md-2"><%= image_tag follower.image, style: "height:50px; width:50px;", title: "#{follower.name}"%></div>
@@ -85,7 +85,7 @@
           <h4 class="modal-title">List OF All Followings</h4>
         </div>
         <div class="modal-body">
-          <% if x.following %>
+          <% if x.following.present? %>
 	          <% x.following.each_with_index do |following, index| %>
 	          <div class="row">
 		          <div class="col-md-2"><%= image_tag following.image, style: "height:50px; width:50px;", title: "#{following.name}"%></div>
