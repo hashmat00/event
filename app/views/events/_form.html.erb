@@ -25,24 +25,24 @@
           <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
               <div class="form-group col-md-12">
-                <label for="name">Name</label>
-                <%= f.text_field :name, :class=>"form-control", required: true %>
+                <label for="name">Name *</label>
+                <%= f.text_field :name, :class=>"form-control", required: true, title: "Event Name must be Reruired, It Should not be less then 3 characters and greater then 100 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
               </div>
               <div class="form-group col-md-12">
-                <label for="name">Description</label>
-                <%= f.text_area :description, id: "desc", :class=>"form-control", rows:5, required: true %>
+                <label for="name">Description *</label>
+                <%= f.text_area :description, id: "desc", :class=>"form-control", rows:5, required: true, title: "Event Description must be Reruired, It Should not be less then 100 characters and greater then 1000 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
               </div>
           
               <div class="form-group col-md-6">
-                <label for="name">Event Start Date </label>
-                <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control", required: true %>
+                <label for="name">Event Start Date *</label>
+                <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control", required: true, title: "Event start Date must be Reruired not less then Today's Date and event start date", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
               </div>
               <div class="form-group col-md-6">
-                <label for="name">Event End Date </label>
-                <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control", required: true %>
+                <label for="name">Event End Date *</label>
+                <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control", required: true, title: "Event End Date must be Reruired, It Should not be less then Today's date characters and greater then 100 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
               </div>
               <div class="form-group col-md-12">
-                <label for="name">Location</label>
+                <label for="name">Location *</label>
                 <div>
                 <!-- Nav tabs -->
                   <ul class="nav nav-tabs" role="tablist">
@@ -57,7 +57,7 @@
                       <div class="form-group col-md-12">
                         <label for="name">Address</label>
                         <div id="mapPlace" class="placeSearch"></div>
-                        <input type="text" placeholder="<%= request.location.address %>" style="z-index: 999999999999999 !important;" name="address_fiekld" id="pacInput" class="form-control" autocomplete="on">
+                        <input type="text" placeholder="<%= request.location.address %>" style="z-index: 999999999999999 !important;" name="address_fiekld" id="pacInput" class="form-control" autocomplete="on" title= "You can Auto Fill Your event Location" onmouseover= "$(this).tooltip();">
                         <div id="type-selector" class="controls" style="display:none">
                           <input type="radio" name="type" id="changetype-all" checked="checked">
                           <label for="changetype-all">All</label>
@@ -116,21 +116,21 @@
                     <% end %>
                   </div>   
                   <div class="form-group col-md-12">
-                    <label for="name">Title</label>
-                    <%= schedule_form.text_field :title, :class=>"form-control", required: true, style: "width:102%;" %>
+                    <label for="name">Title *</label>
+                    <%= schedule_form.text_field :title, :class=>"form-control", required: true, style: "width:102%;", title: "Schedule Name must be Reruired, It Should not be less then 3 characters and greater then 100 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="name">Description</label>
-                    <%=  schedule_form.text_area :description, :class=>"form-control",row:5, required: true %>
+                    <label for="name">Description *</label>
+                    <%=  schedule_form.text_area :description, :class=>"form-control",row:5, required: true, title: "Schedule Description must be Reruired, It Should not be less then 100 characters and greater then 1000 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                   </div>
                   
                   <div class="form-group col-md-6">
-                    <label for="name">Start From</label>
-                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});"%>
+                    <label for="name">Start From *</label>
+                    <%=  schedule_form.text_field :start_date,:id=>"start_schedule_date", :class=>"form-control start_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", title: "Schedule start Date must be Reruired not less then Today's Date and event start date and greater than event end date and schedule end date", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();"%>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="name">To</label>
-                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});;", required: true %>
+                    <label for="name">To *</label>
+                    <%=  schedule_form.text_field :end_date,:id=>"end_schedule_date",:class=>"form-control end_schedule_date", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});;", required: true, title: "Schedule end Date must be Reruired not less then Today's Date, event start date, schedule start date and greater than event end date", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                   </div>
                 <% end %>
                 <div class="form-group col-md-12">
@@ -159,11 +159,11 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="name">Ticket Name</label>
-                    <%= ticket_form.text_field :name, :class=>"form-control", required: true %>
+                    <%= ticket_form.text_field :name, :class=>"form-control", required: true, title: "Ticket Name must be Reruired, It Should not be less then 3 characters and greater then 100 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="quantity">Quantity available*</label>
-                    <%= ticket_form.text_field :quantity, :class=>"form-control", required: true %>
+                    <%= ticket_form.text_field :quantity, :class=>"form-control", required: true, title: "Ticket Quantity must be Reruired, It Should not be less then 0 and it should be integer value", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                   </div>
                   <div class="form-group col-md-6">
                     <div><label for="price">Pay Mode</label></div>
@@ -184,12 +184,12 @@
                   </div>
                   <div class="col-md-6">
                     <label for="price">Price</label>
-                    <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control price", disabled: true %>
+                    <%= ticket_form.number_field :price, :id=>"price", :class=>"form-control price", disabled: true, title: "Ticket Price must be Reruired if ticket mode is paid, It Should not be less then less then 0, negetive and string value", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                   </div>
                   <div class="col-md-12" style="margin:10px 0px">
                       <div class="form-group col-md-12">
                         <label for="ticket_description">Ticket Description</label>
-                        <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5, required: true%>
+                        <%= ticket_form.text_area :ticket_description, :class=>"form-control",row:5, required: true, title: "Ticket Description must be Reruired, It Should not be less then 100 characters and greater then 1000 characters", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();"%>
                       </div>
                       <div class="form-group col-md-6">
                         <div><label for="show_ticket_description">Show Ticket Description</label></div>
@@ -223,11 +223,11 @@
                       </div> 
                       <div class="form-group col-md-6">
                         <label for="tickets_start_date">Ticket Sales Start</label>
-                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", required: true %>
+                        <%= ticket_form.text_field :tickets_start_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", required: true, title: "Ticket Sale Start Date must be Reruired not less then Today's Date and greater than event end date and  Ticket Sale End Date", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                        </div>
                       <div class="form-group col-md-6">
                         <label for="ticket_end_date">Ticket Sales End</label>
-                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", required: true %>
+                        <%= ticket_form.text_field :ticket_end_date, :class=>"form-control", onclick: "$(this).datetimepicker({format: 'YYYY-MM-DD HH:mm:ss',defaultDate:$('#start_date').val(),minDate:$('#start_date').val()});", required: true, title: "Ticlet Sale End Date must be Reruired not less then Today's Date, Ticket Sale Start Date and greater than event end date", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();" %>
                       </div>
                       <div class="form-group col-md-6">
                         <label for="sel1">Sales Channel (How will your attendees get tickets?)</label>
@@ -351,7 +351,7 @@
           </div>
           <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
             <div class="panel-body">
-                <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories", :multiple => true, required: true) %>
+                <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories", :multiple => true, required: true, title: "You can choose one or more than 1 category for this event", 'data-toggle' => 'tooltip', 'data-placement' => 'top', onmouseover: "$(this).tooltip();") %>
             </div>
           </div>
         </div>  
@@ -510,6 +510,14 @@
     right: 10px;
     top: 25px;
   }
+  .tooltip-inner {
+    max-width: 800px !important;
+    /* If max-width does not work, try using width instead */
+    width: auto; 
+}
+ .tooltip > p {
+   text-align:right;
+ }
 </style>
 
 

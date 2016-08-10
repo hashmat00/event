@@ -9,12 +9,12 @@
 					<% end %>
 				<% end %>
 			<% end %> 
-			<b><% if object.interested.count>4 %> + <% object.interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal00">View ALL</button>
+			<b><% if object.interested.count>4 %> + <% object.interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal100">View ALL</button>
 		<% else %>
 			<b>No Response Yet</b>
 		<% end %>
 		<br>
-		<br>
+		<br>	
 	</div>
 </div>
 <div>
@@ -28,7 +28,7 @@
 						<% end %>
 					<% end %>
 				<% end %> 
-				<b><% if object.partially_interested.count>4 %> + <% object.partially_interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal11">View ALL</button>
+				<b><% if object.partially_interested.count>4 %> + <% object.partially_interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal111">View ALL</button>
 		<% else %>
 			<b>No Response Yet </b>
 		<% end %>
@@ -47,7 +47,7 @@
 					<% end %>
 				<% end %>
 			<% end %> 
-			<b><% if object.not_interested.count>4 %> + <% object.not_interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal22">View ALL</button>
+			<b><% if object.not_interested.count>4 %> + <% object.not_interested.count - 4 %> More </b><% end %> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal122">View ALL</button>
 		<% else %>
 			<b>No Response Yet</b> 
 		<% end %>
@@ -60,7 +60,7 @@
 
 
 <div class="container">
-  <div class="modal fade" id="myModal00" role="dialog">
+  <div class="modal fade" id="myModal100" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -108,7 +108,7 @@
 </div>
 
 <div class="container">
-  <div class="modal fade" id="myModal11" role="dialog">
+  <div class="modal fade" id="myModal111" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -155,7 +155,7 @@
 </div>
 
 <div class="container">
-  <div class="modal fade" id="myModal22" role="dialog">
+  <div class="modal fade" id="myModal122" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
