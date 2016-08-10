@@ -2,6 +2,4 @@
 	<%= link_to "Follow", relationships_path(:id => x.try(:id)), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
 <% end %>
 <br>
-<% unless params[:flw] == "false" %>
-	<%= render partial: "users/followers_following", locals: {x: x} %>
-<% end %>
+<%= render partial: "users/followers_following", locals: {x: x} %>

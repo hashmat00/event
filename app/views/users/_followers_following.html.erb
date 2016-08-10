@@ -1,3 +1,4 @@
+<% unless params[:flw] == "false" %>
 <% if x %>
 	<b>Followers (<%= x.followers.count %>) </b> 
 	<% if x.followers %>
@@ -121,3 +122,7 @@
     </div>
   </div>
 </div>
+<% else %>
+<b>Followers (<%= following.followers.count %>) </b>
+<b>Followings (<%= following.following.count %>) </b>
+<% end %>
