@@ -22,29 +22,3 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
-  $('#new_event, .edit_event').formValidation({
-    framework: 'bootstrap',
-    excluded: [':disabled'],
-   	icon: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-      'event[name]': {
-        row: '.col-xs-4',
-        validators: {
-          notEmpty: {
-            message: 'The event name is required'
-          },
-          stringLength: {
-          	min: 3,
-          	max: 100,
-          	message: 'The event name must be more than 3 and less than 100 characters long'
-          }
-        }
-      }
-    }
-  });
-});
