@@ -1,0 +1,259 @@
+<input type="hidden" name="form_filter" value="form_filter">
+  <div class="location-map col-sm-7 col-xs-7">
+    <div class="input-group inner-addon left-addon">
+      <!-- <input id="pac-input" class="controls" type="text"
+          placeholder="Enter a location"> -->
+      <div id="type-selector" class="controls" style="display:none">
+        <input type="radio" name="type" id="changetype-all" checked="checked">
+        <label for="changetype-all">All</label>
+
+        <input type="radio" name="type" id="changetype-establishment">
+        <label for="changetype-establishment">Establishments</label>
+
+        <input type="radio" name="type" id="changetype-address">
+        <label for="changetype-address">Addresses</label>
+
+        <input type="radio" name="type" id="changetype-geocode">
+        <label for="changetype-geocode">Geocodes</label>
+      </div>
+      <div id="map" class="placeSearch"></div>
+      <input type="text" placeholder="<%= request.location.address %>" style="padding: 25px !important;  z-index: 999999999999999 !important;" name="address" id="pac-input" class="form-control mapTextField" autocomplete="off">
+    </div>
+  </div>
+  <div class="select-block col-md-4 col-xs-4 last">
+    <a id="toggle-link" class="options-button">Filters</a>
+  </div>
+  <div style="display: none; min-height:400px; max-height:600px;overflow-y:scroll; z-index: 9999999" id="hidden_content" class="options-overlay col-md-12 col-sm-12">
+    <div class="row">
+      <div class="container" style="padding:20px">
+        <h2>Filter</h2>
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">Reset Filter</a></li>
+          <li><a data-toggle="tab" href="#menu1">Location</a></li>
+          <li><a data-toggle="tab" href="#menu2">Date</a></li>
+          <li><a data-toggle="tab" href="#menu3">Price</a></li>
+          <li><a data-toggle="tab" href="#menu4">Category</a></li>
+          <li><a data-toggle="tab" href="#menu5">Event Type</a></li>
+        </ul>
+          <div class="tab-content" style="padding:20px">
+            <div id="home" class="tab-pane fade in active">
+              <h2>Reset Filter</h2>
+              <div class="btn-group" data-toggle="buttons" style="width:100%;">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="btn btn-success" id="filterLocation">
+                      <input type="checkbox" name="filterLocation" autocomplete="off"> Reset Location
+                    </label>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="btn btn-success" id="filterDate">
+                      <input type="checkbox" name="filterDate" autocomplete="off">Reset Date
+                    </label>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="btn btn-success" id="filterPrice">
+                      <input type="checkbox" name="filterPrice" autocomplete="off">Reset Price
+                    </label>
+                  </div>
+                </div>
+                <div class="row"> 
+                  <div class="col-md-6">
+                    <label class="btn btn-success" id="filterCategory">
+                      <input type="checkbox" name="filterCategory" autocomplete="off">Reset Category
+                    </label>
+                  </div>
+                  <div class="col-md-6">    
+                    <label class="btn btn-success" id="filterEventType">
+                      <input type="checkbox" name="filterEventType" autocomplete="off">Reset Event Type
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+              <h2>Filter By Location</h2>
+              <div class="btn-group" data-toggle="buttons" id="locationFilter">
+                <label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="locationFilter" value="currentLocationOn" id="option000" autocomplete="off"> Current Location
+                  </label>
+                </label>
+                <label>
+                  <label class="btn btn-primary" id="customLocationOn"">
+                    <input type="radio" name="locationFilter" value="customLocationOn" id="option999" autocomplete="off"> Custom Location
+                  </label>
+                    <input type="text" style="display:none" name="location_filter" class="form-control manualInput" id="location_filter" placeholder="Enter City">
+                </label>
+                <label>
+                <label class="btn btn-success">
+                  <input type="radio" name="locationFilter" value="currentCityOn" id="option111" autocomplete="off"> Current City
+                </label>
+                </label>
+                <label>
+                  <label class="btn btn-success">
+                    <input type="radio" name="locationFilter" value="customCityOn" id="option222" autocomplete="off"> Custom City
+                  </label>
+                    <input type="text" name="city_filter" class="form-control manualInput" id="city_filter" placeholder="Enter City" style="display:none">
+                </label>
+                <label>
+                <label class="btn btn-success">
+                  <input type="radio" name="locationFilter" value="currentStateOn" id="option333" autocomplete="off"> Current State
+                </label>
+                </label>
+                <label> 
+                  <label class="btn btn-success">
+                    <input type="radio" name="locationFilter" value="customStateOn" id="option444" autocomplete="off"> Custom State
+                  </label>
+                    <input type="text" name="state_filter" class="form-control manualInput" id="state_filter" placeholder="Enter State" style="display:none">
+                 </label>
+                 <label> 
+                <label class="btn btn-success">
+                  <input type="radio" name="locationFilter" value="currentCountryOn" id="option555" autocomplete="off"> Current Country
+                </label>
+                </label>
+                  <label>
+                    <label class="btn btn-success">
+                      <input type="radio" name="locationFilter" value="customCountryOn" id="option666" autocomplete="off"> Custom Country
+                    </label>
+                      <input type="text" name="country_filter" class="form-control manualInput" id="country_filter" placeholder="Enter Country" style="display:none">
+                  </label>
+                
+              </div>  
+            </div>
+            <div id="menu2" class="tab-pane fade">
+              <h2>Filter By Date</h2>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <input type="radio" name="dateFilter" value="upcommingEventOn" id="option1" autocomplete="off"> Upcomming Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="pastEventOn" id="option2" autocomplete="off"> Past Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="todayEventOn" id="option3" autocomplete="off"> Today's Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="yesterdayEventOn" id="option3" autocomplete="off"> Yesterday's Event
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="tomorrowEventOn" id="option3" autocomplete="off"> Tomorrow's Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="tomorrowAfterEventOn" id="option3" autocomplete="off">  Day after Tomorrow's Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="currentWeekEventOn" id="option3" autocomplete="off"> Current Week Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="currentMonthEventOn" id="option3" autocomplete="off"> Current Month Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="currentYearEventOn" id="option3" autocomplete="off"> Current Year Events
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="7DaysEventOn" id="option3" autocomplete="off"> Events in 7days
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="31DaysEventOn" id="option3" autocomplete="off"> Events in 30days
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="365DaysEventOn" id="option3" autocomplete="off"> Events in 365days
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="dateFilter" value="customDateEventOn" id="option3" autocomplete="off"> Custom Date
+                </label>
+                <div class="row" id="customDateBlock" style="display:none">
+                  <div class="col-md-6">
+                    <label for="name">Start Date </label>
+                    <%= f.text_field :start_time,:id=>"start_date",:class=>"form-control" %>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="name">End Date </label>
+                    <%= f.text_field :end_time,:id=>"end_date",:class=>"form-control" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+              <h2>Filter By Price</h2>
+              <div class="btn-group" data-toggle="buttons">
+                <div class="priceFiled" id = "priceFiled">
+                  <input class="price-input" type="text" name="price" value="">
+                </div>  
+                <label class="btn btn-primary">
+                  <input type="radio" name="priceFilter" value="allPriceOn" id="option1" autocomplete="off"> All
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="priceFilter" value="freePriceOn" id="option1" autocomplete="off"> Free
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="priceFilter" value="paidPriceOn" id="option2" autocomplete="off"> Paid
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="priceFilter" value="freePaidPriceOn" id="option3" autocomplete="off"> Free + Paid
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="priceFilter" value="donationPriceOn" id="option3" autocomplete="off"> Donation
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="priceFilter" value="freeDonationPriceOn" id="option3" autocomplete="off"> Free + Donation
+                </label>
+                <label class="btn btn-success">
+                  <input type="radio" name="priceFilter" value="paidDonationPriceOn" id="option3" autocomplete="off"> Paid + Donation
+                </label>
+              </div>
+            </div>
+            <div id="menu4" class="tab-pane fade">
+              <h2>Filter By Category</h2>
+              <div class="btn-group" data-toggle="buttons" style="width:100%">
+                <label class="btn btn-primary" onclick=" $('#event_categories_filter').val(<%= Category.all.collect(&:id)%>).change()">
+                  <input type="radio" name="options" id="option1" autocomplete="off"> Select All
+                </label>
+                <label class="btn btn-primary" onclick=" $('#event_categories_filter').val('').change()">
+                  <input type="radio" name="options" id="option" autocomplete="off"> Reset All
+                </label>
+                <%= f.select(:categories, Category.all.collect {|s| [s.name, s.id]}, {}, id: "event_categories_filter", :multiple => true) %>
+              </div>
+            </div>
+            <div id="menu5" class="tab-pane fade">
+              <h2>Filter By Event Type</h2>
+               <div class="form-control">
+                <%= f.select :event_type, [['Appearance or Signing', 'AppearanceorSigning'], ['Attraction', 'Attraction'], ['Camp, Trip, or Retreat', 'CampRetreat']], id: "event_type_filter" %>
+              </div>
+            </div>
+          </div>
+          <%= f.submit id: "filterFormSubmit", style:"display:none" %>
+      </div>
+    </div>
+  </div><!-- options-overlay -->
+</header>
+<ul class="tab-links col-md-4 col-xs-12">
+  <li class="col-lg-3 col-lg-offset-2 col-md-4 col-xs-4 no-pad active"><a href="javascript:void(0)" onclick="tabRequest(1);" id="mapView" class="map2"><span class="glyphicon glyphicon-map-marker glf-icon"></span>Map</a></li>
+  <li class="col-lg-3 col-md-4 col-xs-4 no-pad"><a href="javascript:void(0)" onclick="tabRequest(2);"><span class="glyphicon glyphicon-th-large glf-icon"></span>Grig</a></li>
+  <li class="col-lg-3 col-md-4 col-xs-4 bdr-rgh no-pad"><a href="javascript:void(0)" onclick="tabRequest(3);"><span class="glyphicon glyphicon-th-list glf-icon"></span>List</a></li>
+</ul>
+<div class="col-xs-12">
+  <div class="row">
+    <div class="col-md-2 col-sm-4">
+        <label class="top-indent">Distance:</label>
+    </div>
+    <div class="col-md-10 col-sm-8" style="padding: 0 40px">
+      <input class="distance-input" type="text" name="distanceInput" value="100">
+    </div>
+  </div><!-- row -->
+
+  <style>
+  label label input[type="radio"] {
+    width: auto !important;
+  }
+  label
+  {
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+ label label{
+    margin: 0 !important;
+    padding: 2px 30px !important;
+    width: auto !important;
+}
+  </style>
