@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => :registrations }
-  root 'welcome#home'
+  root 'events#index', browse: true
   #get 'about', to: 'welcome#about'
   resource :subscriptions do
     collection do
