@@ -53,9 +53,7 @@ $(function() {
 
 });
 </script>
-<%= form_for @tab, method: :get, remote:true, id: "filterForm" do |f| %>  
-    <%= render partial: "events/event_filter", locals: {f: f} %>
-<% end %>
+
 <!-- <div class="form-inline div-search" >      
   <%#= form_tag  events_path, :method => :get do %>
     <div class="form-group">
