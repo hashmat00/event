@@ -1,5 +1,4 @@
 module ApplicationHelper
-    
   def customDayFormat(date)
     case date
     when date.today? then "Today"
@@ -9,6 +8,7 @@ module ApplicationHelper
       date.strftime('%B %d')  
     end  
   end  
+  
   def resource_name
     :user
   end

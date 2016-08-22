@@ -1,5 +1,5 @@
 
-<%= nested_form_for @user, class: "form-horizontal", role:"form", remote: true  do |f| %>
+<%= nested_form_for @user, class: "form-horizontal", html: { id: "userProfileForm" }, role:"form", remote: true  do |f| %>
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -10,6 +10,12 @@
       
       <div id="collapse11" class="panel-collapse collapse in">
         <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Prefix:</label>
+            <div class="col-sm-10">
+              <%= f.select :prefix, [['Mr', 'Mr'], ['Ms', 'Ms'], ['Mrs', 'Mrs'],['Dr','Dr']], required: true %>
+            </div>
+          </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="email">First Name:</label>
             <div class="col-sm-10">
@@ -35,34 +41,34 @@
               </label>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label class="control-label col-sm-2" for="email">Date OF Birth:</label>
             <div class="col-sm-10">
-              <%= f.text_field :dob, required: true, class: "form-control", id: "dob" %>
+              <%#= f.text_field :dob, required: true, class: "form-control", id: "dobUser" %>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="control-label col-sm-2" for="email">Job Title:</label>
             <div class="col-sm-10">
-              <%= f.text_field :job_title, required: true, class: "form-control", id: "job_title", placeholder: "Enter Job Title" %>
+              <%= f.text_field :job_title, class: "form-control", id: "job_title", placeholder: "Enter Job Title" %>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="email">Company:</label>
             <div class="col-sm-10">
-              <%= f.text_field :company, required: true, class: "form-control", id: "company", placeholder: "Enter Company" %>
+              <%= f.text_field :company, class: "form-control", id: "company", placeholder: "Enter Company" %>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="email">Website:</label>
             <div class="col-sm-10">
-              <%= f.text_field :website_url, required: true, class: "form-control", id: "website_url", placeholder: "Enter Website Url" %>
+              <%= f.text_field :website_url, class: "form-control", id: "website_url", placeholder: "Enter Website Url" %>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="email">Blog:</label>
             <div class="col-sm-10">
-              <%= f.text_field :blog, required: true, class: "form-control", id: "blog", placeholder: "Enter Blog Url" %>
+              <%= f.text_field :blog, class: "form-control", id: "blog", placeholder: "Enter Blog Url" %>
             </div>
           </div>
           <div class="form-group">
@@ -88,14 +94,32 @@
           <% if @address_types.first.present? %>
             <%= f.fields_for :contact_details do |cn| %>
               <% if !(form_count == @address_types.first.count) %>  
-                <%= form_count+1 %>
-                <% if @address_resource =  @address_types.first[form_count] %>
-                <%= @address_resource.name.try(:titleize) %>
-                <% end %>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                    <b>
+                    
+                    <% if @address_resource =  @address_types.first[form_count] %>
+                      <h2><%= form_count+1 %>: &nbsp<%= @address_resource.name.try(:titleize) %></h2>
+                    <% end %>
+                    </b>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="col-md-4">Make Your <%= @address_resource.name.try(:titleize) %> same as: </div>
+                    <div class="col-md-4">
+                      <select onchange="changeAddress(<%= @address_types.first[form_count] %>, );">
+                        <% AddressType.all.active.where.not(id: @address_types.first[form_count]).each_with_index do |address_type, index| %>
+                          <option value="<%= address_type.id %>"><%= address_type.name %></option>
+                        <% end %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="email">Address1:</label>
                   <div class="col-sm-10">
-                    <%= cn.text_field :address1, class: "form-control", id: "address1", placeholder: "Enter Address 1" %>
+                    <%= cn.text_field :address1, class: "form-control", id: "address1", placeholder: "Enter Address 1", required: true %>
                   </div>
                 </div>
                 <div class="form-group">
@@ -317,10 +341,22 @@
   </div>  
 <% end %> 
 
-<script>
-  $(function() {
-    $("#dob").datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss'
+<!--  <script type="text/javascript">
+ <%# defaultDate = Time.now-20.years %>
+
+    $('#dobUser').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm:ss',
+      defaultDate: "<%#=  DateTime.new(defaultDate.year, 01, 01, 0, 0, 0) %>",
+      minDate: new Date()
     });
-  });
-</script>
+  
+
+  </script>
+ -->
+
+ <script type="text/javascript">
+   function changeAddress()
+   {
+
+   }
+ </script>

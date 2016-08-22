@@ -1,4 +1,4 @@
 
-$('#avatarImage_<%= @user.id %>').html("<%= j render partial: 'avatar_image', locals: {user: @user} %>");
+$('#avatarImage_<%= @user.id %>').html("<%= j render partial: 'users/avatar_image', locals: {user: @user} %>");
 
-$('#userShow_<%= @user.id %>').html("<%= j render partial: 'user_profile_details', locals: {user: @user} %>");
+$('#userShow_<%= @user.id %>').html("<%= j render partial: 'users/user_profile_details', locals: {user: @user} %>");

@@ -1,0 +1,52 @@
+  <% @notifications = current_user.notifications.active.order("created_at ASC") %>
+<div class="row">
+	<h1>All Notifications</h1>
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+		   <ul class="clearfix">
+
+
+   <div class="topGrayRow"> 
+   <span class="bold">Notification</span> 
+
+   <%= link_to "Mark As Read ", mark_as_read_notifications_path, :method => "post" ,:class =>"blackColor bold" if @notifications.count > 0  %>
+  </div>     
+
+
+<div class="notifications">
+  <% if @notifications.present? %>
+    <% @notifications.try(:reverse).each do |notification|%>
+      
+      <li class="notification-<%= notification.id %>">
+      
+        <div class="clearfix commentSec cmntRow">
+
+          <div class="clearfix userInfo posRel"> <a href="<%= profile_path(notification.user) rescue nil%>" class="userImg">
+          
+          <img src="/assets/profile.png" class="img img-circle"></a> 
+          <a href="<%= profile_path(notification.user) rescue nil %>" class="userNAme font14"><%=notification.user.username %></a> <br>
+            <div class="grayColor"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
+            <a href="<%= notification_path(notification.id) %>" data-method= "delete" class="btn btn-primary">Delete</a>
+            <div class="font13"><%= notification.body.truncate(50) %></div>
+            <!-- <div class="blackColor font12 bold"> is now a connection</div> -->
+            <% if notification.notificable_type == 'Friendship' %>
+             <div class="acceptRej">
+              <%= link_to "", notification_accept_path(notification), :method => :post , :class=>"accept ", :remote=>true %>
+                 <%= link_to "", notification_reject_path(notification), :method => :post , :class=>"reject ", :remote=>true %>
+                </div>
+            <% end %>
+          </div>              
+        </li>
+        <% end %>
+      <% else %>
+        <li class="center">
+        	<b>There are no Notification</b>
+      	</li>
+      <% end %>     
+    </div>
+  </ul>
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>

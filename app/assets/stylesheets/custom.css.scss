@@ -166,19 +166,19 @@
 }
 
 h1, h2, h3, h4 {
-    line-height: 1;
+    line-height: 1 !important;
 }
 
 h1 {
-    font-size: 3em;
-    letter-spacing: -2px;
+    font-size: 3em !important;
+    letter-spacing: -2px !important;
     // margin-bottom: 30px;
     text-align: center;
 }
 
 h2 {
-    font-size: 1.2em;
-    margin-bottom: 30px;
+    font-size: 1.2em !important;
+    margin-bottom: 30px !important;
     text-align: center;
     font-weight: noraml;
     color: #777;
@@ -1155,4 +1155,10 @@ img
 .modal
 {
   z-index: 999999999 !important;
+}
+
+.notifications
+{
+  overflow-y: scroll !important;
+  height: 335px !important;
 }

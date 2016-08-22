@@ -1,4 +1,3 @@
-<br>
 <div id="interestedPanel">
 	<% if current_user %>
 		<%= form_for [object, object.interests.build], method: :post, remote: true do |f|  %>
@@ -26,13 +25,7 @@
 				<center><a href= "javascript:void(0)" class="btn btn-info btn-lg btn-block" onclick="changeFrom();">Would you like to change</a></center>
 			<% end %>
 		<% end %>
-	<% else %>
-		Please login If you are Inetrested in this event
-	<% end %>
 	<br>		
-	<div id ="interest_<%= object.id %>">
-		<%= render partial: "interests/index", locals: {object: object} %>
-	</div>
 	<br>
 	<script>
 		$( "input[type='radio']" ).change(function() {
@@ -47,5 +40,13 @@
 			$('.question').html('Chanege if You Think change')
 		}
 	</script>
+	<% else %>
+		<b>Please login If you are Inetrested in this event</b>
+	<% end %>
+	<br>
+	<div style="padding: 0px 7px;">
+		<div id ="interest_<%= object.id %>">
+			<%= render partial: "interests/index", locals: {object: object} %>
+		</div>
+	</div>
 </div>
-

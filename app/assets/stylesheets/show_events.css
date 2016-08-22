@@ -367,8 +367,7 @@ input, textarea, select {
 
 /* line 165, ../scss/helpers/_classes.scss */
 .text-center {
-  height: 330px;
-  overflow: hidden;
+  height: auto;
 }
 /* line 168, ../scss/helpers/_classes.scss */
 .text-center .header-pattern {
@@ -5423,7 +5422,7 @@ figure {
 /* line 51, ../scss/helpers/_forms.scss */
 .btn {
   text-transform: uppercase;
-  background-color: #3a7de3;
+  /*background-color: #3a7de3;*/
   border-color: #3a7de3;
   padding: 16px 0;
   font-size: 14px;
@@ -5454,13 +5453,6 @@ figure {
   border-radius: 0;
 }
 
-/* line 75, ../scss/helpers/_forms.scss */
-.btn-lg, .btn-large {
-  padding: 15px 0;
-  width: 255px;
-  height: 50px;
-}
-
 /* line 80, ../scss/helpers/_forms.scss */
 .btn-large-gst {
   padding: 15px 0;
@@ -5468,12 +5460,6 @@ figure {
   height: 50px;
 }
 
-/* line 85, ../scss/helpers/_forms.scss */
-.btn-sm, .btn-small {
-  padding: 9px 0;
-  width: 125px;
-  height: 40px;
-}
 
 /* line 90, ../scss/helpers/_forms.scss */
 .btn-xs, .btn-mini {

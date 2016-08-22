@@ -28,21 +28,29 @@ class EventsController < ApplicationController
     
     def index
       @tab = Event.new
-      if params[:lat].present? && params[:long].present?
-      @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
-      else
-      @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
-      end
-      
-      @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
-      @events = Event.all.active if !(@events)
-      @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
-      @events_pictures = @events.sort{|m| m.pictures.count }
-      @events_videos = @events.sort{|m| m.videos.count }
-      @events = @events
-      if request.format == "js"
-        render :tabs
-      end  
+      # if params[:lat].present? && params[:long].present?
+      # @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
+      # else
+      # @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
+      # end
+      # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+      # @events = Event.all.active if !(@events)
+      # @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
+      # @events_pictures = @events.sort{|m| m.pictures.count }
+      # @events_videos = @events.sort{|m| m.videos.count }
+      # @events = @events
+      set_events_data
+      @users = User.all.active.eager_load(:events).where('events.is_active=?', true).references(:events).paginate(page: params[:page], per_page: 6)
+      @categories = Category.eager_load(:events).shuffle
+      # if request.format == "js"
+      #   render :tabs
+      # end  
+
+      respond_to do |format|
+      format.html { }
+      format.js { render :tabs }
+    end
+
     end
 
     def location_update
@@ -53,17 +61,20 @@ class EventsController < ApplicationController
       if params[:single]
         @event = Event.where(id: params[:event_id]).first
       else  
-        if params[:lat].present? && params[:long].present?
-        @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
-        else
-        @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
-        end        
-        @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
-        @events = Event.all.active if !(@events)
-        @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
-        @events_pictures = @events.sort{|m| m.pictures.count }
-        @events_videos = @events.sort{|m| m.videos.count }
-        @events = @events
+        # if params[:lat].present? && params[:long].present?
+        # @temp_event = Event.new(latitude: params[:lat], longitude: params[:long])
+        # else
+        # @temp_event = Event.new(latitude: latlong[:lat], longitude: latlong[:long])  
+        # end        
+        # @events = @temp_event.nearbys(params[:range].present? ? params[:range].to_i : 100, :order => "distance",:units => :km).active   
+        # @events = Event.all.active if !(@events) 
+        # @events = current_events.present? ? current_events : @events 
+        # byebug
+        # @events = @events.active.eager_load(:pictures,:videos,:tickets).references(:pictures,:videos,:tickets)
+        # @events_pictures = @events.sort{|m| m.pictures.count }
+        # @events_videos = @events.sort{|m| m.videos.count }
+        # @events = @events
+        set_events_data
       end  
     end
 
@@ -91,9 +102,7 @@ class EventsController < ApplicationController
        @event.user = current_user
        if @event.save
         cat_ids.map{ |m| @event.event_categories.create(category_id: m)}
-        User.all.each do |user|
-          Notification.create(recipient: user , user: current_user, body: "#{current_user.try(:name) } has created event #{@event.name} ", notificable: @event)
-        end
+        Notification.notification(current_user, @event, "event", nil)
         flash[:success] = "You have successfully created the Event Please Launch Your Event by click on Launch My Event Button"
         redirect_to "/events/#{@event.id}/edit"
         else
@@ -192,5 +201,11 @@ class EventsController < ApplicationController
       def event_params
           params.require(:event).permit(:name, :summary, :description, :address, :city, :zipcode, :state, :country, :picture, :latitude, :longitude,:user_id, :start_time, :end_time, :is_paid, :youtube_video, :vimeo_video,:event_type,:event_topic,:event_privacy, schedules_attributes: [:id,:event_id, :image, :title, :description, :start_date, :end_date, :start_time, :end_time, :event_occure, :event_day, :week_day, :month_day, :_destroy], pictures_attributes: [:id,:user_id, :image, :note, :_destroy], videos_attributes: [ :id,:user_id, :video_url,:videoable_id, :videoable_type, :is_active, :video,:video_type,:note,:_destroy], tickets_attributes: [:id,:event_id, :name, :price, :active, :quantity, :ticket_description, :show_ticket_description, :sale_channel, :fee, :tickets_start_date, :ticket_end_date, :currency, :country, :pay_mode, :_destroy])
       end
+
+      def set_events_data
+        @events = current_events.present? ? current_events : all_events
+        @events_pictures = @events.sort{|m| m.pictures.count }
+        @events_videos = @events.sort{|m| m.videos.count }
+      end 
 
 end

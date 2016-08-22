@@ -1,0 +1,104 @@
+<!--Display Categories-->
+<div class="center jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="container">
+          <div class="row margin-bottom-30 home-category">
+            <h2>Browse by Top Categories</h2>
+            <hr/>
+            <% @categories.each_with_index do |cat, index| %>
+              <% index == 0 ? divclass = "col-md-8 col-sm-8 col-xs-12" : divclass = "col-md-4 col-sm-4 col-xs-12" %>
+              <div class="<%= divclass %>" style="padding: 0 2px;">
+                <a class="category-card category-family-education" href="<%= index %>">
+                  <div class="category-card__wrapper">
+                    <div class="category-card__tint">
+                      <div class="category-card__image"></div>
+                    </div>
+                    <div class="category-card__text-wrapper">
+                      <h4 class="category-card__label l-padded-h-2 text-large text-body--significant text-heading--emphasized">
+                        <%= cat.name %>
+                      </h4>
+                      <p class="category-card__desc l-block-2 l-padded-h-2 text-body text-heading--emphasized">
+                        <%= cat.sub_title %> 
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            <% end %>
+            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+              <a class="category-card category-food" href="#">
+                <div class="category-card__wrapper">
+                  <div class="category-card__tint">
+                    <div class="category-card__image"></div>
+                  </div>
+                  <div class="category-card__text-wrapper">
+                    <h4 class="category-card__label l-padded-h-2 text-large text-body--significant text-heading--emphasized">
+                      Food &amp; Drink
+                    </h4>
+                    <p class="category-card__desc l-block-2 l-padded-h-2 text-body text-heading--emphasized">
+                      Community food parties, Food festivals, Eids..
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>  -->       
+          <!-- </div>
+          
+          <div class="row margin-bottom-30"> -->
+            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+              <a class="category-card category-community" href="#">
+                <div class="category-card__wrapper">
+                  <div class="category-card__tint">
+                    <div class="category-card__image"></div>
+                  </div>
+                  <div class="category-card__text-wrapper">
+                    <h4 class="category-card__label l-padded-h-2 text-large text-body--significant text-heading--emphasized">
+                      Community
+                    </h4>
+                    <p class="category-card__desc l-block-2 l-padded-h-2 text-body text-heading--emphasized">
+                      Cummunity gathering, Halaqah.
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <a class="category-card category-business" href="#">
+                <div class="category-card__wrapper">
+                  <div class="category-card__tint">
+                    <div class="category-card__image"></div>
+                  </div>
+                  <div class="category-card__text-wrapper">
+                    <h4 class="category-card__label l-padded-h-2 text-large text-body--significant text-heading--emphasized">
+                      Business
+                    </h4>
+                    <p class="category-card__desc l-block-2 l-padded-h-2 text-body text-heading--emphasized">
+                      Business meetings, entrepreneurship, leadership.
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <a class="category-card category-health" href="#">
+                <div class="category-card__wrapper">
+                  <div class="category-card__tint">
+                    <div class="category-card__image"></div>
+                  </div>
+                  <div class="category-card__text-wrapper">
+                    <h4 class="category-card__label l-padded-h-2 text-large text-body--significant text-heading--emphasized">
+                      Health
+                    </h4>
+                    <p class="category-card__desc l-block-2 l-padded-h-2 text-body text-heading--emphasized">
+                      Bike riding, hiking, swimming, gym, yoga
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </div>  -->     
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

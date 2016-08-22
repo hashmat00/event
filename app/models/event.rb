@@ -19,7 +19,7 @@ class Event < ActiveRecord::Base
 
     validates :user_id, presence: true
     validates :name, presence: true, length: { minimum: 3, maximum: 50}
-    validates :description, presence: true, length: {minimum: 20, maximum: 10000}
+    # validates :description, presence: true, length: {minimum: 20, maximum: 10000}
     validates :address, presence: true, length: {minimum: 5, maximum: 150}
     validates :city, presence: true, length: {minimum: 3, maximum: 25}
     validates :zipcode, presence: true
@@ -203,7 +203,54 @@ class Event < ActiveRecord::Base
     if event_type == "online"
       self.update(address: "This is an Online Evemt NO location filled", city: nil, status: nil, zipcode: nil, country: nil)
     end 
+  end
+
+  def self.filterMethod(params)
+    custom_location(params) if params[:locationFilter] == "customLocationOn"
+    temp_event = Event.new(latitude: params[:latlong][:lat], longitude: params[:latlong][:long])
+    current_events = temp_event.nearbys(params[:distanceInput], :order => "distance",:units => :km).active 
+    current_events = location_filter(params,current_events) if params[:filterLocation].present?
+    current_events = date_filter(params,current_events) if params[:filterDate].present?
+    current_events = price_filter(params,current_events) if params[:filterPrice].present?
+    current_events = category_filter(params,current_events) if params[:filterCategory].present?
+    current_events = event_type_filter(params,current_events) if params[:filterEventType].present?
+    return current_events
+  end
+
+  def self.custom_location(params)
+    gecodeloc = Geocoder.search(params[:address]).first
+    params[:latlong].merge(lat: gecodeloc.latitude, long: longitude)      
   end  
+  
+  def self.location_filter(params,current_events)
+    case params[:locationFilter]
+      when "currentLocationOn" then 
+        return current_events
+      when "customLocationOn" then 
+        return current_events
+      when "currentCityOn" then
+        return current_events = Event.all.active.near(params[:current_city], params[:distanceInput], order: :distance)
+      when "customCityOn" then 
+        return current_events = Event.all.active.near(params[:city_filter], params[:distanceInput], order: :distance)
+      when "currentStateOn" then
+        return current_events = Event.all.active.near(params[:current_state], params[:distanceInput], order: :distance)
+      when "customStateOn" then
+        return current_events = Event.all.active.near(params[:state_filter], params[:distanceInput], order: :distance)
+      when "currentCountryOn" then
+        return current_events = Event.all.active.near(params[:current_country], params[:distanceInput], order: :distance)
+      when "customCountryOn" then
+        return current_events = Event.all.active.near(params[:country_filter], params[:distanceInput], order: :distance)
+      end
+  end
+  def self.date_filter(params,current_events)
+  end
+  def self.price_filter(params,current_events)
+  end
+  def self.category_filter(params,current_events)
+  end
+  def self.event_type_filter(params,current_events)
+  end 
+
   private
   def picture_size
     if picture.size > 5.megabytes

@@ -1,4 +1,4 @@
-//= require jquery
+  //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
 //= require alertify.min

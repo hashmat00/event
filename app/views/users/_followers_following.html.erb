@@ -1,4 +1,4 @@
-<% unless params[:flw] == "false" %>
+<%# unless params[:flw] == "false" %>
 <% if x.present? %>
 	<b>Followers (<%= x.followers.count %>) </b> 
 	<% if x.followers.present? %>
@@ -9,7 +9,7 @@
 				<% end %>
 			<% end %>
 			<% if x.followers.present? %>
-				<b><% if x.followers.count>4 %> + <% x.following.count - 4 %> More <% end %></b> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal00">View ALL</button>
+				<b><% if x.followers.count>4 %> + <%= x.following.count - 4 %> More <% end %></b> <button type="button" class="btn btn-info btn-sm" id="followerBtn" style="display:inline" data-toggle="modal" data-target="#myModal00">View ALL</button>
 			<% end %>
 		</div>
 	<% end %>	
@@ -25,7 +25,7 @@
 				<% end %>
 			<% end %>
 			<% if x.following.present? %>
-			<b><% if x.following.count>4 %> + <% x.following.count - 4 %> More <% end %></b> <button type="button" class="btn btn-info btn-sm" style="display:inline" data-toggle="modal" data-target="#myModal11">View ALL</button>
+			<b><% if x.following.count>4 %> + <%= x.following.count - 4 %> More <% end %></b> <button type="button" class="btn btn-info btn-sm" id="followingBtn" style="display:inline" data-toggle="modal" data-target="#myModal11">View ALL</button>
 			<% end %>
 		</div>
 	<% end %>
@@ -51,11 +51,11 @@
 		                <% if current_user %>
 		                  <% if current_user.following?(follower) %>
 			                  <% if user_signed_in? && follower!= current_user %>
-													<%= link_to "UnFollow", unfollow_path(:id => follower.try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+													<%= link_to "UnFollow", unfollow_path(:id => follower.try(:id), flw: false, parent_id: x.id, btnID: "followerBtn"), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
 												<% end %>
 		                  <% else %>
 		                  	<% if user_signed_in? && follower!= current_user %>
-													<%= link_to "Follow", relationships_path(:id => follower.try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+													<%= link_to "Follow", relationships_path(:id => follower.try(:id), flw: false, parent_id: x.id, btnID: "followerBtn"), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
 												<% end %>
 		                  <% end %>
 		                <% end %>
@@ -69,7 +69,7 @@
           <% end %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default clcbtnn" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -97,11 +97,11 @@
 			                <% if current_user %>
 			                  <% if current_user.following?(following) %>
 				                  <% if user_signed_in? && following!= current_user %>
-														<%= link_to "UnFollow", unfollow_path(:id => following.try(:id), flw: false), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
+														<%= link_to "UnFollow", unfollow_path(:id => following.try(:id), flw: false, parent_id: x.id, btnID: "followerBtn"), class: "btn btn-danger btn-lg btn-block", :method => :post, :remote => 'true'%>
 													<% end %>
 			                  <% else %>
 			                  	<% if user_signed_in? && following!= current_user %>
-														<%= link_to "Follow", relationships_path(:id => following.try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+														<%= link_to "Follow", relationships_path(:id => following.try(:id), flw: false, parent_id: x.id, btnID: "followerBtn"), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
 													<% end %>
 			                  <% end %>
 			                <% end %>
@@ -116,7 +116,7 @@
           <% end %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default clcbtnn" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -126,4 +126,7 @@
 <b>Followers (<%= x.followers.count %>) </b>
 <b>Followings (<%= x.following.count %>) </b>
 <% end %>
-<% end %>
+<%# else %>
+	<!-- <b>Followers (<%= x.followers.count %>) </b> -->
+	<!-- <b>Followings (<%= x.following.count %>) </b> -->
+<%# end %>

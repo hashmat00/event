@@ -1,2 +1,2 @@
-$("#ticket_article").html("<%= j render(partial: 'tickets', locals: {tickets: @tickets}) %>");
-$('#tickets_tabse').html("<%= j render(partial: 'tickets_tabs', locals: {all_tickets_count: @all_tickets_count, upcomming_tickets_count: @upcomming_tickets_count, saved_tickets_count: @saved_tickets_count, past_tickets_count: @past_tickets_count, inactive_tickets_count: @inactive_tickets_count}) %>");
+$("#ticket_article").html("<%= j render(partial: 'users/tickets', locals: {tickets: @tickets}) %>");
+$('#tickets_tabse').html("<%= j render(partial: 'users/tickets_tabs', locals: {all_tickets_count: @all_tickets_count, upcomming_tickets_count: @upcomming_tickets_count, saved_tickets_count: @saved_tickets_count, past_tickets_count: @past_tickets_count, inactive_tickets_count: @inactive_tickets_count}) %>");

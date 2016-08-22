@@ -3,7 +3,7 @@
   <div class="col-md-10 full-con">
     <div class="col-md-3 left-con">
       <div id="avatarImage_<%= @user.id %>">
-        <%= render partial: "avatar_image", locals: {user: @user}  %>
+        <%= render partial: "users/avatar_image", locals: {user: @user}  %>
       </div>
       <% if current_user == @user %>
         <div class="center marg">
@@ -26,7 +26,7 @@
     <br>
     <div class="col-md-9">
       <div class="userShow" id="userShow_<%= @user.id %>">
-        <%= render partial: "user_profile_details", locals: {user: @user} %>
+        <%= render partial: "users/user_profile_details", locals: {user: @user} %>
     </div>
   </div>  
   <div class="col-md-1"></div>
@@ -37,7 +37,7 @@
   <button class="btn btn-danger" onclick="tabRequest(7);">Past Events</button>
   <hr>
   <div id="userEvents_<%= @user.id %>">
-    <%= render partial: "user_events", locals: {events: @upcomming_events} %>
+    <%= render partial: "users/user_events", locals: {events: @upcomming_events} %>
   </div>
   <div class="row">
     <div class="col-md-4 col-md-offset-4 center">

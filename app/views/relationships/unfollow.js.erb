@@ -1,1 +1,16 @@
-$('#follow_form_<%= @user.id %>').html('<%= escape_javascript(render "users/follow" , x: @user) %>')
+<% if @resourceRel.errors.any? %>
+	<% @resourceRel.errors.each_with_index do |error, index| %>
+		alertify.message('<%= error[1] %>');
+	<% end %>
+<% else %>
+	<% if params[:flw] == "false" %>
+	<% @parent_user = User.find(params[:parent_id].to_i) %>
+	// 	$('.modal-backdrop').removeClass('fade in');
+		$('.modal-backdrop').removeClass('modal-backdrop');
+		$('#follow_form_<%= params[:parent_id].to_i %>').html('<%= escape_javascript(render partial: "users/follow", locals: {x: @parent_user, params: params }) %>')
+		$('#<%= params[:btnID] %>').click();
+		// $('#follow_form_<%= @user.id %>').html('<%= escape_javascript(render partial: "users/follow", locals: {x: @user, params: params }) %>')
+	<% else %>
+		$('#follow_form_<%= @user.id %>').html('<%= escape_javascript(render partial: "users/follow", locals: {x: @user, params: params }) %>')
+	<% end %>
+<% end %>

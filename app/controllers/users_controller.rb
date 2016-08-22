@@ -40,15 +40,15 @@ class UsersController < ApplicationController
   	end	
   	@tickets = current_user.ticket_histories.eager_load(:event, :ticket, :subscription).references(:event, :ticket, :subscription)	
   	@all_tickets_count = @tickets.try(:active).try(:count)
-  	@upcomming_tickets_count = @tickets.upcomming.try(:count)
+  	@upcomming_tickets_count = @tickets.try(:upcomming).try(:count)
   	@saved_tickets_count = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }.try(:count)
-  	@past_tickets_count = @tickets.past.try(:count)
+  	@past_tickets_count = @tickets.try(:past).try(:count)
   	@inactive_tickets_count = @tickets.try(:inactive).try(:count)
   	case params[:tab]
   	when 'all' then @tickets = @tickets
-  	when 'upcomming' then @tickets = @tickets.upcomming
+  	when 'upcomming' then @tickets = @tickets.try(:upcomming)
   	when 'saved' then @tickets = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }
-  	when 'past' then @tickets = @tickets.past
+  	when 'past' then @tickets = @tickets.try(:past)
   	when 'inactive' then @tickets = @tickets.try(:inactive)	
   	else
   		@tickets = @tickets	

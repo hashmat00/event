@@ -85,7 +85,7 @@ a, input[type="submit"] {
 .userInfo .grayColor {
     font-size: 13px;
     margin-top: -10px;
-    margin-top: -25px;
+    margin-top: -35px;
     color: #909090;
     float: right;
     text-align: right;
@@ -125,43 +125,55 @@ a {
     background-color: transparent;
 }
 </style>
-<% notifications = current_user.notifications %>
+<% notifications = current_user.notifications.active.order("created_at ASC ") %>
  <a href="#" data-toggle="dropdown" class="push-notification"><img src="/assets/noti.png" alt="">
-  <%if notifications.count > 0 %>
-   <span id ="all-notifications"><%= notifications.count %></span>
+  <%if notifications.unread.count > 0 %>
+   <span id ="all-notifications"><%= notifications.unread.count %></span>
    <% end %>
  </a>
    <ul class="clearfix dropdown-menu1 dropdown-menu dropdown-menuNoti">
 
 
-   <div class="topGrayRow"> <span class="bold">Notification</span> 
+   <div class="topGrayRow"> 
+   <span class="bold">Notification</span> 
 
    <%= link_to "Mark As Read ", mark_as_read_notifications_path, :method => "post" ,:class =>"blackColor bold" if notifications.count > 0  %>
   </div>     
 
 
 <div class="notiScroll scrollbars notifications"> 
-  <% notifications.try(:reverse).each do |notification|%>
-    <li class="notification-<%= notification.id %>">
-    
-      <div class="clearfix commentSec cmntRow">
+  <% if notifications.present? %>
+    <% notifications.try(:reverse).each do |notification|%>
+      <li class="notification-<%= notification.id %>">
+      
+        <div class="clearfix commentSec cmntRow">
 
-        <div class="clearfix userInfo posRel"> <a href="<%= profile_path(notification.user) rescue nil%>" class="userImg">
-        
-        <img src="/assets/profile.png" class="img img-circle"></a> 
-        <a href="<%= profile_path(notification.user) rescue nil %>" class="userNAme font14"><%=notification.user.username %></a> <br>
-          <div class="grayColor"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
-          <div class="font13"><%= notification.body.truncate(50) %></div>
-          <!-- <div class="blackColor font12 bold"> is now a connection</div> -->
-          <% if true %>
-           <div class="acceptRej">
-            <%= link_to "", notification_accept_path(notification), :method => :post , :class=>"accept ", :remote=>true %>
-               <%= link_to "", notification_reject_path(notification), :method => :post , :class=>"reject ", :remote=>true %>
-              </div>
-              <% end %>
-        </div>              
-      </li>
+          <div class="clearfix userInfo posRel"> <a href="<%= profile_path(notification.user) rescue nil%>" class="userImg">
+          
+          <img src="/assets/profile.png" class="img img-circle"></a> 
+          <a href="<%= profile_path(notification.user) rescue nil %>" class="userNAme font14"><%=notification.user.username %></a> <br>
+            <div class="grayColor"><%= time_ago_in_words(notification.updated_at).capitalize %> ago</div>
+            <div class="font13"><%= notification.body.truncate(50) %></div>
+            <!-- <div class="blackColor font12 bold"> is now a connection</div> -->
+            <% if true %>
+             <div class="acceptRej">
+              <%= link_to "", notification_accept_path(notification), :method => :post , :class=>"accept ", :remote=>true %>
+                 <%= link_to "", notification_reject_path(notification), :method => :post , :class=>"reject ", :remote=>true %>
+                </div>
+                <% end %>
+          </div>              
+        </li>
+        <% end %>
+      <% else %>
+        There are no Notification
       <% end %>     
+        <div class="center">
+          <a href="/notifications">
+            <li class="btn btn-primary" style="padding: 10px; margin:10px;" >
+              <b> View All </b>
+            </li>
+          </a>
+        </div>
     </div>
   </ul>
   

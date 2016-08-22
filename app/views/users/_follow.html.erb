@@ -1,5 +1,10 @@
 <% if user_signed_in? && x!= current_user %>
-	<%= link_to "Follow", relationships_path(:id => x.try(:id)), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+	<% if !(params[:flw] == "false") %>
+		<%= link_to "Follow", relationships_path(:id => x.try(:id)), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+	<% else %>
+		<%= link_to "Follow", relationships_path(:id => x.try(:id), flw: false), class: "btn btn-success btn-lg btn-block", :method => :post, :remote => 'true' %>
+	<% end %>
+	
 <% end %>
 <br>
-<%= render partial: "users/followers_following", locals: {x: x} %>
+<%= render partial: "users/followers_following", locals: {x: x, params: params} %>

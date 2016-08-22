@@ -41,10 +41,10 @@
             </div>
           </div>
           <div id="ticket_user_details">
-            <%= render partial: "ticket_user_details", locals: {ticket: @ticket} %>        
+            <%= render partial: "users/ticket_user_details", locals: {ticket: @ticket} %>        
           </div>
           <div id="ticket_user_form"  style="display: none;">
-            <%= render partial: "ticket_user_form", locals: {ticket: @ticket} %>        
+            <%= render partial: "users/ticket_user_form", locals: {ticket: @ticket} %>        
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
   <div class="col-md-1">
   </div>
 </div>
-<%= render partial: "contact_orgnizer", locals: {ticket: @ticket} %>
+<%= render partial: "users/contact_orgnizer", locals: {ticket: @ticket} %>
 
 <script type="text/javascript">
   function cancel_ticket()

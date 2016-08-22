@@ -11,10 +11,10 @@
 <div class="l-pad-bot-3">
   <div class="js-order-list-container js-d-tabs" dorsal-guid="327dd1eb-ba1d-6b03-3167-a6f853a365bd" data-xd-wired="tabs">
     <div id="tickets_tabse">
-      <%= render partial: "tickets_tabs", locals: {all_tickets_count: @all_tickets_count, upcomming_tickets_count: @upcomming_tickets_count, saved_tickets_count: @saved_tickets_count, past_tickets_count: @past_tickets_count, inactive_tickets_count: @inactive_tickets_count} %>
+      <%= render partial: "users/tickets_tabs", locals: {all_tickets_count: @all_tickets_count, upcomming_tickets_count: @upcomming_tickets_count, saved_tickets_count: @saved_tickets_count, past_tickets_count: @past_tickets_count, inactive_tickets_count: @inactive_tickets_count} %>
     </div>
     <div id="ticket_article">      
-      <%= render partial: "tickets", locals: {tickets: @tickets} %>
+      <%= render partial: "users/tickets", locals: {tickets: @tickets} %>
     </div>
   </div>
 </div>

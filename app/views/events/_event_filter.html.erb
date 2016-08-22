@@ -40,31 +40,37 @@
               <h2>Reset Filter</h2>
               <div class="btn-group" data-toggle="buttons" style="width:100%;">
                 <div class="row">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6"> 
+                    <label class="btn btn-success" id="filterLocation">
+                      <input type="checkbox" name="filterAll" autocomplete="off" id="filterAllChk"> Reset All Filter
+                    </label></div>
+                  <div class="col-md-3"></div>
                   <div class="col-md-4">
                     <label class="btn btn-success" id="filterLocation">
-                      <input type="checkbox" name="filterLocation" autocomplete="off"> Reset Location
+                      <input type="checkbox" name="filterLocation" autocomplete="off" id="filterLocationChk"> Reset Location
                     </label>
                   </div>
                   <div class="col-md-4">
                     <label class="btn btn-success" id="filterDate">
-                      <input type="checkbox" name="filterDate" autocomplete="off">Reset Date
+                      <input type="checkbox" name="filterDate" autocomplete="off" id="filterDateChk">Reset Date
                     </label>
                   </div>
                   <div class="col-md-4">
                     <label class="btn btn-success" id="filterPrice">
-                      <input type="checkbox" name="filterPrice" autocomplete="off">Reset Price
+                      <input type="checkbox" name="filterPrice" autocomplete="off" id="filterPriceChk">Reset Price
                     </label>
                   </div>
                 </div>
                 <div class="row"> 
                   <div class="col-md-6">
                     <label class="btn btn-success" id="filterCategory">
-                      <input type="checkbox" name="filterCategory" autocomplete="off">Reset Category
+                      <input type="checkbox" name="filterCategory" autocomplete="off" id="filterCategoryChk">Reset Category
                     </label>
                   </div>
                   <div class="col-md-6">    
                     <label class="btn btn-success" id="filterEventType">
-                      <input type="checkbox" name="filterEventType" autocomplete="off">Reset Event Type
+                      <input type="checkbox" name="filterEventType" autocomplete="off" id="filterEventTypeChk">Reset Event Type
                     </label>
                   </div>
                 </div>
@@ -82,47 +88,47 @@
                   <label class="btn btn-primary" id="customLocationOn"">
                     <input type="radio" name="locationFilter" value="customLocationOn" id="option999" autocomplete="off"> Custom Location
                   </label>
-                    <input type="text" style="display:none" name="location_filter" class="form-control manualInput" id="location_filter" placeholder="Enter City">
+                  <input type="text" style="display:none" name="location_filter" class="form-control manualInput" id="location_filter" placeholder="Enter Location">
                 </label>
                 <label>
-                <label class="btn btn-success">
-                  <input type="radio" name="locationFilter" value="currentCityOn" id="option111" autocomplete="off"> Current City
-                </label>
+                  <label class="btn btn-success">
+                    <input type="radio" name="locationFilter" value="currentCityOn" id="option111" autocomplete="off"> Current City
+                  </label>
                 </label>
                 <label>
                   <label class="btn btn-success">
                     <input type="radio" name="locationFilter" value="customCityOn" id="option222" autocomplete="off"> Custom City
                   </label>
-                    <input type="text" name="city_filter" class="form-control manualInput" id="city_filter" placeholder="Enter City" style="display:none">
+                  <input type="text" name="city_filter" class="form-control manualInput" id="city_filter" placeholder="Enter City" style="display:none">
                 </label>
                 <label>
-                <label class="btn btn-success">
-                  <input type="radio" name="locationFilter" value="currentStateOn" id="option333" autocomplete="off"> Current State
-                </label>
+                  <label class="btn btn-success">
+                    <input type="radio" name="locationFilter" value="currentStateOn" id="option333" autocomplete="off"> Current State
+                  </label>
                 </label>
                 <label> 
                   <label class="btn btn-success">
                     <input type="radio" name="locationFilter" value="customStateOn" id="option444" autocomplete="off"> Custom State
                   </label>
-                    <input type="text" name="state_filter" class="form-control manualInput" id="state_filter" placeholder="Enter State" style="display:none">
-                 </label>
-                 <label> 
-                <label class="btn btn-success">
-                  <input type="radio" name="locationFilter" value="currentCountryOn" id="option555" autocomplete="off"> Current Country
+                  <input type="text" name="state_filter" class="form-control manualInput" id="state_filter" placeholder="Enter State" style="display:none">
                 </label>
-                </label>
-                  <label>
-                    <label class="btn btn-success">
-                      <input type="radio" name="locationFilter" value="customCountryOn" id="option666" autocomplete="off"> Custom Country
-                    </label>
-                      <input type="text" name="country_filter" class="form-control manualInput" id="country_filter" placeholder="Enter Country" style="display:none">
+                <label> 
+                  <label class="btn btn-success">
+                    <input type="radio" name="locationFilter" value="currentCountryOn" id="option555" autocomplete="off"> Current Country
                   </label>
-                
+                </label>
+                <label>
+                  <label class="btn btn-success">
+                    <input type="radio" name="locationFilter" value="customCountryOn" id="option666" autocomplete="off"> Custom Country
+                  </label>
+                  <input type="text" name="country_filter" class="form-control manualInput" id="country_filter" placeholder="Enter Country" style="display:none">
+                </label>
               </div>  
             </div>
             <div id="menu2" class="tab-pane fade">
               <h2>Filter By Date</h2>
               <div class="btn-group" data-toggle="buttons">
+                <div class="row">
                 <label class="btn btn-primary">
                   <input type="radio" name="dateFilter" value="upcommingEventOn" id="option1" autocomplete="off"> Upcomming Events
                 </label>
@@ -132,6 +138,7 @@
                 <label class="btn btn-success">
                   <input type="radio" name="dateFilter" value="todayEventOn" id="option3" autocomplete="off"> Today's Events
                 </label>
+                </div>
                 <label class="btn btn-success">
                   <input type="radio" name="dateFilter" value="yesterdayEventOn" id="option3" autocomplete="off"> Yesterday's Event
                 </label>
@@ -246,14 +253,174 @@
   label label input[type="radio"] {
     width: auto !important;
   }
-  label
-  {
-    margin: 0px !important;
-    padding: 0px !important;
-  }
+
  label label{
     margin: 0 !important;
     padding: 2px 30px !important;
     width: auto !important;
 }
   </style>
+<script type="text/javascript">
+  $('input[name=locationFilter]:checked', '#locationFilter').val();
+  $( "#event_categories_filter" ).select2();
+  $( "#event_type_filter" ).select2();
+</script>
+
+<script type="text/javascript">
+  $(".distance-input").ionRangeSlider({
+    type: "single",
+    min: 0,
+    max: 10000,
+    from: 100,
+    to: 100,
+    keyboard: true,
+    step: 10,
+    grid: true,
+    force_edges: true,
+    onStart: function (data) {
+        console.log("onStart");
+    },
+    onChange: function (data) {
+        console.log("onChange");
+    },
+    onFinish: function (data) {
+        console.log("onFinish");
+        $('#filterFormSubmit').click();
+    },
+    onUpdate: function (data) {
+        console.log("onUpdate");
+    }
+});
+
+</script>
+<script type="text/javascript">
+  $(".price-input").ionRangeSlider({
+    type: "double",
+    min: 0,
+    max: 100000,
+    from: 100,
+    to: 100,
+    keyboard: true,
+    step: 10,
+    grid: true,
+    force_edges: true,
+    onStart: function (data) {
+        console.log("onStart");
+    },
+    onChange: function (data) {
+        console.log("onChange");
+    },
+    onFinish: function (data) {
+        console.log("onFinish");
+        $('#filterFormSubmit').click();
+    },
+    onUpdate: function (data) {
+        console.log("onUpdate");
+    }
+});
+
+</script>
+  <script type="text/javascript">
+  
+        var map;
+      
+        function initMap() {
+          
+          var myOptionsB = {
+              zoom: 14,
+              center: {lat: 28.5910985, lng: 77.2252626},
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          }
+          map = new google.maps.Map(document.getElementById("map"), myOptionsB);
+        
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+
+        var types = document.getElementById('type-selector');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+            $("#location_filter").val(place.formatted_address); 
+            $("#customLocationOn").click();
+
+
+            // $.ajax({
+            //   type:'GET',
+            //   url: '/tabs',
+            //   dataType: 'script',
+            //   data: $.param({ lat: place.geometry.location.lat(), long: place.geometry.location.lng(), tab: })
+            // });
+
+          } else {
+
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            console.log(place.geometry.location.G); // Get Latitude
+console.log(place.geometry.location.K); // Get Longitude
+
+//Additional information
+console.log(place.formatted_address); // Formated Address of Place
+console.log(place.name); // Name of Place
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+     } 
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl8KUzAOcfadtLw7_wkJ_NyoD5vDz3_74&callback=initMap&libraries=places" async defer></script>

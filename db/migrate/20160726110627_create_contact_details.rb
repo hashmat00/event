@@ -15,7 +15,7 @@ class CreateContactDetails < ActiveRecord::Migration
       t.string :contact1
       t.string :contact2
       t.string :landline
-      t.string :fax
+      t.string :fax 
       t.boolean :is_active, default:true
 
       t.timestamps null: false
