@@ -126,13 +126,13 @@ class Event < ActiveRecord::Base
           return "Paid"
         when "amount" then 
           if self.tickets.minimum('price') == self.tickets.maximum('price')
-            return '%.2f' % self.tickets.minimum('price')
+            return '%.2f' % self.tickets.minimum('price') rescue 0
           elsif self.tickets.minimum('price') == nil
-            return self.tickets.maximum('price')
+            return self.tickets.maximum('price') rescue 0
           elsif self.tickets.maximum('price') == nil
-            return '%.2f' % self.tickets.minimum('price')
-          else
-            return "#{self.tickets.minimum('price')} - $#{self.tickets.maximum('price')}"
+            return '%.2f' % self.tickets.minimum('price') rescue 0
+          else 
+            return "#{self.tickets.minimum('price')} - $#{self.tickets.maximum('price')}" rescue 0
           end  
         when "all" then
           if self.tickets.minimum('price') == self.tickets.maximum('price')
