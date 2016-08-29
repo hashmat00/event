@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
 	def self.notification(user,resource, resource_type, recipient)
 		case resource_type
 		when 'event' then 
-			user.user.notifications.create(user_id: user.id, body: "you have created event #{resource.name} ", notificable: resource, accept: false)
+			user.notifications.create(user_id: user.id, body: "you have created event #{resource.name} ", notificable: resource, accept: false)
 			if user.followers.present?
 				user.followers.each_with_index do |follower, index|
 					follower.notifications.create(user_id: user.id, body: "#{user.name} has create a event #{resource.name}

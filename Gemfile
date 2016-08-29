@@ -90,3 +90,4 @@ gem "select2-rails"
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 gem "remotipart"
+gem 'paypal-sdk-adaptivepayments'

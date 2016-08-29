@@ -18,6 +18,16 @@ class SubscriptionsController < ApplicationController
         redirect_to event_path(@event.id)
       end  
     end  
+  end
+
+  def notify
+    if PayPal::SDK::Core::API::IPN.valid?(request.raw_post)
+      logger.info("IPN message: VERIFIED")
+      render :text => "VERIFIED"
+    else
+      logger.info("IPN message: INVALID")
+      render :text => "INVALID"
+    end
   end  
 
   private 

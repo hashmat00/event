@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resource :subscriptions do
     collection do
       get 'subscription_create'
+      post 'notify'
     end  
   end
   resources :payments
