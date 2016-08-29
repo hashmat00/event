@@ -72,14 +72,14 @@ class Cart < ActiveRecord::Base
       :upload => 1,
       :return => return_url,
       :invoice => rand.to_s[2..7].to_i,
-      :receiverList => {
-		    :receiver => [{
-		      :amount => 12.0,	
-		      :email => "platfo_1255612361_per@gmail.com" }] },
-      # "amount_1" => self.unit_price,
-      #   "item_name_1" => self.ticket.try(:name) + " ticket for " + self.ticket.event.try(:name),
-      #   "item_number_1" => rand.to_s[2..9].to_i,
-      #   "quantity_1" => self.quantity
+      # :receiverList => {
+		    # :receiver => [{
+		    #   :amount => 12.0,	
+		    #   :email => "platfo_1255612361_per@gmail.com" }] },
+      "amount_1" => self.unit_price,
+        "item_name_1" => self.ticket.try(:name) + " ticket for " + self.ticket.event.try(:name),
+        "item_number_1" => rand.to_s[2..9].to_i,
+        "quantity_1" => self.quantity
     }
   "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
   end
