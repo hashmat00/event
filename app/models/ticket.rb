@@ -5,10 +5,10 @@ class Ticket < ActiveRecord::Base
   has_many :carts, as: :cartable, dependent: :destroy
   scope :active, ->{ where(active: true) }
   scope :inactive, ->{ where(active: false) }
-  validates :name, presence: true, length: {minimum: 3, maximum: 60}  
+  validates :name, presence: true#, length: {minimum: 3, maximum: 60}  
 	validates :quantity, presence: true
 	validates_numericality_of :quantity
-	validates :ticket_description, presence: true, length: {minimum: 3, maximum: 200}  
+	validates :ticket_description, presence: true#, length: {minimum: 3, maximum: 200}  
 	validates :tickets_start_date, presence: true
 	validates :ticket_end_date, presence: true
 	validates :sale_channel, presence: true

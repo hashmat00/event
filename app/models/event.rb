@@ -18,25 +18,25 @@ class Event < ActiveRecord::Base
     accepts_nested_attributes_for :tickets, :allow_destroy => true
 
     validates :user_id, presence: true
-    validates :name, presence: true, length: { minimum: 3, maximum: 50}
-    # validates :description, presence: true, length: {minimum: 20, maximum: 10000}
-    validates :address, presence: true, length: {minimum: 5, maximum: 150}
-    validates :city, presence: true, length: {minimum: 3, maximum: 25}
+    validates :name, presence: true#, length: { minimum: 3, maximum: 50}
+    validates :description, presence: true#, length: {minimum: 20, maximum: 10000}
+    validates :address, presence: true#, length: {minimum: 5, maximum: 150}
+    validates :city, presence: true#, length: {minimum: 3, maximum: 25}
     validates :zipcode, presence: true
-    validates :state, presence: true, length: {minimum: 2, maximum: 20}
-    validates :country, presence: true, length: {minimum: 2, maximum: 55}  
+    validates :state, presence: true#, length: {minimum: 2, maximum: 20}
+    validates :country, presence: true#, length: {minimum: 2, maximum: 55}  
     validates :start_time, presence: true
     validates :end_time, presence: true
-    validates :event_type, presence: true
-    validates :event_topic, presence: true 
-    validates :event_privacy, presence: true 
+    # validates :event_type, presence: true
+    # validates :event_topic, presence: true 
+    # validates :event_privacy, presence: true 
    
    mount_uploader :picture, PictureUploader
    mount_uploader :video, AvatarUploader
    validate :picture_size
-   validate :event_date
-   validate :ticket_price
-   default_scope -> { order(created_at: :desc) }
+   # validate :event_date
+   # validate :ticket_price
+   # default_scope -> { order(created_at: :desc) }
    has_many :interests, as: :interestable, dependent: :destroy
    has_many :pictures, as: :picturable, dependent: :destroy
    accepts_nested_attributes_for :pictures, :allow_destroy => true
