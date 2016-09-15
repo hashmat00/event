@@ -1,5 +1,9 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
+    
+  def index
+    @categories = Category.all.active.paginate(page: params[:page], per_page: 10)
+  end
     
   def show
     @category = Category.find(params[:id])

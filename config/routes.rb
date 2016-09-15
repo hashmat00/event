@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   resources :checkouts, only: [:create]
   resources :users, except: [:new]
-  resources :categories, only: [:new, :create, :show]
+  resources :categories, only: [:index, :new, :create, :show]
   resources :relationships, :only => [:create]
   post 'unfollow' => 'relationships#unfollow', as: :unfollow
   resource :cart, only: [:show]
