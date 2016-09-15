@@ -19,7 +19,7 @@
               </section>
               
               <h4><%= link_to x.name, event_path(x) %></h4>
-              <h2 class="quiet"><%= x.summary.split[0..4].join(" ") %></h2>
+              <h2 class="quiet"><%#= x.summary.split[0..4].join(" ") %></h2>
               
                   <div class>
                         <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
