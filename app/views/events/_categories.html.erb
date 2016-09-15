@@ -9,7 +9,7 @@
             <% @categories.each_with_index do |cat, index| %>
               <% index == 0 ? divclass = "col-md-8 col-sm-8 col-xs-12" : divclass = "col-md-4 col-sm-4 col-xs-12" %>
               <div class="<%= divclass %>" style="padding: 0 2px;">
-                <a class="category-card category-family-education" href="<%= index %>">
+                <a class="category-card category-family-education" href="/categories/<%= cat.id %>">
                   <div class="category-card__wrapper">
                     <div class="category-card__tint">
                       <div class="category-card__image"></div>
