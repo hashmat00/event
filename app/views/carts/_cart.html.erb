@@ -26,19 +26,19 @@
             <%= f.submit "update", class: "btn btn-primary btnMar10" %>
             <%= link_to "Continue Shopping", event_path(cart.try(:ticket).try(:event).try(:id)), class:"btn btn-primary btnMar10" %>
             <%= link_to "remove From Cart", cart_path(cart.id), method: :delete, remote:true, class:"btn btn-danger btnMar10"%>
-            <% if !(cart.ticket.tickets_start_date < Time.now && cart.ticket.ticket_end_date > Time.now rescue nil)  %>
-              <a class="btn btn-primary btnMar10" onclick="alertify.message('you cant not purchase ticket due sale time out');">
+            <%# if !(cart.ticket.tickets_start_date < Time.now && cart.ticket.ticket_end_date > Time.now rescue nil)  %>
+              <!-- <a class="btn btn-primary btnMar10" onclick="alertify.message('you cant not purchase ticket due sale time out');">
                 Checkout
-              </a>
-            <% elsif cart.quantity > cart.available_quantity %>
-              <a class="btn btn-primary btnMar10" onclick="alertify.message('You can not purchase tickets due to thickets are out of order');">
+              </a> -->
+            <%# elsif cart.quantity > cart.available_quantity %>
+              <!-- <a class="btn btn-primary btnMar10" onclick="alertify.message('You can not purchase tickets due to thickets are out of order');">
                 Checkout
-              </a>
-            <% else %>
+              </a> -->
+            <%# else %>
               <a class="btn btn-primary btnMar10" data-toggle="modal" data-target="#myModal">
                 Checkout
               </a>
-            <% end %>
+            <%# end %>
           </div>
         <!-- </div> -->
       <% end %> 

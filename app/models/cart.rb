@@ -1,7 +1,7 @@
 class Cart < ActiveRecord::Base
 	belongs_to :cartable, polymorphic: true
 	has_one :payment
-	validate :sale_time
+	# validate :sale_time
 	validate :validate_quantity
 	before_save :set_columns
 	scope :active, ->{ where(is_active: true) }
