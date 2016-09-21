@@ -3,4 +3,7 @@ class Category < ActiveRecord::Base
   has_many :event_categories
   has_many :events, through: :event_categories
   mount_uploader :image, PictureUploader
+  scope :active, ->{ where(is_active: true) }
+  scope :inactive, ->{ where(is_active: false) }
+  belongs_to :user
 end

@@ -1,20 +1,15 @@
-<!--display title from partials page-->
-<%= render 'shared/page_title', title: "Category for : " + @category.name %>
-
-<!--<hr/>-->
-
 <div class="container">
  
- <% @events.each do |x| %>
+ <% @categories.each do |x| %>
         <div class="col-md-4 m-b-lg">
           <div class="panel panel-default panel-profile m-b-0">
             <!--<div class="panel-heading" style="background-image: url(https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=9bd244971b9cb52a8418cf2f66fce464);"></div>-->
             <!--<div class="panel-heading"></div>-->
-                <%= image_tag(x.picture.url, class: "panel-recipe") if x.picture? %>
+                <%= image_tag(x.image.url, class: "panel-recipe") if x.image? %>
                 
             <div class="panel-body text-center">
                 <section class="panel-profile-recipe-img">
-              <%= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
+              <%#= link_to gravatar_for(x.user, size: 40), user_path(x.user) %>
               
               </section>
               
@@ -22,22 +17,12 @@
               <h2 class="quiet"><%#= x.summary.split[0..4].join(" ") %></h2>
               
                   <div class>
-                        <span class="icon icon-add-user"></span> <%= link_to 'View Event', event_path(x), class: "btn btn-success btn-small" %>
-                    </div> 
-                    
-                <div class="thumbs">
-                    <%= link_to like_event_path(x, like: true), method: :post do %>
-                    <i class="white glyphicon glyphicon-thumbs-up">&nbsp<%= x.thumbs_up_total %></i>
-                    <% end %> &nbsp&nbsp&nbsp&nbsp
-                    <%= link_to like_event_path(x, like: false), method: :post do %>
-                    <i class="white glyphicon glyphicon-thumbs-down">&nbsp<%= x.thumbs_down_total %></i>
-                    <% end %>
-                    
-                </div> 
+                        <span class="icon icon-add-user"></span> <%= link_to 'View Category', category_path(x), class: "btn btn-success btn-small" %>
+                    </div>  
                 </br>
               
                 <div class="ingredient pull-left">
-                <p style="color: #777">categorys: <%= render x.categories %></p>
+                <p style="color: #777">events: <%= render x.events %></p>
                 </div>
                     
               
@@ -53,15 +38,10 @@
      <!--pagination on bttom -->
       <div class="row">
         <div class="col-md-4 col-md-offset-4 center">
-        <%= will_paginate @events %>
+        <%= will_paginate @categories %>
         </div>
       </div>
     
     	    
             
 </div>
-
-
-
-
-
