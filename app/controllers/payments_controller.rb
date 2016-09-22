@@ -14,43 +14,48 @@ class PaymentsController < ApplicationController
   def create
     @payment = @cart.build_payment(payment_params).save
     url = params[:payment][:url]
+    receiver_amount = ((@cart.total_price.to_f*@cart.ticket.event.user.percentage)/100).to_f 
+    receiver_email = (@cart.ticket.event.user.paypal_email)
     # redirect_to @cart.total_price > 0 ? @cart.paypal_url(url) : url
-    require 'paypal-sdk-adaptivepayments'
-      PayPal::SDK.configure(
-        :mode      => "sandbox",  # Set "live" for production
-        :app_id    => "APP-80W284485P519543T",
-        :username  => "bitterntech-facilitator_api1.gmail.com",
-        :password  => "5UFQJ9NRAQY925N5",
-        :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AkYr1SN9OFv0tOdoWXLUJks431Ga" )
+    if @cart.total_price > 0
+      require 'paypal-sdk-adaptivepayments'
+        PayPal::SDK.configure(
+          :mode      => "sandbox",  # Set "live" for production
+          :app_id    => "APP-80W284485P519543T",
+          :username  => "bitterntech-facilitator_api1.gmail.com",
+          :password  => "5UFQJ9NRAQY925N5",
+          :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AkYr1SN9OFv0tOdoWXLUJks431Ga" )
 
-      @api = PayPal::SDK::AdaptivePayments.new
+        @api = PayPal::SDK::AdaptivePayments.new
 
-      # Build request object
-      @pay = @api.build_pay({
-        :actionType => "PAY",
-        :cancelUrl => request.url,
-        :currencyCode => "USD",
-        :feesPayer => "SENDER",
-        :ipnNotificationUrl => request.url,
-        :receiverList => {
-          :receiver => [{
-            :amount => @cart.total_price.to_f,
-            :email => "bitterntech@gmail.com" },{
-            :amount => @cart.total_price.to_f,
-            :email => "arvindkushwah9@gmail.com" }] },
-        :returnUrl => request.url })
+        # Build request object
+        @pay = @api.build_pay({
+          :actionType => "PAY",
+          :cancelUrl => request.url,
+          :currencyCode => "USD",
+          :feesPayer => "SENDER",
+          :ipnNotificationUrl => request.url,
+          :receiverList => {
+            :receiver => [{
+              :amount => receiver_amount,
+              :email => receiver_email },{
+              :amount => @cart.total_price.to_f - receiver_amount,
+              :email => "arvindkushwah9@gmail.com" }] },
+          :returnUrl => url })
 
-      # Make API call & get response
-      @response = @api.pay(@pay)
-      # Access response
-      if @response.success? && @response.payment_exec_status != "ERROR"
-        @response.payKey
-        # Transaction.create(starter_id: @current_user.id, listing_id: @listing.id, community_id: @current_community.id, payment_gateway: 'paypal', :unit_tr_key => @response.payKey, listing_author_id: @listing.author_id)
-        redirect_to  @api.payment_url(@response)  # Url to complete payment
+        # Make API call & get response
+        @response = @api.pay(@pay)
+        # Access response
+        if @response.success? && @response.payment_exec_status != "ERROR"
+          @response.payKey
+          # Transaction.create(starter_id: @current_user.id, listing_id: @listing.id, community_id: @current_community.id, payment_gateway: 'paypal', :unit_tr_key => @response.payKey, listing_author_id: @listing.author_id)
+          redirect_to  @api.payment_url(@response)  # Url to complete payment
+        else
+          flash[:alert] =  @response.error[0].message
+          redirect_to :back
+        end
       else
-        @response.error[0].message
-      redirect_to :back
-
+        redirect_to url
       end
   end
 
