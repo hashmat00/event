@@ -40,7 +40,7 @@ class PaymentsController < ApplicationController
               :amount => receiver_amount,
               :email => receiver_email },{
               :amount => @cart.total_price.to_f - receiver_amount,
-              :email => "arvindkushwah9@gmail.com" }] },
+              :email => "hashmat00@aol.com" }] },
           :returnUrl => url })
 
         # Make API call & get response
