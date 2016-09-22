@@ -46,6 +46,22 @@ class Event < ActiveRecord::Base
    scope :upcomming, -> { where('start_time  > ?',Time.now).try(:active) }
    scope :past, -> { where('end_time  < ?',Time.now).try(:active) }
    before_save :address_fill
+   scope :near, ->(lat, long, radius) {
+    #Haversine Formula based geodistance in kilometers (constant is diameter of Earth in km)
+    #http://www.codecodex.com/wiki/Calculate_distance_between_two_points_on_a_globe
+    query = sanitize_sql_array([%{,(
+      select *, 6371 * acos(
+        cos(radians(?)) * cos(radians(events.latitude)) * cos(radians(?) - radians(events.longitude)) + sin(radians(?)) * sin(radians(events.latitude))
+      ) as distance from events
+    ) calculated
+    }, lat, long, lat])
+
+    select("*, calculated.distance as distance")
+    .joins(query)
+    .where('calculated.id = events.id')
+    .where('calculated.distance < ?', radius)
+    .order('calculated.distance')
+  }
 
    def interested
       self.interests.where(interests: {flag: true})   
@@ -207,8 +223,9 @@ class Event < ActiveRecord::Base
 
   def self.filterMethod(params)
     custom_location(params) if params[:locationFilter] == "customLocationOn"
-    temp_event = Event.new(latitude: params[:latlong][:lat], longitude: params[:latlong][:long])
-    current_events = temp_event.nearbys(params[:distanceInput], :order => "distance",:units => :km).active 
+    # temp_event = Event.new(latitude: params[:latlong][:lat], longitude: params[:latlong][:long])
+    # current_events = temp_event.nearbys(params[:distanceInput], :order => "distance",:units => :km).active 
+    current_events = Event.active.near(params[:latlong][:lat], params[:latlong][:long],params[:distanceInput])
     current_events = location_filter(params,current_events) if params[:filterLocation].present?
     current_events = date_filter(params,current_events) if params[:filterDate].present?
     current_events = price_filter(params,current_events) if params[:filterPrice].present?

@@ -45,15 +45,15 @@ class UsersController < ApplicationController
   	@past_tickets_count = @tickets.try(:past).try(:count)
   	@inactive_tickets_count = @tickets.try(:inactive).try(:count)
   	case params[:tab]
-  	when 'all' then @tickets = @tickets
-  	when 'upcomming' then @tickets = @tickets.try(:upcomming)
-  	when 'saved' then @tickets = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} }
-  	when 'past' then @tickets = @tickets.try(:past)
-  	when 'inactive' then @tickets = @tickets.try(:inactive)	
+  	when 'all' then @tickets = @tickets rescue []
+  	when 'upcomming' then @tickets = @tickets.try(:upcomming) rescue []
+  	when 'saved' then @tickets = @tickets.try(:active).select{|s| current_user.wish_lists_events.map{|m| m == s.event} } rescue []
+  	when 'past' then @tickets = @tickets.try(:past) rescue []
+  	when 'inactive' then @tickets = @tickets.try(:inactive)	rescue []
   	else
-  		@tickets = @tickets	
+  		@tickets = @tickets	rescue []
   	end
-  		@tickets = @tickets.active unless (params[:tab] == 'inactive' || params[:tab] == 'saved')
+  		@tickets = @tickets.active unless (params[:tab] == 'inactive' || params[:tab] == 'saved') rescue []
   end
 
   def ticket_download
